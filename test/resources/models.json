@@ -1,0 +1,21 @@
+[
+  {
+    "name": "bookshop-graphql",
+    "files": [
+      "./bookshop-graphql/srv/admin-service.cds",
+      "./bookshop-graphql/srv/cat-service.cds"
+    ]
+  },
+  {
+    "name": "types",
+    "files": ["./types/srv/types.cds"]
+  },
+  {
+    "name": "model-structure/composition-of-aspect",
+    "files": ["./model-structure/srv/composition-of-aspect.cds"]
+  },
+  {
+    "name": "edge-cases/field-named-localized",
+    "files": ["./edge-cases/srv/field-named-localized.cds"]
+  }
+]

@@ -1,0 +1,199 @@
+type FieldNamedLocalizedService {
+  Root(
+    filter: [FieldNamedLocalizedService_Root_filter]
+    orderBy: [FieldNamedLocalizedService_Root_orderBy]
+    skip: Int
+    top: Int
+  ): FieldNamedLocalizedService_Root_connection
+  localized(
+    filter: [FieldNamedLocalizedService_localized_filter]
+    orderBy: [FieldNamedLocalizedService_localized_orderBy]
+    skip: Int
+    top: Int
+  ): FieldNamedLocalizedService_localized_connection
+}
+
+type FieldNamedLocalizedService_Root {
+  ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  localized(
+    filter: [FieldNamedLocalizedService_localized_filter]
+    orderBy: [FieldNamedLocalizedService_localized_orderBy]
+    skip: Int
+    top: Int
+  ): FieldNamedLocalizedService_localized_connection
+  modifiedAt: Timestamp
+  modifiedBy: String
+}
+
+input FieldNamedLocalizedService_Root_C {
+  ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  localized: [FieldNamedLocalizedService_localized_C]
+  modifiedAt: Timestamp
+  modifiedBy: String
+}
+
+input FieldNamedLocalizedService_Root_U {
+  ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  localized: [FieldNamedLocalizedService_localized_U]
+  modifiedAt: Timestamp
+  modifiedBy: String
+}
+
+type FieldNamedLocalizedService_Root_connection {
+  nodes: [FieldNamedLocalizedService_Root]
+  totalCount: Int
+}
+
+input FieldNamedLocalizedService_Root_filter {
+  ID: [Int_filter]
+  createdAt: [Timestamp_filter]
+  createdBy: [String_filter]
+  modifiedAt: [Timestamp_filter]
+  modifiedBy: [String_filter]
+}
+
+type FieldNamedLocalizedService_Root_input {
+  create(
+    input: [FieldNamedLocalizedService_Root_C]!
+  ): [FieldNamedLocalizedService_Root]
+  delete(
+    filter: [FieldNamedLocalizedService_Root_filter]
+  ): Int
+  update(
+    filter: [FieldNamedLocalizedService_Root_filter]
+    input: FieldNamedLocalizedService_Root_U!
+  ): [FieldNamedLocalizedService_Root]
+}
+
+input FieldNamedLocalizedService_Root_orderBy {
+  ID: SortDirection
+  createdAt: SortDirection
+  createdBy: SortDirection
+  modifiedAt: SortDirection
+  modifiedBy: SortDirection
+}
+
+type FieldNamedLocalizedService_input {
+  Root: FieldNamedLocalizedService_Root_input
+  localized: FieldNamedLocalizedService_localized_input
+}
+
+type FieldNamedLocalizedService_localized {
+  ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  root: FieldNamedLocalizedService_Root
+  root_ID: Int
+}
+
+input FieldNamedLocalizedService_localized_C {
+  ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  root: FieldNamedLocalizedService_Root_C
+  root_ID: Int
+}
+
+input FieldNamedLocalizedService_localized_U {
+  ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  root: FieldNamedLocalizedService_Root_U
+  root_ID: Int
+}
+
+type FieldNamedLocalizedService_localized_connection {
+  nodes: [FieldNamedLocalizedService_localized]
+  totalCount: Int
+}
+
+input FieldNamedLocalizedService_localized_filter {
+  ID: [Int_filter]
+  createdAt: [Timestamp_filter]
+  createdBy: [String_filter]
+  modifiedAt: [Timestamp_filter]
+  modifiedBy: [String_filter]
+  root_ID: [Int_filter]
+}
+
+type FieldNamedLocalizedService_localized_input {
+  create(
+    input: [FieldNamedLocalizedService_localized_C]!
+  ): [FieldNamedLocalizedService_localized]
+  delete(
+    filter: [FieldNamedLocalizedService_localized_filter]
+  ): Int
+  update(
+    filter: [FieldNamedLocalizedService_localized_filter]
+    input: FieldNamedLocalizedService_localized_U!
+  ): [FieldNamedLocalizedService_localized]
+}
+
+input FieldNamedLocalizedService_localized_orderBy {
+  ID: SortDirection
+  createdAt: SortDirection
+  createdBy: SortDirection
+  modifiedAt: SortDirection
+  modifiedBy: SortDirection
+  root_ID: SortDirection
+}
+
+input Int_filter {
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+type Mutation {
+  FieldNamedLocalizedService: FieldNamedLocalizedService_input
+}
+
+type Query {
+  FieldNamedLocalizedService: FieldNamedLocalizedService
+}
+
+enum SortDirection {
+  asc
+  desc
+}
+
+input String_filter {
+  contains: String
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  startswith: String
+}
+
+"""
+The `Timestamp` scalar type represents timestamp values as strings in the ISO 8601 format `YYYY-MM-DDThh-mm-ss.sTZD` with up to 7 digits of fractional seconds.
+"""
+scalar Timestamp
+
+input Timestamp_filter {
+  eq: Timestamp
+  ge: Timestamp
+  gt: Timestamp
+  le: Timestamp
+  lt: Timestamp
+  ne: Timestamp
+}
