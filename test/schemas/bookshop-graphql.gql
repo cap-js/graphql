@@ -1,0 +1,1366 @@
+type AdminService {
+  Authors(
+    filter: [AdminService_Authors_filter]
+    orderBy: [AdminService_Authors_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Authors_connection
+  Books(
+    filter: [AdminService_Books_filter]
+    orderBy: [AdminService_Books_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Books_connection
+  Books_texts(
+    filter: [AdminService_Books_texts_filter]
+    orderBy: [AdminService_Books_texts_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Books_texts_connection
+  Chapters(
+    filter: [AdminService_Chapters_filter]
+    orderBy: [AdminService_Chapters_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Chapters_connection
+  Currencies(
+    filter: [AdminService_Currencies_filter]
+    orderBy: [AdminService_Currencies_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Currencies_connection
+  Currencies_texts(
+    filter: [AdminService_Currencies_texts_filter]
+    orderBy: [AdminService_Currencies_texts_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Currencies_texts_connection
+  Genres(
+    filter: [AdminService_Genres_filter]
+    orderBy: [AdminService_Genres_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Genres_connection
+  Genres_texts(
+    filter: [AdminService_Genres_texts_filter]
+    orderBy: [AdminService_Genres_texts_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Genres_texts_connection
+}
+
+type AdminService_Authors {
+  ID: Int
+  books(
+    filter: [AdminService_Books_filter]
+    orderBy: [AdminService_Books_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Books_connection
+  createdAt: Timestamp
+  createdBy: String
+  dateOfBirth: Date
+  dateOfDeath: Date
+  modifiedAt: Timestamp
+  modifiedBy: String
+  name: String
+  placeOfBirth: String
+  placeOfDeath: String
+}
+
+input AdminService_Authors_C {
+  ID: Int
+  books: [AdminService_Books_C]
+  createdAt: Timestamp
+  createdBy: String
+  dateOfBirth: Date
+  dateOfDeath: Date
+  modifiedAt: Timestamp
+  modifiedBy: String
+  name: String
+  placeOfBirth: String
+  placeOfDeath: String
+}
+
+input AdminService_Authors_U {
+  ID: Int
+  books: [AdminService_Books_U]
+  createdAt: Timestamp
+  createdBy: String
+  dateOfBirth: Date
+  dateOfDeath: Date
+  modifiedAt: Timestamp
+  modifiedBy: String
+  name: String
+  placeOfBirth: String
+  placeOfDeath: String
+}
+
+type AdminService_Authors_connection {
+  nodes: [AdminService_Authors]
+  totalCount: Int
+}
+
+input AdminService_Authors_filter {
+  ID: [Int_filter]
+  createdAt: [Timestamp_filter]
+  createdBy: [String_filter]
+  dateOfBirth: [Date_filter]
+  dateOfDeath: [Date_filter]
+  modifiedAt: [Timestamp_filter]
+  modifiedBy: [String_filter]
+  name: [String_filter]
+  placeOfBirth: [String_filter]
+  placeOfDeath: [String_filter]
+}
+
+type AdminService_Authors_input {
+  create(
+    input: [AdminService_Authors_C]!
+  ): [AdminService_Authors]
+  delete(
+    filter: [AdminService_Authors_filter]
+  ): Int
+  update(
+    filter: [AdminService_Authors_filter]
+    input: AdminService_Authors_U!
+  ): [AdminService_Authors]
+}
+
+input AdminService_Authors_orderBy {
+  ID: SortDirection
+  createdAt: SortDirection
+  createdBy: SortDirection
+  dateOfBirth: SortDirection
+  dateOfDeath: SortDirection
+  modifiedAt: SortDirection
+  modifiedBy: SortDirection
+  name: SortDirection
+  placeOfBirth: SortDirection
+  placeOfDeath: SortDirection
+}
+
+type AdminService_Books {
+  ID: Int
+  author: AdminService_Authors
+  author_ID: Int
+  chapters(
+    filter: [AdminService_Chapters_filter]
+    orderBy: [AdminService_Chapters_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Chapters_connection
+  createdAt: Timestamp
+  createdBy: String
+  currency: AdminService_Currencies
+  currency_code: String
+  descr: String
+  genre: AdminService_Genres
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts(
+    filter: [AdminService_Books_texts_filter]
+    orderBy: [AdminService_Books_texts_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Books_texts_connection
+  title: String
+}
+
+input AdminService_Books_C {
+  ID: Int
+  author: AdminService_Authors_C
+  author_ID: Int
+  chapters: [AdminService_Chapters_C]
+  createdAt: Timestamp
+  createdBy: String
+  currency: AdminService_Currencies_C
+  currency_code: String
+  descr: String
+  genre: AdminService_Genres_C
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts: [AdminService_Books_texts_C]
+  title: String
+}
+
+input AdminService_Books_U {
+  ID: Int
+  author: AdminService_Authors_U
+  author_ID: Int
+  chapters: [AdminService_Chapters_U]
+  createdAt: Timestamp
+  createdBy: String
+  currency: AdminService_Currencies_U
+  currency_code: String
+  descr: String
+  genre: AdminService_Genres_U
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts: [AdminService_Books_texts_U]
+  title: String
+}
+
+type AdminService_Books_connection {
+  nodes: [AdminService_Books]
+  totalCount: Int
+}
+
+input AdminService_Books_filter {
+  ID: [Int_filter]
+  author_ID: [Int_filter]
+  createdAt: [Timestamp_filter]
+  createdBy: [String_filter]
+  currency_code: [String_filter]
+  descr: [String_filter]
+  genre_ID: [Int_filter]
+  image: [Binary_filter]
+  modifiedAt: [Timestamp_filter]
+  modifiedBy: [String_filter]
+  price: [Decimal_filter]
+  stock: [Int_filter]
+  title: [String_filter]
+}
+
+type AdminService_Books_input {
+  create(
+    input: [AdminService_Books_C]!
+  ): [AdminService_Books]
+  delete(
+    filter: [AdminService_Books_filter]
+  ): Int
+  update(
+    filter: [AdminService_Books_filter]
+    input: AdminService_Books_U!
+  ): [AdminService_Books]
+}
+
+input AdminService_Books_orderBy {
+  ID: SortDirection
+  author_ID: SortDirection
+  createdAt: SortDirection
+  createdBy: SortDirection
+  currency_code: SortDirection
+  descr: SortDirection
+  genre_ID: SortDirection
+  image: SortDirection
+  modifiedAt: SortDirection
+  modifiedBy: SortDirection
+  price: SortDirection
+  stock: SortDirection
+  title: SortDirection
+}
+
+type AdminService_Books_texts {
+  ID: Int
+  descr: String
+  locale: String
+  title: String
+}
+
+input AdminService_Books_texts_C {
+  ID: Int
+  descr: String
+  locale: String
+  title: String
+}
+
+input AdminService_Books_texts_U {
+  ID: Int
+  descr: String
+  locale: String
+  title: String
+}
+
+type AdminService_Books_texts_connection {
+  nodes: [AdminService_Books_texts]
+  totalCount: Int
+}
+
+input AdminService_Books_texts_filter {
+  ID: [Int_filter]
+  descr: [String_filter]
+  locale: [String_filter]
+  title: [String_filter]
+}
+
+type AdminService_Books_texts_input {
+  create(
+    input: [AdminService_Books_texts_C]!
+  ): [AdminService_Books_texts]
+  delete(
+    filter: [AdminService_Books_texts_filter]
+  ): Int
+  update(
+    filter: [AdminService_Books_texts_filter]
+    input: AdminService_Books_texts_U!
+  ): [AdminService_Books_texts]
+}
+
+input AdminService_Books_texts_orderBy {
+  ID: SortDirection
+  descr: SortDirection
+  locale: SortDirection
+  title: SortDirection
+}
+
+type AdminService_Chapters {
+  book: AdminService_Books
+  book_ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  number: Int
+  title: String
+}
+
+input AdminService_Chapters_C {
+  book: AdminService_Books_C
+  book_ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  number: Int
+  title: String
+}
+
+input AdminService_Chapters_U {
+  book: AdminService_Books_U
+  book_ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  number: Int
+  title: String
+}
+
+type AdminService_Chapters_connection {
+  nodes: [AdminService_Chapters]
+  totalCount: Int
+}
+
+input AdminService_Chapters_filter {
+  book_ID: [Int_filter]
+  createdAt: [Timestamp_filter]
+  createdBy: [String_filter]
+  modifiedAt: [Timestamp_filter]
+  modifiedBy: [String_filter]
+  number: [Int_filter]
+  title: [String_filter]
+}
+
+type AdminService_Chapters_input {
+  create(
+    input: [AdminService_Chapters_C]!
+  ): [AdminService_Chapters]
+  delete(
+    filter: [AdminService_Chapters_filter]
+  ): Int
+  update(
+    filter: [AdminService_Chapters_filter]
+    input: AdminService_Chapters_U!
+  ): [AdminService_Chapters]
+}
+
+input AdminService_Chapters_orderBy {
+  book_ID: SortDirection
+  createdAt: SortDirection
+  createdBy: SortDirection
+  modifiedAt: SortDirection
+  modifiedBy: SortDirection
+  number: SortDirection
+  title: SortDirection
+}
+
+type AdminService_Currencies {
+  code: String
+  descr: String
+  name: String
+  symbol: String
+  texts(
+    filter: [AdminService_Currencies_texts_filter]
+    orderBy: [AdminService_Currencies_texts_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Currencies_texts_connection
+}
+
+input AdminService_Currencies_C {
+  code: String
+  descr: String
+  name: String
+  symbol: String
+  texts: [AdminService_Currencies_texts_C]
+}
+
+input AdminService_Currencies_U {
+  code: String
+  descr: String
+  name: String
+  symbol: String
+  texts: [AdminService_Currencies_texts_U]
+}
+
+type AdminService_Currencies_connection {
+  nodes: [AdminService_Currencies]
+  totalCount: Int
+}
+
+input AdminService_Currencies_filter {
+  code: [String_filter]
+  descr: [String_filter]
+  name: [String_filter]
+  symbol: [String_filter]
+}
+
+type AdminService_Currencies_input {
+  create(
+    input: [AdminService_Currencies_C]!
+  ): [AdminService_Currencies]
+  delete(
+    filter: [AdminService_Currencies_filter]
+  ): Int
+  update(
+    filter: [AdminService_Currencies_filter]
+    input: AdminService_Currencies_U!
+  ): [AdminService_Currencies]
+}
+
+input AdminService_Currencies_orderBy {
+  code: SortDirection
+  descr: SortDirection
+  name: SortDirection
+  symbol: SortDirection
+}
+
+type AdminService_Currencies_texts {
+  code: String
+  descr: String
+  locale: String
+  name: String
+}
+
+input AdminService_Currencies_texts_C {
+  code: String
+  descr: String
+  locale: String
+  name: String
+}
+
+input AdminService_Currencies_texts_U {
+  code: String
+  descr: String
+  locale: String
+  name: String
+}
+
+type AdminService_Currencies_texts_connection {
+  nodes: [AdminService_Currencies_texts]
+  totalCount: Int
+}
+
+input AdminService_Currencies_texts_filter {
+  code: [String_filter]
+  descr: [String_filter]
+  locale: [String_filter]
+  name: [String_filter]
+}
+
+type AdminService_Currencies_texts_input {
+  create(
+    input: [AdminService_Currencies_texts_C]!
+  ): [AdminService_Currencies_texts]
+  delete(
+    filter: [AdminService_Currencies_texts_filter]
+  ): Int
+  update(
+    filter: [AdminService_Currencies_texts_filter]
+    input: AdminService_Currencies_texts_U!
+  ): [AdminService_Currencies_texts]
+}
+
+input AdminService_Currencies_texts_orderBy {
+  code: SortDirection
+  descr: SortDirection
+  locale: SortDirection
+  name: SortDirection
+}
+
+type AdminService_Genres {
+  ID: Int
+  children(
+    filter: [AdminService_Genres_filter]
+    orderBy: [AdminService_Genres_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Genres_connection
+  descr: String
+  name: String
+  parent: AdminService_Genres
+  parent_ID: Int
+  texts(
+    filter: [AdminService_Genres_texts_filter]
+    orderBy: [AdminService_Genres_texts_orderBy]
+    skip: Int
+    top: Int
+  ): AdminService_Genres_texts_connection
+}
+
+input AdminService_Genres_C {
+  ID: Int
+  children: [AdminService_Genres_C]
+  descr: String
+  name: String
+  parent: AdminService_Genres_C
+  parent_ID: Int
+  texts: [AdminService_Genres_texts_C]
+}
+
+input AdminService_Genres_U {
+  ID: Int
+  children: [AdminService_Genres_U]
+  descr: String
+  name: String
+  parent: AdminService_Genres_U
+  parent_ID: Int
+  texts: [AdminService_Genres_texts_U]
+}
+
+type AdminService_Genres_connection {
+  nodes: [AdminService_Genres]
+  totalCount: Int
+}
+
+input AdminService_Genres_filter {
+  ID: [Int_filter]
+  descr: [String_filter]
+  name: [String_filter]
+  parent_ID: [Int_filter]
+}
+
+type AdminService_Genres_input {
+  create(
+    input: [AdminService_Genres_C]!
+  ): [AdminService_Genres]
+  delete(
+    filter: [AdminService_Genres_filter]
+  ): Int
+  update(
+    filter: [AdminService_Genres_filter]
+    input: AdminService_Genres_U!
+  ): [AdminService_Genres]
+}
+
+input AdminService_Genres_orderBy {
+  ID: SortDirection
+  descr: SortDirection
+  name: SortDirection
+  parent_ID: SortDirection
+}
+
+type AdminService_Genres_texts {
+  ID: Int
+  descr: String
+  locale: String
+  name: String
+}
+
+input AdminService_Genres_texts_C {
+  ID: Int
+  descr: String
+  locale: String
+  name: String
+}
+
+input AdminService_Genres_texts_U {
+  ID: Int
+  descr: String
+  locale: String
+  name: String
+}
+
+type AdminService_Genres_texts_connection {
+  nodes: [AdminService_Genres_texts]
+  totalCount: Int
+}
+
+input AdminService_Genres_texts_filter {
+  ID: [Int_filter]
+  descr: [String_filter]
+  locale: [String_filter]
+  name: [String_filter]
+}
+
+type AdminService_Genres_texts_input {
+  create(
+    input: [AdminService_Genres_texts_C]!
+  ): [AdminService_Genres_texts]
+  delete(
+    filter: [AdminService_Genres_texts_filter]
+  ): Int
+  update(
+    filter: [AdminService_Genres_texts_filter]
+    input: AdminService_Genres_texts_U!
+  ): [AdminService_Genres_texts]
+}
+
+input AdminService_Genres_texts_orderBy {
+  ID: SortDirection
+  descr: SortDirection
+  locale: SortDirection
+  name: SortDirection
+}
+
+type AdminService_input {
+  Authors: AdminService_Authors_input
+  Books: AdminService_Books_input
+  Books_texts: AdminService_Books_texts_input
+  Chapters: AdminService_Chapters_input
+  Currencies: AdminService_Currencies_input
+  Currencies_texts: AdminService_Currencies_texts_input
+  Genres: AdminService_Genres_input
+  Genres_texts: AdminService_Genres_texts_input
+}
+
+"""
+The `Binary` scalar type represents binary values as `base64url` encoded strings.
+"""
+scalar Binary
+
+input Binary_filter {
+  eq: Binary
+  ne: Binary
+}
+
+type CatalogService {
+  Books(
+    filter: [CatalogService_Books_filter]
+    orderBy: [CatalogService_Books_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Books_connection
+  Books_texts(
+    filter: [CatalogService_Books_texts_filter]
+    orderBy: [CatalogService_Books_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Books_texts_connection
+  Chapters(
+    filter: [CatalogService_Chapters_filter]
+    orderBy: [CatalogService_Chapters_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Chapters_connection
+  Currencies(
+    filter: [CatalogService_Currencies_filter]
+    orderBy: [CatalogService_Currencies_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Currencies_connection
+  Currencies_texts(
+    filter: [CatalogService_Currencies_texts_filter]
+    orderBy: [CatalogService_Currencies_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Currencies_texts_connection
+  Genres(
+    filter: [CatalogService_Genres_filter]
+    orderBy: [CatalogService_Genres_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Genres_connection
+  Genres_texts(
+    filter: [CatalogService_Genres_texts_filter]
+    orderBy: [CatalogService_Genres_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Genres_texts_connection
+  ListOfBooks(
+    filter: [CatalogService_ListOfBooks_filter]
+    orderBy: [CatalogService_ListOfBooks_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_ListOfBooks_connection
+}
+
+type CatalogService_Books {
+  ID: Int
+  author: String
+  chapters(
+    filter: [CatalogService_Chapters_filter]
+    orderBy: [CatalogService_Chapters_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Chapters_connection
+  createdAt: Timestamp
+  currency: CatalogService_Currencies
+  currency_code: String
+  descr: String
+  genre: CatalogService_Genres
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  price: Decimal
+  stock: Int
+  texts(
+    filter: [CatalogService_Books_texts_filter]
+    orderBy: [CatalogService_Books_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Books_texts_connection
+  title: String
+}
+
+input CatalogService_Books_C {
+  ID: Int
+  author: String
+  chapters: [CatalogService_Chapters_C]
+  createdAt: Timestamp
+  currency: CatalogService_Currencies_C
+  currency_code: String
+  descr: String
+  genre: CatalogService_Genres_C
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  price: Decimal
+  stock: Int
+  texts: [CatalogService_Books_texts_C]
+  title: String
+}
+
+input CatalogService_Books_U {
+  ID: Int
+  author: String
+  chapters: [CatalogService_Chapters_U]
+  createdAt: Timestamp
+  currency: CatalogService_Currencies_U
+  currency_code: String
+  descr: String
+  genre: CatalogService_Genres_U
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  price: Decimal
+  stock: Int
+  texts: [CatalogService_Books_texts_U]
+  title: String
+}
+
+type CatalogService_Books_connection {
+  nodes: [CatalogService_Books]
+  totalCount: Int
+}
+
+input CatalogService_Books_filter {
+  ID: [Int_filter]
+  author: [String_filter]
+  createdAt: [Timestamp_filter]
+  currency_code: [String_filter]
+  descr: [String_filter]
+  genre_ID: [Int_filter]
+  image: [Binary_filter]
+  modifiedAt: [Timestamp_filter]
+  price: [Decimal_filter]
+  stock: [Int_filter]
+  title: [String_filter]
+}
+
+type CatalogService_Books_input {
+  create(
+    input: [CatalogService_Books_C]!
+  ): [CatalogService_Books]
+  delete(
+    filter: [CatalogService_Books_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Books_filter]
+    input: CatalogService_Books_U!
+  ): [CatalogService_Books]
+}
+
+input CatalogService_Books_orderBy {
+  ID: SortDirection
+  author: SortDirection
+  createdAt: SortDirection
+  currency_code: SortDirection
+  descr: SortDirection
+  genre_ID: SortDirection
+  image: SortDirection
+  modifiedAt: SortDirection
+  price: SortDirection
+  stock: SortDirection
+  title: SortDirection
+}
+
+type CatalogService_Books_texts {
+  ID: Int
+  descr: String
+  locale: String
+  title: String
+}
+
+input CatalogService_Books_texts_C {
+  ID: Int
+  descr: String
+  locale: String
+  title: String
+}
+
+input CatalogService_Books_texts_U {
+  ID: Int
+  descr: String
+  locale: String
+  title: String
+}
+
+type CatalogService_Books_texts_connection {
+  nodes: [CatalogService_Books_texts]
+  totalCount: Int
+}
+
+input CatalogService_Books_texts_filter {
+  ID: [Int_filter]
+  descr: [String_filter]
+  locale: [String_filter]
+  title: [String_filter]
+}
+
+type CatalogService_Books_texts_input {
+  create(
+    input: [CatalogService_Books_texts_C]!
+  ): [CatalogService_Books_texts]
+  delete(
+    filter: [CatalogService_Books_texts_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Books_texts_filter]
+    input: CatalogService_Books_texts_U!
+  ): [CatalogService_Books_texts]
+}
+
+input CatalogService_Books_texts_orderBy {
+  ID: SortDirection
+  descr: SortDirection
+  locale: SortDirection
+  title: SortDirection
+}
+
+type CatalogService_Chapters {
+  book: CatalogService_Books
+  book_ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  number: Int
+  title: String
+}
+
+input CatalogService_Chapters_C {
+  book: CatalogService_Books_C
+  book_ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  number: Int
+  title: String
+}
+
+input CatalogService_Chapters_U {
+  book: CatalogService_Books_U
+  book_ID: Int
+  createdAt: Timestamp
+  createdBy: String
+  modifiedAt: Timestamp
+  modifiedBy: String
+  number: Int
+  title: String
+}
+
+type CatalogService_Chapters_connection {
+  nodes: [CatalogService_Chapters]
+  totalCount: Int
+}
+
+input CatalogService_Chapters_filter {
+  book_ID: [Int_filter]
+  createdAt: [Timestamp_filter]
+  createdBy: [String_filter]
+  modifiedAt: [Timestamp_filter]
+  modifiedBy: [String_filter]
+  number: [Int_filter]
+  title: [String_filter]
+}
+
+type CatalogService_Chapters_input {
+  create(
+    input: [CatalogService_Chapters_C]!
+  ): [CatalogService_Chapters]
+  delete(
+    filter: [CatalogService_Chapters_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Chapters_filter]
+    input: CatalogService_Chapters_U!
+  ): [CatalogService_Chapters]
+}
+
+input CatalogService_Chapters_orderBy {
+  book_ID: SortDirection
+  createdAt: SortDirection
+  createdBy: SortDirection
+  modifiedAt: SortDirection
+  modifiedBy: SortDirection
+  number: SortDirection
+  title: SortDirection
+}
+
+type CatalogService_Currencies {
+  code: String
+  descr: String
+  name: String
+  symbol: String
+  texts(
+    filter: [CatalogService_Currencies_texts_filter]
+    orderBy: [CatalogService_Currencies_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Currencies_texts_connection
+}
+
+input CatalogService_Currencies_C {
+  code: String
+  descr: String
+  name: String
+  symbol: String
+  texts: [CatalogService_Currencies_texts_C]
+}
+
+input CatalogService_Currencies_U {
+  code: String
+  descr: String
+  name: String
+  symbol: String
+  texts: [CatalogService_Currencies_texts_U]
+}
+
+type CatalogService_Currencies_connection {
+  nodes: [CatalogService_Currencies]
+  totalCount: Int
+}
+
+input CatalogService_Currencies_filter {
+  code: [String_filter]
+  descr: [String_filter]
+  name: [String_filter]
+  symbol: [String_filter]
+}
+
+type CatalogService_Currencies_input {
+  create(
+    input: [CatalogService_Currencies_C]!
+  ): [CatalogService_Currencies]
+  delete(
+    filter: [CatalogService_Currencies_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Currencies_filter]
+    input: CatalogService_Currencies_U!
+  ): [CatalogService_Currencies]
+}
+
+input CatalogService_Currencies_orderBy {
+  code: SortDirection
+  descr: SortDirection
+  name: SortDirection
+  symbol: SortDirection
+}
+
+type CatalogService_Currencies_texts {
+  code: String
+  descr: String
+  locale: String
+  name: String
+}
+
+input CatalogService_Currencies_texts_C {
+  code: String
+  descr: String
+  locale: String
+  name: String
+}
+
+input CatalogService_Currencies_texts_U {
+  code: String
+  descr: String
+  locale: String
+  name: String
+}
+
+type CatalogService_Currencies_texts_connection {
+  nodes: [CatalogService_Currencies_texts]
+  totalCount: Int
+}
+
+input CatalogService_Currencies_texts_filter {
+  code: [String_filter]
+  descr: [String_filter]
+  locale: [String_filter]
+  name: [String_filter]
+}
+
+type CatalogService_Currencies_texts_input {
+  create(
+    input: [CatalogService_Currencies_texts_C]!
+  ): [CatalogService_Currencies_texts]
+  delete(
+    filter: [CatalogService_Currencies_texts_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Currencies_texts_filter]
+    input: CatalogService_Currencies_texts_U!
+  ): [CatalogService_Currencies_texts]
+}
+
+input CatalogService_Currencies_texts_orderBy {
+  code: SortDirection
+  descr: SortDirection
+  locale: SortDirection
+  name: SortDirection
+}
+
+type CatalogService_Genres {
+  ID: Int
+  children(
+    filter: [CatalogService_Genres_filter]
+    orderBy: [CatalogService_Genres_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Genres_connection
+  descr: String
+  name: String
+  parent: CatalogService_Genres
+  parent_ID: Int
+  texts(
+    filter: [CatalogService_Genres_texts_filter]
+    orderBy: [CatalogService_Genres_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Genres_texts_connection
+}
+
+input CatalogService_Genres_C {
+  ID: Int
+  children: [CatalogService_Genres_C]
+  descr: String
+  name: String
+  parent: CatalogService_Genres_C
+  parent_ID: Int
+  texts: [CatalogService_Genres_texts_C]
+}
+
+input CatalogService_Genres_U {
+  ID: Int
+  children: [CatalogService_Genres_U]
+  descr: String
+  name: String
+  parent: CatalogService_Genres_U
+  parent_ID: Int
+  texts: [CatalogService_Genres_texts_U]
+}
+
+type CatalogService_Genres_connection {
+  nodes: [CatalogService_Genres]
+  totalCount: Int
+}
+
+input CatalogService_Genres_filter {
+  ID: [Int_filter]
+  descr: [String_filter]
+  name: [String_filter]
+  parent_ID: [Int_filter]
+}
+
+type CatalogService_Genres_input {
+  create(
+    input: [CatalogService_Genres_C]!
+  ): [CatalogService_Genres]
+  delete(
+    filter: [CatalogService_Genres_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Genres_filter]
+    input: CatalogService_Genres_U!
+  ): [CatalogService_Genres]
+}
+
+input CatalogService_Genres_orderBy {
+  ID: SortDirection
+  descr: SortDirection
+  name: SortDirection
+  parent_ID: SortDirection
+}
+
+type CatalogService_Genres_texts {
+  ID: Int
+  descr: String
+  locale: String
+  name: String
+}
+
+input CatalogService_Genres_texts_C {
+  ID: Int
+  descr: String
+  locale: String
+  name: String
+}
+
+input CatalogService_Genres_texts_U {
+  ID: Int
+  descr: String
+  locale: String
+  name: String
+}
+
+type CatalogService_Genres_texts_connection {
+  nodes: [CatalogService_Genres_texts]
+  totalCount: Int
+}
+
+input CatalogService_Genres_texts_filter {
+  ID: [Int_filter]
+  descr: [String_filter]
+  locale: [String_filter]
+  name: [String_filter]
+}
+
+type CatalogService_Genres_texts_input {
+  create(
+    input: [CatalogService_Genres_texts_C]!
+  ): [CatalogService_Genres_texts]
+  delete(
+    filter: [CatalogService_Genres_texts_filter]
+  ): Int
+  update(
+    filter: [CatalogService_Genres_texts_filter]
+    input: CatalogService_Genres_texts_U!
+  ): [CatalogService_Genres_texts]
+}
+
+input CatalogService_Genres_texts_orderBy {
+  ID: SortDirection
+  descr: SortDirection
+  locale: SortDirection
+  name: SortDirection
+}
+
+type CatalogService_ListOfBooks {
+  ID: Int
+  author: String
+  chapters(
+    filter: [CatalogService_Chapters_filter]
+    orderBy: [CatalogService_Chapters_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Chapters_connection
+  createdAt: Timestamp
+  currency: CatalogService_Currencies
+  currency_code: String
+  genre: CatalogService_Genres
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  price: Decimal
+  stock: Int
+  texts(
+    filter: [CatalogService_Books_texts_filter]
+    orderBy: [CatalogService_Books_texts_orderBy]
+    skip: Int
+    top: Int
+  ): CatalogService_Books_texts_connection
+  title: String
+}
+
+input CatalogService_ListOfBooks_C {
+  ID: Int
+  author: String
+  chapters: [CatalogService_Chapters_C]
+  createdAt: Timestamp
+  currency: CatalogService_Currencies_C
+  currency_code: String
+  genre: CatalogService_Genres_C
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  price: Decimal
+  stock: Int
+  texts: [CatalogService_Books_texts_C]
+  title: String
+}
+
+input CatalogService_ListOfBooks_U {
+  ID: Int
+  author: String
+  chapters: [CatalogService_Chapters_U]
+  createdAt: Timestamp
+  currency: CatalogService_Currencies_U
+  currency_code: String
+  genre: CatalogService_Genres_U
+  genre_ID: Int
+  image: Binary
+  modifiedAt: Timestamp
+  price: Decimal
+  stock: Int
+  texts: [CatalogService_Books_texts_U]
+  title: String
+}
+
+type CatalogService_ListOfBooks_connection {
+  nodes: [CatalogService_ListOfBooks]
+  totalCount: Int
+}
+
+input CatalogService_ListOfBooks_filter {
+  ID: [Int_filter]
+  author: [String_filter]
+  createdAt: [Timestamp_filter]
+  currency_code: [String_filter]
+  genre_ID: [Int_filter]
+  image: [Binary_filter]
+  modifiedAt: [Timestamp_filter]
+  price: [Decimal_filter]
+  stock: [Int_filter]
+  title: [String_filter]
+}
+
+type CatalogService_ListOfBooks_input {
+  create(
+    input: [CatalogService_ListOfBooks_C]!
+  ): [CatalogService_ListOfBooks]
+  delete(
+    filter: [CatalogService_ListOfBooks_filter]
+  ): Int
+  update(
+    filter: [CatalogService_ListOfBooks_filter]
+    input: CatalogService_ListOfBooks_U!
+  ): [CatalogService_ListOfBooks]
+}
+
+input CatalogService_ListOfBooks_orderBy {
+  ID: SortDirection
+  author: SortDirection
+  createdAt: SortDirection
+  currency_code: SortDirection
+  genre_ID: SortDirection
+  image: SortDirection
+  modifiedAt: SortDirection
+  price: SortDirection
+  stock: SortDirection
+  title: SortDirection
+}
+
+type CatalogService_input {
+  Books: CatalogService_Books_input
+  Books_texts: CatalogService_Books_texts_input
+  Chapters: CatalogService_Chapters_input
+  Currencies: CatalogService_Currencies_input
+  Currencies_texts: CatalogService_Currencies_texts_input
+  Genres: CatalogService_Genres_input
+  Genres_texts: CatalogService_Genres_texts_input
+  ListOfBooks: CatalogService_ListOfBooks_input
+}
+
+"""
+The `Date` scalar type represents date values as strings in the ISO 8601 format `YYYY-MM-DD`.
+"""
+scalar Date
+
+input Date_filter {
+  eq: Date
+  ge: Date
+  gt: Date
+  le: Date
+  lt: Date
+  ne: Date
+}
+
+"""
+The `Decimal` scalar type represents exact signed decimal values. Decimal represents values as strings rather than floating point numbers.
+"""
+scalar Decimal
+
+input Decimal_filter {
+  eq: Decimal
+  ge: Decimal
+  gt: Decimal
+  le: Decimal
+  lt: Decimal
+  ne: Decimal
+}
+
+input Int_filter {
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+type Mutation {
+  AdminService: AdminService_input
+  CatalogService: CatalogService_input
+}
+
+type Query {
+  AdminService: AdminService
+  CatalogService: CatalogService
+}
+
+enum SortDirection {
+  asc
+  desc
+}
+
+input String_filter {
+  contains: String
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  startswith: String
+}
+
+"""
+The `Timestamp` scalar type represents timestamp values as strings in the ISO 8601 format `YYYY-MM-DDThh-mm-ss.sTZD` with up to 7 digits of fractional seconds.
+"""
+scalar Timestamp
+
+input Timestamp_filter {
+  eq: Timestamp
+  ge: Timestamp
+  gt: Timestamp
+  le: Timestamp
+  lt: Timestamp
+  ne: Timestamp
+}

@@ -1,0 +1,1 @@
+using {CatalogService} from '../../bookshop/srv/cat-service';
