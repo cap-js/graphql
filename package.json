@@ -9,6 +9,7 @@
   ],
   "author": "SAP SE (https://www.sap.com)",
   "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://cap.cloud.sap/",
   "main": "index.js",
   "files": [
     "lib/",
