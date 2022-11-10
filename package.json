@@ -1,7 +1,7 @@
 {
   "name": "@cap-js/graphql",
   "version": "1.0.0",
-  "description": "GraphQL Protocol Adapter for @sap/cds.",
+  "description": "CDS protocol adapter for GraphQL",
   "keywords": [
     "CAP",
     "CDS",
