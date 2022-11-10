@@ -25,9 +25,9 @@ _**WARNING:** This package is in an early general availability state. This means
 
 ## Requirements and Setup
 
-1. Add the GraphQL adapter to your project using `npm`:
+1. Add the GraphQL adapter to your project using `npm`. We will publish the package soon and adapt the snippet accordingly:
     ```js
-    npm add @cap-js/graphql
+    npm add git+https://github.com/cap-js/cds-adapter-graphql
     ```
 
 2. Enable [middlewares](https://cap.cloud.sap/docs/node.js/middlewares) in your project's `package.json`:
