@@ -40,7 +40,7 @@ _**WARNING:** This package is in an early general availability state. This means
 
 ## Limitations
 
-- **Actions** and functions are not yet unsupported.
+- **Actions** and functions are not yet supported.
 - **CDS annotations** like `@readonly` aren’t considered during schema generation.
 - **Cursor-based Pagination** &ndash; we currently support offset-based pagination, and will add cursor-based pagination going forward. While we intend to support both variants then, it is not guaranteed that we can do so without breaking changes to current behaviour.
 - **Extensions** are not yet considered.
