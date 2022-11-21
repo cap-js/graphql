@@ -14,28 +14,21 @@ _**WARNING:** This package is in an early general availability state. This means
     npm add git+https://github.com/cap-js/cds-adapter-graphql
     ```
 
-2. Enable [middlewares](https://cap.cloud.sap/docs/node.js/middlewares) in your project's `package.json`:
+2. Enable [middlewares](https://cap.cloud.sap/docs/node.js/middlewares) and the GraphQL adapter in your project's `package.json`:
     ```jsonc
     {
       "cds": {
         "requires": {
           "middlewares": true
+        },
+        "protocols": {
+          "graphql": { "path": "/graphql", "impl": "@cap-js/graphql" }
         }
       }
     }
     ```
-
-3. Add the GraphQL adapter as a protocol middleware to your project's `server.js`:
-    ```js
-    const cds = require('@sap/cds')
-    const path = require('path')
-
-    cds.env.protocols = {
-      graphql: { path: '/graphql', impl: '@cap-js/graphql' }
-    }
-    ```
   
-4. Run your server as usual, e.g. using `cds watch`.
+3. Run your server as usual, e.g. using `cds watch`.
 > The runtime will automatically serve all services via GraphQL at the default configured endpoint.
 
 ## Limitations
