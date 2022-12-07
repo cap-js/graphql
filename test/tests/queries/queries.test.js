@@ -2,9 +2,10 @@ describe('graphql - queries', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
 
-  const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
+  const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  data.autoReset(true)
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries without arguments without connections', () => {
@@ -26,6 +27,35 @@ describe('graphql - queries', () => {
             { title: 'The Raven' },
             { title: 'Eleonora' },
             { title: 'Catweazle' }
+          ]
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with null result values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: "Moby-Dick" })
+
+      const query = `#graphql
+        {
+          AdminServiceBasic {
+            Books {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const data = {
+        AdminServiceBasic: {
+          Books: [
+            { title: 'Wuthering Heights', stock: 12 },
+            { title: 'Jane Eyre', stock: 11 },
+            { title: 'The Raven', stock: 333 },
+            { title: 'Eleonora', stock: 555 },
+            { title: 'Catweazle', stock: 22 },
+            { title: 'Moby-Dick', stock: null }
           ]
         }
       }
@@ -232,6 +262,39 @@ describe('graphql - queries', () => {
               { title: 'The Raven' },
               { title: 'Eleonora' },
               { title: 'Catweazle' }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with null result values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: "Moby-Dick" })
+
+      const query = `#graphql
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 },
+              { title: 'Moby-Dick', stock: null }
             ]
           }
         }
