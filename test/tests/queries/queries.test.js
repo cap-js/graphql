@@ -2,9 +2,10 @@ describe('graphql - queries', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
 
-  const { axios, POST, data: _data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
+  const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  data.autoReset(true)
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries without arguments without connections', () => {
@@ -60,8 +61,6 @@ describe('graphql - queries', () => {
       }
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
-
-      await _data.reset()
     })
 
     test('nested query containing to-one association', async () => {
@@ -302,8 +301,6 @@ describe('graphql - queries', () => {
       }
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
-
-      await _data.reset()
     })
 
     test('nested query containing to-one association', async () => {
