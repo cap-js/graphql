@@ -9,7 +9,7 @@
   ],
   "author": "SAP SE (https://www.sap.com)",
   "license": "SEE LICENSE IN LICENSE",
-  "homepage": "https://cap.cloud.sap/",
+  "homepage": "https://github.com/cap-js/cds-adapter-graphql",
   "main": "index.js",
   "files": [
     "lib/",
