@@ -46,5 +46,9 @@
   },
   "jest": {
     "testTimeout": 10000
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cap-js/cds-adapter-graphql"
   }
 }
