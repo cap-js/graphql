@@ -29,6 +29,6 @@ jobs:
         tag: "v${{ steps.package-version.outputs.current-version}}"
         name: "Release v${{ steps.package-version.outputs.current-version}}"
         # body: changelog...
-    - run: npm publish --dry
+    - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
