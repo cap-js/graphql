@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.1.0 - tbd
+## Version 0.1.0 - 2022-12-08
 
 ### Added
 
@@ -31,7 +31,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The GraphQL protocol adapter now uses a new middlewares mechanism instead of `cds.plugins` which requires `@sap/cds` version 6.3 to run. Enable the `cds.requires.middlewares` flag and register the GraphQL protocol adapter in `cds.env.protocols` to get started.
 - Replaced `debug` level query and mutation logging with improved `info` level request logging
-
-### Fixed
-
-### Removed
