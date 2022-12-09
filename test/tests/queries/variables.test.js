@@ -2,9 +2,10 @@ describe('graphql - variables', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
 
-  const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
+  const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  data.autoReset(true)
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with variables without connections', () => {
@@ -127,6 +128,106 @@ describe('graphql - variables', () => {
             { ID: 252, title: 'Eleonora' },
             { ID: 271, title: 'Catweazle' }
           ]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with undefined value as an argument', async () => {
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              ID
+              title
+            }
+          }
+        }
+      `
+      const variables = { filter: undefined }
+      const data = {
+        AdminService: {
+          Books: [
+            { ID: 201, title: 'Wuthering Heights' },
+            { ID: 207, title: 'Jane Eyre' },
+            { ID: 251, title: 'The Raven' },
+            { ID: 252, title: 'Eleonora' },
+            { ID: 271, title: 'Catweazle' }
+          ]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with null value as an argument', async () => {
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              ID
+              title
+            }
+          }
+        }
+      `
+      const variables = { filter: null }
+      const data = {
+        AdminService: {
+          Books: [
+            { ID: 201, title: 'Wuthering Heights' },
+            { ID: 207, title: 'Jane Eyre' },
+            { ID: 251, title: 'The Raven' },
+            { ID: 252, title: 'Eleonora' },
+            { ID: 271, title: 'Catweazle' }
+          ]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with undefined value as a field of an argument', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: { eq: undefined } } }
+      const data = {
+        AdminService: {
+          Books: []
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with null value as a field of an argument', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: { eq: null } } }
+      const data = {
+        AdminService: {
+          Books: [{ title: 'Moby-Dick', stock: null }]
         }
       }
       const response = await POST('/graphql', { query, variables })
@@ -273,6 +374,122 @@ describe('graphql - variables', () => {
               { ID: 252, title: 'Eleonora' },
               { ID: 271, title: 'Catweazle' }
             ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with undefined value as an argument', async () => {
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                ID
+                title
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: undefined }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with null value as an argument', async () => {
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                ID
+                title
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: null }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with undefined value as a field of an argument', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: { eq: undefined } } }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: []
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with null value as a field of an argument', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = `#graphql
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: { eq: null } } }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [{ title: 'Moby-Dick', stock: null }]
           }
         }
       }

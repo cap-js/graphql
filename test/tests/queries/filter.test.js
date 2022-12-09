@@ -2,9 +2,10 @@ describe('graphql - filter', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
 
-  const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
+  const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  data.autoReset(true)
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with filter argument without connections', () => {
@@ -22,6 +23,54 @@ describe('graphql - filter', () => {
       const data = {
         AdminServiceBasic: {
           Books: [{ ID: 201, title: 'Wuthering Heights' }]
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter of value null', async () => {
+      const query = `#graphql
+        {
+          AdminService {
+            Books(filter: null) {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: [
+            { title: 'Wuthering Heights', stock: 12 },
+            { title: 'Jane Eyre', stock: 11 },
+            { title: 'The Raven', stock: 333 },
+            { title: 'Eleonora', stock: 555 },
+            { title: 'Catweazle', stock: 22 }
+          ]
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with equality filter for null values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = `#graphql
+        {
+          AdminService {
+            Books(filter: { stock: { eq: null } }) {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: [{ title: 'Moby-Dick', stock: null }]
         }
       }
       const response = await POST('/graphql', { query })
@@ -229,6 +278,62 @@ describe('graphql - filter', () => {
       const data = {
         AdminService: {
           Books: { nodes: [{ ID: 201, title: 'Wuthering Heights' }] }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter of value null', async () => {
+      const query = `#graphql
+        {
+          AdminService {
+            Books(filter: null) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with equality filter for null values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = `#graphql
+        {
+          AdminService {
+            Books(filter: { stock: { eq: null } }) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [{ title: 'Moby-Dick', stock: null }]
+          }
         }
       }
       const response = await POST('/graphql', { query })
