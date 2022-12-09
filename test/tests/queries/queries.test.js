@@ -35,7 +35,7 @@ describe('graphql - queries', () => {
     })
 
     test('query with null result values', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: "Moby-Dick" })
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
       const query = `#graphql
         {
@@ -271,7 +271,7 @@ describe('graphql - queries', () => {
     })
 
     test('query with null result values', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: "Moby-Dick" })
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
       const query = `#graphql
         {
