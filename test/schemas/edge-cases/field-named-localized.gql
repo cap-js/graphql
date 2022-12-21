@@ -88,6 +88,7 @@ type FieldNamedLocalizedService_localized {
   ID: Int
   createdAt: Timestamp
   createdBy: String
+  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   root: FieldNamedLocalizedService_Root
@@ -98,6 +99,7 @@ input FieldNamedLocalizedService_localized_C {
   ID: Int
   createdAt: Timestamp
   createdBy: String
+  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   root: FieldNamedLocalizedService_Root_C
@@ -108,6 +110,7 @@ input FieldNamedLocalizedService_localized_U {
   ID: Int
   createdAt: Timestamp
   createdBy: String
+  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   root: FieldNamedLocalizedService_Root_U
@@ -123,6 +126,7 @@ input FieldNamedLocalizedService_localized_filter {
   ID: [Int_filter]
   createdAt: [Timestamp_filter]
   createdBy: [String_filter]
+  localized: [String_filter]
   modifiedAt: [Timestamp_filter]
   modifiedBy: [String_filter]
   root_ID: [Int_filter]
@@ -145,6 +149,7 @@ input FieldNamedLocalizedService_localized_orderBy {
   ID: SortDirection
   createdAt: SortDirection
   createdBy: SortDirection
+  localized: SortDirection
   modifiedAt: SortDirection
   modifiedBy: SortDirection
   root_ID: SortDirection

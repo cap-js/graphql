@@ -321,7 +321,6 @@ type AdminService_Chapters {
   book_ID: Int
   createdAt: Timestamp
   createdBy: String
-  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   number: Int
@@ -333,7 +332,6 @@ input AdminService_Chapters_C {
   book_ID: Int
   createdAt: Timestamp
   createdBy: String
-  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   number: Int
@@ -345,7 +343,6 @@ input AdminService_Chapters_U {
   book_ID: Int
   createdAt: Timestamp
   createdBy: String
-  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   number: Int
@@ -361,7 +358,6 @@ input AdminService_Chapters_filter {
   book_ID: [Int_filter]
   createdAt: [Timestamp_filter]
   createdBy: [String_filter]
-  localized: [String_filter]
   modifiedAt: [Timestamp_filter]
   modifiedBy: [String_filter]
   number: [Int_filter]
@@ -385,7 +381,6 @@ input AdminService_Chapters_orderBy {
   book_ID: SortDirection
   createdAt: SortDirection
   createdBy: SortDirection
-  localized: SortDirection
   modifiedAt: SortDirection
   modifiedBy: SortDirection
   number: SortDirection
@@ -871,7 +866,6 @@ type CatalogService_Chapters {
   book_ID: Int
   createdAt: Timestamp
   createdBy: String
-  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   number: Int
@@ -883,7 +877,6 @@ input CatalogService_Chapters_C {
   book_ID: Int
   createdAt: Timestamp
   createdBy: String
-  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   number: Int
@@ -895,7 +888,6 @@ input CatalogService_Chapters_U {
   book_ID: Int
   createdAt: Timestamp
   createdBy: String
-  localized: String
   modifiedAt: Timestamp
   modifiedBy: String
   number: Int
@@ -911,7 +903,6 @@ input CatalogService_Chapters_filter {
   book_ID: [Int_filter]
   createdAt: [Timestamp_filter]
   createdBy: [String_filter]
-  localized: [String_filter]
   modifiedAt: [Timestamp_filter]
   modifiedBy: [String_filter]
   number: [Int_filter]
@@ -935,7 +926,6 @@ input CatalogService_Chapters_orderBy {
   book_ID: SortDirection
   createdAt: SortDirection
   createdBy: SortDirection
-  localized: SortDirection
   modifiedAt: SortDirection
   modifiedBy: SortDirection
   number: SortDirection

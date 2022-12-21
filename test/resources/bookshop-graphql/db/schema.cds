@@ -9,8 +9,7 @@ extend bookshop.Books with {
 }
 
 entity Chapters : managed {
-  key book      : Association to bookshop.Books;
-  key number    : Integer;
-      title     : String;
-      localized : String; // to test that a property only named 'localized' is not confused with localized keyword
+  key book   : Association to bookshop.Books;
+  key number : Integer;
+      title  : String;
 }
