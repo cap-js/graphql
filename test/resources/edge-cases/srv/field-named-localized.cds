@@ -2,8 +2,9 @@ using {managed} from '@sap/cds/common';
 
 service FieldNamedLocalizedService {
   entity localized : managed {
-    key ID   : Integer;
-        root : Association to Root;
+    key ID        : Integer;
+        root      : Association to Root;
+        localized : String; // to test that a property only named 'localized' is not confused with localized keyword
   }
 
   entity Root : managed {
