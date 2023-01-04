@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed	
 
-- Fixed a server crash that occourred if an entity property is named `localized`.
+- Fixed a server crash that occurred if an entity property is named `localized`
 
 ### Removed
 
