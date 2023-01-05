@@ -7,7 +7,7 @@ const { buildSchema, lexicographicSortSchema, printSchema, Kind } = require('gra
 const SCHEMAS_DIR = path.join(__dirname, '../schemas')
 
 const cdsFilesToGQLSchema = async files => {
-  const m = cds.linked(await cds.load(files))
+  const m = cds.linked(await cds.load(files, { docs: true }))
   const services = Object.fromEntries(m.services.map(s => [s.name, new cds.ApplicationService(s.name, m)]))
   return generateSchema4(services)
 }

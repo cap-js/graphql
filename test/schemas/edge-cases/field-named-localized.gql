@@ -1,10 +1,21 @@
 type FieldNamedLocalizedService {
+  """
+  Aspect to capture changes by user and name
+
+  See https://cap.cloud.sap/docs/cds/common#aspect-managed
+  """
   Root(
     filter: [FieldNamedLocalizedService_Root_filter]
     orderBy: [FieldNamedLocalizedService_Root_orderBy]
     skip: Int
     top: Int
   ): FieldNamedLocalizedService_Root_connection
+
+  """
+  Aspect to capture changes by user and name
+
+  See https://cap.cloud.sap/docs/cds/common#aspect-managed
+  """
   localized(
     filter: [FieldNamedLocalizedService_localized_filter]
     orderBy: [FieldNamedLocalizedService_localized_orderBy]
@@ -13,9 +24,18 @@ type FieldNamedLocalizedService {
   ): FieldNamedLocalizedService_localized_connection
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type FieldNamedLocalizedService_Root {
   ID: Int
   createdAt: Timestamp
+
+  """
+  Canonical user ID
+  """
   createdBy: String
   localized(
     filter: [FieldNamedLocalizedService_localized_filter]
@@ -24,6 +44,10 @@ type FieldNamedLocalizedService_Root {
     top: Int
   ): FieldNamedLocalizedService_localized_connection
   modifiedAt: Timestamp
+
+  """
+  Canonical user ID
+  """
   modifiedBy: String
 }
 
@@ -45,7 +69,17 @@ input FieldNamedLocalizedService_Root_U {
   modifiedBy: String
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type FieldNamedLocalizedService_Root_connection {
+  """
+  Aspect to capture changes by user and name
+
+  See https://cap.cloud.sap/docs/cds/common#aspect-managed
+  """
   nodes: [FieldNamedLocalizedService_Root]
   totalCount: Int
 }
@@ -84,12 +118,25 @@ type FieldNamedLocalizedService_input {
   localized: FieldNamedLocalizedService_localized_input
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type FieldNamedLocalizedService_localized {
   ID: Int
   createdAt: Timestamp
+
+  """
+  Canonical user ID
+  """
   createdBy: String
   localized: String
   modifiedAt: Timestamp
+
+  """
+  Canonical user ID
+  """
   modifiedBy: String
   root: FieldNamedLocalizedService_Root
   root_ID: Int
@@ -117,7 +164,17 @@ input FieldNamedLocalizedService_localized_U {
   root_ID: Int
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type FieldNamedLocalizedService_localized_connection {
+  """
+  Aspect to capture changes by user and name
+
+  See https://cap.cloud.sap/docs/cds/common#aspect-managed
+  """
   nodes: [FieldNamedLocalizedService_localized]
   totalCount: Int
 }
