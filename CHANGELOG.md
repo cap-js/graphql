@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Register alias field resolver during schema generation instead of providing to the middleware to pass to the execute function
+- Register `aliasFieldResolver` during schema generation instead of passing it to the GraphQL server
 
 ### Fixed	
 
