@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Register alias field resolver during schema generation instead of providing to the middleware to pass to the execute function
+
 ### Fixed	
 
 - Fixed a server crash that occourred if an entity property is named `localized`.
