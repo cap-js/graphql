@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Execute query resolvers in parallel and mutation resolvers serially
+
 ### Fixed	
 
 - Fixed a server crash that occourred if an entity property is named `localized`.
