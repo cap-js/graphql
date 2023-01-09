@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed	
 
 - Fixed a server crash that occourred if an entity property is named `localized`.
+- Log `GET` instead of `GET undefined` when no query was specified
 
 ### Removed
 

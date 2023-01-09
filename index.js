@@ -12,7 +12,7 @@ function CDSGraphQLAdapter (options) {
   return express.Router()
   .use (express.json()) //> required by logger below
   .use ((req,_,next)=>{
-    LOG.info (req.method, req.body?.query || decodeURIComponent(req.query.query))
+    LOG.info (req.method, req.body?.query || req.query.query && decodeURIComponent(req.query.query) || '')
     next()
   })
   .use (new GraphQLAdapter (services, options))
