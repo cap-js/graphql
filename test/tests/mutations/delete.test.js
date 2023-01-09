@@ -13,7 +13,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         AdminService {
           Books {
-            delete(filter: { ID: { eq: 0 } } )
+            delete(filter: { ID: { eq: 0 } })
           }
         }
       }
@@ -43,7 +43,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         AdminService {
           Books {
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -155,7 +155,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         myAlias: AdminService {
           Books {
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -184,7 +184,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         AdminService {
           myAlias: Books {
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -213,7 +213,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         AdminService {
           Books {
-            myAlias: delete(filter: { ID: { eq: 207 } } )
+            myAlias: delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -242,7 +242,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         myAliasA: AdminService {
           myAliasB: Books {
-            myAliasC: delete(filter: { ID: { eq: 207 } } )
+            myAliasC: delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -274,7 +274,7 @@ describe('graphql - delete mutations', () => {
           __typename
           Books {
             __typename
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }

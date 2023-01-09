@@ -764,7 +764,7 @@ describe('graphql - aliases', () => {
           AdminService {
             Books {
               myAliasA: nodes {
-                title 
+                title
               }
               myAliasB: nodes {
                 title

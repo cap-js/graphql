@@ -53,7 +53,7 @@ describe('graphql - filter', () => {
       const query = gql`
         {
           AdminServiceBasic {
-            Books(filter: { ID: { gt: 250, lt:260 } }) {
+            Books(filter: { ID: { gt: 250, lt: 260 } }) {
               ID
               title
             }
@@ -142,23 +142,15 @@ describe('graphql - filter', () => {
       const query = gql`
         {
           AdminServiceBasic {
-            Books(filter: [
-              {
-                title: [
-                  { startswith: "the", endswith: "raven" },
-                  { contains: "height" }
-                ]
-                ID: [
-                  { eq: 201 },
-                  { eq: 251 }
-                ]
-              }
-              {
-                title: {
-                  contains: "cat"
+            Books(
+              filter: [
+                {
+                  title: [{ startswith: "the", endswith: "raven" }, { contains: "height" }]
+                  ID: [{ eq: 201 }, { eq: 251 }]
                 }
-              }
-            ]) {
+                { title: { contains: "cat" } }
+              ]
+            ) {
               ID
               title
             }
@@ -185,7 +177,7 @@ describe('graphql - filter', () => {
             Authors(filter: { ID: { gt: 110 } }) {
               ID
               name
-              books(filter: { ID: { lt: 260 } })  {
+              books(filter: { ID: { lt: 260 } }) {
                 ID
                 title
               }
@@ -262,7 +254,7 @@ describe('graphql - filter', () => {
       const query = gql`
         {
           AdminService {
-            Books(filter: { ID: { gt: 250, lt:260 } }) {
+            Books(filter: { ID: { gt: 250, lt: 260 } }) {
               nodes {
                 ID
                 title
@@ -365,23 +357,15 @@ describe('graphql - filter', () => {
       const query = gql`
         {
           AdminService {
-            Books(filter: [
-              {
-                title: [
-                  { startswith: "the", endswith: "raven" },
-                  { contains: "height" }
-                ]
-                ID: [
-                  { eq: 201 },
-                  { eq: 251 }
-                ]
-              }
-              {
-                title: {
-                  contains: "cat"
+            Books(
+              filter: [
+                {
+                  title: [{ startswith: "the", endswith: "raven" }, { contains: "height" }]
+                  ID: [{ eq: 201 }, { eq: 251 }]
                 }
-              }
-            ]) {
+                { title: { contains: "cat" } }
+              ]
+            ) {
               nodes {
                 ID
                 title
@@ -413,7 +397,7 @@ describe('graphql - filter', () => {
               nodes {
                 ID
                 name
-                books(filter: { ID: { lt: 260 } })  {
+                books(filter: { ID: { lt: 260 } }) {
                   nodes {
                     ID
                     title

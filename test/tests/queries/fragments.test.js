@@ -17,7 +17,7 @@ describe('graphql - fragments', () => {
 
         fragment myFragment on Query {
           AdminServiceBasic {
-            Books{
+            Books {
               title
             }
           }
@@ -137,7 +137,7 @@ describe('graphql - fragments', () => {
       const query = gql`
         query {
           AdminServiceBasic {
-            Books{
+            Books {
               ...myFragmentA
               title
               ...myFragmentB

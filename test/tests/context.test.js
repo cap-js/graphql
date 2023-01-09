@@ -73,10 +73,7 @@ describe('graphql - context is set', () => {
       mutation {
         TestService {
           Foo {
-            update(
-              filter: { ID: { eq: 1 } },
-              input: { bar: "boo" }
-            ) {
+            update(filter: { ID: { eq: 1 } }, input: { bar: "boo" }) {
               ID
               bar
             }

@@ -109,7 +109,7 @@ describe('graphql - queries with localized data', () => {
             create(input: [$input]) {
               ID
               title
-              texts { 
+              texts {
                 nodes {
                   locale
                   title
@@ -143,7 +143,7 @@ describe('graphql - queries with localized data', () => {
 
   test('update localized data', async () => {
     const query = gql`
-      mutation($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
+      mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
             update(filter: [$filter], input: $input) {
@@ -204,7 +204,7 @@ describe('graphql - queries with localized data', () => {
     expect(response.data).toEqual({ data: dataCreate })
 
     const queryUpdate = gql`
-      mutation($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
+      mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
             update(filter: [$filter], input: $input) {
@@ -244,7 +244,7 @@ describe('graphql - queries with localized data', () => {
             create(input: [$input]) {
               ID
               title
-              texts { 
+              texts {
                 nodes {
                   locale
                   title
@@ -273,7 +273,7 @@ describe('graphql - queries with localized data', () => {
     expect(response.data).toEqual({ data: dataCreate })
 
     const queryUpdate = gql`
-      mutation($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
+      mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
             update(filter: [$filter], input: $input) {

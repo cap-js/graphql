@@ -13,10 +13,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "This book does not exist" } },
-              input: { stock: 0 }
-            ) {
+            update(filter: { title: { eq: "This book does not exist" } }, input: { stock: 0 }) {
               title
               stock
             }
@@ -49,10 +46,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
               stock
             }
@@ -181,10 +175,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               ...myFragment
             }
           }
@@ -214,10 +205,7 @@ describe('graphql - update mutations', () => {
       mutation {
         myAlias: AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
             }
           }
@@ -243,10 +231,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           myAlias: Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
             }
           }
@@ -272,10 +257,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           Books {
-            myAlias: update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            myAlias: update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
             }
           }
@@ -301,10 +283,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               myAliasA: title
               myAliasB: title
             }
@@ -331,10 +310,7 @@ describe('graphql - update mutations', () => {
       mutation {
         myAliasA: AdminService {
           myAliasB: Books {
-            myAliasC: update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            myAliasC: update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               myAliasD: title
             }
           }
@@ -360,10 +336,7 @@ describe('graphql - update mutations', () => {
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
               __typename
             }
@@ -393,10 +366,7 @@ describe('graphql - update mutations', () => {
           __typename
           Books {
             __typename
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               __typename
               title
             }
