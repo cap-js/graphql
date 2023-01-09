@@ -1,6 +1,7 @@
 describe('graphql - aliases', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,7 +10,7 @@ describe('graphql - aliases', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with aliases without connections', () => {
     test('query with alias on service', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           myAlias: AdminServiceBasic {
             Books {
@@ -34,7 +35,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             myAlias: Books {
@@ -59,7 +60,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on element', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -84,7 +85,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -111,7 +112,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on element of association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -138,7 +139,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on all fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           myAliasA: AdminServiceBasic {
             myAliasB: Books {
@@ -165,7 +166,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on entity selecting different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             myAliasA: Books {
@@ -195,7 +196,7 @@ describe('graphql - aliases', () => {
 
     // REVISIT: aliases with expand currently not supported in cds
     test.skip('query with aliases on to-many element selecting different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors {
@@ -245,7 +246,7 @@ describe('graphql - aliases', () => {
 
     // REVISIT: aliases with expand currently not supported in cds
     test.skip('query with aliases on to-many element with different filters selecting different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors {
@@ -286,7 +287,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on service allowing two different filters on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           myAliasA: AdminServiceBasic {
             Books(filter: { ID: { eq: 201 } }) {
@@ -315,7 +316,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on entity allowing two different filters on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             myAliasA: Books(filter: { ID: { eq: 201 } }) {
@@ -344,7 +345,7 @@ describe('graphql - aliases', () => {
 
   describe('queries with aliases with connections', () => {
     test('query with alias on service', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           myAlias: AdminService {
             Books {
@@ -373,7 +374,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             myAlias: Books {
@@ -402,7 +403,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on nodes of entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -431,7 +432,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on element', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -460,7 +461,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -491,7 +492,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with alias on element of association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -522,7 +523,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on all fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           myAliasA: AdminService {
             myAliasB: Books {
@@ -553,7 +554,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on entity selecting different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             myAliasA: Books {
@@ -589,7 +590,7 @@ describe('graphql - aliases', () => {
 
     // REVISIT: aliases with expand currently not supported in cds
     test.skip('query with aliases on to-many element selecting different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors {
@@ -647,7 +648,7 @@ describe('graphql - aliases', () => {
 
     // REVISIT: aliases with expand currently not supported in cds
     test.skip('query with aliases on to-many element with different filters selecting different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors {
@@ -694,7 +695,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on service allowing two different filters on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           myAliasA: AdminService {
             Books(filter: { ID: { eq: 201 } }) {
@@ -727,7 +728,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on entity allowing two different filters on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             myAliasA: Books(filter: { ID: { eq: 201 } }) {
@@ -758,7 +759,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on nodes returning the same result list twice', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -797,7 +798,7 @@ describe('graphql - aliases', () => {
     })
 
     test('query with aliases on nodes returning different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {

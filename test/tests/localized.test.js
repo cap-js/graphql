@@ -1,6 +1,7 @@
 describe('graphql - queries with localized data', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -8,7 +9,7 @@ describe('graphql - queries with localized data', () => {
   data.autoReset(true)
 
   test('query with default locale', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books {
@@ -39,7 +40,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('query with locale de', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books {
@@ -70,7 +71,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('query with unknown locale defaults to en', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books {
@@ -101,7 +102,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('create localized data with deep insert', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: AdminService_Books_C) {
         AdminService {
           Books {
@@ -141,7 +142,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('update localized data', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -175,7 +176,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('update empty localized data', async () => {
-    const queryCreate = `#graphql
+    const queryCreate = gql`
       mutation ($input: AdminService_Books_C) {
         AdminService {
           Books {
@@ -202,7 +203,7 @@ describe('graphql - queries with localized data', () => {
     const response = await POST('/graphql', { query: queryCreate, variables: variablesCreate })
     expect(response.data).toEqual({ data: dataCreate })
 
-    const queryUpdate = `#graphql
+    const queryUpdate = gql`
       mutation($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -236,7 +237,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('update localized data with empty texts array', async () => {
-    const queryCreate = `#graphql
+    const queryCreate = gql`
       mutation ($input: AdminService_Books_C) {
         AdminService {
           Books {
@@ -271,7 +272,7 @@ describe('graphql - queries with localized data', () => {
     const response = await POST('/graphql', { query: queryCreate, variables: variablesCreate })
     expect(response.data).toEqual({ data: dataCreate })
 
-    const queryUpdate = `#graphql
+    const queryUpdate = gql`
       mutation($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -305,7 +306,7 @@ describe('graphql - queries with localized data', () => {
   })
 
   test('delete single entry should delete localized data', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter) {
         AdminService {
           Books {

@@ -1,6 +1,7 @@
 describe('graphql - filter', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,7 +10,7 @@ describe('graphql - filter', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with filter argument without connections', () => {
     test('query with simple filter', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: { ID: { eq: 201 } }) {
@@ -29,7 +30,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with simple filter wrapped as lists', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: [{ ID: [{ eq: 201 }] }]) {
@@ -49,7 +50,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by AND on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: { ID: { gt: 250, lt:260 } }) {
@@ -72,7 +73,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by AND on different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: { ID: { eq: 251 }, title: { eq: "The Raven" } }) {
@@ -92,7 +93,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by OR on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: { ID: [{ eq: 201 }, { eq: 251 }] }) {
@@ -115,7 +116,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by OR on different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: [{ ID: { eq: 201 } }, { title: { eq: "The Raven" } }]) {
@@ -138,7 +139,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with complex filter', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(filter: [
@@ -178,7 +179,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filters on nested fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors(filter: { ID: { gt: 110 } }) {
@@ -214,7 +215,7 @@ describe('graphql - filter', () => {
 
   describe('queries with filter argument with connections', () => {
     test('query with simple filter', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: { ID: { eq: 201 } }) {
@@ -236,7 +237,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with simple filter wrapped as lists', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: [{ ID: [{ eq: 201 }] }]) {
@@ -258,7 +259,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by AND on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: { ID: { gt: 250, lt:260 } }) {
@@ -285,7 +286,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by AND on different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: { ID: { eq: 251 }, title: { eq: "The Raven" } }) {
@@ -307,7 +308,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by OR on the same field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: { ID: [{ eq: 201 }, { eq: 251 }] }) {
@@ -334,7 +335,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter joined by OR on different fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: [{ ID: { eq: 201 } }, { title: { eq: "The Raven" } }]) {
@@ -361,7 +362,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with complex filter', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: [
@@ -405,7 +406,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filters on nested fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors(filter: { ID: { gt: 110 } }) {

@@ -1,6 +1,7 @@
 describe('graphql - offset-based paging', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,7 +10,7 @@ describe('graphql - offset-based paging', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with paging arguments without connections', () => {
     test('query with top argument on field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors(top: 2) {
@@ -28,7 +29,7 @@ describe('graphql - offset-based paging', () => {
     })
 
     test('query with top and skip arguments on field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors(top: 2, skip: 2) {
@@ -47,7 +48,7 @@ describe('graphql - offset-based paging', () => {
     })
 
     test('query with top and skip arguments on nested fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors(top: 2, skip: 2) {
@@ -78,7 +79,7 @@ describe('graphql - offset-based paging', () => {
 
   describe('queries with paging arguments with connections', () => {
     test('query with top argument on field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors(top: 2) {
@@ -99,7 +100,7 @@ describe('graphql - offset-based paging', () => {
     })
 
     test('query with top and skip arguments on field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors(top: 2, skip: 2) {
@@ -120,7 +121,7 @@ describe('graphql - offset-based paging', () => {
     })
 
     test('query with top and skip arguments on nested fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors(top: 2, skip: 2) {

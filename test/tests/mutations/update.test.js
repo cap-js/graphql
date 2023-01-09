@@ -1,6 +1,7 @@
 describe('graphql - update mutations', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -8,7 +9,7 @@ describe('graphql - update mutations', () => {
   data.autoReset(true)
 
   test('update no entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -44,7 +45,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update single entry without variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -74,7 +75,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update single entry with variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -102,7 +103,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update multiple entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -141,7 +142,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update all entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -176,7 +177,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with fragment', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -209,7 +210,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on service', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAlias: AdminService {
           Books {
@@ -238,7 +239,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on entity', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           myAlias: Books {
@@ -267,7 +268,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on update mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -296,7 +297,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on field of update mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -326,7 +327,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with aliases on all fields', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAliasA: AdminService {
           myAliasB: Books {
@@ -355,7 +356,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with meta field __typename in update mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -385,7 +386,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with meta field __typename on all nesting levels', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         __typename
         AdminService {

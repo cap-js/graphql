@@ -1,12 +1,13 @@
-const cds = require('@sap/cds/lib')
 const path = require('path')
 const prettier = require('prettier')
-const { generateSchema4 } = require('../../lib/schema')
 const { buildSchema, lexicographicSortSchema, printSchema, Kind } = require('graphql')
 
 const SCHEMAS_DIR = path.join(__dirname, '../schemas')
 
 const cdsFilesToGQLSchema = async files => {
+  const cds = require('@sap/cds/lib')
+  const { generateSchema4 } = require('../../lib/schema')
+
   const m = cds.linked(await cds.load(files))
   const services = Object.fromEntries(m.services.map(s => [s.name, new cds.ApplicationService(s.name, m)]))
   return generateSchema4(services)
@@ -38,4 +39,11 @@ const fakeInfoObject = (document, schema, parentTypeName, variables) => {
   }
 }
 
-module.exports = { SCHEMAS_DIR, cdsFilesToGQLSchema, formatSchema, fakeInfoObject }
+/**
+ * Dummy template literal tag function that returns the raw string that was passed to it.
+ * Mocks the gql tag provided by the graphql-tag module and the graphql tag provided by the react-relay module.
+ * Usage of this tag allows IDEs and prettier to detect GraphQL query strings and provide syntax highlighting and code formatting.
+ */
+const gql = String.raw
+
+module.exports = { SCHEMAS_DIR, cdsFilesToGQLSchema, formatSchema, fakeInfoObject, gql }

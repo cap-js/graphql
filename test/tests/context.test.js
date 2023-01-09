@@ -1,13 +1,14 @@
 describe('graphql - context is set', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
   beforeEach(async () => {
-    const deleteAll = `#graphql
+    const deleteAll = gql`
       mutation {
         TestService {
           Foo {
@@ -17,7 +18,7 @@ describe('graphql - context is set', () => {
       }
     `
     await POST('/graphql', { query: deleteAll })
-    const insertOne = `#graphql
+    const insertOne = gql`
       mutation {
         TestService {
           Foo {
@@ -32,7 +33,7 @@ describe('graphql - context is set', () => {
   })
 
   test('read', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         TestService {
           Foo {
@@ -49,7 +50,7 @@ describe('graphql - context is set', () => {
   })
 
   test('create', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         TestService {
           Foo {
@@ -68,7 +69,7 @@ describe('graphql - context is set', () => {
   })
 
   test('update', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         TestService {
           Foo {
@@ -90,7 +91,7 @@ describe('graphql - context is set', () => {
   })
 
   test('delete', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         TestService {
           Foo {
