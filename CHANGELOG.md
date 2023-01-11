@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Register `aliasFieldResolver` during schema generation instead of passing it to the GraphQL server
+
 ### Fixed	
 
 - Fixed a server crash that occourred if an entity property is named `localized`.
