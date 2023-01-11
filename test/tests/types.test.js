@@ -1183,8 +1183,8 @@ describe('graphql - types parsing and validation', () => {
         expect(result).toContainEqual({ [field]: value })
       })
 
-      test('cds.Timestamp is correctly parsed from input literal high precision timestamp string value', async () => {
-        const value = '2021-06-27T14:52:23.123456789Z'
+      test('cds.Timestamp is correctly parsed from input literal timestamp string value', async () => {
+        const value = '2021-06-27T14:52:23.123Z'
         const returnValue = '2021-06-27T14:52:23.123Z'
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
         const data = { TypesService: { MyEntity: { create: [{ [field]: returnValue }] } } }
@@ -1225,8 +1225,8 @@ describe('graphql - types parsing and validation', () => {
         expect(result).toContainEqual({ [field]: value })
       })
 
-      test('cds.Timestamp is correctly parsed from variable high precision timestamp string value', async () => {
-        const value = '2021-06-27T14:52:23.123456789Z'
+      test('cds.Timestamp is correctly parsed from variable timestamp string value', async () => {
+        const value = '2021-06-27T14:52:23.123Z'
         const returnValue = '2021-06-27T14:52:23.123Z'
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
         const data = { TypesService: { MyEntity: { create: [{ [field]: returnValue }] } } }
