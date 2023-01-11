@@ -32,7 +32,7 @@ const fakeInfoObject = (document, schema, parentTypeName, variables) => {
   return {
     fieldNodes: operationDefinition.selectionSet.selections,
     schema,
-    parentType: schema._typeMap[parentTypeName],
+    parentType: schema.getType(parentTypeName),
     variableValues: { ...variables },
     fragments
   }
