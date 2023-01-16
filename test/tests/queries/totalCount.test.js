@@ -37,6 +37,27 @@ describe('graphql - queries with totalCount', () => {
     expect(response.data).toEqual({ data })
   })
 
+  test('query selecting only totalCount', async () => {
+    const query = `#graphql
+      {
+        AdminService {
+          Books {
+            totalCount
+          }
+        }
+      }
+    `
+    const data = {
+      AdminService: {
+        Books: {
+          totalCount: 5
+        }
+      }
+    }
+    const response = await POST('/graphql', { query })
+    expect(response.data).toEqual({ data })
+  })
+
   test('query with totalCount and simple filter', async () => {
     const query = `#graphql
       {
