@@ -39,7 +39,7 @@ describe('graphql - queries with totalCount', () => {
   })
 
   test('query selecting only totalCount', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books {
