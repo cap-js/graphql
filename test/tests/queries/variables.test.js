@@ -136,7 +136,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with undefined value as an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -163,7 +163,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with null value as an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -192,7 +192,7 @@ describe('graphql - variables', () => {
     test('query variable with undefined value as a field of an argument', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -215,7 +215,7 @@ describe('graphql - variables', () => {
     test('query variable with null value as a field of an argument', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -383,7 +383,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with undefined value as an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -414,7 +414,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with null value as an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -447,7 +447,7 @@ describe('graphql - variables', () => {
     test('query variable with undefined value as a field of an argument', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -474,7 +474,7 @@ describe('graphql - variables', () => {
     test('query variable with null value as a field of an argument', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {

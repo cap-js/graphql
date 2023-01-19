@@ -31,7 +31,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter of value null', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: null) {
@@ -59,7 +59,7 @@ describe('graphql - filter', () => {
     test('query with equality filter for null values', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: { stock: { eq: null } }) {
@@ -278,7 +278,7 @@ describe('graphql - filter', () => {
     })
 
     test('query with filter of value null', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: null) {
@@ -310,7 +310,7 @@ describe('graphql - filter', () => {
     test('query with equality filter for null values', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(filter: { stock: { eq: null } }) {
