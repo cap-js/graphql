@@ -1,6 +1,7 @@
 describe('graphql - orderBy', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,7 +10,7 @@ describe('graphql - orderBy', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with orderBy argument without connections', () => {
     test('query with single orderBy object on field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(orderBy: { ID: desc }) {
@@ -37,7 +38,7 @@ describe('graphql - orderBy', () => {
     test('query with list of orderBy object on field', async () => {
       // Use createdAt as first sort criteria to test second level sort criteria,
       // since they all have the same values due to being created at the same time
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books(orderBy: [{ createdAt: desc }, { ID: desc }]) {
@@ -63,7 +64,7 @@ describe('graphql - orderBy', () => {
     })
 
     test('query with orderBy objects on nested fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors(orderBy: { ID: desc }) {
@@ -92,7 +93,7 @@ describe('graphql - orderBy', () => {
 
   describe('queries with orderBy argument with connections', () => {
     test('query with single orderBy object on field', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(orderBy: { ID: desc }) {
@@ -124,7 +125,7 @@ describe('graphql - orderBy', () => {
     test('query with list of orderBy object on field', async () => {
       // Use createdAt as first sort criteria to test second level sort criteria,
       // since they all have the same values due to being created at the same time
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books(orderBy: [{ createdAt: desc }, { ID: desc }]) {
@@ -154,7 +155,7 @@ describe('graphql - orderBy', () => {
     })
 
     test('query with orderBy objects on nested fields', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors(orderBy: { ID: desc }) {

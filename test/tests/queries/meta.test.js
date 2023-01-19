@@ -1,6 +1,7 @@
 describe('graphql - meta fields', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,7 +10,7 @@ describe('graphql - meta fields', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with __typename meta field without connections', () => {
     test('query with __typename meta field on root query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           __typename
         }
@@ -20,7 +21,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on service', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             __typename
@@ -37,7 +38,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -62,7 +63,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on association of entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -89,7 +90,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on all nesting levels', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           __typename
           AdminServiceBasic {
@@ -139,7 +140,7 @@ describe('graphql - meta fields', () => {
 
   describe('queries with __typename meta field with connections', () => {
     test('query with __typename meta field on root query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           __typename
         }
@@ -150,7 +151,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on service', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             __typename
@@ -167,7 +168,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -186,7 +187,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on entity nodes', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -215,7 +216,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on association of entity', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -246,7 +247,7 @@ describe('graphql - meta fields', () => {
     })
 
     test('query with __typename meta field on all nesting levels', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           __typename
           AdminService {

@@ -1,6 +1,7 @@
 describe('graphql - create mutations', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -8,7 +9,7 @@ describe('graphql - create mutations', () => {
   data.autoReset(true)
 
   test('create empty entry', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -34,7 +35,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create single entry without variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -60,7 +61,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create single entry with variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: AdminService_Books_C) {
         AdminService {
           Books {
@@ -88,7 +89,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create multiple entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: [AdminService_Books_C]!) {
         AdminService {
           Books {
@@ -122,7 +123,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with deep insert', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: AdminService_Books_C) {
         AdminService {
           Books {
@@ -168,7 +169,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with fragment on create mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -198,7 +199,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with alias on service', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAlias: AdminService {
           Books {
@@ -224,7 +225,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with alias on entity', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           myAlias: Books {
@@ -250,7 +251,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with alias on create mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -276,7 +277,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with alias on field of create mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -303,7 +304,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with deep insert with aliases on nested fields', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: AdminService_Books_C) {
         AdminService {
           Books {
@@ -349,7 +350,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with aliases on all fields', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAliasA: AdminService {
           myAliasB: Books {
@@ -375,7 +376,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with meta field __typename in create mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -402,7 +403,7 @@ describe('graphql - create mutations', () => {
   })
 
   test('create entry with meta field __typename on all nesting levels', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         __typename
         AdminService {
