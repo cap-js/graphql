@@ -1,8 +1,8 @@
-const cds = require('@sap/cds/lib')
-const path = require('path')
-const { gql } = require('../util')
-
 describe('graphql resolver concurrency', () => {
+  const cds = require('@sap/cds/lib')
+  const path = require('path')
+  const { gql } = require('../util')
+
   const { POST } = cds.test(path.join(__dirname, '../resources/concurrency'))
   let _log
 
