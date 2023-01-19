@@ -1,6 +1,7 @@
 describe('graphql - variables', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,7 +10,7 @@ describe('graphql - variables', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with variables without connections', () => {
     test('query variable of type input object passed as argument without connections', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminServiceBasic_Books_filter]) {
           AdminServiceBasic {
             Books(filter: $filter) {
@@ -34,7 +35,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type input object passed as argument wrapped in a list', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: AdminServiceBasic_Books_filter) {
           AdminServiceBasic {
             Books(filter: [$filter]) {
@@ -59,7 +60,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type input object passed as a field of an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [Int_filter]) {
           AdminServiceBasic {
             Books(filter: { ID: $filter }) {
@@ -84,7 +85,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type input object passed as a field of an argument wrapped in a list', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: Int_filter) {
           AdminServiceBasic {
             Books(filter: { ID: [$filter] }) {
@@ -109,7 +110,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type scalar value passed as a field of an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: Int) {
           AdminServiceBasic {
             Books(filter: { ID: { ge: $filter } }) {
@@ -136,7 +137,7 @@ describe('graphql - variables', () => {
 
   describe('queries with variables with connections', () => {
     test('query variable of type input object passed as argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
             Books(filter: $filter) {
@@ -165,7 +166,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type input object passed as argument wrapped in a list', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: AdminService_Books_filter) {
           AdminService {
             Books(filter: [$filter]) {
@@ -194,7 +195,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type input object passed as a field of an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: [Int_filter]) {
           AdminService {
             Books(filter: { ID: $filter }) {
@@ -223,7 +224,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type input object passed as a field of an argument wrapped in a list', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: Int_filter) {
           AdminService {
             Books(filter: { ID: [$filter] }) {
@@ -252,7 +253,7 @@ describe('graphql - variables', () => {
     })
 
     test('query variable of type scalar value passed as a field of an argument', async () => {
-      const query = `#graphql
+      const query = gql`
         query ($filter: Int) {
           AdminService {
             Books(filter: { ID: { ge: $filter } }) {

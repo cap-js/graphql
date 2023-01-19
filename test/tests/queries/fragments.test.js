@@ -1,6 +1,7 @@
 describe('graphql - fragments', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -9,14 +10,14 @@ describe('graphql - fragments', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with fragments without connections', () => {
     test('query with fragment on root query', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           ...myFragment
         }
 
         fragment myFragment on Query {
           AdminServiceBasic {
-            Books{
+            Books {
               title
             }
           }
@@ -38,7 +39,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragment on service', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminServiceBasic {
             ...myFragment
@@ -67,7 +68,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragment on entity', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminServiceBasic {
             Books {
@@ -96,7 +97,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with nested fragments', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           ...myFragmentA
         }
@@ -133,10 +134,10 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragments along with other fields', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminServiceBasic {
-            Books{
+            Books {
               ...myFragmentA
               title
               ...myFragmentB
@@ -172,7 +173,7 @@ describe('graphql - fragments', () => {
 
   describe('queries with fragments with connections', () => {
     test('query with fragment on root query', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           ...myFragment
         }
@@ -205,7 +206,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragment on service', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminService {
             ...myFragment
@@ -238,7 +239,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragment on entity', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminService {
             Books {
@@ -271,7 +272,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragment on nodes of entity', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminService {
             Books {
@@ -304,7 +305,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with nested fragments', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           ...myFragmentA
         }
@@ -349,7 +350,7 @@ describe('graphql - fragments', () => {
     })
 
     test('query with fragments along with other fields', async () => {
-      const query = `#graphql
+      const query = gql`
         query {
           AdminService {
             Books {
