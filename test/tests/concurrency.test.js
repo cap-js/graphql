@@ -3,7 +3,7 @@ describe('graphql resolver concurrency', () => {
   const path = require('path')
   const { gql } = require('../util')
 
-  const { POST } = cds.test(path.join(__dirname, '../resources/concurrency'))
+  const { axios, POST } = cds.test(path.join(__dirname, '../resources/concurrency'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
   let _log
