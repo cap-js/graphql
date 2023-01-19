@@ -1,6 +1,7 @@
 describe('graphql - queries', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -10,7 +11,7 @@ describe('graphql - queries', () => {
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries without arguments without connections', () => {
     test('simple query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -37,7 +38,7 @@ describe('graphql - queries', () => {
     test('query with null result values', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -64,7 +65,7 @@ describe('graphql - queries', () => {
     })
 
     test('nested query containing to-one association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -92,7 +93,7 @@ describe('graphql - queries', () => {
     })
 
     test('nested query containing to-many association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors {
@@ -119,7 +120,7 @@ describe('graphql - queries', () => {
     })
 
     test('complex query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Books {
@@ -181,7 +182,7 @@ describe('graphql - queries', () => {
     })
 
     test('recursive query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminServiceBasic {
             Authors {
@@ -242,7 +243,7 @@ describe('graphql - queries', () => {
 
   describe('queries without arguments with connections', () => {
     test('simple query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -273,7 +274,7 @@ describe('graphql - queries', () => {
     test('query with null result values', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -304,7 +305,7 @@ describe('graphql - queries', () => {
     })
 
     test('nested query containing to-one association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -336,7 +337,7 @@ describe('graphql - queries', () => {
     })
 
     test('nested query containing to-many association', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors {
@@ -369,7 +370,7 @@ describe('graphql - queries', () => {
     })
 
     test('complex query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Books {
@@ -443,7 +444,7 @@ describe('graphql - queries', () => {
     })
 
     test('recursive query', async () => {
-      const query = `#graphql
+      const query = gql`
         {
           AdminService {
             Authors {

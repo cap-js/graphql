@@ -1,3 +1,5 @@
+const { gql } = require('../util')
+
 const _toBase64Url = value => value.replace(/\//g, '_').replace(/\+/g, '-')
 
 const _getTestBuffer = repetitions => {
@@ -8,7 +10,7 @@ const _getTestBuffer = repetitions => {
 }
 
 const _getMutationForFieldWithLiteralValue = (field, value, quoted) =>
-  `#graphql
+  gql`
     mutation {
       TypesService {
         MyEntity {
@@ -21,7 +23,7 @@ const _getMutationForFieldWithLiteralValue = (field, value, quoted) =>
   `
 
 const _getMutationAndVariablesForFieldWithVariable = (field, value) => ({
-  query: `#graphql
+  query: gql`
     mutation ($input: [TypesService_MyEntity_C]!) {
       TypesService {
         MyEntity {
