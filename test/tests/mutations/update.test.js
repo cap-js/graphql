@@ -1,6 +1,7 @@
 describe('graphql - update mutations', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -8,14 +9,11 @@ describe('graphql - update mutations', () => {
   data.autoReset(true)
 
   test('update no entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "This book does not exist" } },
-              input: { stock: 0 }
-            ) {
+            update(filter: { title: { eq: "This book does not exist" } }, input: { stock: 0 }) {
               title
               stock
             }
@@ -44,14 +42,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update single entry without variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
               stock
             }
@@ -74,7 +69,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update single entry with variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -102,7 +97,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update multiple entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter, $input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -141,7 +136,7 @@ describe('graphql - update mutations', () => {
   })
 
   test('update all entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($input: AdminService_Books_U!) {
         AdminService {
           Books {
@@ -176,14 +171,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with fragment', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               ...myFragment
             }
           }
@@ -209,14 +201,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on service', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAlias: AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
             }
           }
@@ -238,14 +227,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on entity', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           myAlias: Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
             }
           }
@@ -267,14 +253,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on update mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            myAlias: update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            myAlias: update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
             }
           }
@@ -296,14 +279,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with alias on field of update mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               myAliasA: title
               myAliasB: title
             }
@@ -326,14 +306,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with aliases on all fields', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAliasA: AdminService {
           myAliasB: Books {
-            myAliasC: update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            myAliasC: update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               myAliasD: title
             }
           }
@@ -355,14 +332,11 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with meta field __typename in update mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               title
               __typename
             }
@@ -385,17 +359,14 @@ describe('graphql - update mutations', () => {
   })
 
   test('update entry with meta field __typename on all nesting levels', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         __typename
         AdminService {
           __typename
           Books {
             __typename
-            update(
-              filter: { title: { eq: "Wuthering Heights" } },
-              input: { title: "Sturmhöhe" }
-            ) {
+            update(filter: { title: { eq: "Wuthering Heights" } }, input: { title: "Sturmhöhe" }) {
               __typename
               title
             }

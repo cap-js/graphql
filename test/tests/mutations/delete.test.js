@@ -1,6 +1,7 @@
 describe('graphql - delete mutations', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
@@ -8,11 +9,11 @@ describe('graphql - delete mutations', () => {
   data.autoReset(true)
 
   test('delete no entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            delete(filter: { ID: { eq: 0 } } )
+            delete(filter: { ID: { eq: 0 } })
           }
         }
       }
@@ -38,11 +39,11 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete single entry without variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -67,7 +68,7 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete single entry with variables', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter) {
         AdminService {
           Books {
@@ -97,7 +98,7 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete multiple entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation ($filter: AdminService_Books_filter) {
         AdminService {
           Books {
@@ -126,7 +127,7 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete all entries', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
@@ -150,11 +151,11 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete entry with alias on service', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAlias: AdminService {
           Books {
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -179,11 +180,11 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete entry with alias on entity', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           myAlias: Books {
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -208,11 +209,11 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete entry with alias on delete mutation', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         AdminService {
           Books {
-            myAlias: delete(filter: { ID: { eq: 207 } } )
+            myAlias: delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -237,11 +238,11 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete entry with aliases on all fields', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         myAliasA: AdminService {
           myAliasB: Books {
-            myAliasC: delete(filter: { ID: { eq: 207 } } )
+            myAliasC: delete(filter: { ID: { eq: 207 } })
           }
         }
       }
@@ -266,14 +267,14 @@ describe('graphql - delete mutations', () => {
   })
 
   test('delete entry with meta field __typename on all nesting levels', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         __typename
         AdminService {
           __typename
           Books {
             __typename
-            delete(filter: { ID: { eq: 207 } } )
+            delete(filter: { ID: { eq: 207 } })
           }
         }
       }

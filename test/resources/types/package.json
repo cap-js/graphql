@@ -1,7 +1,0 @@
-{
-  "cds": {
-    "requires": {
-      "middlewares": true
-    }
-  }
-}
