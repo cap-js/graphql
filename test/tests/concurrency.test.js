@@ -1,5 +1,6 @@
 const cds = require('@sap/cds/lib')
 const path = require('path')
+const { gql } = require('../util')
 
 describe('graphql resolver concurrency', () => {
   const { POST } = cds.test(path.join(__dirname, '../resources/concurrency'))
@@ -14,12 +15,24 @@ describe('graphql resolver concurrency', () => {
   })
 
   test('query resolvers should be executed in parallel', async () => {
-    const query = `#graphql
+    const query = gql`
       query {
         ConcurrencyService {
-          A { nodes { id } }
-          B { nodes { id } }
-          C { nodes { id } }
+          A {
+            nodes {
+              id
+            }
+          }
+          B {
+            nodes {
+              id
+            }
+          }
+          C {
+            nodes {
+              id
+            }
+          }
         }
       }
     `
@@ -33,12 +46,24 @@ describe('graphql resolver concurrency', () => {
   })
 
   test('mutation resolvers should be executed serially', async () => {
-    const query = `#graphql
+    const query = gql`
       mutation {
         ConcurrencyService {
-          A { create(input: {}) { id } }
-          B { create(input: {}) { id } }
-          C { create(input: {}) { id } }
+          A {
+            create(input: {}) {
+              id
+            }
+          }
+          B {
+            create(input: {}) {
+              id
+            }
+          }
+          C {
+            create(input: {}) {
+              id
+            }
+          }
         }
       }
     `
