@@ -1,4 +1,5 @@
 describe('graphql - enrich AST with parsed inline literal values', () => {
+  const { gql } = require('../util')
   const { parse } = require('graphql')
   const enrich = require('../../lib/resolvers/parse/ast/enrich')
   const { models } = require('../resources')
@@ -12,7 +13,7 @@ describe('graphql - enrich AST with parsed inline literal values', () => {
   })
 
   test('parsing of literal value as top level argument', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Authors(top: 2) {
@@ -31,7 +32,7 @@ describe('graphql - enrich AST with parsed inline literal values', () => {
   })
 
   test('parsing of literal value in nested input value', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books(filter: { ID: { eq: 201 } }) {
