@@ -12,7 +12,18 @@ function CDSGraphQLAdapter (options) {
   return express.Router()
   .use (express.json()) //> required by logger below
   .use ((req,_,next)=>{
-    LOG.info (req.method, req.body?.query || req.query.query && decodeURIComponent(req.query.query) || '')
+    const query = req.body?.query || req.query.query && decodeURIComponent(req.query.query)
+    if (!query) {
+      next()
+      return
+    }
+
+    const formattedQuery = query.includes('\n') && !query.startsWith('\n') ? '\n' + query + '\n' : query
+    const operationName = req.body?.operationName && { operationName: req.body.operationName }
+    const variables = process.env.NODE_ENV !== 'production' && req.body?.variables && { variables: req.body.variables }
+
+    LOG.info (...[req.method, operationName, formattedQuery, variables].filter(e => e))
+
     next()
   })
   .use (new GraphQLAdapter (services, options))
