@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Register `aliasFieldResolver` during schema generation instead of passing it to the GraphQL server
+- Filters `contains`, `startswith`, and `endswith` now generate CQN function calls instead of generating `like` expressions directly
 
 ### Fixed	
 
