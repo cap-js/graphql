@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed	
 
 - Fixed a server crash that occourred if an entity property is named `localized`.
+- A bug where the field `totalCount` could not be queried on its own
 
 ### Removed
 
