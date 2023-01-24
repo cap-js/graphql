@@ -15,9 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The filters `contains`, `startswith`, and `endswith` now generate CQN function calls instead of generating `like` expressions directly
 - Execute query resolvers in parallel and mutation resolvers serially
 
-### Fixed	
+### Fixed
 
-- Fixed a server crash that occourred if an entity property is named `localized`.
+- Fixed a server crash that occurred if an entity property is named `localized`
 - A bug where the field `totalCount` could not be queried on its own
 
 ### Removed

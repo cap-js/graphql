@@ -15,34 +15,22 @@ type FieldNamedLocalizedService {
 
 type FieldNamedLocalizedService_Root {
   ID: Int
-  createdAt: Timestamp
-  createdBy: String
   localized(
     filter: [FieldNamedLocalizedService_localized_filter]
     orderBy: [FieldNamedLocalizedService_localized_orderBy]
     skip: Int
     top: Int
   ): FieldNamedLocalizedService_localized_connection
-  modifiedAt: Timestamp
-  modifiedBy: String
 }
 
 input FieldNamedLocalizedService_Root_C {
   ID: Int
-  createdAt: Timestamp
-  createdBy: String
   localized: [FieldNamedLocalizedService_localized_C]
-  modifiedAt: Timestamp
-  modifiedBy: String
 }
 
 input FieldNamedLocalizedService_Root_U {
   ID: Int
-  createdAt: Timestamp
-  createdBy: String
   localized: [FieldNamedLocalizedService_localized_U]
-  modifiedAt: Timestamp
-  modifiedBy: String
 }
 
 type FieldNamedLocalizedService_Root_connection {
@@ -52,10 +40,6 @@ type FieldNamedLocalizedService_Root_connection {
 
 input FieldNamedLocalizedService_Root_filter {
   ID: [Int_filter]
-  createdAt: [Timestamp_filter]
-  createdBy: [String_filter]
-  modifiedAt: [Timestamp_filter]
-  modifiedBy: [String_filter]
 }
 
 type FieldNamedLocalizedService_Root_input {
@@ -73,10 +57,6 @@ type FieldNamedLocalizedService_Root_input {
 
 input FieldNamedLocalizedService_Root_orderBy {
   ID: SortDirection
-  createdAt: SortDirection
-  createdBy: SortDirection
-  modifiedAt: SortDirection
-  modifiedBy: SortDirection
 }
 
 type FieldNamedLocalizedService_input {
@@ -86,33 +66,21 @@ type FieldNamedLocalizedService_input {
 
 type FieldNamedLocalizedService_localized {
   ID: Int
-  createdAt: Timestamp
-  createdBy: String
   localized: String
-  modifiedAt: Timestamp
-  modifiedBy: String
   root: FieldNamedLocalizedService_Root
   root_ID: Int
 }
 
 input FieldNamedLocalizedService_localized_C {
   ID: Int
-  createdAt: Timestamp
-  createdBy: String
   localized: String
-  modifiedAt: Timestamp
-  modifiedBy: String
   root: FieldNamedLocalizedService_Root_C
   root_ID: Int
 }
 
 input FieldNamedLocalizedService_localized_U {
   ID: Int
-  createdAt: Timestamp
-  createdBy: String
   localized: String
-  modifiedAt: Timestamp
-  modifiedBy: String
   root: FieldNamedLocalizedService_Root_U
   root_ID: Int
 }
@@ -124,11 +92,7 @@ type FieldNamedLocalizedService_localized_connection {
 
 input FieldNamedLocalizedService_localized_filter {
   ID: [Int_filter]
-  createdAt: [Timestamp_filter]
-  createdBy: [String_filter]
   localized: [String_filter]
-  modifiedAt: [Timestamp_filter]
-  modifiedBy: [String_filter]
   root_ID: [Int_filter]
 }
 
@@ -147,11 +111,7 @@ type FieldNamedLocalizedService_localized_input {
 
 input FieldNamedLocalizedService_localized_orderBy {
   ID: SortDirection
-  createdAt: SortDirection
-  createdBy: SortDirection
   localized: SortDirection
-  modifiedAt: SortDirection
-  modifiedBy: SortDirection
   root_ID: SortDirection
 }
 
@@ -187,18 +147,4 @@ input String_filter {
   lt: String
   ne: String
   startswith: String
-}
-
-"""
-The `Timestamp` scalar type represents timestamp values as strings in the ISO 8601 format `YYYY-MM-DDThh-mm-ss.sTZD` with up to 7 digits of fractional seconds.
-"""
-scalar Timestamp
-
-input Timestamp_filter {
-  eq: Timestamp
-  ge: Timestamp
-  gt: Timestamp
-  le: Timestamp
-  lt: Timestamp
-  ne: Timestamp
 }
