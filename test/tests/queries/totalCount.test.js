@@ -1,13 +1,14 @@
 describe('graphql - queries with totalCount', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
+  const { gql } = require('../../util')
 
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
   test('simple query with totalCount', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books {
@@ -37,8 +38,29 @@ describe('graphql - queries with totalCount', () => {
     expect(response.data).toEqual({ data })
   })
 
+  test('query selecting only totalCount', async () => {
+    const query = gql`
+      {
+        AdminService {
+          Books {
+            totalCount
+          }
+        }
+      }
+    `
+    const data = {
+      AdminService: {
+        Books: {
+          totalCount: 5
+        }
+      }
+    }
+    const response = await POST('/graphql', { query })
+    expect(response.data).toEqual({ data })
+  })
+
   test('query with totalCount and simple filter', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Books(filter: { ID: { eq: 201 } }) {
@@ -61,7 +83,7 @@ describe('graphql - queries with totalCount', () => {
   })
 
   test('query with totalCount on nested fields', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Authors {
@@ -96,7 +118,7 @@ describe('graphql - queries with totalCount', () => {
   })
 
   test('query with totalCount and top and skip', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Authors(top: 2, skip: 2) {
@@ -118,7 +140,7 @@ describe('graphql - queries with totalCount', () => {
   })
 
   test('query with totalCount and top and skip arguments on nested fields', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Authors(top: 2, skip: 2) {
@@ -153,7 +175,7 @@ describe('graphql - queries with totalCount', () => {
   })
 
   test('query with aliases on totalCount on nested fields', async () => {
-    const query = `#graphql
+    const query = gql`
       {
         AdminService {
           Authors {

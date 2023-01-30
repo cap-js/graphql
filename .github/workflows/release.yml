@@ -26,8 +26,7 @@ jobs:
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
-        tag: "v${{ steps.package-version.outputs.current-version}}"
-        name: "Release v${{ steps.package-version.outputs.current-version}}"
+        tag: "v${{ steps.package-version.outputs.current-version }}"
         # body: changelog...
     - run: npm publish --access public
       env:
