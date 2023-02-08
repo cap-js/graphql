@@ -80,4 +80,132 @@ describe('graphql resolver concurrency', () => {
       expect(_log.mock.calls[5][0]).toEqual('END CREATE C')
     })
   })
+
+  describe('queries and mutations returning data and errors', () => {
+    test('query resolvers return both data and an error', async () => {
+      const query = gql`
+        query {
+          DataAndErrorsService {
+            A {
+              nodes {
+                timestamp
+              }
+            }
+            B {
+              nodes {
+                timestamp
+              }
+            }
+            C {
+              nodes {
+                timestamp
+              }
+            }
+          }
+        }
+      `
+      const errors = [
+        {
+          message: 'My error on READ B',
+          locations: [
+            {
+              line: 9,
+              column: 13
+            }
+          ],
+          path: ['DataAndErrorsService', 'B']
+        }
+      ]
+      const data = {
+        DataAndErrorsService: {
+          A: {
+            nodes: [
+              {
+                timestamp: expect.any(String)
+              }
+            ]
+          },
+          B: null,
+          C: {
+            nodes: [
+              {
+                timestamp: expect.any(String)
+              }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ errors, data })
+      // A sleeps 3000 ms, C sleeps 2000 ms
+      // Since query resolvers are executed in parallel C should resolve before A
+      expect(new Date(response.data.data.DataAndErrorsService.A.nodes[0].timestamp).getTime()).toBeGreaterThan(
+        new Date(response.data.data.DataAndErrorsService.C.nodes[0].timestamp).getTime()
+      )
+    })
+
+    test('mutation resolvers return both data and an error', async () => {
+      const query = gql`
+        mutation {
+          DataAndErrorsService {
+            A {
+              create(input: {}) {
+                timestamp
+              }
+            }
+            B {
+              create(input: {}) {
+                timestamp
+              }
+            }
+            C {
+              create(input: {}) {
+                timestamp
+              }
+            }
+          }
+        }
+      `
+      const errors = [
+        {
+          message: 'My error on CREATE B',
+          locations: [
+            {
+              line: 10,
+              column: 15
+            }
+          ],
+          path: ['DataAndErrorsService', 'B', 'create']
+        }
+      ]
+      const data = {
+        DataAndErrorsService: {
+          A: {
+            create: [
+              {
+                timestamp: expect.any(String)
+              }
+            ]
+          },
+          B: {
+            create: null
+          },
+          C: {
+            create: [
+              {
+                timestamp: expect.any(String)
+              }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ errors, data })
+      // A sleeps 3000 ms, C sleeps 2000 ms
+      // Since mutation resolvers are executed serially A should resolve before C
+      expect(new Date(response.data.data.DataAndErrorsService.A.create[0].timestamp).getTime()).toBeLessThan(
+        new Date(response.data.data.DataAndErrorsService.C.create[0].timestamp).getTime()
+      )
+    })
+  })
 })
