@@ -15,7 +15,7 @@ class DataAndErrorsService extends cds.ApplicationService { init(){
   })
   this.on('READ', 'B', async () => {
     await sleep(SLEEP_DURATION_B)
-    throw new Error('My error on READ B')
+    throw 'My error on READ B'
   })
   this.on('READ', 'C', async () => {
     await sleep(SLEEP_DURATION_C)
