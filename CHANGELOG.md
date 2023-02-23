@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Replaced deprecated GraphQL HTTP server `express-graphql` with `graphql-http`
+- Serve GraphiQL 2 via included HTML instead of relying on the server framework (`express-graphql` included GraphiQL 1)
+- Bump `graphql` version to 16
+
 ### Fixed
 
 ### Removed
