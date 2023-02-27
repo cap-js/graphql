@@ -13,6 +13,7 @@
   "homepage": "https://cap.cloud.sap/",
   "main": "index.js",
   "files": [
+    "app/",
     "lib/",
     "index.js",
     "README.md",
