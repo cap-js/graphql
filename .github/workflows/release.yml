@@ -23,11 +23,16 @@ jobs:
     - name: get-version
       id: package-version
       uses: martinbeentjes/npm-get-version-action@v1.2.3
+    - name: Parse changelog
+      uses: schwma/parse-changelog-action@v1.0.0
+      id: parse-changelog
+      with:
+        version: '${{ steps.package-version.outputs.current-version }}'
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
-        tag: "v${{ steps.package-version.outputs.current-version }}"
-        # body: changelog...
+        tag: 'v${{ steps.package-version.outputs.current-version }}'
+        body: '${{ steps.parse-changelog.outputs.body }}'
     - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
