@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support for generating GraphQL descriptions from CDS doc comments
+
 ### Changed
 
 ### Fixed
@@ -25,8 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Execute query resolvers in parallel and mutation resolvers serially
 
 ## Version 0.2.0 - 2023-01-30
-
-- Support for generating GraphQL descriptions from CDS doc comments
 
 ### Changed
 
