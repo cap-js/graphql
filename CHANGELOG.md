@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support for filtering by `null` values
+
 ### Changed
+
+- Improved handling of `null` and `undefined` values in query arguments
 
 ### Fixed
 
@@ -26,13 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version 0.2.0 - 2023-01-30
 
-- Support for filtering by `null` values
-
 ### Changed
 
 - Register `aliasFieldResolver` during schema generation instead of passing it to the GraphQL server
 - The filters `contains`, `startswith`, and `endswith` now generate CQN function calls instead of generating `like` expressions directly
-- Improved handling of `null` and `undefined` values in query arguments
 
 ### Fixed
 
