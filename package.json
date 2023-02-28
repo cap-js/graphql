@@ -1,6 +1,6 @@
 {
   "name": "@cap-js/graphql",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CDS protocol adapter for GraphQL",
   "keywords": [
     "CAP",
@@ -13,6 +13,7 @@
   "homepage": "https://cap.cloud.sap/",
   "main": "index.js",
   "files": [
+    "app/",
     "lib/",
     "index.js",
     "README.md",
