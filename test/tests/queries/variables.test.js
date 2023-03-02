@@ -189,6 +189,66 @@ describe('graphql - variables', () => {
       expect(response.data).toEqual({ data })
     })
 
+    test('query variable with undefined value where an object value is expected', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: undefined } }
+      const data = {
+        AdminService: {
+          Books: [
+            { title: 'Wuthering Heights', stock: 12 },
+            { title: 'Jane Eyre', stock: 11 },
+            { title: 'The Raven', stock: 333 },
+            { title: 'Eleonora', stock: 555 },
+            { title: 'Catweazle', stock: 22 },
+            { title: 'Moby-Dick', stock: null }
+          ]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with null value where an object value is expected', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              title
+              stock
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: null } }
+      const data = {
+        AdminService: {
+          Books: [
+            { title: 'Wuthering Heights', stock: 12 },
+            { title: 'Jane Eyre', stock: 11 },
+            { title: 'The Raven', stock: 333 },
+            { title: 'Eleonora', stock: 555 },
+            { title: 'Catweazle', stock: 22 },
+            { title: 'Moby-Dick', stock: null }
+          ]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
     test('query variable with undefined value as a field of an argument', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
@@ -436,6 +496,74 @@ describe('graphql - variables', () => {
               { ID: 251, title: 'The Raven' },
               { ID: 252, title: 'Eleonora' },
               { ID: 271, title: 'Catweazle' }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with undefined value where an object value is expected', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: undefined } }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 },
+              { title: 'Moby-Dick', stock: null }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable with null value where an object value is expected', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: { stock: null } }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 },
+              { title: 'Moby-Dick', stock: null }
             ]
           }
         }
