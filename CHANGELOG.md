@@ -5,22 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.2.0 - tbd
+## Version 0.4.0 - tbd
 
 ### Added
+
+### Changed
+
+### Fixed
+
+- A bug where the field `totalCount` could not be queried on its own
+- Name clashes when CDS elements are named `nodes` or `totalCount`
+
+### Removed
+
+## Version 0.3.1 - 2023-02-28
+
+### Fixed
+
+- Add `app` folder to `files` property of `package.json` to be included for publishing to `npm`
+
+## Version 0.3.0 - 2023-02-27
+
+### Changed
+
+- Replaced deprecated GraphQL HTTP server `express-graphql` with `graphql-http`
+- Serve GraphiQL 2 via included HTML instead of relying on the server framework (`express-graphql` included GraphiQL 1)
+- Bump `graphql` version to 16
+- Execute query resolvers in parallel and mutation resolvers serially
+
+## Version 0.2.0 - 2023-01-30
 
 ### Changed
 
 - Register `aliasFieldResolver` during schema generation instead of passing it to the GraphQL server
 - The filters `contains`, `startswith`, and `endswith` now generate CQN function calls instead of generating `like` expressions directly
 
-### Fixed	
+### Fixed
 
-- Fixed a server crash that occourred if an entity property is named `localized`.
-- A bug where the field `totalCount` could not be queried on its own
-- Name clashes when CDS elements are named `nodes` or `totalCount`
-
-### Removed
+- Schema generation crash that occurred if an entity property is named `localized`
+- The field `totalCount` could not be queried on its own
 
 ## Version 0.1.0 - 2022-12-08
 
