@@ -463,7 +463,14 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: []
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 },
+              { title: 'Moby-Dick', stock: null }
+            ]
           }
         }
       }
