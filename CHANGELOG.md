@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## Version 0.3.1 - 2023-02-28
+
+### Fixed
+
+- Add `app` folder to `files` property of `package.json` to be included for publishing to `npm`
+
 ## Version 0.3.0 - 2023-02-27
 
 ### Changed
