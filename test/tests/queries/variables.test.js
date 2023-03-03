@@ -294,6 +294,52 @@ describe('graphql - variables', () => {
       const response = await POST('/graphql', { query, variables })
       expect(response.data).toEqual({ data })
     })
+
+    test('query variable combining undefined and non-undefined values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              ID
+              title
+            }
+          }
+        }
+      `
+      const variables = { filter: [{ ID: { eq: undefined } }, { ID: { eq: 251 } }, { ID: undefined }] }
+      const data = {
+        AdminService: {
+          Books: [{ ID: 251, title: 'The Raven' }]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable combining null and non-null values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              ID
+              title
+            }
+          }
+        }
+      `
+      const variables = { filter: [{ ID: { eq: 251 } }, { ID: null }] }
+      const data = {
+        AdminService: {
+          Books: [{ ID: 251, title: 'The Raven' }]
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
   })
 
   describe('queries with variables with connections', () => {
@@ -626,6 +672,60 @@ describe('graphql - variables', () => {
         AdminService: {
           Books: {
             nodes: [{ title: 'Moby-Dick', stock: null }]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable combining undefined and non-undefined values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                ID
+                title
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: [{ ID: { eq: undefined } }, { ID: { eq: 251 } }, { ID: undefined }] }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [{ ID: 251, title: 'The Raven' }]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query, variables })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query variable combining null and non-null values', async () => {
+      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
+
+      const query = gql`
+        query ($filter: [AdminService_Books_filter]) {
+          AdminService {
+            Books(filter: $filter) {
+              nodes {
+                ID
+                title
+              }
+            }
+          }
+        }
+      `
+      const variables = { filter: [{ ID: { eq: 251 } }, { ID: null }] }
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [{ ID: 251, title: 'The Raven' }]
           }
         }
       }
