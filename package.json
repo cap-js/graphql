@@ -24,8 +24,8 @@
     "node": ">=14"
   },
   "scripts": {
-    "prettier": "npx prettier --write lib test",
-    "prettier:check": "npx prettier --check lib test",
+    "prettier": "npx prettier --write app lib test",
+    "prettier:check": "npx prettier --check app lib test",
     "lint": "npx eslint .",
     "test": "jest --silent",
     "test:generate-schemas": "node ./test/scripts/generate-schemas.js"
