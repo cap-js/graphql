@@ -5,6 +5,6 @@ module.exports = (req, res, next) => {
     // Forward GET requests with query URL parameter to GraphQL server
     next()
   } else {
-    res.sendFile(path.join(__dirname, '../app/graphiql.html'))
+    res.sendFile(path.join(__dirname, 'graphiql.html'))
   }
 }
