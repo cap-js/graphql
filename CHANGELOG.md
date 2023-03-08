@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Handling of GraphQL queries that are sent via `GET` requests using the `query` URL parameter if GraphiQL is enabled
+
 ### Removed
 
 ## Version 0.3.1 - 2023-02-28
