@@ -190,8 +190,6 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with undefined value where an object value is expected', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
-
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
@@ -205,14 +203,7 @@ describe('graphql - variables', () => {
       const variables = { filter: { stock: undefined } }
       const data = {
         AdminService: {
-          Books: [
-            { title: 'Wuthering Heights', stock: 12 },
-            { title: 'Jane Eyre', stock: 11 },
-            { title: 'The Raven', stock: 333 },
-            { title: 'Eleonora', stock: 555 },
-            { title: 'Catweazle', stock: 22 },
-            { title: 'Moby-Dick', stock: null }
-          ]
+          Books: []
         }
       }
       const response = await POST('/graphql', { query, variables })
@@ -220,8 +211,6 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with null value where an object value is expected', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
-
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
@@ -235,14 +224,7 @@ describe('graphql - variables', () => {
       const variables = { filter: { stock: null } }
       const data = {
         AdminService: {
-          Books: [
-            { title: 'Wuthering Heights', stock: 12 },
-            { title: 'Jane Eyre', stock: 11 },
-            { title: 'The Raven', stock: 333 },
-            { title: 'Eleonora', stock: 555 },
-            { title: 'Catweazle', stock: 22 },
-            { title: 'Moby-Dick', stock: null }
-          ]
+          Books: []
         }
       }
       const response = await POST('/graphql', { query, variables })
@@ -250,8 +232,6 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with undefined value as a field of an argument', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
-
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
