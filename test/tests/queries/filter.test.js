@@ -307,6 +307,174 @@ describe('graphql - filter', () => {
       expect(response.data).toEqual({ data })
     })
 
+    test('query with filter of value empty input object', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: {}) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter of value empty list', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: []) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: []
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter list containing empty input object', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: [{}]) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter column of value empty input object', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: { ID: {} }) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter column of value empty list', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: { ID: [] }) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: []
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter column list containing empty input object', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: { ID: [{}] }) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
     test('query with equality filter for null values', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
@@ -535,5 +703,7 @@ describe('graphql - filter', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
     })
+
+    describe('queries with filter argument containing null and undefined values', () => {})
   })
 })
