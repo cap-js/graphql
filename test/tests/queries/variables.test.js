@@ -536,8 +536,8 @@ describe('graphql - variables', () => {
           AdminService {
             Books(filter: $filter) {
               nodes {
+                ID
                 title
-                stock
               }
             }
           }
@@ -547,7 +547,13 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: []
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
           }
         }
       }
@@ -561,8 +567,8 @@ describe('graphql - variables', () => {
           AdminService {
             Books(filter: $filter) {
               nodes {
+                ID
                 title
-                stock
               }
             }
           }
@@ -572,7 +578,13 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: []
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
           }
         }
       }
@@ -586,8 +598,8 @@ describe('graphql - variables', () => {
           AdminService {
             Books(filter: $filter) {
               nodes {
+                ID
                 title
-                stock
               }
             }
           }
@@ -597,7 +609,13 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: []
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
           }
         }
       }
@@ -633,8 +651,6 @@ describe('graphql - variables', () => {
     })
 
     test('query variable combining undefined and non-undefined values', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
-
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
@@ -651,7 +667,13 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: [{ ID: 251, title: 'The Raven' }]
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
           }
         }
       }
@@ -660,8 +682,6 @@ describe('graphql - variables', () => {
     })
 
     test('query variable combining null and non-null values', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
-
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
@@ -678,7 +698,13 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: [{ ID: 251, title: 'The Raven' }]
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+          ]
           }
         }
       }
