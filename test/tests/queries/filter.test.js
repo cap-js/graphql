@@ -703,7 +703,5 @@ describe('graphql - filter', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
     })
-
-    describe('queries with filter argument containing null and undefined values', () => {})
   })
 })
