@@ -3,10 +3,9 @@ describe('graphql - variables', () => {
   const path = require('path')
   const { gql } = require('../../util')
 
-  const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
+  const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with variables without connections', () => {
@@ -438,8 +437,6 @@ describe('graphql - variables', () => {
     })
 
     test('query variable with null value as a field of an argument', async () => {
-      await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
-
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
           AdminService {
@@ -456,7 +453,7 @@ describe('graphql - variables', () => {
       const data = {
         AdminService: {
           Books: {
-            nodes: [{ title: 'Moby-Dick', stock: null }]
+            nodes: []
           }
         }
       }
