@@ -427,6 +427,108 @@ describe('graphql - filter', () => {
       expect(response.data).toEqual({ data })
     })
 
+    test('query with filter column of empty input object, which resolves to true, joined by AND with equality filter', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: { title: {}, stock: { eq: 11 } }) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [{ title: 'Jane Eyre', stock: 11 }]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter column of empty list, which resolves to false, joined by AND with equality filter', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: { title: [], stock: { eq: 11 } }) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: []
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter column of empty input object, which resolves to true, joined by OR with equality filter', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: [{ title: {} }, { stock: { eq: 11 } }]) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { title: 'Wuthering Heights', stock: 12 },
+              { title: 'Jane Eyre', stock: 11 },
+              { title: 'The Raven', stock: 333 },
+              { title: 'Eleonora', stock: 555 },
+              { title: 'Catweazle', stock: 22 }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
+    test('query with filter column of empty list, which resolves to false, joined by OR with equality filter', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: [{ title: [] }, { stock: { eq: 11 } }]) {
+              nodes {
+                title
+                stock
+              }
+            }
+          }
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [{ title: 'Jane Eyre', stock: 11 }]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
     test('query with equality filter for null values', async () => {
       await INSERT.into('sap.capire.bookshop.Books').entries({ title: 'Moby-Dick' })
 
