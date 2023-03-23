@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Improved handling of `null` and `undefined` values in query arguments
+- Empty filter lists resolve to `false` and empty filter objects resolve to `true`
 
 ### Fixed
 
