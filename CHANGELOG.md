@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   ```graphql
   {
     AdminService {
-      # Books where title contains "Wuthering" and title contains "Heights"
       Books(filter: { title: { contains: ["Wuthering", "Heights"] } }) {
         nodes {
           title
