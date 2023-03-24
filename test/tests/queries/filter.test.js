@@ -281,6 +281,28 @@ describe('graphql - filter', () => {
         expect(response.data).toEqual({ data })
       })
 
+      test('query with filter joined by AND on the same field with the same operator', async () => {
+        const query = gql`
+          {
+            AdminService {
+              Books(filter: { title: { contains: ["Wuthering", "Heights"] } }) {
+                nodes {
+                  ID
+                  title
+                }
+              }
+            }
+          }
+        `
+        const data = {
+          AdminService: {
+            Books: { nodes: [{ ID: 201, title: 'Wuthering Heights' }] }
+          }
+        }
+        const response = await POST('/graphql', { query })
+        expect(response.data).toEqual({ data })
+      })
+
       test('query with filter joined by AND on different fields', async () => {
         const query = gql`
           {
