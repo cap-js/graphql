@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Supporting new `cds-plugin` technique for zero configuration
 - Support for filtering by `null` values
 
 ### Changed
