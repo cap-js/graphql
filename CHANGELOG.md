@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     }
   }
   ```
+- Use `cds.Request` when running CDS queries to set HTTP headers for custom handlers
 
 ### Changed
 
