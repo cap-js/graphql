@@ -16,6 +16,7 @@
     "app/",
     "lib/",
     "index.js",
+    "cds-plugin.js",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
