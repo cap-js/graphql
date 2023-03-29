@@ -643,8 +643,8 @@ The `Binary` scalar type represents binary values as `base64url` encoded strings
 scalar Binary
 
 input Binary_filter {
-  eq: Binary
-  ne: Binary
+  eq: [Binary]
+  ne: [Binary]
 }
 
 type CatalogService {
@@ -1293,12 +1293,12 @@ The `Date` scalar type represents date values as strings in the ISO 8601 format 
 scalar Date
 
 input Date_filter {
-  eq: Date
-  ge: Date
-  gt: Date
-  le: Date
-  lt: Date
-  ne: Date
+  eq: [Date]
+  ge: [Date]
+  gt: [Date]
+  le: [Date]
+  lt: [Date]
+  ne: [Date]
 }
 
 """
@@ -1307,21 +1307,21 @@ The `Decimal` scalar type represents exact signed decimal values. Decimal repres
 scalar Decimal
 
 input Decimal_filter {
-  eq: Decimal
-  ge: Decimal
-  gt: Decimal
-  le: Decimal
-  lt: Decimal
-  ne: Decimal
+  eq: [Decimal]
+  ge: [Decimal]
+  gt: [Decimal]
+  le: [Decimal]
+  lt: [Decimal]
+  ne: [Decimal]
 }
 
 input Int_filter {
-  eq: Int
-  ge: Int
-  gt: Int
-  le: Int
-  lt: Int
-  ne: Int
+  eq: [Int]
+  ge: [Int]
+  gt: [Int]
+  le: [Int]
+  lt: [Int]
+  ne: [Int]
 }
 
 type Mutation {
@@ -1340,15 +1340,15 @@ enum SortDirection {
 }
 
 input String_filter {
-  contains: String
-  endswith: String
-  eq: String
-  ge: String
-  gt: String
-  le: String
-  lt: String
-  ne: String
-  startswith: String
+  contains: [String]
+  endswith: [String]
+  eq: [String]
+  ge: [String]
+  gt: [String]
+  le: [String]
+  lt: [String]
+  ne: [String]
+  startswith: [String]
 }
 
 """
@@ -1357,10 +1357,10 @@ The `Timestamp` scalar type represents timestamp values as strings in the ISO 86
 scalar Timestamp
 
 input Timestamp_filter {
-  eq: Timestamp
-  ge: Timestamp
-  gt: Timestamp
-  le: Timestamp
-  lt: Timestamp
-  ne: Timestamp
+  eq: [Timestamp]
+  ge: [Timestamp]
+  gt: [Timestamp]
+  le: [Timestamp]
+  lt: [Timestamp]
+  ne: [Timestamp]
 }

@@ -144,12 +144,12 @@ type CompositionOfAspectService_input {
 }
 
 input ID_filter {
-  eq: ID
-  ge: ID
-  gt: ID
-  le: ID
-  lt: ID
-  ne: ID
+  eq: [ID]
+  ge: [ID]
+  gt: [ID]
+  le: [ID]
+  lt: [ID]
+  ne: [ID]
 }
 
 type Mutation {
