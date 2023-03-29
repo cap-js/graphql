@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Add `cds-plugin.js` to `files` property of `package.json` to be included for publishing to `npm`
+- `cds-plugin.js` was missing in `files` property of `package.json`
 
 ## Version 0.4.0 - 2023-03-29
 
