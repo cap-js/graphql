@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Supporting new `cds-plugin` technique for zero configuration
 - Support for filtering by `null` values
+- Allow multiple filters on the same field, with the same operator, that are logically joined by `AND`. For example, filtering for all books with titles that contain both strings, "Wuthering" and "Heights":
+  ```graphql
+  {
+    AdminService {
+      Books(filter: { title: { contains: ["Wuthering", "Heights"] } }) {
+        nodes {
+          title
+        }
+      }
+    }
+  }
+  ```
 
 ### Changed
 
