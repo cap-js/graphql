@@ -7,7 +7,7 @@ describe('graphql - cds.request', () => {
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
-  describe('HTTP headers are correctly passed to custom handlers', () => {
+  describe('HTTP request headers are correctly passed to custom handlers', () => {
     const my_header = 'my header value'
 
     test('Create', async () => {
@@ -98,6 +98,72 @@ describe('graphql - cds.request', () => {
       }
       const response = await POST('/graphql', { query }, { headers: { my_header } })
       expect(response.data).toEqual({ data })
+    })
+  })
+
+  describe('HTTP response headers are correctly set in custom handlers', () => {
+    const my_res_header = 'my res header value'
+
+    test('Create', async () => {
+      const query = gql`
+        mutation {
+          RequestService {
+            A {
+              create(input: {}) {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST('/graphql', { query })
+      expect(response.headers).toMatchObject({ my_res_header })
+    })
+
+    test('Read', async () => {
+      const query = gql`
+        {
+          RequestService {
+            A {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST('/graphql', { query })
+      expect(response.headers).toMatchObject({ my_res_header })
+    })
+
+    test('Update', async () => {
+      const query = gql`
+        mutation {
+          RequestService {
+            A {
+              update(filter: [], input: {}) {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST('/graphql', { query })
+      expect(response.headers).toMatchObject({ my_res_header })
+    })
+
+    test('Delete', async () => {
+      const query = gql`
+        mutation {
+          RequestService {
+            A {
+              delete(filter: [])
+            }
+          }
+        }
+      `
+      const response = await POST('/graphql', { query })
+      expect(response.headers).toMatchObject({ my_res_header })
     })
   })
 })
