@@ -12,8 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
-  + Wrap only objects (not primitive types) returned by custom handlers in arrays in create, update, and delete resolvers
-  + Delete mutations return the length of the array that is returned by a `DELETE` custom handler or 1 if a single object is returned
+  + Wrap only objects (i.e. not primitive types or arrays) returned by custom handlers in arrays in create, read, and update resolvers
+  + Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
 
 ### Fixed
 
