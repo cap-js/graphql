@@ -29,7 +29,6 @@ input FieldNamedLocalizedService_Root_C {
 }
 
 input FieldNamedLocalizedService_Root_U {
-  ID: Int
   localized: [FieldNamedLocalizedService_localized_U]
 }
 
@@ -79,7 +78,6 @@ input FieldNamedLocalizedService_localized_C {
 }
 
 input FieldNamedLocalizedService_localized_U {
-  ID: Int
   localized: String
   root: FieldNamedLocalizedService_Root_U
   root_ID: Int
