@@ -42,8 +42,6 @@ input CompositionOfAspectService_Books_chapters_C {
   id: ID
 }
 
-input CompositionOfAspectService_Books_chapters_U
-
 type CompositionOfAspectService_Books_chapters_connection {
   nodes: [CompositionOfAspectService_Books_chapters]
   totalCount: Int
@@ -62,7 +60,6 @@ type CompositionOfAspectService_Books_chapters_input {
   ): Int
   update(
     filter: [CompositionOfAspectService_Books_chapters_filter]
-    input: CompositionOfAspectService_Books_chapters_U!
   ): [CompositionOfAspectService_Books_chapters]
 }
 
@@ -104,8 +101,6 @@ input CompositionOfAspectService_Books_reviews_C {
   id: ID
 }
 
-input CompositionOfAspectService_Books_reviews_U
-
 type CompositionOfAspectService_Books_reviews_connection {
   nodes: [CompositionOfAspectService_Books_reviews]
   totalCount: Int
@@ -124,7 +119,6 @@ type CompositionOfAspectService_Books_reviews_input {
   ): Int
   update(
     filter: [CompositionOfAspectService_Books_reviews_filter]
-    input: CompositionOfAspectService_Books_reviews_U!
   ): [CompositionOfAspectService_Books_reviews]
 }
 
