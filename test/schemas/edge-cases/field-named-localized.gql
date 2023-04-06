@@ -29,7 +29,7 @@ input FieldNamedLocalizedService_Root_C {
 }
 
 input FieldNamedLocalizedService_Root_U {
-  localized: [FieldNamedLocalizedService_localized_U]
+  localized: [FieldNamedLocalizedService_localized_C]
 }
 
 type FieldNamedLocalizedService_Root_connection {
@@ -79,7 +79,7 @@ input FieldNamedLocalizedService_localized_C {
 
 input FieldNamedLocalizedService_localized_U {
   localized: String
-  root: FieldNamedLocalizedService_Root_U
+  root: FieldNamedLocalizedService_Root_C
   root_ID: Int
 }
 

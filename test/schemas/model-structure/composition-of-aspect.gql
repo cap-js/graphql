@@ -30,8 +30,8 @@ input CompositionOfAspectService_Books_C {
 }
 
 input CompositionOfAspectService_Books_U {
-  chapters: [CompositionOfAspectService_Books_chapters_U]
-  reviews: [CompositionOfAspectService_Books_reviews_U]
+  chapters: [CompositionOfAspectService_Books_chapters_C]
+  reviews: [CompositionOfAspectService_Books_reviews_C]
 }
 
 type CompositionOfAspectService_Books_chapters {
