@@ -58,9 +58,6 @@ type CompositionOfAspectService_Books_chapters_input {
   delete(
     filter: [CompositionOfAspectService_Books_chapters_filter]
   ): Int
-  update(
-    filter: [CompositionOfAspectService_Books_chapters_filter]
-  ): [CompositionOfAspectService_Books_chapters]
 }
 
 input CompositionOfAspectService_Books_chapters_orderBy {
@@ -117,9 +114,6 @@ type CompositionOfAspectService_Books_reviews_input {
   delete(
     filter: [CompositionOfAspectService_Books_reviews_filter]
   ): Int
-  update(
-    filter: [CompositionOfAspectService_Books_reviews_filter]
-  ): [CompositionOfAspectService_Books_reviews]
 }
 
 input CompositionOfAspectService_Books_reviews_orderBy {
