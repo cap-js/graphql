@@ -390,6 +390,7 @@ input AdminService_Chapters_orderBy {
 type AdminService_Currencies {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts(
@@ -403,6 +404,7 @@ type AdminService_Currencies {
 input AdminService_Currencies_C {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts: [AdminService_Currencies_texts_C]
@@ -411,6 +413,7 @@ input AdminService_Currencies_C {
 input AdminService_Currencies_U {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts: [AdminService_Currencies_texts_U]
@@ -424,6 +427,7 @@ type AdminService_Currencies_connection {
 input AdminService_Currencies_filter {
   code: [String_filter]
   descr: [String_filter]
+  minorUnit: [Int16_filter]
   name: [String_filter]
   symbol: [String_filter]
 }
@@ -444,6 +448,7 @@ type AdminService_Currencies_input {
 input AdminService_Currencies_orderBy {
   code: SortDirection
   descr: SortDirection
+  minorUnit: SortDirection
   name: SortDirection
   symbol: SortDirection
 }
@@ -935,6 +940,7 @@ input CatalogService_Chapters_orderBy {
 type CatalogService_Currencies {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts(
@@ -948,6 +954,7 @@ type CatalogService_Currencies {
 input CatalogService_Currencies_C {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts: [CatalogService_Currencies_texts_C]
@@ -956,6 +963,7 @@ input CatalogService_Currencies_C {
 input CatalogService_Currencies_U {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts: [CatalogService_Currencies_texts_U]
@@ -969,6 +977,7 @@ type CatalogService_Currencies_connection {
 input CatalogService_Currencies_filter {
   code: [String_filter]
   descr: [String_filter]
+  minorUnit: [Int16_filter]
   name: [String_filter]
   symbol: [String_filter]
 }
@@ -989,6 +998,7 @@ type CatalogService_Currencies_input {
 input CatalogService_Currencies_orderBy {
   code: SortDirection
   descr: SortDirection
+  minorUnit: SortDirection
   name: SortDirection
   symbol: SortDirection
 }
@@ -1313,6 +1323,20 @@ input Decimal_filter {
   le: [Decimal]
   lt: [Decimal]
   ne: [Decimal]
+}
+
+"""
+The `Int16` scalar type represents 16-bit non-fractional signed whole numeric values. Int16 can represent values between -(2^15) and 2^15 - 1.
+"""
+scalar Int16
+
+input Int16_filter {
+  eq: [Int16]
+  ge: [Int16]
+  gt: [Int16]
+  le: [Int16]
+  lt: [Int16]
+  ne: [Int16]
 }
 
 input Int_filter {
