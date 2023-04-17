@@ -515,7 +515,7 @@ describe('graphql - variables', () => {
               { ID: 251, title: 'The Raven' },
               { ID: 252, title: 'Eleonora' },
               { ID: 271, title: 'Catweazle' }
-          ]
+            ]
           }
         }
       }
