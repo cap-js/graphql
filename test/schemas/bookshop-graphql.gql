@@ -83,8 +83,7 @@ input AdminService_Authors_C {
 }
 
 input AdminService_Authors_U {
-  ID: Int
-  books: [AdminService_Books_U]
+  books: [AdminService_Books_C]
   createdAt: Timestamp
   createdBy: String
   dateOfBirth: Date
@@ -193,23 +192,22 @@ input AdminService_Books_C {
 }
 
 input AdminService_Books_U {
-  ID: Int
-  author: AdminService_Authors_U
+  author: AdminService_Authors_C
   author_ID: Int
-  chapters: [AdminService_Chapters_U]
+  chapters: [AdminService_Chapters_C]
   createdAt: Timestamp
   createdBy: String
-  currency: AdminService_Currencies_U
+  currency: AdminService_Currencies_C
   currency_code: String
   descr: String
-  genre: AdminService_Genres_U
+  genre: AdminService_Genres_C
   genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   modifiedBy: String
   price: Decimal
   stock: Int
-  texts: [AdminService_Books_texts_U]
+  texts: [AdminService_Books_texts_C]
   title: String
 }
 
@@ -278,9 +276,7 @@ input AdminService_Books_texts_C {
 }
 
 input AdminService_Books_texts_U {
-  ID: Int
   descr: String
-  locale: String
   title: String
 }
 
@@ -339,13 +335,10 @@ input AdminService_Chapters_C {
 }
 
 input AdminService_Chapters_U {
-  book: AdminService_Books_U
-  book_ID: Int
   createdAt: Timestamp
   createdBy: String
   modifiedAt: Timestamp
   modifiedBy: String
-  number: Int
   title: String
 }
 
@@ -411,12 +404,11 @@ input AdminService_Currencies_C {
 }
 
 input AdminService_Currencies_U {
-  code: String
   descr: String
   minorUnit: Int16
   name: String
   symbol: String
-  texts: [AdminService_Currencies_texts_U]
+  texts: [AdminService_Currencies_texts_C]
 }
 
 type AdminService_Currencies_connection {
@@ -468,9 +460,7 @@ input AdminService_Currencies_texts_C {
 }
 
 input AdminService_Currencies_texts_U {
-  code: String
   descr: String
-  locale: String
   name: String
 }
 
@@ -537,13 +527,12 @@ input AdminService_Genres_C {
 }
 
 input AdminService_Genres_U {
-  ID: Int
-  children: [AdminService_Genres_U]
+  children: [AdminService_Genres_C]
   descr: String
   name: String
-  parent: AdminService_Genres_U
+  parent: AdminService_Genres_C
   parent_ID: Int
-  texts: [AdminService_Genres_texts_U]
+  texts: [AdminService_Genres_texts_C]
 }
 
 type AdminService_Genres_connection {
@@ -593,9 +582,7 @@ input AdminService_Genres_texts_C {
 }
 
 input AdminService_Genres_texts_U {
-  ID: Int
   descr: String
-  locale: String
   name: String
 }
 
@@ -750,20 +737,19 @@ input CatalogService_Books_C {
 }
 
 input CatalogService_Books_U {
-  ID: Int
   author: String
-  chapters: [CatalogService_Chapters_U]
+  chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
-  currency: CatalogService_Currencies_U
+  currency: CatalogService_Currencies_C
   currency_code: String
   descr: String
-  genre: CatalogService_Genres_U
+  genre: CatalogService_Genres_C
   genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
   stock: Int
-  texts: [CatalogService_Books_texts_U]
+  texts: [CatalogService_Books_texts_C]
   title: String
 }
 
@@ -828,9 +814,7 @@ input CatalogService_Books_texts_C {
 }
 
 input CatalogService_Books_texts_U {
-  ID: Int
   descr: String
-  locale: String
   title: String
 }
 
@@ -889,13 +873,10 @@ input CatalogService_Chapters_C {
 }
 
 input CatalogService_Chapters_U {
-  book: CatalogService_Books_U
-  book_ID: Int
   createdAt: Timestamp
   createdBy: String
   modifiedAt: Timestamp
   modifiedBy: String
-  number: Int
   title: String
 }
 
@@ -961,12 +942,11 @@ input CatalogService_Currencies_C {
 }
 
 input CatalogService_Currencies_U {
-  code: String
   descr: String
   minorUnit: Int16
   name: String
   symbol: String
-  texts: [CatalogService_Currencies_texts_U]
+  texts: [CatalogService_Currencies_texts_C]
 }
 
 type CatalogService_Currencies_connection {
@@ -1018,9 +998,7 @@ input CatalogService_Currencies_texts_C {
 }
 
 input CatalogService_Currencies_texts_U {
-  code: String
   descr: String
-  locale: String
   name: String
 }
 
@@ -1087,13 +1065,12 @@ input CatalogService_Genres_C {
 }
 
 input CatalogService_Genres_U {
-  ID: Int
-  children: [CatalogService_Genres_U]
+  children: [CatalogService_Genres_C]
   descr: String
   name: String
-  parent: CatalogService_Genres_U
+  parent: CatalogService_Genres_C
   parent_ID: Int
-  texts: [CatalogService_Genres_texts_U]
+  texts: [CatalogService_Genres_texts_C]
 }
 
 type CatalogService_Genres_connection {
@@ -1143,9 +1120,7 @@ input CatalogService_Genres_texts_C {
 }
 
 input CatalogService_Genres_texts_U {
-  ID: Int
   descr: String
-  locale: String
   name: String
 }
 
@@ -1226,19 +1201,18 @@ input CatalogService_ListOfBooks_C {
 }
 
 input CatalogService_ListOfBooks_U {
-  ID: Int
   author: String
-  chapters: [CatalogService_Chapters_U]
+  chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
-  currency: CatalogService_Currencies_U
+  currency: CatalogService_Currencies_C
   currency_code: String
-  genre: CatalogService_Genres_U
+  genre: CatalogService_Genres_C
   genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
   stock: Int
-  texts: [CatalogService_Books_texts_U]
+  texts: [CatalogService_Books_texts_C]
   title: String
 }
 

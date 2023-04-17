@@ -235,7 +235,6 @@ input TypesService_MyEntity_U {
   myTime: Time
   myTimestamp: Timestamp
   myUInt8: UInt8
-  myUUID: ID
 }
 
 type TypesService_MyEntity_connection {
