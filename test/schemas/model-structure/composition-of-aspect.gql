@@ -30,9 +30,8 @@ input CompositionOfAspectService_Books_C {
 }
 
 input CompositionOfAspectService_Books_U {
-  chapters: [CompositionOfAspectService_Books_chapters_U]
-  id: ID
-  reviews: [CompositionOfAspectService_Books_reviews_U]
+  chapters: [CompositionOfAspectService_Books_chapters_C]
+  reviews: [CompositionOfAspectService_Books_reviews_C]
 }
 
 type CompositionOfAspectService_Books_chapters {
@@ -40,10 +39,6 @@ type CompositionOfAspectService_Books_chapters {
 }
 
 input CompositionOfAspectService_Books_chapters_C {
-  id: ID
-}
-
-input CompositionOfAspectService_Books_chapters_U {
   id: ID
 }
 
@@ -63,10 +58,6 @@ type CompositionOfAspectService_Books_chapters_input {
   delete(
     filter: [CompositionOfAspectService_Books_chapters_filter]
   ): Int
-  update(
-    filter: [CompositionOfAspectService_Books_chapters_filter]
-    input: CompositionOfAspectService_Books_chapters_U!
-  ): [CompositionOfAspectService_Books_chapters]
 }
 
 input CompositionOfAspectService_Books_chapters_orderBy {
@@ -107,10 +98,6 @@ input CompositionOfAspectService_Books_reviews_C {
   id: ID
 }
 
-input CompositionOfAspectService_Books_reviews_U {
-  id: ID
-}
-
 type CompositionOfAspectService_Books_reviews_connection {
   nodes: [CompositionOfAspectService_Books_reviews]
   totalCount: Int
@@ -127,10 +114,6 @@ type CompositionOfAspectService_Books_reviews_input {
   delete(
     filter: [CompositionOfAspectService_Books_reviews_filter]
   ): Int
-  update(
-    filter: [CompositionOfAspectService_Books_reviews_filter]
-    input: CompositionOfAspectService_Books_reviews_U!
-  ): [CompositionOfAspectService_Books_reviews]
 }
 
 input CompositionOfAspectService_Books_reviews_orderBy {
@@ -144,12 +127,12 @@ type CompositionOfAspectService_input {
 }
 
 input ID_filter {
-  eq: ID
-  ge: ID
-  gt: ID
-  le: ID
-  lt: ID
-  ne: ID
+  eq: [ID]
+  ge: [ID]
+  gt: [ID]
+  le: [ID]
+  lt: [ID]
+  ne: [ID]
 }
 
 type Mutation {

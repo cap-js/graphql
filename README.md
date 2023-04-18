@@ -11,24 +11,14 @@ _**WARNING:** This package is in an early general availability state. This means
 
 ## Requirements and Setup
 
-1. Add the GraphQL adapter to your project using `npm`:
-    ```js
-    npm add @cap-js/graphql
-    ```
+1. Simply add the GraphQL adapter to your project using `npm`:
+   ```js
+   npm add @cap-js/graphql
+   ```
 
-2. Register the GraphQL adapter in your project's `package.json`:
-    ```jsonc
-    {
-      "cds": {
-        "protocols": {
-          "graphql": { "path": "/graphql", "impl": "@cap-js/graphql" }
-        }
-      }
-    }
-    ```
-    > Note: This automatically enables the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js.
+> This will automatically plugin to `@sap/cds` runtime, enabling the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and register a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model. 
   
-3. Run your server as usual, e.g. using `cds watch`.
+2. Run your server as usual, e.g. using `cds watch`.
 > The runtime will automatically serve all services via GraphQL at the default configured endpoint.
 
 ## Limitations
