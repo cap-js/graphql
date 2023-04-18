@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      #graphiql {
+        height: 100vh;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/graphiql/graphiql.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@graphiql/plugin-explorer/dist/style.css" />
+  </head>
+
+  <body>
+    <div id="graphiql">Loading GraphiQL...</div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <script crossorigin src="https://unpkg.com/graphiql/graphiql.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@graphiql/plugin-explorer/dist/graphiql-plugin-explorer.umd.js"></script>
+
+    <script>
+      const fetcher = GraphiQL.createFetcher({ url: '' })
+
+      function GraphiQLWithExplorer() {
+        const [query, setQuery] = React.useState()
+        const explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({ query, onEdit: setQuery })
+        return React.createElement(GraphiQL, {
+          fetcher,
+          defaultEditorToolsVisibility: true,
+          plugins: [explorerPlugin],
+          query,
+          onEditQuery: setQuery
+        })
+      }
+
+      ReactDOM.render(React.createElement(GraphiQLWithExplorer), document.getElementById('graphiql'))
+    </script>
+  </body>
+</html>
