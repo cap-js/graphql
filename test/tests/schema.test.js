@@ -1,6 +1,11 @@
 const fs = require('fs')
 const path = require('path')
-const { models } = require('../resources')
+const semver = require('semver')
+const cdsVersion = require('@sap/cds').version
+
+let { models } = require('../resources')
+models = models.filter(m => !m.requires_cds || semver.satisfies(cdsVersion, m.requires_cds))
+
 const { SCHEMAS_DIR, cdsFilesToGQLSchema, formatSchema } = require('../util')
 const { printSchema, validateSchema } = require('graphql')
 
