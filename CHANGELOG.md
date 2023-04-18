@@ -5,17 +5,54 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.4.0 - tbd
+## Version 0.5.0 - tbd
 
 ### Added
 
 ### Changed
 
+- Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
+  + Wrap only objects (i.e. not primitive types or arrays) returned by custom handlers in arrays in create, read, and update resolvers
+  + Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
+- Don't generate fields for key elements in update input objects
+
+### Fixed
+
+### Removed
+
+## Version 0.4.1 - 2023-03-29
+
+### Fixed
+
+- `cds-plugin.js` was missing in `files` property of `package.json`
+
+## Version 0.4.0 - 2023-03-29
+
+### Added
+
+- Supporting new `cds-plugin` technique for zero configuration
+- Support for filtering by `null` values
+- Allow multiple filters on the same field, with the same operator, that are logically joined by `AND`. For example, filtering for all books with titles that contain both strings, "Wuthering" and "Heights":
+  ```graphql
+  {
+    AdminService {
+      Books(filter: { title: { contains: ["Wuthering", "Heights"] } }) {
+        nodes {
+          title
+        }
+      }
+    }
+  }
+  ```
+
+### Changed
+
+- Improved handling of `null` and `undefined` values in query arguments
+- Empty filter lists resolve to `false` and empty filter objects resolve to `true`
+
 ### Fixed
 
 - Handling of GraphQL queries that are sent via `GET` requests using the `query` URL parameter if GraphiQL is enabled
-
-### Removed
 
 ## Version 0.3.1 - 2023-02-28
 

@@ -29,8 +29,7 @@ input FieldNamedLocalizedService_Root_C {
 }
 
 input FieldNamedLocalizedService_Root_U {
-  ID: Int
-  localized: [FieldNamedLocalizedService_localized_U]
+  localized: [FieldNamedLocalizedService_localized_C]
 }
 
 type FieldNamedLocalizedService_Root_connection {
@@ -79,9 +78,8 @@ input FieldNamedLocalizedService_localized_C {
 }
 
 input FieldNamedLocalizedService_localized_U {
-  ID: Int
   localized: String
-  root: FieldNamedLocalizedService_Root_U
+  root: FieldNamedLocalizedService_Root_C
   root_ID: Int
 }
 
@@ -116,12 +114,12 @@ input FieldNamedLocalizedService_localized_orderBy {
 }
 
 input Int_filter {
-  eq: Int
-  ge: Int
-  gt: Int
-  le: Int
-  lt: Int
-  ne: Int
+  eq: [Int]
+  ge: [Int]
+  gt: [Int]
+  le: [Int]
+  lt: [Int]
+  ne: [Int]
 }
 
 type Mutation {
@@ -138,13 +136,13 @@ enum SortDirection {
 }
 
 input String_filter {
-  contains: String
-  endswith: String
-  eq: String
-  ge: String
-  gt: String
-  le: String
-  lt: String
-  ne: String
-  startswith: String
+  contains: [String]
+  endswith: [String]
+  eq: [String]
+  ge: [String]
+  gt: [String]
+  le: [String]
+  lt: [String]
+  ne: [String]
+  startswith: [String]
 }

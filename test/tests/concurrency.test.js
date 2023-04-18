@@ -1,4 +1,4 @@
-describe('graphql resolver concurrency', () => {
+describe('graphql - resolver concurrency', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
   const { gql } = require('../util')

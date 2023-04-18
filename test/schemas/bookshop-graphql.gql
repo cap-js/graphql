@@ -83,8 +83,7 @@ input AdminService_Authors_C {
 }
 
 input AdminService_Authors_U {
-  ID: Int
-  books: [AdminService_Books_U]
+  books: [AdminService_Books_C]
   createdAt: Timestamp
   createdBy: String
   dateOfBirth: Date
@@ -193,23 +192,22 @@ input AdminService_Books_C {
 }
 
 input AdminService_Books_U {
-  ID: Int
-  author: AdminService_Authors_U
+  author: AdminService_Authors_C
   author_ID: Int
-  chapters: [AdminService_Chapters_U]
+  chapters: [AdminService_Chapters_C]
   createdAt: Timestamp
   createdBy: String
-  currency: AdminService_Currencies_U
+  currency: AdminService_Currencies_C
   currency_code: String
   descr: String
-  genre: AdminService_Genres_U
+  genre: AdminService_Genres_C
   genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   modifiedBy: String
   price: Decimal
   stock: Int
-  texts: [AdminService_Books_texts_U]
+  texts: [AdminService_Books_texts_C]
   title: String
 }
 
@@ -278,9 +276,7 @@ input AdminService_Books_texts_C {
 }
 
 input AdminService_Books_texts_U {
-  ID: Int
   descr: String
-  locale: String
   title: String
 }
 
@@ -339,13 +335,10 @@ input AdminService_Chapters_C {
 }
 
 input AdminService_Chapters_U {
-  book: AdminService_Books_U
-  book_ID: Int
   createdAt: Timestamp
   createdBy: String
   modifiedAt: Timestamp
   modifiedBy: String
-  number: Int
   title: String
 }
 
@@ -390,6 +383,7 @@ input AdminService_Chapters_orderBy {
 type AdminService_Currencies {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts(
@@ -403,17 +397,18 @@ type AdminService_Currencies {
 input AdminService_Currencies_C {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts: [AdminService_Currencies_texts_C]
 }
 
 input AdminService_Currencies_U {
-  code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
-  texts: [AdminService_Currencies_texts_U]
+  texts: [AdminService_Currencies_texts_C]
 }
 
 type AdminService_Currencies_connection {
@@ -424,6 +419,7 @@ type AdminService_Currencies_connection {
 input AdminService_Currencies_filter {
   code: [String_filter]
   descr: [String_filter]
+  minorUnit: [Int16_filter]
   name: [String_filter]
   symbol: [String_filter]
 }
@@ -444,6 +440,7 @@ type AdminService_Currencies_input {
 input AdminService_Currencies_orderBy {
   code: SortDirection
   descr: SortDirection
+  minorUnit: SortDirection
   name: SortDirection
   symbol: SortDirection
 }
@@ -463,9 +460,7 @@ input AdminService_Currencies_texts_C {
 }
 
 input AdminService_Currencies_texts_U {
-  code: String
   descr: String
-  locale: String
   name: String
 }
 
@@ -532,13 +527,12 @@ input AdminService_Genres_C {
 }
 
 input AdminService_Genres_U {
-  ID: Int
-  children: [AdminService_Genres_U]
+  children: [AdminService_Genres_C]
   descr: String
   name: String
-  parent: AdminService_Genres_U
+  parent: AdminService_Genres_C
   parent_ID: Int
-  texts: [AdminService_Genres_texts_U]
+  texts: [AdminService_Genres_texts_C]
 }
 
 type AdminService_Genres_connection {
@@ -588,9 +582,7 @@ input AdminService_Genres_texts_C {
 }
 
 input AdminService_Genres_texts_U {
-  ID: Int
   descr: String
-  locale: String
   name: String
 }
 
@@ -643,8 +635,8 @@ The `Binary` scalar type represents binary values as `base64url` encoded strings
 scalar Binary
 
 input Binary_filter {
-  eq: Binary
-  ne: Binary
+  eq: [Binary]
+  ne: [Binary]
 }
 
 type CatalogService {
@@ -745,20 +737,19 @@ input CatalogService_Books_C {
 }
 
 input CatalogService_Books_U {
-  ID: Int
   author: String
-  chapters: [CatalogService_Chapters_U]
+  chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
-  currency: CatalogService_Currencies_U
+  currency: CatalogService_Currencies_C
   currency_code: String
   descr: String
-  genre: CatalogService_Genres_U
+  genre: CatalogService_Genres_C
   genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
   stock: Int
-  texts: [CatalogService_Books_texts_U]
+  texts: [CatalogService_Books_texts_C]
   title: String
 }
 
@@ -823,9 +814,7 @@ input CatalogService_Books_texts_C {
 }
 
 input CatalogService_Books_texts_U {
-  ID: Int
   descr: String
-  locale: String
   title: String
 }
 
@@ -884,13 +873,10 @@ input CatalogService_Chapters_C {
 }
 
 input CatalogService_Chapters_U {
-  book: CatalogService_Books_U
-  book_ID: Int
   createdAt: Timestamp
   createdBy: String
   modifiedAt: Timestamp
   modifiedBy: String
-  number: Int
   title: String
 }
 
@@ -935,6 +921,7 @@ input CatalogService_Chapters_orderBy {
 type CatalogService_Currencies {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts(
@@ -948,17 +935,18 @@ type CatalogService_Currencies {
 input CatalogService_Currencies_C {
   code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
   texts: [CatalogService_Currencies_texts_C]
 }
 
 input CatalogService_Currencies_U {
-  code: String
   descr: String
+  minorUnit: Int16
   name: String
   symbol: String
-  texts: [CatalogService_Currencies_texts_U]
+  texts: [CatalogService_Currencies_texts_C]
 }
 
 type CatalogService_Currencies_connection {
@@ -969,6 +957,7 @@ type CatalogService_Currencies_connection {
 input CatalogService_Currencies_filter {
   code: [String_filter]
   descr: [String_filter]
+  minorUnit: [Int16_filter]
   name: [String_filter]
   symbol: [String_filter]
 }
@@ -989,6 +978,7 @@ type CatalogService_Currencies_input {
 input CatalogService_Currencies_orderBy {
   code: SortDirection
   descr: SortDirection
+  minorUnit: SortDirection
   name: SortDirection
   symbol: SortDirection
 }
@@ -1008,9 +998,7 @@ input CatalogService_Currencies_texts_C {
 }
 
 input CatalogService_Currencies_texts_U {
-  code: String
   descr: String
-  locale: String
   name: String
 }
 
@@ -1077,13 +1065,12 @@ input CatalogService_Genres_C {
 }
 
 input CatalogService_Genres_U {
-  ID: Int
-  children: [CatalogService_Genres_U]
+  children: [CatalogService_Genres_C]
   descr: String
   name: String
-  parent: CatalogService_Genres_U
+  parent: CatalogService_Genres_C
   parent_ID: Int
-  texts: [CatalogService_Genres_texts_U]
+  texts: [CatalogService_Genres_texts_C]
 }
 
 type CatalogService_Genres_connection {
@@ -1133,9 +1120,7 @@ input CatalogService_Genres_texts_C {
 }
 
 input CatalogService_Genres_texts_U {
-  ID: Int
   descr: String
-  locale: String
   name: String
 }
 
@@ -1216,19 +1201,18 @@ input CatalogService_ListOfBooks_C {
 }
 
 input CatalogService_ListOfBooks_U {
-  ID: Int
   author: String
-  chapters: [CatalogService_Chapters_U]
+  chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
-  currency: CatalogService_Currencies_U
+  currency: CatalogService_Currencies_C
   currency_code: String
-  genre: CatalogService_Genres_U
+  genre: CatalogService_Genres_C
   genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
   stock: Int
-  texts: [CatalogService_Books_texts_U]
+  texts: [CatalogService_Books_texts_C]
   title: String
 }
 
@@ -1293,12 +1277,12 @@ The `Date` scalar type represents date values as strings in the ISO 8601 format 
 scalar Date
 
 input Date_filter {
-  eq: Date
-  ge: Date
-  gt: Date
-  le: Date
-  lt: Date
-  ne: Date
+  eq: [Date]
+  ge: [Date]
+  gt: [Date]
+  le: [Date]
+  lt: [Date]
+  ne: [Date]
 }
 
 """
@@ -1307,21 +1291,35 @@ The `Decimal` scalar type represents exact signed decimal values. Decimal repres
 scalar Decimal
 
 input Decimal_filter {
-  eq: Decimal
-  ge: Decimal
-  gt: Decimal
-  le: Decimal
-  lt: Decimal
-  ne: Decimal
+  eq: [Decimal]
+  ge: [Decimal]
+  gt: [Decimal]
+  le: [Decimal]
+  lt: [Decimal]
+  ne: [Decimal]
+}
+
+"""
+The `Int16` scalar type represents 16-bit non-fractional signed whole numeric values. Int16 can represent values between -(2^15) and 2^15 - 1.
+"""
+scalar Int16
+
+input Int16_filter {
+  eq: [Int16]
+  ge: [Int16]
+  gt: [Int16]
+  le: [Int16]
+  lt: [Int16]
+  ne: [Int16]
 }
 
 input Int_filter {
-  eq: Int
-  ge: Int
-  gt: Int
-  le: Int
-  lt: Int
-  ne: Int
+  eq: [Int]
+  ge: [Int]
+  gt: [Int]
+  le: [Int]
+  lt: [Int]
+  ne: [Int]
 }
 
 type Mutation {
@@ -1340,15 +1338,15 @@ enum SortDirection {
 }
 
 input String_filter {
-  contains: String
-  endswith: String
-  eq: String
-  ge: String
-  gt: String
-  le: String
-  lt: String
-  ne: String
-  startswith: String
+  contains: [String]
+  endswith: [String]
+  eq: [String]
+  ge: [String]
+  gt: [String]
+  le: [String]
+  lt: [String]
+  ne: [String]
+  startswith: [String]
 }
 
 """
@@ -1357,10 +1355,10 @@ The `Timestamp` scalar type represents timestamp values as strings in the ISO 86
 scalar Timestamp
 
 input Timestamp_filter {
-  eq: Timestamp
-  ge: Timestamp
-  gt: Timestamp
-  le: Timestamp
-  lt: Timestamp
-  ne: Timestamp
+  eq: [Timestamp]
+  ge: [Timestamp]
+  gt: [Timestamp]
+  le: [Timestamp]
+  lt: [Timestamp]
+  ne: [Timestamp]
 }
