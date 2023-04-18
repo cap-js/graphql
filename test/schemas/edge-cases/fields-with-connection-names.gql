@@ -26,7 +26,6 @@ input FieldsWithConnectionNamesService_Nodes_C {
 }
 
 input FieldsWithConnectionNamesService_Nodes_U {
-  ID: ID
   nodes: String
   totalCount: String
 }
@@ -76,8 +75,7 @@ input FieldsWithConnectionNamesService_Root_C {
 }
 
 input FieldsWithConnectionNamesService_Root_U {
-  ID: ID
-  nodes: FieldsWithConnectionNamesService_Nodes_U
+  nodes: FieldsWithConnectionNamesService_Nodes_C
   nodes_ID: ID
   totalCount: String
 }
@@ -118,12 +116,12 @@ type FieldsWithConnectionNamesService_input {
 }
 
 input ID_filter {
-  eq: ID
-  ge: ID
-  gt: ID
-  le: ID
-  lt: ID
-  ne: ID
+  eq: [ID]
+  ge: [ID]
+  gt: [ID]
+  le: [ID]
+  lt: [ID]
+  ne: [ID]
 }
 
 type Mutation {
@@ -140,13 +138,13 @@ enum SortDirection {
 }
 
 input String_filter {
-  contains: String
-  endswith: String
-  eq: String
-  ge: String
-  gt: String
-  le: String
-  lt: String
-  ne: String
-  startswith: String
+  contains: [String]
+  endswith: [String]
+  eq: [String]
+  ge: [String]
+  gt: [String]
+  le: [String]
+  lt: [String]
+  ne: [String]
+  startswith: [String]
 }
