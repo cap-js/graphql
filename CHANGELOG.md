@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Improved query logging, including `operationName` and logging of `variables` when not in production
+
 ### Changed
 
 - Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
