@@ -4,13 +4,13 @@ The `Binary` scalar type represents binary values as `base64url` encoded strings
 scalar Binary
 
 input Binary_filter {
-  eq: Binary
-  ne: Binary
+  eq: [Binary]
+  ne: [Binary]
 }
 
 input Boolean_filter {
-  eq: Boolean
-  ne: Boolean
+  eq: [Boolean]
+  ne: [Boolean]
 }
 
 """
@@ -24,21 +24,21 @@ The `DateTime` scalar type represents datetime values as strings in the ISO 8601
 scalar DateTime
 
 input DateTime_filter {
-  eq: DateTime
-  ge: DateTime
-  gt: DateTime
-  le: DateTime
-  lt: DateTime
-  ne: DateTime
+  eq: [DateTime]
+  ge: [DateTime]
+  gt: [DateTime]
+  le: [DateTime]
+  lt: [DateTime]
+  ne: [DateTime]
 }
 
 input Date_filter {
-  eq: Date
-  ge: Date
-  gt: Date
-  le: Date
-  lt: Date
-  ne: Date
+  eq: [Date]
+  ge: [Date]
+  gt: [Date]
+  le: [Date]
+  lt: [Date]
+  ne: [Date]
 }
 
 """
@@ -47,30 +47,30 @@ The `Decimal` scalar type represents exact signed decimal values. Decimal repres
 scalar Decimal
 
 input Decimal_filter {
-  eq: Decimal
-  ge: Decimal
-  gt: Decimal
-  le: Decimal
-  lt: Decimal
-  ne: Decimal
+  eq: [Decimal]
+  ge: [Decimal]
+  gt: [Decimal]
+  le: [Decimal]
+  lt: [Decimal]
+  ne: [Decimal]
 }
 
 input Float_filter {
-  eq: Float
-  ge: Float
-  gt: Float
-  le: Float
-  lt: Float
-  ne: Float
+  eq: [Float]
+  ge: [Float]
+  gt: [Float]
+  le: [Float]
+  lt: [Float]
+  ne: [Float]
 }
 
 input ID_filter {
-  eq: ID
-  ge: ID
-  gt: ID
-  le: ID
-  lt: ID
-  ne: ID
+  eq: [ID]
+  ge: [ID]
+  gt: [ID]
+  le: [ID]
+  lt: [ID]
+  ne: [ID]
 }
 
 """
@@ -79,12 +79,12 @@ The `Int16` scalar type represents 16-bit non-fractional signed whole numeric va
 scalar Int16
 
 input Int16_filter {
-  eq: Int16
-  ge: Int16
-  gt: Int16
-  le: Int16
-  lt: Int16
-  ne: Int16
+  eq: [Int16]
+  ge: [Int16]
+  gt: [Int16]
+  le: [Int16]
+  lt: [Int16]
+  ne: [Int16]
 }
 
 """
@@ -93,21 +93,21 @@ The `Int64` scalar type represents 64-bit non-fractional signed whole numeric va
 scalar Int64
 
 input Int64_filter {
-  eq: Int64
-  ge: Int64
-  gt: Int64
-  le: Int64
-  lt: Int64
-  ne: Int64
+  eq: [Int64]
+  ge: [Int64]
+  gt: [Int64]
+  le: [Int64]
+  lt: [Int64]
+  ne: [Int64]
 }
 
 input Int_filter {
-  eq: Int
-  ge: Int
-  gt: Int
-  le: Int
-  lt: Int
-  ne: Int
+  eq: [Int]
+  ge: [Int]
+  gt: [Int]
+  le: [Int]
+  lt: [Int]
+  ne: [Int]
 }
 
 type Mutation {
@@ -124,15 +124,15 @@ enum SortDirection {
 }
 
 input String_filter {
-  contains: String
-  endswith: String
-  eq: String
-  ge: String
-  gt: String
-  le: String
-  lt: String
-  ne: String
-  startswith: String
+  contains: [String]
+  endswith: [String]
+  eq: [String]
+  ge: [String]
+  gt: [String]
+  le: [String]
+  lt: [String]
+  ne: [String]
+  startswith: [String]
 }
 
 """
@@ -141,12 +141,12 @@ The `Time` scalar type represents time values as strings in the ISO 8601 format 
 scalar Time
 
 input Time_filter {
-  eq: Time
-  ge: Time
-  gt: Time
-  le: Time
-  lt: Time
-  ne: Time
+  eq: [Time]
+  ge: [Time]
+  gt: [Time]
+  le: [Time]
+  lt: [Time]
+  ne: [Time]
 }
 
 """
@@ -155,12 +155,12 @@ The `Timestamp` scalar type represents timestamp values as strings in the ISO 86
 scalar Timestamp
 
 input Timestamp_filter {
-  eq: Timestamp
-  ge: Timestamp
-  gt: Timestamp
-  le: Timestamp
-  lt: Timestamp
-  ne: Timestamp
+  eq: [Timestamp]
+  ge: [Timestamp]
+  gt: [Timestamp]
+  le: [Timestamp]
+  lt: [Timestamp]
+  ne: [Timestamp]
 }
 
 type TypesService {
@@ -235,7 +235,6 @@ input TypesService_MyEntity_U {
   myTime: Time
   myTimestamp: Timestamp
   myUInt8: UInt8
-  myUUID: ID
 }
 
 type TypesService_MyEntity_connection {
@@ -310,10 +309,10 @@ The `UInt8` scalar type represents 8-bit non-fractional unsigned whole numeric v
 scalar UInt8
 
 input UInt8_filter {
-  eq: UInt8
-  ge: UInt8
-  gt: UInt8
-  le: UInt8
-  lt: UInt8
-  ne: UInt8
+  eq: [UInt8]
+  ge: [UInt8]
+  gt: [UInt8]
+  le: [UInt8]
+  lt: [UInt8]
+  ne: [UInt8]
 }

@@ -4,7 +4,8 @@
     "files": [
       "./bookshop-graphql/srv/admin-service.cds",
       "./bookshop-graphql/srv/cat-service.cds"
-    ]
+    ],
+    "requires_cds": ">=6.8.0"
   },
   {
     "name": "types",
