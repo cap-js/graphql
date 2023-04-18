@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Improved query logging, including `operationName` and logging of `variables` when not in production
+- Improved query logging:
+  + Log `operationName`
+  + Log `variables` when not in production
+  + Don't log queries that are undefined
 
 ### Changed
 
