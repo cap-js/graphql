@@ -1,6 +1,6 @@
 const GraphQLAdapter = require('./lib')
 const express = require ('express')
-const requestLogger = require('./lib/logger')
+const queryLogger = require('./lib/logger')
 
 function CDSGraphQLAdapter (options) {
   const {services} = options
@@ -9,7 +9,7 @@ function CDSGraphQLAdapter (options) {
 
   return express.Router()
   .use (express.json()) //> required by logger below
-  .use (requestLogger)
+  .use (queryLogger)
   .use (new GraphQLAdapter (services, options))
 }
 
