@@ -9,8 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Use `cds.Request` when running CDS queries to set HTTP headers for custom handlers
-
 ### Changed
 
 - Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
@@ -19,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Don't generate fields for key elements in update input objects
 
 ### Fixed
+
+- Aligned `cds.Request` instantiation with other protocols for more consistent usage in custom handlers
 
 ### Removed
 
