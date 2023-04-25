@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Aligned `cds.Request` instantiation with other protocols for more consistent usage in custom handlers
+
 ### Removed
 
 ## Version 0.4.1 - 2023-03-29
