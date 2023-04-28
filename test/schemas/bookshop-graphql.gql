@@ -118,10 +118,10 @@ type AdminService_Authors_input {
     input: [AdminService_Authors_C]!
   ): [AdminService_Authors]
   delete(
-    filter: [AdminService_Authors_filter]
+    filter: [AdminService_Authors_filter]!
   ): Int
   update(
-    filter: [AdminService_Authors_filter]
+    filter: [AdminService_Authors_filter]!
     input: AdminService_Authors_U!
   ): [AdminService_Authors]
 }
@@ -237,10 +237,10 @@ type AdminService_Books_input {
     input: [AdminService_Books_C]!
   ): [AdminService_Books]
   delete(
-    filter: [AdminService_Books_filter]
+    filter: [AdminService_Books_filter]!
   ): Int
   update(
-    filter: [AdminService_Books_filter]
+    filter: [AdminService_Books_filter]!
     input: AdminService_Books_U!
   ): [AdminService_Books]
 }
@@ -297,10 +297,10 @@ type AdminService_Books_texts_input {
     input: [AdminService_Books_texts_C]!
   ): [AdminService_Books_texts]
   delete(
-    filter: [AdminService_Books_texts_filter]
+    filter: [AdminService_Books_texts_filter]!
   ): Int
   update(
-    filter: [AdminService_Books_texts_filter]
+    filter: [AdminService_Books_texts_filter]!
     input: AdminService_Books_texts_U!
   ): [AdminService_Books_texts]
 }
@@ -362,10 +362,10 @@ type AdminService_Chapters_input {
     input: [AdminService_Chapters_C]!
   ): [AdminService_Chapters]
   delete(
-    filter: [AdminService_Chapters_filter]
+    filter: [AdminService_Chapters_filter]!
   ): Int
   update(
-    filter: [AdminService_Chapters_filter]
+    filter: [AdminService_Chapters_filter]!
     input: AdminService_Chapters_U!
   ): [AdminService_Chapters]
 }
@@ -383,7 +383,6 @@ input AdminService_Chapters_orderBy {
 type AdminService_Currencies {
   code: String
   descr: String
-  minorUnit: Int16
   name: String
   symbol: String
   texts(
@@ -397,7 +396,6 @@ type AdminService_Currencies {
 input AdminService_Currencies_C {
   code: String
   descr: String
-  minorUnit: Int16
   name: String
   symbol: String
   texts: [AdminService_Currencies_texts_C]
@@ -405,7 +403,6 @@ input AdminService_Currencies_C {
 
 input AdminService_Currencies_U {
   descr: String
-  minorUnit: Int16
   name: String
   symbol: String
   texts: [AdminService_Currencies_texts_C]
@@ -419,7 +416,6 @@ type AdminService_Currencies_connection {
 input AdminService_Currencies_filter {
   code: [String_filter]
   descr: [String_filter]
-  minorUnit: [Int16_filter]
   name: [String_filter]
   symbol: [String_filter]
 }
@@ -429,10 +425,10 @@ type AdminService_Currencies_input {
     input: [AdminService_Currencies_C]!
   ): [AdminService_Currencies]
   delete(
-    filter: [AdminService_Currencies_filter]
+    filter: [AdminService_Currencies_filter]!
   ): Int
   update(
-    filter: [AdminService_Currencies_filter]
+    filter: [AdminService_Currencies_filter]!
     input: AdminService_Currencies_U!
   ): [AdminService_Currencies]
 }
@@ -440,7 +436,6 @@ type AdminService_Currencies_input {
 input AdminService_Currencies_orderBy {
   code: SortDirection
   descr: SortDirection
-  minorUnit: SortDirection
   name: SortDirection
   symbol: SortDirection
 }
@@ -481,10 +476,10 @@ type AdminService_Currencies_texts_input {
     input: [AdminService_Currencies_texts_C]!
   ): [AdminService_Currencies_texts]
   delete(
-    filter: [AdminService_Currencies_texts_filter]
+    filter: [AdminService_Currencies_texts_filter]!
   ): Int
   update(
-    filter: [AdminService_Currencies_texts_filter]
+    filter: [AdminService_Currencies_texts_filter]!
     input: AdminService_Currencies_texts_U!
   ): [AdminService_Currencies_texts]
 }
@@ -552,10 +547,10 @@ type AdminService_Genres_input {
     input: [AdminService_Genres_C]!
   ): [AdminService_Genres]
   delete(
-    filter: [AdminService_Genres_filter]
+    filter: [AdminService_Genres_filter]!
   ): Int
   update(
-    filter: [AdminService_Genres_filter]
+    filter: [AdminService_Genres_filter]!
     input: AdminService_Genres_U!
   ): [AdminService_Genres]
 }
@@ -603,10 +598,10 @@ type AdminService_Genres_texts_input {
     input: [AdminService_Genres_texts_C]!
   ): [AdminService_Genres_texts]
   delete(
-    filter: [AdminService_Genres_texts_filter]
+    filter: [AdminService_Genres_texts_filter]!
   ): Int
   update(
-    filter: [AdminService_Genres_texts_filter]
+    filter: [AdminService_Genres_texts_filter]!
     input: AdminService_Genres_texts_U!
   ): [AdminService_Genres_texts]
 }
@@ -777,10 +772,10 @@ type CatalogService_Books_input {
     input: [CatalogService_Books_C]!
   ): [CatalogService_Books]
   delete(
-    filter: [CatalogService_Books_filter]
+    filter: [CatalogService_Books_filter]!
   ): Int
   update(
-    filter: [CatalogService_Books_filter]
+    filter: [CatalogService_Books_filter]!
     input: CatalogService_Books_U!
   ): [CatalogService_Books]
 }
@@ -835,10 +830,10 @@ type CatalogService_Books_texts_input {
     input: [CatalogService_Books_texts_C]!
   ): [CatalogService_Books_texts]
   delete(
-    filter: [CatalogService_Books_texts_filter]
+    filter: [CatalogService_Books_texts_filter]!
   ): Int
   update(
-    filter: [CatalogService_Books_texts_filter]
+    filter: [CatalogService_Books_texts_filter]!
     input: CatalogService_Books_texts_U!
   ): [CatalogService_Books_texts]
 }
@@ -900,10 +895,10 @@ type CatalogService_Chapters_input {
     input: [CatalogService_Chapters_C]!
   ): [CatalogService_Chapters]
   delete(
-    filter: [CatalogService_Chapters_filter]
+    filter: [CatalogService_Chapters_filter]!
   ): Int
   update(
-    filter: [CatalogService_Chapters_filter]
+    filter: [CatalogService_Chapters_filter]!
     input: CatalogService_Chapters_U!
   ): [CatalogService_Chapters]
 }
@@ -921,7 +916,6 @@ input CatalogService_Chapters_orderBy {
 type CatalogService_Currencies {
   code: String
   descr: String
-  minorUnit: Int16
   name: String
   symbol: String
   texts(
@@ -935,7 +929,6 @@ type CatalogService_Currencies {
 input CatalogService_Currencies_C {
   code: String
   descr: String
-  minorUnit: Int16
   name: String
   symbol: String
   texts: [CatalogService_Currencies_texts_C]
@@ -943,7 +936,6 @@ input CatalogService_Currencies_C {
 
 input CatalogService_Currencies_U {
   descr: String
-  minorUnit: Int16
   name: String
   symbol: String
   texts: [CatalogService_Currencies_texts_C]
@@ -957,7 +949,6 @@ type CatalogService_Currencies_connection {
 input CatalogService_Currencies_filter {
   code: [String_filter]
   descr: [String_filter]
-  minorUnit: [Int16_filter]
   name: [String_filter]
   symbol: [String_filter]
 }
@@ -967,10 +958,10 @@ type CatalogService_Currencies_input {
     input: [CatalogService_Currencies_C]!
   ): [CatalogService_Currencies]
   delete(
-    filter: [CatalogService_Currencies_filter]
+    filter: [CatalogService_Currencies_filter]!
   ): Int
   update(
-    filter: [CatalogService_Currencies_filter]
+    filter: [CatalogService_Currencies_filter]!
     input: CatalogService_Currencies_U!
   ): [CatalogService_Currencies]
 }
@@ -978,7 +969,6 @@ type CatalogService_Currencies_input {
 input CatalogService_Currencies_orderBy {
   code: SortDirection
   descr: SortDirection
-  minorUnit: SortDirection
   name: SortDirection
   symbol: SortDirection
 }
@@ -1019,10 +1009,10 @@ type CatalogService_Currencies_texts_input {
     input: [CatalogService_Currencies_texts_C]!
   ): [CatalogService_Currencies_texts]
   delete(
-    filter: [CatalogService_Currencies_texts_filter]
+    filter: [CatalogService_Currencies_texts_filter]!
   ): Int
   update(
-    filter: [CatalogService_Currencies_texts_filter]
+    filter: [CatalogService_Currencies_texts_filter]!
     input: CatalogService_Currencies_texts_U!
   ): [CatalogService_Currencies_texts]
 }
@@ -1090,10 +1080,10 @@ type CatalogService_Genres_input {
     input: [CatalogService_Genres_C]!
   ): [CatalogService_Genres]
   delete(
-    filter: [CatalogService_Genres_filter]
+    filter: [CatalogService_Genres_filter]!
   ): Int
   update(
-    filter: [CatalogService_Genres_filter]
+    filter: [CatalogService_Genres_filter]!
     input: CatalogService_Genres_U!
   ): [CatalogService_Genres]
 }
@@ -1141,10 +1131,10 @@ type CatalogService_Genres_texts_input {
     input: [CatalogService_Genres_texts_C]!
   ): [CatalogService_Genres_texts]
   delete(
-    filter: [CatalogService_Genres_texts_filter]
+    filter: [CatalogService_Genres_texts_filter]!
   ): Int
   update(
-    filter: [CatalogService_Genres_texts_filter]
+    filter: [CatalogService_Genres_texts_filter]!
     input: CatalogService_Genres_texts_U!
   ): [CatalogService_Genres_texts]
 }
@@ -1239,10 +1229,10 @@ type CatalogService_ListOfBooks_input {
     input: [CatalogService_ListOfBooks_C]!
   ): [CatalogService_ListOfBooks]
   delete(
-    filter: [CatalogService_ListOfBooks_filter]
+    filter: [CatalogService_ListOfBooks_filter]!
   ): Int
   update(
-    filter: [CatalogService_ListOfBooks_filter]
+    filter: [CatalogService_ListOfBooks_filter]!
     input: CatalogService_ListOfBooks_U!
   ): [CatalogService_ListOfBooks]
 }
@@ -1297,20 +1287,6 @@ input Decimal_filter {
   le: [Decimal]
   lt: [Decimal]
   ne: [Decimal]
-}
-
-"""
-The `Int16` scalar type represents 16-bit non-fractional signed whole numeric values. Int16 can represent values between -(2^15) and 2^15 - 1.
-"""
-scalar Int16
-
-input Int16_filter {
-  eq: [Int16]
-  ge: [Int16]
-  gt: [Int16]
-  le: [Int16]
-  lt: [Int16]
-  ne: [Int16]
 }
 
 input Int_filter {
