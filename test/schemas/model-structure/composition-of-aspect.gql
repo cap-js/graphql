@@ -56,7 +56,7 @@ type CompositionOfAspectService_Books_chapters_input {
     input: [CompositionOfAspectService_Books_chapters_C]!
   ): [CompositionOfAspectService_Books_chapters]
   delete(
-    filter: [CompositionOfAspectService_Books_chapters_filter]
+    filter: [CompositionOfAspectService_Books_chapters_filter]!
   ): Int
 }
 
@@ -78,10 +78,10 @@ type CompositionOfAspectService_Books_input {
     input: [CompositionOfAspectService_Books_C]!
   ): [CompositionOfAspectService_Books]
   delete(
-    filter: [CompositionOfAspectService_Books_filter]
+    filter: [CompositionOfAspectService_Books_filter]!
   ): Int
   update(
-    filter: [CompositionOfAspectService_Books_filter]
+    filter: [CompositionOfAspectService_Books_filter]!
     input: CompositionOfAspectService_Books_U!
   ): [CompositionOfAspectService_Books]
 }
@@ -112,7 +112,7 @@ type CompositionOfAspectService_Books_reviews_input {
     input: [CompositionOfAspectService_Books_reviews_C]!
   ): [CompositionOfAspectService_Books_reviews]
   delete(
-    filter: [CompositionOfAspectService_Books_reviews_filter]
+    filter: [CompositionOfAspectService_Books_reviews_filter]!
   ): Int
 }
 
