@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Don't generate fields that represent composed aspects in the root Mutation type
+
 ### Fixed
 
 ### Removed
