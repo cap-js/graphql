@@ -1,6 +1,6 @@
 {
   "name": "@cap-js/graphql",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "CDS protocol adapter for GraphQL",
   "keywords": [
     "CAP",
@@ -36,7 +36,7 @@
     "graphql-http": "^1.16.0"
   },
   "peerDependencies": {
-    "@sap/cds": "^6.3"
+    "@sap/cds": ">=6.3"
   },
   "devDependencies": {
     "@sap/cds": "^6.3",
