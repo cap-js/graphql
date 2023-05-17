@@ -1183,7 +1183,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
       test('cds.Timestamp is correctly parsed from input literal high precision timestamp string value', async () => {
@@ -1195,7 +1195,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
       test('cds.Timestamp throws error when input literal is a string containing a non-time value', async () => {
@@ -1226,7 +1226,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
       test('cds.Timestamp is correctly parsed from variable high precision timestamp string value', async () => {
@@ -1238,7 +1238,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
       test('cds.Timestamp throws error when variable is a string containing a non-timestamp value', async () => {
