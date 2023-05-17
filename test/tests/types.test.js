@@ -1176,25 +1176,26 @@ describe('graphql - types parsing and validation', () => {
     describe('input literal', () => {
       test('cds.Timestamp is correctly parsed from input literal timestamp string value', async () => {
         const value = '2021-06-27T14:52:23.123Z'
-        const returnValue = '2021-06-27T14:52:23.1230000Z'
+        const returnValue = /2021-06-27T14:52:23\.123(0000)?Z/ // REVISIT: expect only 7 fractional digits with cds^7
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: returnValue }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: returnValue })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
       })
 
       test('cds.Timestamp is correctly parsed from input literal high precision timestamp string value', async () => {
         const value = '2021-06-27T14:52:23.1234567Z'
+        const returnValue = /2021-06-27T14:52:23\.123(4567)?Z/ // REVISIT: expect only 7 fractional digits with cds^7
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: value })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
       })
 
       test('cds.Timestamp throws error when input literal is a string containing a non-time value', async () => {
@@ -1218,25 +1219,26 @@ describe('graphql - types parsing and validation', () => {
     describe('variable value', () => {
       test('cds.Timestamp is correctly parsed from variable timestamp string value', async () => {
         const value = '2021-06-27T14:52:23.123Z'
-        const returnValue = '2021-06-27T14:52:23.1230000Z'
+        const returnValue = /2021-06-27T14:52:23\.123(0000)?Z/ // REVISIT: expect only 7 fractional digits with cds^7
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: returnValue }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query, variables })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: returnValue })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
       })
 
       test('cds.Timestamp is correctly parsed from variable high precision timestamp string value', async () => {
         const value = '2021-06-27T14:52:23.1234567Z'
+        const returnValue = /2021-06-27T14:52:23\.123(4567)?Z/ // REVISIT: expect only 7 fractional digits with cds^7
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query, variables })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: value })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue)  })
       })
 
       test('cds.Timestamp throws error when variable is a string containing a non-timestamp value', async () => {
