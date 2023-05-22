@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.5.0 - tbd
+## Version 0.6.0 - tbd
 
 ### Added
 
@@ -17,14 +17,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
-  + Wrap only objects (i.e. not primitive types or arrays) returned by custom handlers in arrays in create, read, and update resolvers
-  + Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
-- Don't generate fields for key elements in update input objects
+- Don't generate fields that represent compositions of aspects within mutation types that represent services
 
 ### Fixed
 
 ### Removed
+
+## Version 0.5.0 - 2023-05-04
+
+### Changed
+
+- Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
+  + Wrap only objects (i.e. not primitive types or arrays) returned by custom handlers in arrays in create, read, and update resolvers
+  + Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
+- Don't generate fields for key elements in update input objects
+- Update and delete mutations have mandatory `filter` argument
+- Allow services that are not instances of `cds.ApplicationService`. It is expected that the invoker provides the correct set of service providers when directly using the GraphQL protocol adpater API.
+
+### Fixed
+
+- Aligned `cds.Request` instantiation with other protocols for more consistent usage in custom handlers
 
 ## Version 0.4.1 - 2023-03-29
 
