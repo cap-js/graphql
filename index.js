@@ -18,7 +18,6 @@ function CDSGraphQLAdapter (services, options) {
 }
 
 let services
-
 module.exports = (srv, options) => {
   if (!services) {
     services = {}
