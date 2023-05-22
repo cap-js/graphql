@@ -4,7 +4,8 @@ const { decodeURIComponent } = cds.utils
 const LOG = cds.log('graphql')
 const express = require ('express')
 
-function CDSGraphQLAdapter (services, options) {
+function CDSGraphQLAdapter (options) {
+  const { services } = options
   const defaults = { graphiql: true }
   options = { ...defaults, ...options }
 
@@ -22,7 +23,8 @@ module.exports = (srv, options) => {
   if (!services) {
     services = {}
     cds.on('served', () => {
-      cds.app.use (options.endpoint, cds.middlewares.before, CDSGraphQLAdapter(services, options), cds.middlewares.after)
+      options.services = services
+      cds.app.use (options.endpoint, cds.middlewares.before, CDSGraphQLAdapter(options), cds.middlewares.after)
     })
   }
   services[srv.name] = srv
