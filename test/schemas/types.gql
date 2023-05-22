@@ -269,10 +269,10 @@ type TypesService_MyEntity_input {
     input: [TypesService_MyEntity_C]!
   ): [TypesService_MyEntity]
   delete(
-    filter: [TypesService_MyEntity_filter]
+    filter: [TypesService_MyEntity_filter]!
   ): Int
   update(
-    filter: [TypesService_MyEntity_filter]
+    filter: [TypesService_MyEntity_filter]!
     input: TypesService_MyEntity_U!
   ): [TypesService_MyEntity]
 }

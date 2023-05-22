@@ -140,7 +140,7 @@ describe('graphql - update mutations', () => {
       mutation ($input: AdminService_Books_U!) {
         AdminService {
           Books {
-            update(input: $input) {
+            update(filter: {}, input: $input) {
               title
               stock
             }
