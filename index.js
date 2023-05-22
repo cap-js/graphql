@@ -23,7 +23,7 @@ module.exports = (srv, options) => {
   if (!services) {
     services = {}
     cds.on('served', () => {
-      cds.app.use ('/graphql', cds.middlewares.before, CDSGraphQLAdapter(services, options), cds.middlewares.after)
+      cds.app.use (options.endpoint, cds.middlewares.before, CDSGraphQLAdapter(services, options), cds.middlewares.after)
     })
   }
   services[srv.name] = srv
