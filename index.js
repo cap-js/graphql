@@ -6,7 +6,7 @@ const { generateSchema4 } = require('./lib/schema')
 const graphiql = require('./app/graphiql')
 const { decodeURIComponent } = cds.utils
 
-function CDSGraphQLAdapter(options) {
+function GraphQLAdapter(options) {
   const router = express.Router()
   const { services } = options
   const defaults = { graphiql: true }
@@ -25,4 +25,4 @@ function CDSGraphQLAdapter(options) {
   return router
 }
 
-module.exports = CDSGraphQLAdapter
+module.exports = GraphQLAdapter
