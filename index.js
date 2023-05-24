@@ -1,15 +1,16 @@
 const cds = require('@sap/cds')
-const { decodeURIComponent } = cds.utils
 const LOG = cds.log('graphql')
 const express = require('express')
 const { createHandler } = require('graphql-http/lib/use/express')
 const { generateSchema4 } = require('./lib/schema')
 const graphiql = require('./app/graphiql')
+const { decodeURIComponent } = cds.utils
 
 function CDSGraphQLAdapter(options) {
   const router = express.Router()
   const { services } = options
   const defaults = { graphiql: true }
+  const schema = generateSchema4(services)
   options = { ...defaults, ...options }
 
   router
@@ -20,7 +21,6 @@ function CDSGraphQLAdapter(options) {
     })
 
   if (options.graphiql) router.get('/', graphiql)
-  const schema = generateSchema4(services)
   router.use((req, res) => createHandler({ schema, context: { req, res }, ...options })(req, res))
   return router
 }
