@@ -5,7 +5,7 @@ entity MyEntity {
       myBoolean      : Boolean;
       myDate         : Date;
       myDateTime     : DateTime;
-      myDecimal      : Decimal(5, 2);
+      myDecimal      : Decimal;
       myDecimalFloat : DecimalFloat;
       myDouble       : Double;
       myInt16        : Int16;

@@ -436,7 +436,7 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Decimal correctly determines large input literal numeric string to be a decimal number', async () => {
-        const value = '123456789101234567890.01234567890123456789'
+        const value = '12345678901234567890.01234567890123456789'
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
         const data = { TypesService: { MyEntity: { create: [{ [field]: String(value) }] } } }
         const response = await POST('/graphql', { query })
@@ -444,7 +444,7 @@ describe('graphql - types parsing and validation', () => {
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
         expect(result.length).toBe(1)
-        expect(result[0][field]).toBeGreaterThan(123456789101234500000) // Incorrect sqlite value due to dynamic typing system and rounding errors
+        expect(result[0][field]).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
       })
 
       test('cds.Decimal throws error when input literal is not a decimal string, but a boolean', async () => {
@@ -522,7 +522,7 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Decimal correctly determines large numeric string variable to be a decimal number', async () => {
-        const value = '123456789101234567890.01234567890123456789'
+        const value = '12345678901234567890.01234567890123456789'
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
         const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', { query, variables })
@@ -530,7 +530,7 @@ describe('graphql - types parsing and validation', () => {
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
         expect(result.length).toBe(1)
-        expect(result[0][field]).toBeGreaterThan(123456789101234500000) // Incorrect sqlite value due to dynamic typing system and rounding errors
+        expect(result[0][field]).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
       })
 
       test('cds.Decimal throws error when variable value is a float', async () => {
