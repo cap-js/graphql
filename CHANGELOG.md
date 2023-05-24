@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support for `@sap/cds^7` middlewares and protocols
+
 ### Changed
 
+- Bump required `@sap/cds` version to `>=7`
+- `@cap-js/graphql/index.js` now collects individual services and adds the adapter as a protocol middleware on the `cds.on('served', ...)` event
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
 
 ### Fixed
