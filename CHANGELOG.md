@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support for `@sap/cds^7` middlewares and protocols
+- Support for `@sap/cds^7` middlewares and protocols. Note: services now need to be annotated with protocol annotations such as `@graphql` or `@protocol: 'graphql'`.
 
 ### Changed
 
