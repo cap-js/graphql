@@ -12,21 +12,21 @@ service AnnotatedWithAtGraphQL {
 }
 
 @protocol: 'graphql'
-service AnnotatedWithAtProtcolString {
+service AnnotatedWithAtProtocolString {
   entity A {
     key id : UUID;
   }
 }
 
 @protocol: ['graphql']
-service AnnotatedWithAtProtcolStringList {
+service AnnotatedWithAtProtocolStringList {
   entity A {
     key id : UUID;
   }
 }
 
 @protocol: [{kind: 'graphql'}]
-service AnnotatedWithAtProtcolObjectList {
+service AnnotatedWithAtProtocolObjectList {
   entity A {
     key id : UUID;
   }
