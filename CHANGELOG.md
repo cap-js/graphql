@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
+- Moved the `GraphQLAdapter` module to the root directory (`index.js`), simplifying the import process and reducing the required typing. The module signature has also been updated. For example:
+
+```diff
+- const GraphQLAdapter = require('@cap-js/graphql/lib')
+- const adapter = new GraphQLAdapter(cds.services, { graphiql: true, path: '/graphql' })
++ const GraphQLAdapter = require('@cap-js/graphql')
++ const adapter = new GraphQLAdapter({ graphiql: true, path: '/graphql', services: cds.services })
+```
 
 ### Fixed
 
