@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
+- Moved the `GraphQLAdapter` module to the root directory (`index.js`), simplifying the import process and reducing the required typing.
 
 ### Fixed
 
