@@ -31,7 +31,7 @@ module.exports = (srv, options) => {
     services = {}
     cds.on('served', () => {
       options.services = services
-      cds.app.use (options.endpoint, cds.middlewares.before, CDSGraphQLAdapter(options), cds.middlewares.after)
+      cds.app.use (options.endpoint, cds.middlewares.before, GraphQLAdapter(options), cds.middlewares.after)
     })
   }
   services[srv.name] = srv
