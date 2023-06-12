@@ -9,7 +9,7 @@ describe('graphql - annotations', () => {
   data.autoReset(true)
 
   describe('protocols annotations', () => {
-    const endpoint = '/custom-graphql-endpoint'
+    const path = '/custom-graphql-path'
 
     test('service not annotated is not served', async () => {
       const query = gql`
@@ -23,11 +23,11 @@ describe('graphql - annotations', () => {
           }
         }
       `
-      const response = await POST(endpoint, { query })
+      const response = await POST(path, { query })
       expect(response.data.errors[0].message).toMatch(/^Cannot query field "NotAnnotated" on type "Query"\./)
     })
 
-    test('service annotated with @graphql is served at configured endpoint', async () => {
+    test('service annotated with @graphql is served at configured path', async () => {
       const query = gql`
         {
           AnnotatedWithAtGraphQL {
@@ -39,11 +39,11 @@ describe('graphql - annotations', () => {
           }
         }
       `
-      const response = await POST(endpoint, { query })
+      const response = await POST(path, { query })
       expect(response.data).not.toHaveProperty('errors')
     })
 
-    test('service annotated with "@protocol: \'graphql\'" is served at configured endpoint', async () => {
+    test('service annotated with "@protocol: \'graphql\'" is served at configured path', async () => {
       const query = gql`
         {
           AnnotatedWithAtProtocolString {
@@ -55,11 +55,11 @@ describe('graphql - annotations', () => {
           }
         }
       `
-      const response = await POST(endpoint, { query })
+      const response = await POST(path, { query })
       expect(response.data).not.toHaveProperty('errors')
     })
 
-    test('service annotated with "@protocol: [\'graphql\']" is served at configured endpoint', async () => {
+    test('service annotated with "@protocol: [\'graphql\']" is served at configured path', async () => {
       const query = gql`
         {
           AnnotatedWithAtProtocolStringList {
@@ -71,11 +71,11 @@ describe('graphql - annotations', () => {
           }
         }
       `
-      const response = await POST(endpoint, { query })
+      const response = await POST(path, { query })
       expect(response.data).not.toHaveProperty('errors')
     })
 
-    test('service annotated with "@protocol: [{kind: \'graphql\'}]" is served at configured endpoint', async () => {
+    test('service annotated with "@protocol: [{kind: \'graphql\'}]" is served at configured path', async () => {
       const query = gql`
         {
           AnnotatedWithAtProtocolObjectList {
@@ -87,7 +87,7 @@ describe('graphql - annotations', () => {
           }
         }
       `
-      const response = await POST(endpoint, { query })
+      const response = await POST(path, { query })
       expect(response.data).not.toHaveProperty('errors')
     })
   })
