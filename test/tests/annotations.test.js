@@ -1,7 +1,7 @@
 describe('graphql - annotations', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
-  const { gql } = require('../../util')
+  const { gql } = require('../util')
 
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/annotations'))
   // Prevent axios from throwing errors for non 2xx status codes
