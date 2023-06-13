@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
+- Moved the `GraphQLAdapter` module to the root directory (`index.js`), simplifying the import process and reducing the required typing.
 
 ### Fixed
 
@@ -26,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   + Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
 - Don't generate fields for key elements in update input objects
 - Update and delete mutations have mandatory `filter` argument
-- Allow services that are not instances of `cds.ApplicationService`. It is expected that the invoker provides the correct set of service providers when directly using the GraphQL protocol adpater API.
+- Allow services that are not instances of `cds.ApplicationService`. It is expected that the invoker provides the correct set of service providers when directly using the GraphQL protocol adapter API.
 
 ### Fixed
 
