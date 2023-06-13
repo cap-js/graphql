@@ -39,7 +39,6 @@
     "@sap/cds": ">=7"
   },
   "devDependencies": {
-    "@sap/cds": ">=7",
     "axios": ">=0.24",
     "eslint": "^8",
     "express": "^4.17.1",
