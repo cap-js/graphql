@@ -20,7 +20,7 @@ function GraphQLAdapter(options) {
       next()
     })
 
-  if (options.graphiql) router.get('/', graphiql)
+  if (options.graphiql) router.use(graphiql)
   router.use((req, res) => createHandler({ schema, context: { req, res }, ...options })(req, res))
   return router
 }
