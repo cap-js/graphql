@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
 - Moved the `GraphQLAdapter` module to the root directory (`index.js`), simplifying the import process and reducing the required typing.
+- Disabled conjunction on the same field for the following operators:
+  + `eq` (Equal)
+  + `gt` (Greater Than)
+  + `ge` (Greater Than or Equal)
+  + `le` (Less Than or Equal)
+  + `lt` (Less Than)
+  + `startswith`
+  + `endswith`
 
 ### Fixed
 
