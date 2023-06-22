@@ -1,8 +1,9 @@
+const cds = require('@sap/cds')
 const LOG = cds.log()
 const GraphQLAdapter = require('./lib/GraphQLAdapter')
 
 let services
-module.exports = (srv, options) => {
+const _collectServicesAndServe = (srv, options) => {
   if (!services) {
     services = {}
     cds.on('served', () => {
@@ -13,3 +14,7 @@ module.exports = (srv, options) => {
   }
   services[srv.name] = srv
 }
+
+_collectServicesAndServe.GraphQLAdapter = GraphQLAdapter
+
+module.exports = _collectServicesAndServe
