@@ -15,6 +15,4 @@ const _collectServicesAndServe = (srv, options) => {
   services[srv.name] = srv
 }
 
-_collectServicesAndServe.GraphQLAdapter = GraphQLAdapter
-
 module.exports = _collectServicesAndServe
