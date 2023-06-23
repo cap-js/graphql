@@ -1,5 +1,5 @@
 const cds = require('@sap/cds')
-const LOG = cds.log()
+const DEBUG = cds.debug('adapters')
 const GraphQLAdapter = require('./lib/GraphQLAdapter')
 
 let services
@@ -9,7 +9,7 @@ const _collectServicesAndServe = (srv, options) => {
     cds.on('served', () => {
       options.services = services
       cds.app.use (options.path, cds.middlewares.before, GraphQLAdapter(options), cds.middlewares.after)
-      LOG.info('serving', { protocol: 'graphql', at: options.path })
+      DEBUG?.('app.use(', options.path, ', ... )')
     })
   }
   services[srv.name] = srv
