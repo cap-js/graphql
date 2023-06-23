@@ -114,11 +114,11 @@ input FieldNamedLocalizedService_localized_orderBy {
 }
 
 input Int_filter {
-  eq: [Int]
-  ge: [Int]
-  gt: [Int]
-  le: [Int]
-  lt: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
   ne: [Int]
 }
 
@@ -137,12 +137,12 @@ enum SortDirection {
 
 input String_filter {
   contains: [String]
-  endswith: [String]
-  eq: [String]
-  ge: [String]
-  gt: [String]
-  le: [String]
-  lt: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
   ne: [String]
-  startswith: [String]
+  startswith: String
 }
