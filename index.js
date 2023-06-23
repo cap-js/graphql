@@ -3,7 +3,7 @@ const DEBUG = cds.debug('adapters')
 const GraphQLAdapter = require('./lib/GraphQLAdapter')
 
 let services
-const _collectServicesAndMount = (srv, options) => {
+const _collectServicesAndMountAdapter = (srv, options) => {
   if (!services) {
     services = {}
     cds.on('served', () => {
@@ -15,4 +15,4 @@ const _collectServicesAndMount = (srv, options) => {
   services[srv.name] = srv
 }
 
-module.exports = _collectServicesAndMount
+module.exports = _collectServicesAndMountAdapter
