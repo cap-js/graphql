@@ -26,10 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   + `startswith`
   + `endswith`
 
-### Fixed
-
-### Removed
-
 ## Version 0.5.0 - 2023-05-04
 
 ### Changed
