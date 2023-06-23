@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.6.0 - tbd
+## Version 0.6.0 - 2023-06-23
 
 ### Added
 
@@ -14,9 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump required `@sap/cds` version to `>=7`
-- `@cap-js/graphql/index.js` now collects individual services and adds the adapter as a protocol middleware on the `cds.on('served', ...)` event
+- `@cap-js/graphql/index.js` now collects individual services and mounts the adapter as a protocol middleware on the `cds.on('served', ...)` event
+- Moved the `GraphQLAdapter` module to `lib/GraphQLAdapter.js` and merged it with `CDSGraphQLAdapter` previously found in `index.js` in the root directory
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
-- Moved the `GraphQLAdapter` module to the root directory (`index.js`), simplifying the import process and reducing the required typing.
 - Disabled conjunction on the same field for the following operators:
   + `eq` (Equal)
   + `gt` (Greater Than)
