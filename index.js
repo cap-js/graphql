@@ -1,16 +1,18 @@
-const GraphQLAdapter = require('./lib')
-const express = require ('express')
-const queryLogger = require('./lib/logger')
+const cds = require('@sap/cds')
+const DEBUG = cds.debug('adapters')
+const GraphQLAdapter = require('./lib/GraphQLAdapter')
 
-function CDSGraphQLAdapter (options) {
-  const {services} = options
-  const defaults = { graphiql: true }
-  options = { ...defaults, ...options }
-
-  return express.Router()
-  .use (express.json()) //> required by logger below
-  .use (queryLogger)
-  .use (new GraphQLAdapter (services, options))
+let services
+const collectServicesAndMountAdapter = (srv, options) => {
+  if (!services) {
+    services = {}
+    cds.on('served', () => {
+      options.services = services
+      cds.app.use (options.path, cds.middlewares.before, GraphQLAdapter(options), cds.middlewares.after)
+      DEBUG?.('app.use(', options.path, ', ... )')
+    })
+  }
+  services[srv.name] = srv
 }
 
-module.exports = CDSGraphQLAdapter
+module.exports = collectServicesAndMountAdapter

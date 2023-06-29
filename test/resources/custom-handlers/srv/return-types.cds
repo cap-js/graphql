@@ -1,3 +1,4 @@
+@graphql
 service ReturnTypesService {
   entity Integer {
     key id     : UUID;

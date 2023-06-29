@@ -111,7 +111,7 @@ describe('graphql - variables', () => {
 
     test('query variable of type scalar value passed as a field of an argument', async () => {
       const query = gql`
-        query ($filter: [Int]) {
+        query ($filter: Int) {
           AdminServiceBasic {
             Books(filter: { ID: { ge: $filter } }) {
               ID
@@ -254,7 +254,7 @@ describe('graphql - variables', () => {
 
     test('query variable of type scalar value passed as a field of an argument', async () => {
       const query = gql`
-        query ($filter: [Int]) {
+        query ($filter: Int) {
           AdminService {
             Books(filter: { ID: { ge: $filter } }) {
               nodes {
