@@ -1,4 +1,4 @@
-describe('graphql - query logging', () => {
+describe('graphql - query logging in development', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
   const { gql } = require('../util')
@@ -19,7 +19,6 @@ describe('graphql - query logging', () => {
 
   afterEach(() => {
     jest.clearAllMocks()
-    delete process.env.NODE_ENV
   })
 
   describe('POST requests', () => {
