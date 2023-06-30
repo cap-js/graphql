@@ -1,3 +1,4 @@
+@graphql
 service RequestService {
   entity A {
     key id        : UUID;

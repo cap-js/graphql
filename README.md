@@ -19,7 +19,9 @@ _**WARNING:** This package is in an early general availability state. This means
 > This will automatically plugin to `@sap/cds` runtime, enabling the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and register a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model. 
   
 2. Run your server as usual, e.g. using `cds watch`.
-> The runtime will automatically serve all services via GraphQL at the default configured endpoint.
+
+3. Annotate the services you want to serve, e.g. using `@graphql` or `@protocol: 'graphql'`.
+> The runtime will serve all annotated services via GraphQL at the default configured endpoint.
 
 ## Limitations
 

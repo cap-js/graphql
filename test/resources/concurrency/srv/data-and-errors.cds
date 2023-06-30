@@ -1,3 +1,4 @@
+@graphql
 service DataAndErrorsService {
   entity A {
     key id        : UUID;

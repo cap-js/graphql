@@ -1,3 +1,4 @@
+@graphql
 service ConcurrencyService {
   entity A {
     key id : UUID;

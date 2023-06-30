@@ -635,7 +635,7 @@ The `Binary` scalar type represents binary values as `base64url` encoded strings
 scalar Binary
 
 input Binary_filter {
-  eq: [Binary]
+  eq: Binary
   ne: [Binary]
 }
 
@@ -1277,11 +1277,11 @@ The `Date` scalar type represents date values as strings in the ISO 8601 format 
 scalar Date
 
 input Date_filter {
-  eq: [Date]
-  ge: [Date]
-  gt: [Date]
-  le: [Date]
-  lt: [Date]
+  eq: Date
+  ge: Date
+  gt: Date
+  le: Date
+  lt: Date
   ne: [Date]
 }
 
@@ -1291,11 +1291,11 @@ The `Decimal` scalar type represents exact signed decimal values. Decimal repres
 scalar Decimal
 
 input Decimal_filter {
-  eq: [Decimal]
-  ge: [Decimal]
-  gt: [Decimal]
-  le: [Decimal]
-  lt: [Decimal]
+  eq: Decimal
+  ge: Decimal
+  gt: Decimal
+  le: Decimal
+  lt: Decimal
   ne: [Decimal]
 }
 
@@ -1305,20 +1305,20 @@ The `Int16` scalar type represents 16-bit non-fractional signed whole numeric va
 scalar Int16
 
 input Int16_filter {
-  eq: [Int16]
-  ge: [Int16]
-  gt: [Int16]
-  le: [Int16]
-  lt: [Int16]
+  eq: Int16
+  ge: Int16
+  gt: Int16
+  le: Int16
+  lt: Int16
   ne: [Int16]
 }
 
 input Int_filter {
-  eq: [Int]
-  ge: [Int]
-  gt: [Int]
-  le: [Int]
-  lt: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
   ne: [Int]
 }
 
@@ -1339,14 +1339,14 @@ enum SortDirection {
 
 input String_filter {
   contains: [String]
-  endswith: [String]
-  eq: [String]
-  ge: [String]
-  gt: [String]
-  le: [String]
-  lt: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
   ne: [String]
-  startswith: [String]
+  startswith: String
 }
 
 """
@@ -1355,10 +1355,10 @@ The `Timestamp` scalar type represents timestamp values as strings in the ISO 86
 scalar Timestamp
 
 input Timestamp_filter {
-  eq: [Timestamp]
-  ge: [Timestamp]
-  gt: [Timestamp]
-  le: [Timestamp]
-  lt: [Timestamp]
+  eq: Timestamp
+  ge: Timestamp
+  gt: Timestamp
+  le: Timestamp
+  lt: Timestamp
   ne: [Timestamp]
 }
