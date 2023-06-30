@@ -101,6 +101,23 @@ describe('graphql - query logging in development', () => {
       expect(_formatLogLine(_log.mock.calls[0])).toContain(`operationName: '${operationName}'`)
     })
 
+    test('Log should contain literal values', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_formatLogLine(_log.mock.calls[0])).toContain(secretTitle)
+    })
+
     test('Log should contain variables and their values', async () => {
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
@@ -199,6 +216,23 @@ describe('graphql - query logging in development', () => {
       `
       await GET(`/graphql?operationName=${operationName}&query=${query}`)
       expect(_formatLogLine(_log.mock.calls[0])).toContain(`operationName: '${operationName}'`)
+    })
+
+    test('Log should contain literal values', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        query {
+          AdminService {
+            Books(filter: { title: { ne: "${secretTitle}"}}) {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_formatLogLine(_log.mock.calls[0])).toContain(secretTitle)
     })
 
     test('Log should contain variables and their values', async () => {
