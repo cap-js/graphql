@@ -12,7 +12,8 @@ describe('graphql - query logging with sanitization in production', () => {
   axios.defaults.validateStatus = false
   data.autoReset(true)
 
-  const _formatLogLine = logLineArray => util.formatWithOptions({ colors: false }, ...logLineArray)
+  const _format = e => util.formatWithOptions({ color: false, depth: null }, e)
+  const _formatLogLine = logLineArray => _format(...logLineArray)
 
   let _log
 

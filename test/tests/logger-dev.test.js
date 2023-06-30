@@ -9,7 +9,8 @@ describe('graphql - query logging in development', () => {
   axios.defaults.validateStatus = false
   data.autoReset(true)
 
-  const _formatLogLine = logLineArray => util.formatWithOptions({ colors: false }, ...logLineArray)
+  const _format = e => util.formatWithOptions({ color: false, depth: null }, e)
+  const _formatLogLine = logLineArray => _format(...logLineArray)
 
   let _log
 
@@ -132,9 +133,7 @@ describe('graphql - query logging in development', () => {
       `
       const variables = { filter: { ID: { ge: 250 } } }
       await POST('/graphql', { query, variables })
-      expect(_formatLogLine(_log.mock.calls[0])).toContain(
-        `variables: ${util.formatWithOptions({ colors: false }, variables)}`
-      )
+      expect(_formatLogLine(_log.mock.calls[0])).toContain(`variables: ${_format(variables)}`)
     })
   })
 
@@ -249,9 +248,7 @@ describe('graphql - query logging in development', () => {
       `
       const variables = { filter: { ID: { ge: 250 } } }
       await GET(`/graphql?query=${query}&variables=${JSON.stringify(variables)}`)
-      expect(_formatLogLine(_log.mock.calls[0])).toContain(
-        `variables: ${util.formatWithOptions({ colors: false }, variables)}`
-      )
+      expect(_formatLogLine(_log.mock.calls[0])).toContain(`variables: ${_format(variables)}`)
     })
   })
 })
