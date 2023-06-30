@@ -29,6 +29,85 @@ describe('graphql - query logging with sanitization in production', () => {
   })
 
   describe('POST requests', () => {
+    test('Do not log requests with undefined queries', async () => {
+      await POST('/graphql')
+      expect(_log.mock.calls.length).toEqual(0)
+    })
+
+    test('Log should contain HTTP method', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_formatLogLine(_log.mock.calls[0])).toContain('POST')
+    })
+
+    test('Log should not contain operationName if none was provided', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_formatLogLine(_log.mock.calls[0])).not.toContain('operationName')
+    })
+
+    test('Log should not contain variables if none were provided', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_formatLogLine(_log.mock.calls[0])).not.toContain('variables')
+    })
+
+    test('Log should contain operationName and its value', async () => {
+      const operationName = 'ListBooks'
+      const query = gql`
+        query ListAuthors {
+          AdminService {
+            Authors {
+              nodes {
+                name
+              }
+            }
+          }
+        }
+        query ${operationName} {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { operationName, query })
+      expect(_formatLogLine(_log.mock.calls[0])).toContain(`operationName: '${operationName}'`)
+    })
+
     test('Log should not contain literal values', async () => {
       const secretTitle = 'secret'
       const query = gql`
@@ -67,6 +146,85 @@ describe('graphql - query logging with sanitization in production', () => {
   })
 
   describe('GET requests', () => {
+    test('Do not log requests with undefined queries', async () => {
+      await GET('/graphql')
+      expect(_log.mock.calls.length).toEqual(0)
+    })
+
+    test('Log should contain HTTP method', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_formatLogLine(_log.mock.calls[0])).toContain('GET')
+    })
+
+    test('Log should not contain operationName if none was provided', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_formatLogLine(_log.mock.calls[0])).not.toContain('operationName')
+    })
+
+    test('Log should not contain variables if none were provided', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_formatLogLine(_log.mock.calls[0])).not.toContain('variables')
+    })
+
+    test('Log should contain operationName and its value', async () => {
+      const operationName = 'ListBooks'
+      const query = gql`
+        query ListAuthors {
+          AdminService {
+            Authors {
+              nodes {
+                name
+              }
+            }
+          }
+        }
+        query ${operationName} {
+          AdminService {
+            Books {
+              nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?operationName=${operationName}&query=${query}`)
+      expect(_formatLogLine(_log.mock.calls[0])).toContain(`operationName: '${operationName}'`)
+    })
+
     test('Log should not contain literal values', async () => {
       const secretTitle = 'secret'
       const query = gql`
