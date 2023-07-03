@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: cds-adapter-graphql
+Upstream-Name: graphql
 Upstream-Contact: The cap team <cap@sap.com>
-Source: https://github.com/cap-js/cds-adapter-graphql
+Source: https://github.com/cap-js/graphql
 Disclaimer: The code in this project may include calls to APIs ("API Calls") of
  SAP or third-party products or services developed outside of this project
  ("External Products").
@@ -25,6 +25,6 @@ Disclaimer: The code in this project may include calls to APIs ("API Calls") of
  parties the right to use of access any SAP External Product, through API Calls.
 
 Files: *
-Copyright: 2022 SAP SE or an SAP affiliate company and cds-adapter-graphql contributors
+Copyright: 2022 SAP SE or an SAP affiliate company and cap-js/graphql contributors
 License: Apache-2.0
 
