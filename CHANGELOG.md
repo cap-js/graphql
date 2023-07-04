@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Improved query logging:
+  + Don't log queries that are `undefined`
+  + Log `operationName`
+  + Log `variables` when not in production
+  + Sanitize arguments and their values in queries when in production
+
 ### Fixed
 
 ### Removed
