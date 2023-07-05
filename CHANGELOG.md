@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Changed GraphiQL Explorer Plugin CDN URL due to upstream renaming
+
 ### Removed
 
 ## Version 0.6.0 - 2023-06-23
