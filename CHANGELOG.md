@@ -5,9 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.7.0 - tbd
-
-### Added
+## Version 0.6.1 - 2023-07-05
 
 ### Changed
 
@@ -20,8 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Changed GraphiQL Explorer Plugin CDN URL due to upstream renaming
-
-### Removed
 
 ## Version 0.6.0 - 2023-06-23
 
