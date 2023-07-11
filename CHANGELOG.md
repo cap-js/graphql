@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- GraphiQL Explorer Plugin initialization due to upstream function signature change
+- GraphiQL Explorer Plugin initialization due to upstream implementation pattern change
 
 ### Removed
 
