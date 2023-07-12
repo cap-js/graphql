@@ -13,8 +13,11 @@ const cdsFilesToGQLSchema = async files => {
   return generateSchema4(services)
 }
 
-const formatSchema = schemaString =>
-  prettier.format(printSchema(lexicographicSortSchema(buildSchema(schemaString))), { parser: 'graphql', printWidth: 0 })
+const formatSchema = async schemaString =>
+  await prettier.format(printSchema(lexicographicSortSchema(buildSchema(schemaString))), {
+    parser: 'graphql',
+    printWidth: 0
+  })
 
 /**
  * Create a fake/mock object that matches the structure of the info object that is passed to resolver functions by the graphql.js library.
