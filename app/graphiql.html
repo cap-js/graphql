@@ -31,14 +31,11 @@
       const fetcher = GraphiQL.createFetcher({ url: '' })
 
       function GraphiQLWithExplorer() {
-        const [query, setQuery] = React.useState()
-        const explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({ query, onEdit: setQuery })
+        const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin()
         return React.createElement(GraphiQL, {
           fetcher,
           defaultEditorToolsVisibility: true,
-          plugins: [explorerPlugin],
-          query,
-          onEditQuery: setQuery
+          plugins: [explorerPlugin]
         })
       }
 
