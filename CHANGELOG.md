@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Pin `graphiql` version to `^3`
+- Pin `@graphiql/plugin-explorer` to version `~0.3`
+
 ### Fixed
 
 - GraphiQL Explorer Plugin initialization due to upstream implementation pattern change
