@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- GraphiQL Explorer Plugin initialization due to upstream implementation pattern change
+
 ### Removed
 
 ## Version 0.6.1 - 2023-07-05
