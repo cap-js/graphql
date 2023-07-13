@@ -5,17 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.7.0 - tbd
-
-### Added
+## Version 0.6.2 - 2023-07-12
 
 - Translate CDS errors and include details in `GraphQLError` `extensions`
 
 ### Changed
 
+- Pin `graphiql` version to `^3`
+- Pin `@graphiql/plugin-explorer` version to `~0.3`
+
 ### Fixed
 
-### Removed
+- GraphiQL Explorer Plugin initialization due to upstream implementation pattern change
+
+## Version 0.6.1 - 2023-07-05
+
+### Changed
+
+- Improved query logging:
+  + Don't log queries that are `undefined`
+  + Log `operationName`
+  + Log `variables` when not in production
+  + Sanitize arguments and their values in queries when in production
+
+### Fixed
+
+- Changed GraphiQL Explorer Plugin CDN URL due to upstream renaming
 
 ## Version 0.6.0 - 2023-06-23
 
