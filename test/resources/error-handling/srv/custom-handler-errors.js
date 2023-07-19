@@ -19,12 +19,16 @@ module.exports = srv => {
     throw new cds.error('MY_CODE', { code: 'MY_CODE', myProperty: 'My value D' })
   })
 
-  srv.before('CREATE', 'Orders', async (req) => {
-    const { quantity, stock} = req.data
-    if (quantity > stock) req.reject(400, 'ORDER_EXCEEDS_STOCK', [quantity, quantity - stock])
+  srv.on('READ', 'E', async req => {
+    req.error ({
+      code: 'Some-Custom-Code',
+      message: 'Some Custom Error Message',
+      target: 'some_field',
+      status: 418
+    })
   })
 
-  srv.on('READ', 'Z', async req => {
+  srv.on('READ', 'F', async req => {
     req.error ({
       code: 'Some-Custom-Code1',
       message: 'Some Custom Error Message 1',
@@ -37,5 +41,10 @@ module.exports = srv => {
       target: 'some_field',
       status: 500
     })
+  })
+
+  srv.before('CREATE', 'Orders', async (req) => {
+    const { quantity, stock} = req.data
+    if (quantity > stock) req.reject(400, 'ORDER_EXCEEDS_STOCK', [quantity, quantity - stock])
   })
 }
