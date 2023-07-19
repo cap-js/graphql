@@ -24,10 +24,18 @@ module.exports = srv => {
     if (quantity > stock) req.reject(400, 'ORDER_EXCEEDS_STOCK', [quantity, quantity - stock])
   })
 
-  srv.on('READ', 'Z', async () => {
-    return Promise.all([
-      Promise.reject(new Error('A')),
-      Promise.reject(new Error('B')),
-    ])
+  srv.on('READ', 'Z', async req => {
+    req.error ({
+      code: 'Some-Custom-Code1',
+      message: 'Some Custom Error Message 1',
+      target: 'some_field',
+      status: 418
+    })
+    req.error ({
+      code: 'Some-Custom-Code2',
+      message: 'Some Custom Error Message 2',
+      target: 'some_field',
+      status: 500
+    })
   })
 }
