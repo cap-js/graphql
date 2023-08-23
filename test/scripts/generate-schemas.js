@@ -11,7 +11,7 @@ const compile = require('../../lib/compile')
   fs.mkdirSync(SCHEMAS_DIR)
   for (const model of models) {
     console.log(`Generating GraphQL schema "${model.name}.gql"`)
-    const graphQLSchema = formatSchema(compile(await cds.load(model.files)))
+    const graphQLSchema = formatSchema(compile(await cds.load(model.files), { sort: true }))
     const schemaPath = path.join(SCHEMAS_DIR, `${model.name}.gql`)
     const schemaPathDir = path.parse(schemaPath).dir
     if (!fs.existsSync(schemaPathDir)) fs.mkdirSync(schemaPathDir)

@@ -14,7 +14,7 @@ describe('graphql - schema generation', () => {
   describe('generated schema should match saved schema', () => {
     models.forEach(model => {
       it('should process model ' + model.name, async () => {
-        const generatedSchemaObject = compile(await cds.load(model.files), { object: true })
+        const generatedSchemaObject = compile(await cds.load(model.files), { object: true, sort: true })
         const schemaValidationErrors = validateSchema(generatedSchemaObject)
         expect(schemaValidationErrors.length).toEqual(0)
 
