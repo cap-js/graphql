@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const cds = require('@sap/cds')
 const path = require('path')
 const fs = require('fs')
 const { SCHEMAS_DIR, formatSchema } = require('../util')

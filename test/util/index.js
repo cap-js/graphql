@@ -4,15 +4,6 @@ const { buildSchema, lexicographicSortSchema, printSchema, Kind } = require('gra
 
 const SCHEMAS_DIR = path.join(__dirname, '../schemas')
 
-const cdsFilesToGQLSchema = async files => {
-  const cds = require('@sap/cds/lib')
-  const { generateSchema4 } = require('../../lib/schema')
-
-  const m = cds.linked(await cds.load(files))
-  const services = Object.fromEntries(m.services.map(s => [s.name, new cds.ApplicationService(s.name, m)]))
-  return generateSchema4(services)
-}
-
 const formatSchema = schemaString =>
   prettier.format(printSchema(lexicographicSortSchema(buildSchema(schemaString))), { parser: 'graphql', printWidth: 0 })
 
@@ -46,4 +37,4 @@ const fakeInfoObject = (document, schema, parentTypeName, variables) => {
  */
 const gql = String.raw
 
-module.exports = { SCHEMAS_DIR, cdsFilesToGQLSchema, formatSchema, fakeInfoObject, gql }
+module.exports = { SCHEMAS_DIR, formatSchema, fakeInfoObject, gql }
