@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Omit `variables` from log if it is an empty object
+
 ### Fixed
 
 ### Removed
