@@ -4,14 +4,14 @@ describe('graphql - enrich AST with parsed inline literal values', () => {
   const { parse } = require('graphql')
   const enrich = require('../../lib/resolvers/parse/ast/enrich')
   const { models } = require('../resources')
-  const compile = require('../../lib/compile')
+  const cds_compile_to_gql = require('../../lib/compile')
   const { fakeInfoObject } = require('../util')
 
   let bookshopSchema
 
   beforeAll(async () => {
     const bookshopModel = models.find(m => m.name === 'bookshop-graphql')
-    bookshopSchema = compile(await cds.load(bookshopModel.files), { object: true })
+    bookshopSchema = cds_compile_to_gql(await cds.load(bookshopModel.files), { object: true })
   })
 
   test('parsing of literal value as top level argument', async () => {

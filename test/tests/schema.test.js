@@ -6,7 +6,7 @@ const cdsVersion = require('@sap/cds').version
 let { models } = require('../resources')
 models = models.filter(m => !m.requires_cds || semver.satisfies(cdsVersion, m.requires_cds))
 
-const compile = require('../../lib/compile')
+const cds_compile_to_gql = require('../../lib/compile')
 const { SCHEMAS_DIR, formatSchema } = require('../util')
 const { printSchema, validateSchema } = require('graphql')
 
@@ -14,7 +14,7 @@ describe('graphql - schema generation', () => {
   describe('generated schema should match saved schema', () => {
     models.forEach(model => {
       it('should process model ' + model.name, async () => {
-        const generatedSchemaObject = compile(await cds.load(model.files), { object: true, sort: true })
+        const generatedSchemaObject = cds_compile_to_gql(await cds.load(model.files), { object: true, sort: true })
         const schemaValidationErrors = validateSchema(generatedSchemaObject)
         expect(schemaValidationErrors.length).toEqual(0)
 
