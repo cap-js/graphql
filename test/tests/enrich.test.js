@@ -11,7 +11,7 @@ describe('graphql - enrich AST with parsed inline literal values', () => {
 
   beforeAll(async () => {
     const bookshopModel = models.find(m => m.name === 'bookshop-graphql')
-    bookshopSchema = cds_compile_to_gql(await cds.load(bookshopModel.files), { object: true })
+    bookshopSchema = cds_compile_to_gql(await cds.load(bookshopModel.files), { as: 'object' })
   })
 
   test('parsing of literal value as top level argument', async () => {
