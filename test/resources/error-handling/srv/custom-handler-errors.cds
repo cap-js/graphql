@@ -29,7 +29,7 @@ service CustomHandlerErrorsService {
         quantity : Integer;
   }
 
-  entity Z {
+  entity F {
     key id : Integer;
   }
 }
