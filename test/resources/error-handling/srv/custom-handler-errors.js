@@ -20,7 +20,7 @@ module.exports = srv => {
   })
 
   srv.on('READ', 'E', async req => {
-    req.error ({
+    req.error({
       code: 'Some-Custom-Code',
       message: 'Some Custom Error Message',
       target: 'some_field',
@@ -29,13 +29,13 @@ module.exports = srv => {
   })
 
   srv.on('READ', 'F', async req => {
-    req.error ({
+    req.error({
       code: 'Some-Custom-Code1',
       message: 'Some Custom Error Message 1',
       target: 'some_field',
       status: 418
     })
-    req.error ({
+    req.error({
       code: 'Some-Custom-Code2',
       message: 'Some Custom Error Message 2',
       target: 'some_field',
@@ -44,7 +44,7 @@ module.exports = srv => {
   })
 
   srv.before('CREATE', 'Orders', async req => {
-    const { id, quantity, stock} = req.data
+    const { id, quantity, stock } = req.data
     if (quantity > stock) {
       const code = 'ORDER_EXCEEDS_STOCK'
       const message = code
