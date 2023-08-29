@@ -48,16 +48,11 @@ module.exports = srv => {
     if (quantity > stock) {
       const code = 'ORDER_EXCEEDS_STOCK'
       const message = code
-      const target = code
       const args = [quantity, quantity - stock]
 
-      // if (id === 1) req.reject(400, message, args, target)
-      // if (id === 2) req.reject(code, message, args, target)
-      // req.reject(message)
-
-      if (id === 1) req.reject({ code: 400, message, target, args })
-      if (id === 2) req.reject({ code, message, target, args })
-      req.reject({ message })
+      if (id === 1) req.reject(400, message, args)
+      if (id === 2) req.reject(code, message, args)
+      req.reject(message)
     }
   })
 }
