@@ -95,7 +95,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace).toBe(undefined) // No stacktrace outside of error details
+      expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).toEqual(`Error: ${code}`)
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).toEqual(`Error: ${code}`)
     })
@@ -181,7 +181,6 @@ describe('graphql - error handling in development', () => {
                 value: 'foo',
                 enum: ['@assert.range', 'type', 'enum'],
                 numericSeverity: 4,
-
                 stacktrace: expect.any(Array)
               }
             ]
@@ -190,7 +189,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'de' } })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace).toBe(undefined) // No stacktrace outside of error details
+      expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).toEqual('Error: ASSERT_NOT_NULL')
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).toEqual('Error: ASSERT_ENUM')
     })
@@ -386,7 +385,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace).toBe(undefined) // No stacktrace outside of error details
+      expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).toEqual('Error: Some Custom Error Message 1')
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).toEqual('Error: Some Custom Error Message 2')
     })
