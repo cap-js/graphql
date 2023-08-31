@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Translate CDS errors and include details in `GraphQLError` `extensions`
+
 ### Changed
 
 - Omit `variables` from log if it is an empty object
@@ -18,8 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ## Version 0.6.2 - 2023-07-12
-
-- Translate CDS errors and include details in `GraphQLError` `extensions`
 
 ### Changed
 
