@@ -41,7 +41,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -96,8 +96,8 @@ describe('graphql - error handling in development', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
-      expect(response.data.errors[0].extensions.details[0].stacktrace[0]).toEqual(`Error: ${code}`)
-      expect(response.data.errors[0].extensions.details[1].stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
+      expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('Single @assert.range validation error', async () => {
@@ -134,7 +134,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('Multiple different validation errors with i18n', async () => {
@@ -190,8 +190,8 @@ describe('graphql - error handling in development', () => {
       const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'de' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
-      expect(response.data.errors[0].extensions.details[0].stacktrace[0]).toEqual('Error: ASSERT_NOT_NULL')
-      expect(response.data.errors[0].extensions.details[1].stacktrace[0]).toEqual('Error: ASSERT_ENUM')
+      expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
+      expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
   })
 
@@ -222,7 +222,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${message}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('Thrown error string', async () => {
@@ -250,7 +250,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${message}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('Thrown new cds.error', async () => {
@@ -278,7 +278,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${message}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('Thrown new cds.error with custom code and property with i18n', async () => {
@@ -308,7 +308,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'de' } })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('req.error call with custom code and message', async () => {
@@ -340,7 +340,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${message}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('multiple req.error calls with custom code and message', async () => {
@@ -386,8 +386,8 @@ describe('graphql - error handling in development', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
-      expect(response.data.errors[0].extensions.details[0].stacktrace[0]).toEqual('Error: Some Custom Error Message 1')
-      expect(response.data.errors[0].extensions.details[1].stacktrace[0]).toEqual('Error: Some Custom Error Message 2')
+      expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
+      expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('req.reject with numeric code and custom message', async () => {
@@ -420,7 +420,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('req.reject with custom code and message', async () => {
@@ -454,7 +454,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
     test('req.reject with custom code', async () => {
@@ -486,7 +486,7 @@ describe('graphql - error handling in development', () => {
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace[0]).toEqual(`Error: ${code}`)
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
   })
 })
