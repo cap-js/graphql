@@ -387,7 +387,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: 400,
+            code: '400',
             message: 'The order of 20 books exceeds the stock by 10',
             args: [20, 10],
             numericSeverity: 4,
