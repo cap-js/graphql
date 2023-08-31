@@ -9,9 +9,6 @@ describe('graphql - error handling in development', () => {
 
   describe('Errors thrown by CDS', () => {
     test('Single @mandatory validation error', async () => {
-      const message = 'Value is required'
-      const code = 'ASSERT_NOT_NULL'
-      const element = 'notEmptyI'
       const query = gql`
         mutation {
           ValidationErrorsService {
@@ -25,14 +22,14 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Value is required',
           extensions: {
-            code,
-            message,
-            target: element,
-            args: [element],
+            code: 'ASSERT_NOT_NULL',
+            message: 'Value is required',
+            target: 'notEmptyI',
+            args: ['notEmptyI'],
             entity: 'ValidationErrorsService.A',
-            element,
+            element: 'notEmptyI',
             type: 'cds.Integer',
             numericSeverity: 4,
             stacktrace: expect.any(Array)
@@ -45,10 +42,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('Multiple @mandatory validation errors', async () => {
-      const message = 'Multiple errors occurred. Please see the details for more information.'
-      const code = 'ASSERT_NOT_NULL'
-      const element1 = 'notEmptyI'
-      const element2 = 'notEmptyS'
       const query = gql`
         mutation {
           ValidationErrorsService {
@@ -62,29 +55,29 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
             code: 'MULTIPLE_ERRORS',
-            message,
+            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
-                code,
+                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required',
-                target: element1,
-                args: [element1],
+                target: 'notEmptyI',
+                args: ['notEmptyI'],
                 entity: 'ValidationErrorsService.B',
-                element: element1,
+                element: 'notEmptyI',
                 type: 'cds.Integer',
                 numericSeverity: 4,
                 stacktrace: expect.any(Array)
               },
               {
-                code,
+                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required',
-                target: element2,
-                args: [element2],
+                target: 'notEmptyS',
+                args: ['notEmptyS'],
                 entity: 'ValidationErrorsService.B',
-                element: element2,
+                element: 'notEmptyS',
                 type: 'cds.String',
                 numericSeverity: 4,
                 stacktrace: expect.any(Array)
@@ -101,15 +94,12 @@ describe('graphql - error handling in development', () => {
     })
 
     test('Single @assert.range validation error', async () => {
-      const message = 'Value 10 is not in specified range [0, 3]'
-      const code = 'ASSERT_RANGE'
-      const element = 'inRange'
       const query = gql`
         mutation {
           ValidationErrorsService {
             C {
-              create(input: { ${element}: 10 }) {
-                ${element}
+              create(input: { inRange: 10 }) {
+                inRange
               }
             }
           }
@@ -117,14 +107,14 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
-            code,
-            message,
-            target: element,
+            code: 'ASSERT_RANGE',
+            message: 'Value 10 is not in specified range [0, 3]',
+            target: 'inRange',
             args: [10, 0, 3],
             entity: 'ValidationErrorsService.C',
-            element,
+            element: 'inRange',
             type: 'cds.Integer',
             value: 10,
             numericSeverity: 4,
@@ -138,15 +128,12 @@ describe('graphql - error handling in development', () => {
     })
 
     test('Multiple different validation errors with i18n', async () => {
-      const message = 'Es sind mehrere Fehler aufgetreten.'
-      const element1 = 'inRange'
-      const element2 = 'oneOfEnumValues'
       const query = gql`
         mutation {
           ValidationErrorsService {
             C {
-              create(input: { ${element2}: "foo" }) {
-                ${element2}
+              create(input: { oneOfEnumValues: "foo" }) {
+                oneOfEnumValues
               }
             }
           }
@@ -154,18 +141,18 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
             code: 'MULTIPLE_ERRORS',
-            message,
+            message: 'Es sind mehrere Fehler aufgetreten.',
             details: [
               {
                 code: 'ASSERT_NOT_NULL',
                 message: 'Wert ist erforderlich',
-                target: element1,
+                target: 'inRange',
                 args: ['inRange'],
                 entity: 'ValidationErrorsService.C',
-                element: element1,
+                element: 'inRange',
                 type: 'cds.Integer',
                 numericSeverity: 4,
                 stacktrace: expect.any(Array)
@@ -173,10 +160,10 @@ describe('graphql - error handling in development', () => {
               {
                 code: 'ASSERT_ENUM',
                 message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
-                target: element2,
+                target: 'oneOfEnumValues',
                 args: ['"foo"', '"high", "medium", "low"'],
                 entity: 'ValidationErrorsService.C',
-                element: element2,
+                element: 'oneOfEnumValues',
                 type: 'cds.String',
                 value: 'foo',
                 enum: ['@assert.range', 'type', 'enum'],
@@ -197,7 +184,6 @@ describe('graphql - error handling in development', () => {
 
   describe('Errors thrown in custom handlers', () => {
     test('Thrown new error object with custom property', async () => {
-      const message = 'Error on READ A'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -211,10 +197,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Error on READ A',
           extensions: {
             code: '500',
-            message,
+            message: 'Error on READ A',
             myProperty: 'My value A',
             stacktrace: expect.any(Array)
           }
@@ -226,7 +212,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('Thrown error string', async () => {
-      const message = 'Error on READ B'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -240,10 +225,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Error on READ B',
           extensions: {
             code: '500',
-            message,
+            message: 'Error on READ B',
             stacktrace: expect.any(Array)
           }
         }
@@ -254,7 +239,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('Thrown new cds.error', async () => {
-      const message = 'Error on READ C'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -268,10 +252,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Error on READ C',
           extensions: {
             code: '500',
-            message,
+            message: 'Error on READ C',
             stacktrace: expect.any(Array)
           }
         }
@@ -282,8 +266,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('Thrown new cds.error with custom code and property with i18n', async () => {
-      const message = 'Mein custom Fehlercode'
-      const code = 'MY_CODE'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -297,10 +279,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Mein custom Fehlercode',
           extensions: {
-            code,
-            message,
+            code: 'MY_CODE',
+            message: 'Mein custom Fehlercode',
             myProperty: 'My value D',
             stacktrace: expect.any(Array)
           }
@@ -312,8 +294,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('req.error call with custom code and message', async () => {
-      const message = 'Some Custom Error Message'
-      const code = 'Some-Custom-Code'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -327,10 +307,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Some Custom Error Message',
           extensions: {
-            code,
-            message,
+            code: 'Some-Custom-Code',
+            message: 'Some Custom Error Message',
             target: 'some_field',
             status: 418,
             numericSeverity: 4,
@@ -344,7 +324,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('multiple req.error calls with custom code and message', async () => {
-      const message = 'Multiple errors occurred. Please see the details for more information.'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -358,10 +337,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
             code: 'MULTIPLE_ERRORS',
-            message,
+            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
                 code: 'Some-Custom-Code1',
@@ -391,8 +370,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('req.reject with numeric code and custom message', async () => {
-      const message = 'The order of 20 books exceeds the stock by 10'
-      const code = 'ORDER_EXCEEDS_STOCK'
       const query = gql`
         mutation {
           CustomHandlerErrorsService {
@@ -408,10 +385,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
             code: 400,
-            message,
+            message: 'The order of 20 books exceeds the stock by 10',
             args: [20, 10],
             numericSeverity: 4,
             stacktrace: expect.any(Array)
@@ -424,8 +401,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('req.reject with custom code and message', async () => {
-      const message = 'The order of 20 books exceeds the stock by 10'
-      const code = 'ORDER_EXCEEDS_STOCK'
       const query = gql`
         mutation {
           CustomHandlerErrorsService {
@@ -441,11 +416,11 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code,
-            message,
-            target: code,
+            code: 'ORDER_EXCEEDS_STOCK',
+            message: 'The order of 20 books exceeds the stock by 10',
+            target: 'ORDER_EXCEEDS_STOCK',
             args: [20, 10],
             numericSeverity: 4,
             stacktrace: expect.any(Array)
@@ -458,8 +433,6 @@ describe('graphql - error handling in development', () => {
     })
 
     test('req.reject with custom code', async () => {
-      const message = 'The order of NULL books exceeds the stock by NULL'
-      const code = 'ORDER_EXCEEDS_STOCK'
       const query = gql`
         mutation {
           CustomHandlerErrorsService {
@@ -475,10 +448,10 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message,
+          message: 'The order of NULL books exceeds the stock by NULL',
           extensions: {
-            code,
-            message,
+            code: 'ORDER_EXCEEDS_STOCK',
+            message: 'The order of NULL books exceeds the stock by NULL',
             numericSeverity: 4,
             stacktrace: expect.any(Array)
           }

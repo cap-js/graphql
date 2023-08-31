@@ -10,8 +10,6 @@ describe('graphql - error handling in production', () => {
 
   describe('Errors thrown by CDS', () => {
     test('Single @mandatory validation error', async () => {
-      const message = 'Value is required'
-      const code = 'ASSERT_NOT_NULL'
       const query = gql`
         mutation {
           ValidationErrorsService {
@@ -25,10 +23,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Value is required',
           extensions: {
-            code,
-            message
+            code: 'ASSERT_NOT_NULL',
+            message: 'Value is required'
           }
         }
       ]
@@ -38,8 +36,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('Multiple @mandatory validation errors', async () => {
-      const message = 'Multiple errors occurred. Please see the details for more information.'
-      const code = 'ASSERT_NOT_NULL'
       const query = gql`
         mutation {
           ValidationErrorsService {
@@ -53,17 +49,17 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
             code: 'MULTIPLE_ERRORS',
-            message,
+            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
-                code,
+                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required'
               },
               {
-                code,
+                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required'
               }
             ]
@@ -78,15 +74,12 @@ describe('graphql - error handling in production', () => {
     })
 
     test('Single @assert.range validation error', async () => {
-      const message = 'Value 10 is not in specified range [0, 3]'
-      const code = 'ASSERT_RANGE'
-      const element = 'inRange'
       const query = gql`
         mutation {
           ValidationErrorsService {
             C {
-              create(input: { ${element}: 10 }) {
-                ${element}
+              create(input: { inRange: 10 }) {
+                inRange
               }
             }
           }
@@ -94,10 +87,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
-            code,
-            message
+            code: 'ASSERT_RANGE',
+            message: 'Value 10 is not in specified range [0, 3]'
           }
         }
       ]
@@ -107,14 +100,12 @@ describe('graphql - error handling in production', () => {
     })
 
     test('Multiple different validation errors with i18n', async () => {
-      const message = 'Es sind mehrere Fehler aufgetreten.'
-      const element2 = 'oneOfEnumValues'
       const query = gql`
         mutation {
           ValidationErrorsService {
             C {
-              create(input: { ${element2}: "foo" }) {
-                ${element2}
+              create(input: { oneOfEnumValues: "foo" }) {
+                oneOfEnumValues
               }
             }
           }
@@ -122,10 +113,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
             code: 'MULTIPLE_ERRORS',
-            message,
+            message: 'Es sind mehrere Fehler aufgetreten.',
             details: [
               {
                 code: 'ASSERT_NOT_NULL',
@@ -149,7 +140,6 @@ describe('graphql - error handling in production', () => {
 
   describe('Errors thrown in custom handlers', () => {
     test('Thrown new error object with custom property', async () => {
-      const message = 'Internal Server Error'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -163,10 +153,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message
+            message: 'Internal Server Error',
           }
         }
       ]
@@ -177,7 +167,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('Thrown error string', async () => {
-      const message = 'Internal Server Error'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -191,10 +180,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message
+            message: 'Internal Server Error',
           }
         }
       ]
@@ -204,7 +193,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('Thrown new cds.error', async () => {
-      const message = 'Internal Server Error'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -218,10 +206,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message
+            message: 'Internal Server Error',
           }
         }
       ]
@@ -231,8 +219,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('Thrown new cds.error with custom code and property with i18n', async () => {
-      const message = 'Internal Server Error'
-      const code = '500'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -246,10 +232,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Internal Server Error',
           extensions: {
-            code,
-            message
+            code: '500',
+            message: 'Internal Server Error',
           }
         }
       ]
@@ -260,8 +246,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('req.error call with custom code and message', async () => {
-      const message = 'Some Custom Error Message'
-      const code = 'Some-Custom-Code'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -275,10 +259,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Some Custom Error Message',
           extensions: {
-            code,
-            message
+            code: 'Some-Custom-Code',
+            message: 'Some Custom Error Message'
           }
         }
       ]
@@ -288,7 +272,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('multiple req.error calls with custom code and message', async () => {
-      const message = 'Multiple errors occurred. Please see the details for more information.'
       const query = gql`
         {
           CustomHandlerErrorsService {
@@ -302,10 +285,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
             code: 'MULTIPLE_ERRORS',
-            message,
+            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
                 code: 'Some-Custom-Code1',
@@ -327,7 +310,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('req.reject with numeric code and custom message', async () => {
-      const message = 'The order of 20 books exceeds the stock by 10'
       const query = gql`
         mutation {
           CustomHandlerErrorsService {
@@ -343,10 +325,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
             code: 400,
-            message
+            message: 'The order of 20 books exceeds the stock by 10'
           }
         }
       ]
@@ -356,8 +338,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('req.reject with custom code and message', async () => {
-      const message = 'Internal Server Error'
-      const code = '500'
       const query = gql`
         mutation {
           CustomHandlerErrorsService {
@@ -373,10 +353,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Internal Server Error',
           extensions: {
-            code,
-            message
+            code: '500',
+            message: 'Internal Server Error'
           }
         }
       ]
@@ -386,8 +366,6 @@ describe('graphql - error handling in production', () => {
     })
 
     test('req.reject with custom code', async () => {
-      const message = 'Internal Server Error'
-      const code = '500'
       const query = gql`
         mutation {
           CustomHandlerErrorsService {
@@ -403,10 +381,10 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message,
+          message: 'Internal Server Error',
           extensions: {
-            code,
-            message
+            code: '500',
+            message: 'Internal Server Error'
           }
         }
       ]
