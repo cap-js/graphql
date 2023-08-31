@@ -156,7 +156,7 @@ describe('graphql - error handling in production', () => {
           message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message: 'Internal Server Error',
+            message: 'Internal Server Error'
           }
         }
       ]
@@ -183,7 +183,7 @@ describe('graphql - error handling in production', () => {
           message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message: 'Internal Server Error',
+            message: 'Internal Server Error'
           }
         }
       ]
@@ -209,7 +209,7 @@ describe('graphql - error handling in production', () => {
           message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message: 'Internal Server Error',
+            message: 'Internal Server Error'
           }
         }
       ]
@@ -235,7 +235,7 @@ describe('graphql - error handling in production', () => {
           message: 'Internal Server Error',
           extensions: {
             code: '500',
-            message: 'Internal Server Error',
+            message: 'Internal Server Error'
           }
         }
       ]
