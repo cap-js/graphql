@@ -5,9 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.7.0 - tbd
-
-### Added
+## Version 0.7.0 - 2023-09-04
 
 - Translate CDS errors and include details in `GraphQLError` `extensions`
 
@@ -16,10 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump required `@sap/cds` version to `>=7.2`
 - Bump required `graphql-http` version to `^1.18.0`
 - Omit `variables` from log if it is an empty object
-
-### Fixed
-
-### Removed
 
 ## Version 0.6.2 - 2023-07-12
 
