@@ -201,7 +201,8 @@ describe('graphql - error handling in development', () => {
           extensions: {
             code: '500',
             message: 'Error on READ A',
-            myProperty: 'My value A',
+            myProperty: 'My value A1',
+            my: { nested: { property: 'My value A2' } },
             stacktrace: expect.any(Array)
           }
         }

@@ -3,7 +3,10 @@ const cds = require('@sap/cds')
 module.exports = srv => {
   srv.on('READ', 'A', () => {
     const error = new Error('Error on READ A')
-    Object.assign(error, { myProperty: 'My value A' })
+    Object.assign(error, {
+      myProperty: 'My value A1',
+      my: { nested: { property: 'My value A2' } }
+    })
     throw error
   })
 

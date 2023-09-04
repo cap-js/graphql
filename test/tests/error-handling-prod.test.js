@@ -163,6 +163,7 @@ describe('graphql - error handling in production', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('myProperty') // No custom properties in production
+      expect(response.data.errors[0].extensions).not.toHaveProperty('my') // No custom properties in production
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
     })
 
