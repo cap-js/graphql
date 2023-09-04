@@ -26,7 +26,8 @@ describe('graphql - error handling in production', () => {
           message: 'Value is required',
           extensions: {
             code: 'ASSERT_NOT_NULL',
-            message: 'Value is required'
+            message: 'Value is required',
+            target: 'notEmptyI'
           }
         }
       ]
@@ -56,11 +57,13 @@ describe('graphql - error handling in production', () => {
             details: [
               {
                 code: 'ASSERT_NOT_NULL',
-                message: 'Value is required'
+                message: 'Value is required',
+                target: 'notEmptyI'
               },
               {
                 code: 'ASSERT_NOT_NULL',
-                message: 'Value is required'
+                message: 'Value is required',
+                target: 'notEmptyS'
               }
             ]
           }
@@ -90,7 +93,8 @@ describe('graphql - error handling in production', () => {
           message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
             code: 'ASSERT_RANGE',
-            message: 'Value 10 is not in specified range [0, 3]'
+            message: 'Value 10 is not in specified range [0, 3]',
+            target: 'inRange'
           }
         }
       ]
@@ -120,11 +124,13 @@ describe('graphql - error handling in production', () => {
             details: [
               {
                 code: 'ASSERT_NOT_NULL',
-                message: 'Wert ist erforderlich'
+                message: 'Wert ist erforderlich',
+                target: 'inRange'
               },
               {
                 code: 'ASSERT_ENUM',
-                message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}'
+                message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
+                target: 'oneOfEnumValues'
               }
             ]
           }
@@ -263,7 +269,8 @@ describe('graphql - error handling in production', () => {
           message: 'Some Custom Error Message',
           extensions: {
             code: 'Some-Custom-Code',
-            message: 'Some Custom Error Message'
+            message: 'Some Custom Error Message',
+            target: 'some_field'
           }
         }
       ]
@@ -293,11 +300,13 @@ describe('graphql - error handling in production', () => {
             details: [
               {
                 code: 'Some-Custom-Code1',
-                message: 'Some Custom Error Message 1'
+                message: 'Some Custom Error Message 1',
+                target: 'some_field'
               },
               {
                 code: 'Some-Custom-Code2',
-                message: 'Some Custom Error Message 2'
+                message: 'Some Custom Error Message 2',
+                target: 'some_field'
               }
             ]
           }
