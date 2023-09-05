@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump required `@sap/cds` version to `>=7.2`
+- Bump required `@sap/cds` version to `>=7.3`
 - Bump required `graphql-http` version to `^1.18.0`
 - Omit `variables` from log if it is an empty object
 
