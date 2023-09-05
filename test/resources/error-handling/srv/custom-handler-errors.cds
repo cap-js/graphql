@@ -23,13 +23,17 @@ service CustomHandlerErrorsService {
     key id : Integer;
   }
 
+  entity F {
+    key id : Integer;
+  }
+
+  entity G {
+    key id : Integer;
+  }
+
   entity Orders {
     key id       : Integer;
         stock    : Integer;
         quantity : Integer;
-  }
-
-  entity F {
-    key id : Integer;
   }
 }

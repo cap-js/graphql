@@ -46,6 +46,18 @@ module.exports = srv => {
     })
   })
 
+  srv.on('error', (err, req) => {
+    if (err.modify) {
+      err.message = 'Oh no! ' + err.message
+      err.myProperty = 'My value G'
+      delete err.modify
+    }
+  })
+
+  srv.on('READ', 'G', async req => {
+    req.error({ code: '418', message: 'Error on READ G', modify: true })
+  })
+
   srv.before('CREATE', 'Orders', async req => {
     const { id, quantity, stock } = req.data
     if (quantity > stock) {

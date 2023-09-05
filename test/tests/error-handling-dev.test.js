@@ -370,6 +370,35 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
+    test('Thrown error is modified in srv.on(error) handler', async () => {
+      const query = gql`
+        {
+          CustomHandlerErrorsService {
+            G {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const errors = [
+        {
+          message: 'Oh no! Error on READ G',
+          extensions: {
+            code: '418',
+            message: 'Oh no! Error on READ G',
+            myProperty: 'My value G',
+            stacktrace: expect.any(Array)
+          }
+        }
+      ]
+      const response = await POST('/graphql', { query })
+      expect(response.data).toMatchObject({ errors })
+      expect(response.data.errors[0].extensions).not.toHaveProperty('modify') // Property deleted in srv.on(error) handler
+      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
+    })
+
     test('req.reject with numeric code and custom message', async () => {
       const query = gql`
         mutation {
