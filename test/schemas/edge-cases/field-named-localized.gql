@@ -46,10 +46,10 @@ type FieldNamedLocalizedService_Root_input {
     input: [FieldNamedLocalizedService_Root_C]!
   ): [FieldNamedLocalizedService_Root]
   delete(
-    filter: [FieldNamedLocalizedService_Root_filter]
+    filter: [FieldNamedLocalizedService_Root_filter]!
   ): Int
   update(
-    filter: [FieldNamedLocalizedService_Root_filter]
+    filter: [FieldNamedLocalizedService_Root_filter]!
     input: FieldNamedLocalizedService_Root_U!
   ): [FieldNamedLocalizedService_Root]
 }
@@ -99,10 +99,10 @@ type FieldNamedLocalizedService_localized_input {
     input: [FieldNamedLocalizedService_localized_C]!
   ): [FieldNamedLocalizedService_localized]
   delete(
-    filter: [FieldNamedLocalizedService_localized_filter]
+    filter: [FieldNamedLocalizedService_localized_filter]!
   ): Int
   update(
-    filter: [FieldNamedLocalizedService_localized_filter]
+    filter: [FieldNamedLocalizedService_localized_filter]!
     input: FieldNamedLocalizedService_localized_U!
   ): [FieldNamedLocalizedService_localized]
 }
@@ -114,11 +114,11 @@ input FieldNamedLocalizedService_localized_orderBy {
 }
 
 input Int_filter {
-  eq: [Int]
-  ge: [Int]
-  gt: [Int]
-  le: [Int]
-  lt: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
   ne: [Int]
 }
 
@@ -137,12 +137,12 @@ enum SortDirection {
 
 input String_filter {
   contains: [String]
-  endswith: [String]
-  eq: [String]
-  ge: [String]
-  gt: [String]
-  le: [String]
-  lt: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
   ne: [String]
-  startswith: [String]
+  startswith: String
 }

@@ -1,4 +1,4 @@
-[![REUSE status](https://api.reuse.software/badge/github.com/cap-js/cds-adapter-graphql)](https://api.reuse.software/info/github.com/cap-js/cds-adapter-graphql)
+[![REUSE status](https://api.reuse.software/badge/github.com/cap-js/graphql)](https://api.reuse.software/info/github.com/cap-js/graphql)
 
 # CDS protocol adapter for GraphQL
 
@@ -18,8 +18,10 @@ _**WARNING:** This package is in an early general availability state. This means
 
 > This will automatically plugin to `@sap/cds` runtime, enabling the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and register a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model. 
   
-2. Run your server as usual, e.g. using `cds watch`.
-> The runtime will automatically serve all services via GraphQL at the default configured endpoint.
+2. Annotate the services you want to serve, e.g. using `@graphql` or `@protocol: 'graphql'`.
+
+3. Run your server as usual, e.g. using `cds watch`.
+> The runtime will serve all annotated services via GraphQL at the default configured endpoint.
 
 ## Limitations
 
@@ -30,7 +32,7 @@ _**WARNING:** This package is in an early general availability state. This means
 
 ## Support, Feedback, Contributing
 
-This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/cap-js/cds-adapter-graphql/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
+This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/cap-js/graphql/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
 
 ## Code of Conduct
 
@@ -38,4 +40,4 @@ We as members, contributors, and leaders pledge to make participation in our com
 
 ## Licensing
 
-Copyright 2022 SAP SE or an SAP affiliate company and cds-adapter-graphql contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/cap-js/cds-adapter-graphql).
+Copyright 2022 SAP SE or an SAP affiliate company and cap-js/graphql contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/cap-js/graphql).

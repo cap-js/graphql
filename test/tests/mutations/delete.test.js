@@ -131,7 +131,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         AdminService {
           Books {
-            delete
+            delete(filter: {})
           }
         }
       }

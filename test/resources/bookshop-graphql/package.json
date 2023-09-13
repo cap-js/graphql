@@ -1,0 +1,15 @@
+{
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": ":memory:"
+        }
+      },
+      "auth": {
+        "kind": "mocked"
+      }
+    }
+  }
+}
