@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Translate CDS errors and include details in `GraphQLError` `extensions`
+
 ### Changed
 
 ### Fixed
@@ -16,8 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ## Version 0.7.0 - 2023-09-04
-
-- Translate CDS errors and include details in `GraphQLError` `extensions`
 
 ### Changed
 
