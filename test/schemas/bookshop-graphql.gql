@@ -45,7 +45,7 @@ type AdminService {
   """
   Code list for currencies
 
-  See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+  See https://cap.cloud.sap/docs/cds/common#entity-currencies
   """
   Currencies(
     filter: [AdminService_Currencies_filter]
@@ -484,7 +484,7 @@ input AdminService_Chapters_orderBy {
 """
 Code list for currencies
 
-See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
 """
 type AdminService_Currencies {
   code: String
@@ -520,13 +520,13 @@ input AdminService_Currencies_U {
 """
 Code list for currencies
 
-See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
 """
 type AdminService_Currencies_connection {
   """
   Code list for currencies
 
-  See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+  See https://cap.cloud.sap/docs/cds/common#entity-currencies
   """
   nodes: [AdminService_Currencies]
   totalCount: Int
@@ -802,7 +802,7 @@ type CatalogService {
   """
   Code list for currencies
 
-  See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+  See https://cap.cloud.sap/docs/cds/common#entity-currencies
   """
   Currencies(
     filter: [CatalogService_Currencies_filter]
@@ -1111,7 +1111,7 @@ input CatalogService_Chapters_orderBy {
 """
 Code list for currencies
 
-See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
 """
 type CatalogService_Currencies {
   code: String
@@ -1147,13 +1147,13 @@ input CatalogService_Currencies_U {
 """
 Code list for currencies
 
-See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
 """
 type CatalogService_Currencies_connection {
   """
   Code list for currencies
 
-  See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
+  See https://cap.cloud.sap/docs/cds/common#entity-currencies
   """
   nodes: [CatalogService_Currencies]
   totalCount: Int
