@@ -14,7 +14,7 @@ const cdsFilesToGQLSchema = async files => {
 }
 
 const formatSchema = async schemaString =>
-  await prettier.format(printSchema(lexicographicSortSchema(buildSchema(schemaString))), {
+  prettier.format(printSchema(lexicographicSortSchema(buildSchema(schemaString))), {
     parser: 'graphql',
     printWidth: 0
   })
