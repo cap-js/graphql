@@ -1,7 +1,4 @@
-@protocol: [
-  'odata-v4',
-  'graphql'
-]
+@graphql
 service CustomHandlerErrorsService {
   entity A {
     key id : Integer;
