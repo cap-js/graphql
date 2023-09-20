@@ -48,7 +48,7 @@ module.exports = srv => {
     })
   })
 
-  srv.on('error', (err, req) => {
+  srv.on('error', err => {
     if (err.modify) {
       err.message = 'Oh no! ' + err.message
       err.myProperty = 'My value G1'
