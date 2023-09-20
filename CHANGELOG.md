@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Translate CDS errors and include details in `GraphQLError` `extensions`
+- Translate CDS error messages and include additional error properties in `GraphQLError` `extensions`. Only whitelisted properties are exposed when running in production.
 
 ### Changed
 
