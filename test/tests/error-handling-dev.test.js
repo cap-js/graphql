@@ -24,7 +24,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Value is required',
           extensions: {
-            code: 'ASSERT_NOT_NULL',
+            code: '400',
             message: 'Value is required',
             target: 'notEmptyI',
             args: ['notEmptyI'],
@@ -57,11 +57,11 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            code: 'MULTIPLE_ERRORS',
+            code: '400',
             message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
+                code: '400',
                 message: 'Value is required',
                 target: 'notEmptyI',
                 args: ['notEmptyI'],
@@ -72,7 +72,7 @@ describe('graphql - error handling in development', () => {
                 stacktrace: expect.any(Array)
               },
               {
-                code: 'ASSERT_NOT_NULL',
+                code: '400',
                 message: 'Value is required',
                 target: 'notEmptyS',
                 args: ['notEmptyS'],
@@ -109,7 +109,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
-            code: 'ASSERT_RANGE',
+            code: '400',
             message: 'Value 10 is not in specified range [0, 3]',
             target: 'inRange',
             args: [10, 0, 3],
@@ -143,11 +143,11 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
-            code: 'MULTIPLE_ERRORS',
+            code: '400',
             message: 'Es sind mehrere Fehler aufgetreten.',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
+                code: '400',
                 message: 'Wert ist erforderlich',
                 target: 'inRange',
                 args: ['inRange'],
@@ -158,7 +158,7 @@ describe('graphql - error handling in development', () => {
                 stacktrace: expect.any(Array)
               },
               {
-                code: 'ASSERT_ENUM',
+                code: '400',
                 message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
                 target: 'oneOfEnumValues',
                 args: ['"foo"', '"high", "medium", "low"'],
@@ -343,7 +343,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            code: 'MULTIPLE_ERRORS',
+            code: '500',
             message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
@@ -452,7 +452,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: 'ORDER_EXCEEDS_STOCK',
+            code: '500',
             message: 'The order of 20 books exceeds the stock by 10',
             target: 'ORDER_EXCEEDS_STOCK',
             args: [20, 10],
@@ -484,7 +484,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'The order of NULL books exceeds the stock by NULL',
           extensions: {
-            code: 'ORDER_EXCEEDS_STOCK',
+            code: '500',
             message: 'The order of NULL books exceeds the stock by NULL',
             numericSeverity: 4,
             stacktrace: expect.any(Array)
