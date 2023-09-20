@@ -25,7 +25,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Value is required',
           extensions: {
-            code: 'ASSERT_NOT_NULL',
             message: 'Value is required',
             target: 'notEmptyI'
           }
@@ -52,16 +51,13 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            code: 'MULTIPLE_ERRORS',
             message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required',
                 target: 'notEmptyI'
               },
               {
-                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required',
                 target: 'notEmptyS'
               }
@@ -92,7 +88,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
-            code: 'ASSERT_RANGE',
             message: 'Value 10 is not in specified range [0, 3]',
             target: 'inRange'
           }
@@ -119,16 +114,13 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
-            code: 'MULTIPLE_ERRORS',
             message: 'Es sind mehrere Fehler aufgetreten.',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
                 message: 'Wert ist erforderlich',
                 target: 'inRange'
               },
               {
-                code: 'ASSERT_ENUM',
                 message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
                 target: 'oneOfEnumValues'
               }
@@ -161,7 +153,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Internal Server Error',
           extensions: {
-            code: '500',
             message: 'Internal Server Error'
           }
         }
@@ -191,7 +182,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Internal Server Error',
           extensions: {
-            code: '500',
             message: 'Internal Server Error'
           }
         }
@@ -217,7 +207,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Internal Server Error',
           extensions: {
-            code: '500',
             message: 'Internal Server Error'
           }
         }
@@ -243,7 +232,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Internal Server Error',
           extensions: {
-            code: '500',
             message: 'Internal Server Error'
           }
         }
@@ -271,7 +259,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Some Custom Error Message',
           extensions: {
-            code: 'Some-Custom-Code',
             message: 'Some Custom Error Message',
             target: 'some_field'
           }
@@ -298,16 +285,13 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            code: 'MULTIPLE_ERRORS',
             message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
-                code: 'Some-Custom-Code1',
                 message: 'Some Custom Error Message 1',
                 target: 'some_field'
               },
               {
-                code: 'Some-Custom-Code2',
                 message: 'Some Custom Error Message 2',
                 target: 'some_field'
               }
@@ -338,7 +322,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Oh no! Error on READ G',
           extensions: {
-            code: '418',
             message: 'Oh no! Error on READ G',
             $myProperty: 'My value G2'
           }
@@ -369,7 +352,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: '400',
             message: 'The order of 20 books exceeds the stock by 10'
           }
         }
@@ -397,7 +379,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Internal Server Error',
           extensions: {
-            code: '500',
             message: 'Internal Server Error'
           }
         }
@@ -425,7 +406,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Internal Server Error',
           extensions: {
-            code: '500',
             message: 'Internal Server Error'
           }
         }
