@@ -202,7 +202,9 @@ describe('graphql - error handling in development', () => {
             code: '500',
             message: 'Error on READ A',
             myProperty: 'My value A1',
-            my: { nested: { property: 'My value A2' } },
+            $myProperty: 'My value A2',
+            my: { nested: { property: 'My value A3' } },
+            $my: { nested: { property: 'My value A4' } },
             stacktrace: expect.any(Array)
           }
         }
@@ -284,7 +286,8 @@ describe('graphql - error handling in development', () => {
           extensions: {
             code: 'MY_CODE',
             message: 'Mein custom Fehlercode',
-            myProperty: 'My value D',
+            myProperty: 'My value D1',
+            $myProperty: 'My value D2',
             stacktrace: expect.any(Array)
           }
         }
@@ -388,7 +391,8 @@ describe('graphql - error handling in development', () => {
           extensions: {
             code: '418',
             message: 'Oh no! Error on READ G',
-            myProperty: 'My value G',
+            myProperty: 'My value G1',
+            $myProperty: 'My value G2',
             stacktrace: expect.any(Array)
           }
         }

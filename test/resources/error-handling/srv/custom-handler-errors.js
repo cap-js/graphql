@@ -5,7 +5,9 @@ module.exports = srv => {
     const error = new Error('Error on READ A')
     Object.assign(error, {
       myProperty: 'My value A1',
-      my: { nested: { property: 'My value A2' } }
+      $myProperty: 'My value A2',
+      my: { nested: { property: 'My value A3' } },
+      $my: { nested: { property: 'My value A4' } }
     })
     throw error
   })
@@ -19,7 +21,7 @@ module.exports = srv => {
   })
 
   srv.on('READ', 'D', () => {
-    throw new cds.error('MY_CODE', { code: 'MY_CODE', myProperty: 'My value D' })
+    throw new cds.error('MY_CODE', { code: 'MY_CODE', myProperty: 'My value D1', $myProperty: 'My value D2' })
   })
 
   srv.on('READ', 'E', async req => {
@@ -49,7 +51,8 @@ module.exports = srv => {
   srv.on('error', (err, req) => {
     if (err.modify) {
       err.message = 'Oh no! ' + err.message
-      err.myProperty = 'My value G'
+      err.myProperty = 'My value G1'
+      err.$myProperty = 'My value G2'
       delete err.modify
     }
   })
