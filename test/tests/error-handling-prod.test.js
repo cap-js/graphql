@@ -25,7 +25,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Value is required',
           extensions: {
-            message: 'Value is required',
             target: 'notEmptyI'
           }
         }
@@ -51,7 +50,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
                 message: 'Value is required',
@@ -88,7 +86,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
-            message: 'Value 10 is not in specified range [0, 3]',
             target: 'inRange'
           }
         }
@@ -114,7 +111,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
-            message: 'Es sind mehrere Fehler aufgetreten.',
             details: [
               {
                 message: 'Wert ist erforderlich',
@@ -152,9 +148,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'Internal Server Error',
-          extensions: {
-            message: 'Internal Server Error'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query })
@@ -181,9 +175,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'Internal Server Error',
-          extensions: {
-            message: 'Internal Server Error'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query })
@@ -206,9 +198,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'Internal Server Error',
-          extensions: {
-            message: 'Internal Server Error'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query })
@@ -231,9 +221,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'Internal Server Error',
-          extensions: {
-            message: 'Internal Server Error'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'de' } })
@@ -259,7 +247,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Some Custom Error Message',
           extensions: {
-            message: 'Some Custom Error Message',
             target: 'some_field'
           }
         }
@@ -285,7 +272,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
                 message: 'Some Custom Error Message 1',
@@ -322,7 +308,6 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Oh no! Error on READ G',
           extensions: {
-            message: 'Oh no! Error on READ G',
             $myProperty: 'My value G2'
           }
         }
@@ -351,9 +336,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'The order of 20 books exceeds the stock by 10',
-          extensions: {
-            message: 'The order of 20 books exceeds the stock by 10'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query })
@@ -378,9 +361,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'Internal Server Error',
-          extensions: {
-            message: 'Internal Server Error'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query })
@@ -405,9 +386,7 @@ describe('graphql - error handling in production', () => {
       const errors = [
         {
           message: 'Internal Server Error',
-          extensions: {
-            message: 'Internal Server Error'
-          }
+          extensions: {}
         }
       ]
       const response = await POST('/graphql', { query })

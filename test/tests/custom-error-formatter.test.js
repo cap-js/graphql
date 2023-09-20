@@ -23,7 +23,6 @@ describe('graphql - custom error formatter function', () => {
       {
         message: 'Oops! Multiple errors occurred. Please see the details for more information.',
         extensions: {
-          message: 'Oops! Multiple errors occurred. Please see the details for more information.',
           custom: 'This property is added by the custom error formatter',
           count: 2,
           details: [

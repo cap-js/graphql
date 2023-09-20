@@ -25,7 +25,6 @@ describe('graphql - error handling in development', () => {
           message: 'Value is required',
           extensions: {
             code: '400',
-            message: 'Value is required',
             target: 'notEmptyI',
             args: ['notEmptyI'],
             entity: 'ValidationErrorsService.A',
@@ -58,7 +57,6 @@ describe('graphql - error handling in development', () => {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
             code: '400',
-            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
                 code: '400',
@@ -110,7 +108,6 @@ describe('graphql - error handling in development', () => {
           message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
             code: '400',
-            message: 'Value 10 is not in specified range [0, 3]',
             target: 'inRange',
             args: [10, 0, 3],
             entity: 'ValidationErrorsService.C',
@@ -144,7 +141,6 @@ describe('graphql - error handling in development', () => {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
             code: '400',
-            message: 'Es sind mehrere Fehler aufgetreten.',
             details: [
               {
                 code: '400',
@@ -200,7 +196,6 @@ describe('graphql - error handling in development', () => {
           message: 'Error on READ A',
           extensions: {
             code: '500',
-            message: 'Error on READ A',
             myProperty: 'My value A1',
             $myProperty: 'My value A2',
             my: { nested: { property: 'My value A3' } },
@@ -231,7 +226,6 @@ describe('graphql - error handling in development', () => {
           message: 'Error on READ B',
           extensions: {
             code: '500',
-            message: 'Error on READ B',
             stacktrace: expect.any(Array)
           }
         }
@@ -258,7 +252,6 @@ describe('graphql - error handling in development', () => {
           message: 'Error on READ C',
           extensions: {
             code: '500',
-            message: 'Error on READ C',
             stacktrace: expect.any(Array)
           }
         }
@@ -285,7 +278,6 @@ describe('graphql - error handling in development', () => {
           message: 'Mein custom Fehlercode',
           extensions: {
             code: 'MY_CODE',
-            message: 'Mein custom Fehlercode',
             myProperty: 'My value D1',
             $myProperty: 'My value D2',
             stacktrace: expect.any(Array)
@@ -314,7 +306,6 @@ describe('graphql - error handling in development', () => {
           message: 'Some Custom Error Message',
           extensions: {
             code: 'Some-Custom-Code',
-            message: 'Some Custom Error Message',
             target: 'some_field',
             status: 418,
             numericSeverity: 4,
@@ -344,7 +335,6 @@ describe('graphql - error handling in development', () => {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
             code: '500',
-            message: 'Multiple errors occurred. Please see the details for more information.',
             details: [
               {
                 code: 'Some-Custom-Code1',
@@ -390,7 +380,6 @@ describe('graphql - error handling in development', () => {
           message: 'Oh no! Error on READ G',
           extensions: {
             code: '418',
-            message: 'Oh no! Error on READ G',
             myProperty: 'My value G1',
             $myProperty: 'My value G2',
             stacktrace: expect.any(Array)
@@ -422,7 +411,6 @@ describe('graphql - error handling in development', () => {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
             code: '400',
-            message: 'The order of 20 books exceeds the stock by 10',
             args: [20, 10],
             numericSeverity: 4,
             stacktrace: expect.any(Array)
@@ -453,7 +441,6 @@ describe('graphql - error handling in development', () => {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
             code: '500',
-            message: 'The order of 20 books exceeds the stock by 10',
             target: 'ORDER_EXCEEDS_STOCK',
             args: [20, 10],
             numericSeverity: 4,
@@ -485,7 +472,6 @@ describe('graphql - error handling in development', () => {
           message: 'The order of NULL books exceeds the stock by NULL',
           extensions: {
             code: '500',
-            message: 'The order of NULL books exceeds the stock by NULL',
             numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
