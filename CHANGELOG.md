@@ -5,17 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.7.0 - tbd
+## Version 0.8.0 - tbd
 
 ### Added
 
 ### Changed
 
-- Omit `variables` from log if it is an empty object
-
 ### Fixed
 
 ### Removed
+
+## Version 0.7.0 - 2023-09-04
+
+### Changed
+
+- Omit `variables` from log if it is an empty object
 
 ## Version 0.6.2 - 2023-07-12
 
