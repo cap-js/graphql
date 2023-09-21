@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Malformed responses for convoluted queries, where parts of results should be returned multiple times, caused by formatting results in-place
+
 ### Removed
 
 ## Version 0.7.0 - 2023-09-04
