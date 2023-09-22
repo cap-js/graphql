@@ -1,5 +1,4 @@
 const path = require('path')
-const prettier = require('prettier')
 const { buildSchema, lexicographicSortSchema, printSchema, Kind } = require('graphql')
 
 const SCHEMAS_DIR = path.join(__dirname, '../schemas')
@@ -14,7 +13,7 @@ const cdsFilesToGQLSchema = async files => {
 }
 
 const formatSchema = schemaString =>
-  prettier.format(printSchema(lexicographicSortSchema(buildSchema(schemaString))), { parser: 'graphql', printWidth: 0 })
+  printSchema(lexicographicSortSchema(buildSchema(schemaString)))
 
 /**
  * Create a fake/mock object that matches the structure of the info object that is passed to resolver functions by the graphql.js library.
