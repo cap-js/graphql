@@ -226,9 +226,8 @@ describe('graphql - enrich AST ', () => {
           title
         }
       `
-      const WithFragments = { top: 1 }
       const documentWithFragment = parse(queryWithFragment)
-      const fakeInfoWithFragment = fakeInfoObject(documentWithFragment, bookshopSchema, 'Query', WithFragments)
+      const fakeInfoWithFragment = fakeInfoObject(documentWithFragment, bookshopSchema, 'Query')
       const enrichedASTWithFragment = enrich(fakeInfoWithFragment)
       const enrichedASTWithFragmentWithoutLoc = _removeProperty(enrichedASTWithFragment, 'loc')
 
@@ -255,10 +254,6 @@ describe('graphql - enrich AST ', () => {
     test('nested fragments are substituted into the AST', async () => {
       const queryWithFragment = gql`
         query {
-          ...myFragmentA
-        }
-
-        fragment myFragmentA on Query {
           AdminService {
             ...myFragmentB
           }
@@ -280,9 +275,8 @@ describe('graphql - enrich AST ', () => {
           title
         }
       `
-      const WithFragments = { top: 1 }
       const documentWithFragment = parse(queryWithFragment)
-      const fakeInfoWithFragment = fakeInfoObject(documentWithFragment, bookshopSchema, 'Query', WithFragments)
+      const fakeInfoWithFragment = fakeInfoObject(documentWithFragment, bookshopSchema, 'Query')
       const enrichedASTWithFragment = enrich(fakeInfoWithFragment)
       const enrichedASTWithFragmentWithoutLoc = _removeProperty(enrichedASTWithFragment, 'loc')
 
