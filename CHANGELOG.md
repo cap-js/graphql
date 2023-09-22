@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Malformed responses for convoluted queries, where parts of results should be returned multiple times, caused by formatting results in-place
+- Malformed responses for convoluted queries in which parts of results are supposed to be returned multiple times, caused by formatting results in-place
 
 ### Removed
 
