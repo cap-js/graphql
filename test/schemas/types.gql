@@ -164,12 +164,7 @@ input Timestamp_filter {
 }
 
 type TypesService {
-  MyEntity(
-    filter: [TypesService_MyEntity_filter]
-    orderBy: [TypesService_MyEntity_orderBy]
-    skip: Int
-    top: Int
-  ): TypesService_MyEntity_connection
+  MyEntity(filter: [TypesService_MyEntity_filter], orderBy: [TypesService_MyEntity_orderBy], skip: Int, top: Int): TypesService_MyEntity_connection
 }
 
 type TypesService_MyEntity {
@@ -265,16 +260,9 @@ input TypesService_MyEntity_filter {
 }
 
 type TypesService_MyEntity_input {
-  create(
-    input: [TypesService_MyEntity_C]!
-  ): [TypesService_MyEntity]
-  delete(
-    filter: [TypesService_MyEntity_filter]!
-  ): Int
-  update(
-    filter: [TypesService_MyEntity_filter]!
-    input: TypesService_MyEntity_U!
-  ): [TypesService_MyEntity]
+  create(input: [TypesService_MyEntity_C]!): [TypesService_MyEntity]
+  delete(filter: [TypesService_MyEntity_filter]!): Int
+  update(filter: [TypesService_MyEntity_filter]!, input: TypesService_MyEntity_U!): [TypesService_MyEntity]
 }
 
 input TypesService_MyEntity_orderBy {
