@@ -49,6 +49,7 @@ module.exports = srv => {
   })
 
   srv.on('error', err => {
+    // 'modify' property is set in error thrown by READ G handler
     if (err.modify) {
       err.message = 'Oh no! ' + err.message
       err.myProperty = 'My value G1'
