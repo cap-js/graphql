@@ -21,7 +21,7 @@ module.exports = srv => {
   })
 
   srv.on('READ', 'D', () => {
-    throw new cds.error('MY_CODE', { code: 'MY_CODE', myProperty: 'My value D1', $myProperty: 'My value D2' })
+    cds.error('MY_CODE', { code: 'MY_CODE', myProperty: 'My value D1', $myProperty: 'My value D2' })
   })
 
   srv.on('READ', 'E', async req => {
