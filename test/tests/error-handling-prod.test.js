@@ -164,9 +164,9 @@ describe('graphql - error handling in production', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('myProperty') // No custom properties without $ prefix in production
-      expect(response.data.errors[0].extensions).not.toHaveProperty('$myProperty') // No custom properties in production for 500 errors
+      expect(response.data.errors[0].extensions).not.toHaveProperty('$myProperty') // No custom properties in production for 5xx errors
       expect(response.data.errors[0].extensions).not.toHaveProperty('my') // No custom properties without $ prefix in production
-      expect(response.data.errors[0].extensions).not.toHaveProperty('$my') // No custom properties in production for 500 errors
+      expect(response.data.errors[0].extensions).not.toHaveProperty('$my') // No custom properties in production for 5xx errors
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
     })
 
@@ -243,7 +243,7 @@ describe('graphql - error handling in production', () => {
       const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'de' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('myProperty') // No custom properties without $ prefix in production
-      expect(response.data.errors[0].extensions).not.toHaveProperty('$myProperty') // No custom properties in production for 500 errors
+      expect(response.data.errors[0].extensions).not.toHaveProperty('$myProperty') // No custom properties in production for 5xx errors
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
     })
 
