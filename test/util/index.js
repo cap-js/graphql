@@ -3,8 +3,6 @@ const { Kind } = require('graphql')
 
 const SCHEMAS_DIR = path.join(__dirname, '../schemas')
 
-const formatSchema = schemaString => schemaString
-
 /**
  * Create a fake/mock object that matches the structure of the info object that is passed to resolver functions by the graphql.js library.
  *
@@ -35,4 +33,4 @@ const fakeInfoObject = (document, schema, parentTypeName, variables) => {
  */
 const gql = String.raw
 
-module.exports = { SCHEMAS_DIR, formatSchema, fakeInfoObject, gql }
+module.exports = { SCHEMAS_DIR, fakeInfoObject, gql }

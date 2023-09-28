@@ -7,7 +7,7 @@ let { models } = require('../resources')
 models = models.filter(m => !m.requires_cds || semver.satisfies(cdsVersion, m.requires_cds))
 
 const cds_compile_to_gql = require('../../lib/compile')
-const { SCHEMAS_DIR, formatSchema } = require('../util')
+const { SCHEMAS_DIR } = require('../util')
 const { printSchema, validateSchema } = require('graphql')
 
 describe('graphql - schema generation', () => {
@@ -18,8 +18,8 @@ describe('graphql - schema generation', () => {
         const schemaValidationErrors = validateSchema(generatedSchemaObject)
         expect(schemaValidationErrors.length).toEqual(0)
 
-        const loadedSchema = formatSchema(fs.readFileSync(path.join(SCHEMAS_DIR, `${model.name}.gql`), 'utf-8'))
-        const generatedSchema = formatSchema(printSchema(generatedSchemaObject))
+        const loadedSchema = fs.readFileSync(path.join(SCHEMAS_DIR, `${model.name}.gql`), 'utf-8')
+        const generatedSchema = printSchema(generatedSchemaObject)
         expect(loadedSchema).toEqual(generatedSchema)
       })
     })
