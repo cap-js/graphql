@@ -28,7 +28,7 @@
     "prettier": "npx prettier --write app lib test",
     "prettier:check": "npx prettier --check app lib test",
     "lint": "npx eslint .",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --silent",
+    "test": "jest --silent",
     "test:generate-schemas": "node ./test/scripts/generate-schemas.js"
   },
   "dependencies": {
