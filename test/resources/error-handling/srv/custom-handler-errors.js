@@ -48,6 +48,11 @@ module.exports = srv => {
     })
   })
 
+  srv.on('READ', 'G', async req => {
+    // 'modify' property is checked in service level error handler
+    req.error({ code: '418', message: 'Error on READ G', modify: true })
+  })
+
   srv.on('error', err => {
     // 'modify' property is set in error thrown by READ G handler
     if (err.modify) {
@@ -56,10 +61,6 @@ module.exports = srv => {
       err.$myProperty = 'My value G2'
       delete err.modify
     }
-  })
-
-  srv.on('READ', 'G', async req => {
-    req.error({ code: '418', message: 'Error on READ G', modify: true })
   })
 
   srv.before('CREATE', 'Orders', async req => {
