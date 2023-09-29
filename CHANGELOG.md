@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
+
 ### Fixed
 
 - Malformed responses for convoluted queries in which parts of results are supposed to be returned multiple times, caused by formatting results in-place
