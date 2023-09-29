@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - [beta] Translate CDS error messages and include additional error properties in `GraphQLError` `extensions`. Only specific allowed properties are exposed when running in production.
-- [beta] Option `errorFormatter` that can be pointed to a function that overwrites the default logic of how CDS errors are formatted before they are added to the GraphQL error response
+- [beta] Option `errorFormatter` that can be pointed to a function that overwrites the default logic of how CDS errors are formatted before they are added to the GraphQL error response. Please note that this may overwrite sanitization logic that is otherwise applied to error messages in production.
 - [beta] Logging of errors that occur during query and mutation execution
 
 ### Changed
