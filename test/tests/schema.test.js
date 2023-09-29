@@ -1,12 +1,14 @@
 const fs = require('fs')
 const path = require('path')
 const semver = require('semver')
-const cdsVersion = require('@sap/cds').version
+const { version: cdsVersion } = require('@sap/cds')
+// Load GraphQLAdapter to ensure .to.gql and .to.graphql compile targets are registered
+require('../../lib/GraphQLAdapter')
 
-let { models } = require('../resources')
-models = models.filter(m => !m.requires_cds || semver.satisfies(cdsVersion, m.requires_cds))
+const models = require('../resources').models.filter(
+  m => !m.requires_cds || semver.satisfies(cdsVersion, m.requires_cds)
+)
 
-const cds_compile_to_gql = require('../../lib/compile')
 const { SCHEMAS_DIR } = require('../util')
 const { printSchema, validateSchema } = require('graphql')
 
@@ -15,7 +17,7 @@ describe('graphql - schema generation', () => {
     models.forEach(model => {
       it('should process model ' + model.name, async () => {
         const csn = await cds.load(model.files)
-        const generatedSchemaObject = cds_compile_to_gql(csn, { as: 'obj', sort: true })
+        const generatedSchemaObject = cds.compile(csn).to.graphql({ as: 'obj', sort: true })
         const schemaValidationErrors = validateSchema(generatedSchemaObject)
         expect(schemaValidationErrors.length).toEqual(0)
 
