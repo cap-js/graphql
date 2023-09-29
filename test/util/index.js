@@ -12,8 +12,7 @@ const cdsFilesToGQLSchema = async files => {
   return generateSchema4(services)
 }
 
-const formatSchema = schemaString =>
-  printSchema(lexicographicSortSchema(buildSchema(schemaString)))
+const formatSchema = schemaString => printSchema(lexicographicSortSchema(buildSchema(schemaString)))
 
 /**
  * Create a fake/mock object that matches the structure of the info object that is passed to resolver functions by the graphql.js library.
