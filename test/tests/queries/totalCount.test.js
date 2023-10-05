@@ -167,7 +167,8 @@ describe('graphql - queries with totalCount', () => {
       {
         locations: [{ column: 11, line: 4 }],
         message: 'Pagination is not supported in expand',
-        path: ['AdminService', 'Authors']
+        path: ['AdminService', 'Authors'],
+        extensions: expect.any(Object)
       }
     ]
     const response = await POST('/graphql', { query })
