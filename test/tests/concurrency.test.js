@@ -113,7 +113,8 @@ describe('graphql - resolver concurrency', () => {
               column: 13
             }
           ],
-          path: ['DataAndErrorsService', 'B']
+          path: ['DataAndErrorsService', 'B'],
+          extensions: expect.any(Object)
         }
       ]
       const data = {
@@ -175,7 +176,8 @@ describe('graphql - resolver concurrency', () => {
               column: 15
             }
           ],
-          path: ['DataAndErrorsService', 'B', 'create']
+          path: ['DataAndErrorsService', 'B', 'create'],
+          extensions: expect.any(Object)
         }
       ]
       const data = {
