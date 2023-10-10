@@ -1,32 +1,11 @@
 """Service to administer Books and Authors"""
 type AdminService {
-  """
-  Aspect to capture changes by user and name
-  
-  See https://cap.cloud.sap/docs/cds/common#aspect-managed
-  """
   Authors(filter: [AdminService_Authors_filter], orderBy: [AdminService_Authors_orderBy], skip: Int, top: Int): AdminService_Authors_connection
-
-  """
-  Aspect to capture changes by user and name
-  
-  See https://cap.cloud.sap/docs/cds/common#aspect-managed
-  """
   Books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
   Books_texts(filter: [AdminService_Books_texts_filter], orderBy: [AdminService_Books_texts_orderBy], skip: Int, top: Int): AdminService_Books_texts_connection
-
-  """A chapter of a Book"""
   Chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
-
-  """
-  Code list for currencies
-  
-  See https://cap.cloud.sap/docs/cds/common#entity-currencies
-  """
   Currencies(filter: [AdminService_Currencies_filter], orderBy: [AdminService_Currencies_orderBy], skip: Int, top: Int): AdminService_Currencies_connection
   Currencies_texts(filter: [AdminService_Currencies_texts_filter], orderBy: [AdminService_Currencies_texts_orderBy], skip: Int, top: Int): AdminService_Currencies_texts_connection
-
-  """Hierarchically organized Code List for Genres"""
   Genres(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
   Genres_texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
 }
@@ -81,17 +60,7 @@ input AdminService_Authors_U {
   placeOfDeath: String
 }
 
-"""
-Aspect to capture changes by user and name
-
-See https://cap.cloud.sap/docs/cds/common#aspect-managed
-"""
 type AdminService_Authors_connection {
-  """
-  Aspect to capture changes by user and name
-  
-  See https://cap.cloud.sap/docs/cds/common#aspect-managed
-  """
   nodes: [AdminService_Authors]
   totalCount: Int
 }
@@ -205,17 +174,7 @@ input AdminService_Books_U {
   title: String
 }
 
-"""
-Aspect to capture changes by user and name
-
-See https://cap.cloud.sap/docs/cds/common#aspect-managed
-"""
 type AdminService_Books_connection {
-  """
-  Aspect to capture changes by user and name
-  
-  See https://cap.cloud.sap/docs/cds/common#aspect-managed
-  """
   nodes: [AdminService_Books]
   totalCount: Int
 }
@@ -339,9 +298,7 @@ input AdminService_Chapters_U {
   title: String
 }
 
-"""A chapter of a Book"""
 type AdminService_Chapters_connection {
-  """A chapter of a Book"""
   nodes: [AdminService_Chapters]
   totalCount: Int
 }
@@ -403,17 +360,7 @@ input AdminService_Currencies_U {
   texts: [AdminService_Currencies_texts_C]
 }
 
-"""
-Code list for currencies
-
-See https://cap.cloud.sap/docs/cds/common#entity-currencies
-"""
 type AdminService_Currencies_connection {
-  """
-  Code list for currencies
-  
-  See https://cap.cloud.sap/docs/cds/common#entity-currencies
-  """
   nodes: [AdminService_Currencies]
   totalCount: Int
 }
@@ -516,9 +463,7 @@ input AdminService_Genres_U {
   texts: [AdminService_Genres_texts_C]
 }
 
-"""Hierarchically organized Code List for Genres"""
 type AdminService_Genres_connection {
-  """Hierarchically organized Code List for Genres"""
   nodes: [AdminService_Genres]
   totalCount: Int
 }
@@ -611,26 +556,13 @@ input Binary_filter {
 }
 
 type CatalogService {
-  """For display in details pages"""
   Books(filter: [CatalogService_Books_filter], orderBy: [CatalogService_Books_orderBy], skip: Int, top: Int): CatalogService_Books_connection
   Books_texts(filter: [CatalogService_Books_texts_filter], orderBy: [CatalogService_Books_texts_orderBy], skip: Int, top: Int): CatalogService_Books_texts_connection
-
-  """A chapter of a Book"""
   Chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
-
-  """
-  Code list for currencies
-  
-  See https://cap.cloud.sap/docs/cds/common#entity-currencies
-  """
   Currencies(filter: [CatalogService_Currencies_filter], orderBy: [CatalogService_Currencies_orderBy], skip: Int, top: Int): CatalogService_Currencies_connection
   Currencies_texts(filter: [CatalogService_Currencies_texts_filter], orderBy: [CatalogService_Currencies_texts_orderBy], skip: Int, top: Int): CatalogService_Currencies_texts_connection
-
-  """Hierarchically organized Code List for Genres"""
   Genres(filter: [CatalogService_Genres_filter], orderBy: [CatalogService_Genres_orderBy], skip: Int, top: Int): CatalogService_Genres_connection
   Genres_texts(filter: [CatalogService_Genres_texts_filter], orderBy: [CatalogService_Genres_texts_orderBy], skip: Int, top: Int): CatalogService_Genres_texts_connection
-
-  """For displaying lists of Books"""
   ListOfBooks(filter: [CatalogService_ListOfBooks_filter], orderBy: [CatalogService_ListOfBooks_orderBy], skip: Int, top: Int): CatalogService_ListOfBooks_connection
 }
 
@@ -694,9 +626,7 @@ input CatalogService_Books_U {
   title: String
 }
 
-"""For display in details pages"""
 type CatalogService_Books_connection {
-  """For display in details pages"""
   nodes: [CatalogService_Books]
   totalCount: Int
 }
@@ -816,9 +746,7 @@ input CatalogService_Chapters_U {
   title: String
 }
 
-"""A chapter of a Book"""
 type CatalogService_Chapters_connection {
-  """A chapter of a Book"""
   nodes: [CatalogService_Chapters]
   totalCount: Int
 }
@@ -880,17 +808,7 @@ input CatalogService_Currencies_U {
   texts: [CatalogService_Currencies_texts_C]
 }
 
-"""
-Code list for currencies
-
-See https://cap.cloud.sap/docs/cds/common#entity-currencies
-"""
 type CatalogService_Currencies_connection {
-  """
-  Code list for currencies
-  
-  See https://cap.cloud.sap/docs/cds/common#entity-currencies
-  """
   nodes: [CatalogService_Currencies]
   totalCount: Int
 }
@@ -993,9 +911,7 @@ input CatalogService_Genres_U {
   texts: [CatalogService_Genres_texts_C]
 }
 
-"""Hierarchically organized Code List for Genres"""
 type CatalogService_Genres_connection {
-  """Hierarchically organized Code List for Genres"""
   nodes: [CatalogService_Genres]
   totalCount: Int
 }
@@ -1123,9 +1039,7 @@ input CatalogService_ListOfBooks_U {
   title: String
 }
 
-"""For displaying lists of Books"""
 type CatalogService_ListOfBooks_connection {
-  """For displaying lists of Books"""
   nodes: [CatalogService_ListOfBooks]
   totalCount: Int
 }
@@ -1230,7 +1144,6 @@ type Mutation {
 }
 
 type Query {
-  """Service to administer Books and Authors"""
   AdminService: AdminService
   CatalogService: CatalogService
 }
