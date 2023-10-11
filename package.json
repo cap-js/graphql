@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "graphql": "^16",
-    "graphql-http": "^1.16.0"
+    "graphql-http": "^1.18.0"
   },
   "peerDependencies": {
-    "@sap/cds": ">=7"
+    "@sap/cds": ">=7.3"
   },
   "devDependencies": {
     "axios": "^1",
