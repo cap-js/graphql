@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version 0.9.0 - tbd
 
+### Added
+
 ### Changed
 
 - Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
 
-## Version 0.8.0 - 2021-10-06
+### Fixed
+
+### Removed
+
+## Version 0.8.0 - 2023-10-06
 
 ### Added
 
