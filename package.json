@@ -39,6 +39,7 @@
     "@sap/cds": ">=7.3"
   },
   "devDependencies": {
+    "@cap-js/graphql": "file:.",
     "axios": "^1",
     "eslint": "^8",
     "express": "^4.17.1",
