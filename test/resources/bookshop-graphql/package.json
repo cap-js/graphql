@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@cap-js/graphql": "../../.."
+    "@cap-js/graphql": "*"
   },
   "cds": {
     "requires": {
