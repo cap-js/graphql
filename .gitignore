@@ -1,4 +1,9 @@
-node_modules
+# Exclude all node_modules except @cap-js/graphql which is a symlink to itself
+node_modules/*
+!node_modules/@cap-js
+node_modules/@cap-js/*
+!node_modules/@cap-js/graphql
+
 package-lock.json
 .idea
 .DS_Store
