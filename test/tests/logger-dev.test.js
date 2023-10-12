@@ -7,13 +7,13 @@ describe('graphql - query logging in development', () => {
   const { axios, GET, POST, data } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
 
   const _format = e => util.formatWithOptions({ colors: false, depth: null }, ...(Array.isArray(e) ? e : [e]))
 
   let _log
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await data.reset() 
     _log = jest.spyOn(console, 'info')
   })
 
