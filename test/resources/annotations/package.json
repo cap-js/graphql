@@ -5,7 +5,6 @@
   "cds": {
     "protocols": {
       "graphql": {
-        "impl": "@cap-js/graphql",
         "path": "/custom-graphql-path"
       }
     }
