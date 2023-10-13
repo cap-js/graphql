@@ -47,7 +47,10 @@ describe('graphql - types parsing and validation', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../resources/types'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset() 
+  })
 
   describe('cds.Binary', () => {
     const field = 'myBinary'

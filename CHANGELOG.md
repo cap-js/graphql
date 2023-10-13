@@ -14,8 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
+- Improve merging of custom `graphql` protocol configuration with plugin default configuration
 
 ### Fixed
+
+- Load custom `errorFormatter` relative to CDS project root
 
 ### Removed
 

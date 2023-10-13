@@ -3,10 +3,9 @@ describe('graphql - annotations', () => {
   const path = require('path')
   const { gql } = require('../util')
 
-  const { axios, POST, data } = cds.test(path.join(__dirname, '../resources/annotations'))
+  const { axios, POST } = cds.test(path.join(__dirname, '../resources/annotations'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
 
   describe('protocols annotations', () => {
     const path = '/custom-graphql-path'
