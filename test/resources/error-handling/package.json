@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@cap-js/graphql": "*"
+  },
   "cds": {
     "requires": {
       "db": {
