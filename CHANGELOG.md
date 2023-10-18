@@ -5,15 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.8.0 - tbd
+## Version 0.9.0 - tbd
 
 ### Added
 
 ### Changed
 
+- Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
+- Improve merging of custom `graphql` protocol configuration with plugin default configuration
+
 ### Fixed
 
+- Load custom `errorFormatter` relative to CDS project root
+
 ### Removed
+
+## Version 0.8.0 - 2023-10-06
+
+### Added
+
+- [beta] Translate CDS error messages and include additional error properties in `GraphQLError` `extensions`. Only specific allowed properties are exposed when running in production.
+- [beta] Option `errorFormatter` that can be pointed to a function that overwrites the default logic of how CDS errors are formatted before they are added to the GraphQL error response. Please note that this may overwrite sanitization logic that is otherwise applied to error messages in production.
+- [beta] Logging of errors that occur during query and mutation execution
+
+### Changed
+
+- Bump required `@sap/cds` version to `>=7.3`
+- Bump required `graphql-http` version to `^1.18.0`
+
+### Fixed
+
+- Malformed responses for convoluted queries in which parts of results are supposed to be returned multiple times, caused by formatting results in-place
 
 ## Version 0.7.0 - 2023-09-04
 

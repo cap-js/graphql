@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@cap-js/graphql": "*"
+  },
+  "cds": {
+    "protocols": {
+      "graphql": {
+        "path": "/graphql",
+        "errorFormatter": "customErrorFormatter"
+      }
+    }
+  }
+}

@@ -65,12 +65,14 @@ describe('graphql - custom handlers', () => {
         {
           locations: [{ column: 15, line: 5 }],
           message: 'Expected Iterable, but did not find one for field "ReturnTypesService_Integer_input.create".',
-          path: ['ReturnTypesService', 'Integer', 'create']
+          path: ['ReturnTypesService', 'Integer', 'create'],
+          extensions: { stacktrace: expect.any(Array) }
         },
         {
           locations: [{ column: 15, line: 11 }],
           message: 'Expected Iterable, but did not find one for field "ReturnTypesService_String_input.create".',
-          path: ['ReturnTypesService', 'String', 'create']
+          path: ['ReturnTypesService', 'String', 'create'],
+          extensions: { stacktrace: expect.any(Array) }
         }
       ]
       const response = await POST('/graphql', { query })
@@ -185,12 +187,14 @@ describe('graphql - custom handlers', () => {
         {
           locations: [{ column: 15, line: 5 }],
           message: 'Expected Iterable, but did not find one for field "ReturnTypesService_Integer_input.update".',
-          path: ['ReturnTypesService', 'Integer', 'update']
+          path: ['ReturnTypesService', 'Integer', 'update'],
+          extensions: { stacktrace: expect.any(Array) }
         },
         {
           locations: [{ column: 15, line: 11 }],
           message: 'Expected Iterable, but did not find one for field "ReturnTypesService_String_input.update".',
-          path: ['ReturnTypesService', 'String', 'update']
+          path: ['ReturnTypesService', 'String', 'update'],
+          extensions: { stacktrace: expect.any(Array) }
         }
       ]
       const response = await POST('/graphql', { query })
@@ -236,7 +240,8 @@ describe('graphql - custom handlers', () => {
         {
           locations: [{ column: 15, line: 8 }],
           message: 'Int cannot represent non-integer value: "foo"',
-          path: ['ReturnTypesService', 'String', 'delete']
+          path: ['ReturnTypesService', 'String', 'delete'],
+          extensions: { stacktrace: expect.any(Array) }
         }
       ]
       const response = await POST('/graphql', { query })

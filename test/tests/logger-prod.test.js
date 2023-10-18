@@ -10,7 +10,6 @@ describe('graphql - query logging with sanitization in production', () => {
   const { axios, GET, POST, data } = cds.test(PROJECT_PATH)
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
 
   const _format = e => util.formatWithOptions({ colors: false, depth: null }, ...(Array.isArray(e) ? e : [e]))
 
@@ -20,7 +19,8 @@ describe('graphql - query logging with sanitization in production', () => {
     await cds.deploy(path.join(PROJECT_PATH, 'srv'))
   })
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await data.reset() 
     _log = jest.spyOn(console, 'info')
   })
 

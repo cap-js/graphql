@@ -6,7 +6,10 @@ describe('graphql - queries with localized data', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset() 
+  })
 
   test('query with default locale', async () => {
     const query = gql`
