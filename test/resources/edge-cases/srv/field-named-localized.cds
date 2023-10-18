@@ -1,5 +1,3 @@
-using {managed} from '@sap/cds/common';
-
 @graphql
 service FieldNamedLocalizedService {
   entity localized {
