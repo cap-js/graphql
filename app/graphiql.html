@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <style>
@@ -14,8 +14,8 @@
       }
     </style>
 
-    <link rel="stylesheet" href="https://unpkg.com/graphiql/graphiql.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@graphiql/plugin-explorer/dist/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/graphiql@3/graphiql.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@graphiql/plugin-explorer@0.3/dist/style.css" />
   </head>
 
   <body>
@@ -24,21 +24,18 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-    <script crossorigin src="https://unpkg.com/graphiql/graphiql.min.js"></script>
-    <script crossorigin src="https://unpkg.com/@graphiql/plugin-explorer/dist/graphiql-plugin-explorer.umd.js"></script>
+    <script crossorigin src="https://unpkg.com/graphiql@3/graphiql.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@graphiql/plugin-explorer@0.3/dist/index.umd.js"></script>
 
     <script>
       const fetcher = GraphiQL.createFetcher({ url: '' })
 
       function GraphiQLWithExplorer() {
-        const [query, setQuery] = React.useState()
-        const explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({ query, onEdit: setQuery })
+        const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin()
         return React.createElement(GraphiQL, {
           fetcher,
           defaultEditorToolsVisibility: true,
-          plugins: [explorerPlugin],
-          query,
-          onEditQuery: setQuery
+          plugins: [explorerPlugin]
         })
       }
 

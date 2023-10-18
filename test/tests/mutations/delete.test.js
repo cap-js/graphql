@@ -6,7 +6,10 @@ describe('graphql - delete mutations', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset() 
+  })
 
   test('delete no entries', async () => {
     const query = gql`
@@ -131,7 +134,7 @@ describe('graphql - delete mutations', () => {
       mutation {
         AdminService {
           Books {
-            delete
+            delete(filter: {})
           }
         }
       }

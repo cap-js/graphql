@@ -1,26 +1,11 @@
 type FieldNamedLocalizedService {
-  Root(
-    filter: [FieldNamedLocalizedService_Root_filter]
-    orderBy: [FieldNamedLocalizedService_Root_orderBy]
-    skip: Int
-    top: Int
-  ): FieldNamedLocalizedService_Root_connection
-  localized(
-    filter: [FieldNamedLocalizedService_localized_filter]
-    orderBy: [FieldNamedLocalizedService_localized_orderBy]
-    skip: Int
-    top: Int
-  ): FieldNamedLocalizedService_localized_connection
+  Root(filter: [FieldNamedLocalizedService_Root_filter], orderBy: [FieldNamedLocalizedService_Root_orderBy], skip: Int, top: Int): FieldNamedLocalizedService_Root_connection
+  localized(filter: [FieldNamedLocalizedService_localized_filter], orderBy: [FieldNamedLocalizedService_localized_orderBy], skip: Int, top: Int): FieldNamedLocalizedService_localized_connection
 }
 
 type FieldNamedLocalizedService_Root {
   ID: Int
-  localized(
-    filter: [FieldNamedLocalizedService_localized_filter]
-    orderBy: [FieldNamedLocalizedService_localized_orderBy]
-    skip: Int
-    top: Int
-  ): FieldNamedLocalizedService_localized_connection
+  localized(filter: [FieldNamedLocalizedService_localized_filter], orderBy: [FieldNamedLocalizedService_localized_orderBy], skip: Int, top: Int): FieldNamedLocalizedService_localized_connection
 }
 
 input FieldNamedLocalizedService_Root_C {
@@ -42,16 +27,9 @@ input FieldNamedLocalizedService_Root_filter {
 }
 
 type FieldNamedLocalizedService_Root_input {
-  create(
-    input: [FieldNamedLocalizedService_Root_C]!
-  ): [FieldNamedLocalizedService_Root]
-  delete(
-    filter: [FieldNamedLocalizedService_Root_filter]
-  ): Int
-  update(
-    filter: [FieldNamedLocalizedService_Root_filter]
-    input: FieldNamedLocalizedService_Root_U!
-  ): [FieldNamedLocalizedService_Root]
+  create(input: [FieldNamedLocalizedService_Root_C]!): [FieldNamedLocalizedService_Root]
+  delete(filter: [FieldNamedLocalizedService_Root_filter]!): Int
+  update(filter: [FieldNamedLocalizedService_Root_filter]!, input: FieldNamedLocalizedService_Root_U!): [FieldNamedLocalizedService_Root]
 }
 
 input FieldNamedLocalizedService_Root_orderBy {
@@ -95,16 +73,9 @@ input FieldNamedLocalizedService_localized_filter {
 }
 
 type FieldNamedLocalizedService_localized_input {
-  create(
-    input: [FieldNamedLocalizedService_localized_C]!
-  ): [FieldNamedLocalizedService_localized]
-  delete(
-    filter: [FieldNamedLocalizedService_localized_filter]
-  ): Int
-  update(
-    filter: [FieldNamedLocalizedService_localized_filter]
-    input: FieldNamedLocalizedService_localized_U!
-  ): [FieldNamedLocalizedService_localized]
+  create(input: [FieldNamedLocalizedService_localized_C]!): [FieldNamedLocalizedService_localized]
+  delete(filter: [FieldNamedLocalizedService_localized_filter]!): Int
+  update(filter: [FieldNamedLocalizedService_localized_filter]!, input: FieldNamedLocalizedService_localized_U!): [FieldNamedLocalizedService_localized]
 }
 
 input FieldNamedLocalizedService_localized_orderBy {
@@ -114,11 +85,11 @@ input FieldNamedLocalizedService_localized_orderBy {
 }
 
 input Int_filter {
-  eq: [Int]
-  ge: [Int]
-  gt: [Int]
-  le: [Int]
-  lt: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
   ne: [Int]
 }
 
@@ -137,12 +108,12 @@ enum SortDirection {
 
 input String_filter {
   contains: [String]
-  endswith: [String]
-  eq: [String]
-  ge: [String]
-  gt: [String]
-  le: [String]
-  lt: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
   ne: [String]
-  startswith: [String]
+  startswith: String
 }

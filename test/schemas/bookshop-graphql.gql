@@ -1,62 +1,17 @@
 type AdminService {
-  Authors(
-    filter: [AdminService_Authors_filter]
-    orderBy: [AdminService_Authors_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Authors_connection
-  Books(
-    filter: [AdminService_Books_filter]
-    orderBy: [AdminService_Books_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Books_connection
-  Books_texts(
-    filter: [AdminService_Books_texts_filter]
-    orderBy: [AdminService_Books_texts_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Books_texts_connection
-  Chapters(
-    filter: [AdminService_Chapters_filter]
-    orderBy: [AdminService_Chapters_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Chapters_connection
-  Currencies(
-    filter: [AdminService_Currencies_filter]
-    orderBy: [AdminService_Currencies_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Currencies_connection
-  Currencies_texts(
-    filter: [AdminService_Currencies_texts_filter]
-    orderBy: [AdminService_Currencies_texts_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Currencies_texts_connection
-  Genres(
-    filter: [AdminService_Genres_filter]
-    orderBy: [AdminService_Genres_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Genres_connection
-  Genres_texts(
-    filter: [AdminService_Genres_texts_filter]
-    orderBy: [AdminService_Genres_texts_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Genres_texts_connection
+  Authors(filter: [AdminService_Authors_filter], orderBy: [AdminService_Authors_orderBy], skip: Int, top: Int): AdminService_Authors_connection
+  Books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
+  Books_texts(filter: [AdminService_Books_texts_filter], orderBy: [AdminService_Books_texts_orderBy], skip: Int, top: Int): AdminService_Books_texts_connection
+  Chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
+  Currencies(filter: [AdminService_Currencies_filter], orderBy: [AdminService_Currencies_orderBy], skip: Int, top: Int): AdminService_Currencies_connection
+  Currencies_texts(filter: [AdminService_Currencies_texts_filter], orderBy: [AdminService_Currencies_texts_orderBy], skip: Int, top: Int): AdminService_Currencies_texts_connection
+  Genres(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
+  Genres_texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
 }
 
 type AdminService_Authors {
   ID: Int
-  books(
-    filter: [AdminService_Books_filter]
-    orderBy: [AdminService_Books_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Books_connection
+  books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
   createdAt: Timestamp
   createdBy: String
   dateOfBirth: Date
@@ -114,16 +69,9 @@ input AdminService_Authors_filter {
 }
 
 type AdminService_Authors_input {
-  create(
-    input: [AdminService_Authors_C]!
-  ): [AdminService_Authors]
-  delete(
-    filter: [AdminService_Authors_filter]
-  ): Int
-  update(
-    filter: [AdminService_Authors_filter]
-    input: AdminService_Authors_U!
-  ): [AdminService_Authors]
+  create(input: [AdminService_Authors_C]!): [AdminService_Authors]
+  delete(filter: [AdminService_Authors_filter]!): Int
+  update(filter: [AdminService_Authors_filter]!, input: AdminService_Authors_U!): [AdminService_Authors]
 }
 
 input AdminService_Authors_orderBy {
@@ -143,12 +91,7 @@ type AdminService_Books {
   ID: Int
   author: AdminService_Authors
   author_ID: Int
-  chapters(
-    filter: [AdminService_Chapters_filter]
-    orderBy: [AdminService_Chapters_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Chapters_connection
+  chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
   createdAt: Timestamp
   createdBy: String
   currency: AdminService_Currencies
@@ -161,12 +104,7 @@ type AdminService_Books {
   modifiedBy: String
   price: Decimal
   stock: Int
-  texts(
-    filter: [AdminService_Books_texts_filter]
-    orderBy: [AdminService_Books_texts_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Books_texts_connection
+  texts(filter: [AdminService_Books_texts_filter], orderBy: [AdminService_Books_texts_orderBy], skip: Int, top: Int): AdminService_Books_texts_connection
   title: String
 }
 
@@ -233,16 +171,9 @@ input AdminService_Books_filter {
 }
 
 type AdminService_Books_input {
-  create(
-    input: [AdminService_Books_C]!
-  ): [AdminService_Books]
-  delete(
-    filter: [AdminService_Books_filter]
-  ): Int
-  update(
-    filter: [AdminService_Books_filter]
-    input: AdminService_Books_U!
-  ): [AdminService_Books]
+  create(input: [AdminService_Books_C]!): [AdminService_Books]
+  delete(filter: [AdminService_Books_filter]!): Int
+  update(filter: [AdminService_Books_filter]!, input: AdminService_Books_U!): [AdminService_Books]
 }
 
 input AdminService_Books_orderBy {
@@ -293,16 +224,9 @@ input AdminService_Books_texts_filter {
 }
 
 type AdminService_Books_texts_input {
-  create(
-    input: [AdminService_Books_texts_C]!
-  ): [AdminService_Books_texts]
-  delete(
-    filter: [AdminService_Books_texts_filter]
-  ): Int
-  update(
-    filter: [AdminService_Books_texts_filter]
-    input: AdminService_Books_texts_U!
-  ): [AdminService_Books_texts]
+  create(input: [AdminService_Books_texts_C]!): [AdminService_Books_texts]
+  delete(filter: [AdminService_Books_texts_filter]!): Int
+  update(filter: [AdminService_Books_texts_filter]!, input: AdminService_Books_texts_U!): [AdminService_Books_texts]
 }
 
 input AdminService_Books_texts_orderBy {
@@ -358,16 +282,9 @@ input AdminService_Chapters_filter {
 }
 
 type AdminService_Chapters_input {
-  create(
-    input: [AdminService_Chapters_C]!
-  ): [AdminService_Chapters]
-  delete(
-    filter: [AdminService_Chapters_filter]
-  ): Int
-  update(
-    filter: [AdminService_Chapters_filter]
-    input: AdminService_Chapters_U!
-  ): [AdminService_Chapters]
+  create(input: [AdminService_Chapters_C]!): [AdminService_Chapters]
+  delete(filter: [AdminService_Chapters_filter]!): Int
+  update(filter: [AdminService_Chapters_filter]!, input: AdminService_Chapters_U!): [AdminService_Chapters]
 }
 
 input AdminService_Chapters_orderBy {
@@ -386,12 +303,7 @@ type AdminService_Currencies {
   minorUnit: Int16
   name: String
   symbol: String
-  texts(
-    filter: [AdminService_Currencies_texts_filter]
-    orderBy: [AdminService_Currencies_texts_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Currencies_texts_connection
+  texts(filter: [AdminService_Currencies_texts_filter], orderBy: [AdminService_Currencies_texts_orderBy], skip: Int, top: Int): AdminService_Currencies_texts_connection
 }
 
 input AdminService_Currencies_C {
@@ -425,16 +337,9 @@ input AdminService_Currencies_filter {
 }
 
 type AdminService_Currencies_input {
-  create(
-    input: [AdminService_Currencies_C]!
-  ): [AdminService_Currencies]
-  delete(
-    filter: [AdminService_Currencies_filter]
-  ): Int
-  update(
-    filter: [AdminService_Currencies_filter]
-    input: AdminService_Currencies_U!
-  ): [AdminService_Currencies]
+  create(input: [AdminService_Currencies_C]!): [AdminService_Currencies]
+  delete(filter: [AdminService_Currencies_filter]!): Int
+  update(filter: [AdminService_Currencies_filter]!, input: AdminService_Currencies_U!): [AdminService_Currencies]
 }
 
 input AdminService_Currencies_orderBy {
@@ -477,16 +382,9 @@ input AdminService_Currencies_texts_filter {
 }
 
 type AdminService_Currencies_texts_input {
-  create(
-    input: [AdminService_Currencies_texts_C]!
-  ): [AdminService_Currencies_texts]
-  delete(
-    filter: [AdminService_Currencies_texts_filter]
-  ): Int
-  update(
-    filter: [AdminService_Currencies_texts_filter]
-    input: AdminService_Currencies_texts_U!
-  ): [AdminService_Currencies_texts]
+  create(input: [AdminService_Currencies_texts_C]!): [AdminService_Currencies_texts]
+  delete(filter: [AdminService_Currencies_texts_filter]!): Int
+  update(filter: [AdminService_Currencies_texts_filter]!, input: AdminService_Currencies_texts_U!): [AdminService_Currencies_texts]
 }
 
 input AdminService_Currencies_texts_orderBy {
@@ -498,22 +396,12 @@ input AdminService_Currencies_texts_orderBy {
 
 type AdminService_Genres {
   ID: Int
-  children(
-    filter: [AdminService_Genres_filter]
-    orderBy: [AdminService_Genres_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Genres_connection
+  children(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
   descr: String
   name: String
   parent: AdminService_Genres
   parent_ID: Int
-  texts(
-    filter: [AdminService_Genres_texts_filter]
-    orderBy: [AdminService_Genres_texts_orderBy]
-    skip: Int
-    top: Int
-  ): AdminService_Genres_texts_connection
+  texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
 }
 
 input AdminService_Genres_C {
@@ -548,16 +436,9 @@ input AdminService_Genres_filter {
 }
 
 type AdminService_Genres_input {
-  create(
-    input: [AdminService_Genres_C]!
-  ): [AdminService_Genres]
-  delete(
-    filter: [AdminService_Genres_filter]
-  ): Int
-  update(
-    filter: [AdminService_Genres_filter]
-    input: AdminService_Genres_U!
-  ): [AdminService_Genres]
+  create(input: [AdminService_Genres_C]!): [AdminService_Genres]
+  delete(filter: [AdminService_Genres_filter]!): Int
+  update(filter: [AdminService_Genres_filter]!, input: AdminService_Genres_U!): [AdminService_Genres]
 }
 
 input AdminService_Genres_orderBy {
@@ -599,16 +480,9 @@ input AdminService_Genres_texts_filter {
 }
 
 type AdminService_Genres_texts_input {
-  create(
-    input: [AdminService_Genres_texts_C]!
-  ): [AdminService_Genres_texts]
-  delete(
-    filter: [AdminService_Genres_texts_filter]
-  ): Int
-  update(
-    filter: [AdminService_Genres_texts_filter]
-    input: AdminService_Genres_texts_U!
-  ): [AdminService_Genres_texts]
+  create(input: [AdminService_Genres_texts_C]!): [AdminService_Genres_texts]
+  delete(filter: [AdminService_Genres_texts_filter]!): Int
+  update(filter: [AdminService_Genres_texts_filter]!, input: AdminService_Genres_texts_U!): [AdminService_Genres_texts]
 }
 
 input AdminService_Genres_texts_orderBy {
@@ -635,70 +509,25 @@ The `Binary` scalar type represents binary values as `base64url` encoded strings
 scalar Binary
 
 input Binary_filter {
-  eq: [Binary]
+  eq: Binary
   ne: [Binary]
 }
 
 type CatalogService {
-  Books(
-    filter: [CatalogService_Books_filter]
-    orderBy: [CatalogService_Books_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Books_connection
-  Books_texts(
-    filter: [CatalogService_Books_texts_filter]
-    orderBy: [CatalogService_Books_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Books_texts_connection
-  Chapters(
-    filter: [CatalogService_Chapters_filter]
-    orderBy: [CatalogService_Chapters_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Chapters_connection
-  Currencies(
-    filter: [CatalogService_Currencies_filter]
-    orderBy: [CatalogService_Currencies_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Currencies_connection
-  Currencies_texts(
-    filter: [CatalogService_Currencies_texts_filter]
-    orderBy: [CatalogService_Currencies_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Currencies_texts_connection
-  Genres(
-    filter: [CatalogService_Genres_filter]
-    orderBy: [CatalogService_Genres_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Genres_connection
-  Genres_texts(
-    filter: [CatalogService_Genres_texts_filter]
-    orderBy: [CatalogService_Genres_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Genres_texts_connection
-  ListOfBooks(
-    filter: [CatalogService_ListOfBooks_filter]
-    orderBy: [CatalogService_ListOfBooks_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_ListOfBooks_connection
+  Books(filter: [CatalogService_Books_filter], orderBy: [CatalogService_Books_orderBy], skip: Int, top: Int): CatalogService_Books_connection
+  Books_texts(filter: [CatalogService_Books_texts_filter], orderBy: [CatalogService_Books_texts_orderBy], skip: Int, top: Int): CatalogService_Books_texts_connection
+  Chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
+  Currencies(filter: [CatalogService_Currencies_filter], orderBy: [CatalogService_Currencies_orderBy], skip: Int, top: Int): CatalogService_Currencies_connection
+  Currencies_texts(filter: [CatalogService_Currencies_texts_filter], orderBy: [CatalogService_Currencies_texts_orderBy], skip: Int, top: Int): CatalogService_Currencies_texts_connection
+  Genres(filter: [CatalogService_Genres_filter], orderBy: [CatalogService_Genres_orderBy], skip: Int, top: Int): CatalogService_Genres_connection
+  Genres_texts(filter: [CatalogService_Genres_texts_filter], orderBy: [CatalogService_Genres_texts_orderBy], skip: Int, top: Int): CatalogService_Genres_texts_connection
+  ListOfBooks(filter: [CatalogService_ListOfBooks_filter], orderBy: [CatalogService_ListOfBooks_orderBy], skip: Int, top: Int): CatalogService_ListOfBooks_connection
 }
 
 type CatalogService_Books {
   ID: Int
   author: String
-  chapters(
-    filter: [CatalogService_Chapters_filter]
-    orderBy: [CatalogService_Chapters_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Chapters_connection
+  chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
   createdAt: Timestamp
   currency: CatalogService_Currencies
   currency_code: String
@@ -709,12 +538,7 @@ type CatalogService_Books {
   modifiedAt: Timestamp
   price: Decimal
   stock: Int
-  texts(
-    filter: [CatalogService_Books_texts_filter]
-    orderBy: [CatalogService_Books_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Books_texts_connection
+  texts(filter: [CatalogService_Books_texts_filter], orderBy: [CatalogService_Books_texts_orderBy], skip: Int, top: Int): CatalogService_Books_texts_connection
   title: String
 }
 
@@ -773,16 +597,9 @@ input CatalogService_Books_filter {
 }
 
 type CatalogService_Books_input {
-  create(
-    input: [CatalogService_Books_C]!
-  ): [CatalogService_Books]
-  delete(
-    filter: [CatalogService_Books_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Books_filter]
-    input: CatalogService_Books_U!
-  ): [CatalogService_Books]
+  create(input: [CatalogService_Books_C]!): [CatalogService_Books]
+  delete(filter: [CatalogService_Books_filter]!): Int
+  update(filter: [CatalogService_Books_filter]!, input: CatalogService_Books_U!): [CatalogService_Books]
 }
 
 input CatalogService_Books_orderBy {
@@ -831,16 +648,9 @@ input CatalogService_Books_texts_filter {
 }
 
 type CatalogService_Books_texts_input {
-  create(
-    input: [CatalogService_Books_texts_C]!
-  ): [CatalogService_Books_texts]
-  delete(
-    filter: [CatalogService_Books_texts_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Books_texts_filter]
-    input: CatalogService_Books_texts_U!
-  ): [CatalogService_Books_texts]
+  create(input: [CatalogService_Books_texts_C]!): [CatalogService_Books_texts]
+  delete(filter: [CatalogService_Books_texts_filter]!): Int
+  update(filter: [CatalogService_Books_texts_filter]!, input: CatalogService_Books_texts_U!): [CatalogService_Books_texts]
 }
 
 input CatalogService_Books_texts_orderBy {
@@ -896,16 +706,9 @@ input CatalogService_Chapters_filter {
 }
 
 type CatalogService_Chapters_input {
-  create(
-    input: [CatalogService_Chapters_C]!
-  ): [CatalogService_Chapters]
-  delete(
-    filter: [CatalogService_Chapters_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Chapters_filter]
-    input: CatalogService_Chapters_U!
-  ): [CatalogService_Chapters]
+  create(input: [CatalogService_Chapters_C]!): [CatalogService_Chapters]
+  delete(filter: [CatalogService_Chapters_filter]!): Int
+  update(filter: [CatalogService_Chapters_filter]!, input: CatalogService_Chapters_U!): [CatalogService_Chapters]
 }
 
 input CatalogService_Chapters_orderBy {
@@ -924,12 +727,7 @@ type CatalogService_Currencies {
   minorUnit: Int16
   name: String
   symbol: String
-  texts(
-    filter: [CatalogService_Currencies_texts_filter]
-    orderBy: [CatalogService_Currencies_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Currencies_texts_connection
+  texts(filter: [CatalogService_Currencies_texts_filter], orderBy: [CatalogService_Currencies_texts_orderBy], skip: Int, top: Int): CatalogService_Currencies_texts_connection
 }
 
 input CatalogService_Currencies_C {
@@ -963,16 +761,9 @@ input CatalogService_Currencies_filter {
 }
 
 type CatalogService_Currencies_input {
-  create(
-    input: [CatalogService_Currencies_C]!
-  ): [CatalogService_Currencies]
-  delete(
-    filter: [CatalogService_Currencies_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Currencies_filter]
-    input: CatalogService_Currencies_U!
-  ): [CatalogService_Currencies]
+  create(input: [CatalogService_Currencies_C]!): [CatalogService_Currencies]
+  delete(filter: [CatalogService_Currencies_filter]!): Int
+  update(filter: [CatalogService_Currencies_filter]!, input: CatalogService_Currencies_U!): [CatalogService_Currencies]
 }
 
 input CatalogService_Currencies_orderBy {
@@ -1015,16 +806,9 @@ input CatalogService_Currencies_texts_filter {
 }
 
 type CatalogService_Currencies_texts_input {
-  create(
-    input: [CatalogService_Currencies_texts_C]!
-  ): [CatalogService_Currencies_texts]
-  delete(
-    filter: [CatalogService_Currencies_texts_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Currencies_texts_filter]
-    input: CatalogService_Currencies_texts_U!
-  ): [CatalogService_Currencies_texts]
+  create(input: [CatalogService_Currencies_texts_C]!): [CatalogService_Currencies_texts]
+  delete(filter: [CatalogService_Currencies_texts_filter]!): Int
+  update(filter: [CatalogService_Currencies_texts_filter]!, input: CatalogService_Currencies_texts_U!): [CatalogService_Currencies_texts]
 }
 
 input CatalogService_Currencies_texts_orderBy {
@@ -1036,22 +820,12 @@ input CatalogService_Currencies_texts_orderBy {
 
 type CatalogService_Genres {
   ID: Int
-  children(
-    filter: [CatalogService_Genres_filter]
-    orderBy: [CatalogService_Genres_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Genres_connection
+  children(filter: [CatalogService_Genres_filter], orderBy: [CatalogService_Genres_orderBy], skip: Int, top: Int): CatalogService_Genres_connection
   descr: String
   name: String
   parent: CatalogService_Genres
   parent_ID: Int
-  texts(
-    filter: [CatalogService_Genres_texts_filter]
-    orderBy: [CatalogService_Genres_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Genres_texts_connection
+  texts(filter: [CatalogService_Genres_texts_filter], orderBy: [CatalogService_Genres_texts_orderBy], skip: Int, top: Int): CatalogService_Genres_texts_connection
 }
 
 input CatalogService_Genres_C {
@@ -1086,16 +860,9 @@ input CatalogService_Genres_filter {
 }
 
 type CatalogService_Genres_input {
-  create(
-    input: [CatalogService_Genres_C]!
-  ): [CatalogService_Genres]
-  delete(
-    filter: [CatalogService_Genres_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Genres_filter]
-    input: CatalogService_Genres_U!
-  ): [CatalogService_Genres]
+  create(input: [CatalogService_Genres_C]!): [CatalogService_Genres]
+  delete(filter: [CatalogService_Genres_filter]!): Int
+  update(filter: [CatalogService_Genres_filter]!, input: CatalogService_Genres_U!): [CatalogService_Genres]
 }
 
 input CatalogService_Genres_orderBy {
@@ -1137,16 +904,9 @@ input CatalogService_Genres_texts_filter {
 }
 
 type CatalogService_Genres_texts_input {
-  create(
-    input: [CatalogService_Genres_texts_C]!
-  ): [CatalogService_Genres_texts]
-  delete(
-    filter: [CatalogService_Genres_texts_filter]
-  ): Int
-  update(
-    filter: [CatalogService_Genres_texts_filter]
-    input: CatalogService_Genres_texts_U!
-  ): [CatalogService_Genres_texts]
+  create(input: [CatalogService_Genres_texts_C]!): [CatalogService_Genres_texts]
+  delete(filter: [CatalogService_Genres_texts_filter]!): Int
+  update(filter: [CatalogService_Genres_texts_filter]!, input: CatalogService_Genres_texts_U!): [CatalogService_Genres_texts]
 }
 
 input CatalogService_Genres_texts_orderBy {
@@ -1159,12 +919,7 @@ input CatalogService_Genres_texts_orderBy {
 type CatalogService_ListOfBooks {
   ID: Int
   author: String
-  chapters(
-    filter: [CatalogService_Chapters_filter]
-    orderBy: [CatalogService_Chapters_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Chapters_connection
+  chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
   createdAt: Timestamp
   currency: CatalogService_Currencies
   currency_code: String
@@ -1174,12 +929,7 @@ type CatalogService_ListOfBooks {
   modifiedAt: Timestamp
   price: Decimal
   stock: Int
-  texts(
-    filter: [CatalogService_Books_texts_filter]
-    orderBy: [CatalogService_Books_texts_orderBy]
-    skip: Int
-    top: Int
-  ): CatalogService_Books_texts_connection
+  texts(filter: [CatalogService_Books_texts_filter], orderBy: [CatalogService_Books_texts_orderBy], skip: Int, top: Int): CatalogService_Books_texts_connection
   title: String
 }
 
@@ -1235,16 +985,9 @@ input CatalogService_ListOfBooks_filter {
 }
 
 type CatalogService_ListOfBooks_input {
-  create(
-    input: [CatalogService_ListOfBooks_C]!
-  ): [CatalogService_ListOfBooks]
-  delete(
-    filter: [CatalogService_ListOfBooks_filter]
-  ): Int
-  update(
-    filter: [CatalogService_ListOfBooks_filter]
-    input: CatalogService_ListOfBooks_U!
-  ): [CatalogService_ListOfBooks]
+  create(input: [CatalogService_ListOfBooks_C]!): [CatalogService_ListOfBooks]
+  delete(filter: [CatalogService_ListOfBooks_filter]!): Int
+  update(filter: [CatalogService_ListOfBooks_filter]!, input: CatalogService_ListOfBooks_U!): [CatalogService_ListOfBooks]
 }
 
 input CatalogService_ListOfBooks_orderBy {
@@ -1277,11 +1020,11 @@ The `Date` scalar type represents date values as strings in the ISO 8601 format 
 scalar Date
 
 input Date_filter {
-  eq: [Date]
-  ge: [Date]
-  gt: [Date]
-  le: [Date]
-  lt: [Date]
+  eq: Date
+  ge: Date
+  gt: Date
+  le: Date
+  lt: Date
   ne: [Date]
 }
 
@@ -1291,11 +1034,11 @@ The `Decimal` scalar type represents exact signed decimal values. Decimal repres
 scalar Decimal
 
 input Decimal_filter {
-  eq: [Decimal]
-  ge: [Decimal]
-  gt: [Decimal]
-  le: [Decimal]
-  lt: [Decimal]
+  eq: Decimal
+  ge: Decimal
+  gt: Decimal
+  le: Decimal
+  lt: Decimal
   ne: [Decimal]
 }
 
@@ -1305,20 +1048,20 @@ The `Int16` scalar type represents 16-bit non-fractional signed whole numeric va
 scalar Int16
 
 input Int16_filter {
-  eq: [Int16]
-  ge: [Int16]
-  gt: [Int16]
-  le: [Int16]
-  lt: [Int16]
+  eq: Int16
+  ge: Int16
+  gt: Int16
+  le: Int16
+  lt: Int16
   ne: [Int16]
 }
 
 input Int_filter {
-  eq: [Int]
-  ge: [Int]
-  gt: [Int]
-  le: [Int]
-  lt: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
   ne: [Int]
 }
 
@@ -1339,14 +1082,14 @@ enum SortDirection {
 
 input String_filter {
   contains: [String]
-  endswith: [String]
-  eq: [String]
-  ge: [String]
-  gt: [String]
-  le: [String]
-  lt: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
   ne: [String]
-  startswith: [String]
+  startswith: String
 }
 
 """
@@ -1355,10 +1098,10 @@ The `Timestamp` scalar type represents timestamp values as strings in the ISO 86
 scalar Timestamp
 
 input Timestamp_filter {
-  eq: [Timestamp]
-  ge: [Timestamp]
-  gt: [Timestamp]
-  le: [Timestamp]
-  lt: [Timestamp]
+  eq: Timestamp
+  ge: Timestamp
+  gt: Timestamp
+  le: Timestamp
+  lt: Timestamp
   ne: [Timestamp]
 }

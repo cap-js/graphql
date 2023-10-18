@@ -47,7 +47,10 @@ describe('graphql - types parsing and validation', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../resources/types'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset() 
+  })
 
   describe('cds.Binary', () => {
     const field = 'myBinary'
@@ -436,7 +439,7 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Decimal correctly determines large input literal numeric string to be a decimal number', async () => {
-        const value = '123456789101234567890.01234567890123456789'
+        const value = '12345678901234567890.01234567890123456789'
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
         const data = { TypesService: { MyEntity: { create: [{ [field]: String(value) }] } } }
         const response = await POST('/graphql', { query })
@@ -444,7 +447,7 @@ describe('graphql - types parsing and validation', () => {
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
         expect(result.length).toBe(1)
-        expect(result[0][field]).toBeGreaterThan(123456789101234500000) // Incorrect sqlite value due to dynamic typing system and rounding errors
+        expect(result[0][field]).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
       })
 
       test('cds.Decimal throws error when input literal is not a decimal string, but a boolean', async () => {
@@ -522,7 +525,7 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Decimal correctly determines large numeric string variable to be a decimal number', async () => {
-        const value = '123456789101234567890.01234567890123456789'
+        const value = '12345678901234567890.01234567890123456789'
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
         const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', { query, variables })
@@ -530,7 +533,7 @@ describe('graphql - types parsing and validation', () => {
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
         expect(result.length).toBe(1)
-        expect(result[0][field]).toBeGreaterThan(123456789101234500000) // Incorrect sqlite value due to dynamic typing system and rounding errors
+        expect(result[0][field]).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
       })
 
       test('cds.Decimal throws error when variable value is a float', async () => {
@@ -1176,25 +1179,26 @@ describe('graphql - types parsing and validation', () => {
     describe('input literal', () => {
       test('cds.Timestamp is correctly parsed from input literal timestamp string value', async () => {
         const value = '2021-06-27T14:52:23.123Z'
+        const returnValue = /2021-06-27T14:52:23\.123(0000)?Z/ // timestamp precision increase with cds^7
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: value })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
-      test('cds.Timestamp is correctly parsed from input literal timestamp string value', async () => {
-        const value = '2021-06-27T14:52:23.123Z'
-        const returnValue = '2021-06-27T14:52:23.123Z'
+      test('cds.Timestamp is correctly parsed from input literal high precision timestamp string value', async () => {
+        const value = '2021-06-27T14:52:23.1234567Z'
+        const returnValue = /2021-06-27T14:52:23\.123(4567)?Z/ // timestamp precision increase with cds^7
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: returnValue }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: returnValue })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
       test('cds.Timestamp throws error when input literal is a string containing a non-time value', async () => {
@@ -1218,25 +1222,26 @@ describe('graphql - types parsing and validation', () => {
     describe('variable value', () => {
       test('cds.Timestamp is correctly parsed from variable timestamp string value', async () => {
         const value = '2021-06-27T14:52:23.123Z'
+        const returnValue = /2021-06-27T14:52:23\.123(0000)?Z/ // timestamp precision increase with cds^7
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query, variables })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: value })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
-      test('cds.Timestamp is correctly parsed from variable timestamp string value', async () => {
-        const value = '2021-06-27T14:52:23.123Z'
-        const returnValue = '2021-06-27T14:52:23.123Z'
+      test('cds.Timestamp is correctly parsed from variable high precision timestamp string value', async () => {
+        const value = '2021-06-27T14:52:23.1234567Z'
+        const returnValue = /2021-06-27T14:52:23\.123(4567)?Z/ // timestamp precision increase with cds^7
         const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: returnValue }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: expect.stringMatching(returnValue) }] } } }
         const response = await POST('/graphql', { query, variables })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toContainEqual({ [field]: returnValue })
+        expect(result).toContainEqual({ [field]: expect.stringMatching(returnValue) })
       })
 
       test('cds.Timestamp throws error when variable is a string containing a non-timestamp value', async () => {

@@ -1,6 +1,4 @@
 const cds = require('@sap/cds')
-const path = require('path')
-
-cds.env.protocols = {
-  graphql: { path: '/graphql', impl: path.join(__dirname, '../../../index.js') }
-}
+// Programmatic configuration of GraphQL protocol adapter
+const protocols = cds.env.protocols ??= {}
+protocols.graphql = { path: '/graphql', impl: '@cap-js/graphql' }

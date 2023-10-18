@@ -6,7 +6,10 @@ describe('graphql - queries', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset() 
+  })
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries without arguments without connections', () => {
@@ -447,17 +450,20 @@ describe('graphql - queries', () => {
       const query = gql`
         {
           AdminService {
-            Authors {
+            Books {
               nodes {
-                name
-                books {
-                  nodes {
-                    title
-                    author {
-                      name
-                      books {
-                        nodes {
-                          title
+                title
+                author {
+                  name
+                  books {
+                    nodes {
+                      title
+                      author {
+                        name
+                        books {
+                          nodes {
+                            title
+                          }
                         }
                       }
                     }
@@ -470,60 +476,96 @@ describe('graphql - queries', () => {
       `
       const data = {
         AdminService: {
-          Authors: {
+          Books: {
             nodes: [
               {
-                name: 'Emily Brontë',
-                books: {
-                  nodes: [
-                    {
-                      title: 'Wuthering Heights',
-                      author: { name: 'Emily Brontë', books: { nodes: [{ title: 'Wuthering Heights' }] } }
-                    }
-                  ]
-                }
-              },
-              {
-                name: 'Charlotte Brontë',
-                books: {
-                  nodes: [
-                    {
-                      title: 'Jane Eyre',
-                      author: { name: 'Charlotte Brontë', books: { nodes: [{ title: 'Jane Eyre' }] } }
-                    }
-                  ]
-                }
-              },
-              {
-                name: 'Edgar Allen Poe',
-                books: {
-                  nodes: [
-                    {
-                      title: 'The Raven',
-                      author: {
-                        name: 'Edgar Allen Poe',
-                        books: { nodes: [{ title: 'The Raven' }, { title: 'Eleonora' }] }
+                title: 'Wuthering Heights',
+                author: {
+                  name: 'Emily Brontë',
+                  books: {
+                    nodes: [
+                      {
+                        title: 'Wuthering Heights',
+                        author: { name: 'Emily Brontë', books: { nodes: [{ title: 'Wuthering Heights' }] } }
                       }
-                    },
-                    {
-                      title: 'Eleonora',
-                      author: {
-                        name: 'Edgar Allen Poe',
-                        books: { nodes: [{ title: 'The Raven' }, { title: 'Eleonora' }] }
-                      }
-                    }
-                  ]
+                    ]
+                  }
                 }
               },
               {
-                name: 'Richard Carpenter',
-                books: {
-                  nodes: [
-                    {
-                      title: 'Catweazle',
-                      author: { name: 'Richard Carpenter', books: { nodes: [{ title: 'Catweazle' }] } }
-                    }
-                  ]
+                title: 'Jane Eyre',
+                author: {
+                  name: 'Charlotte Brontë',
+                  books: {
+                    nodes: [
+                      {
+                        title: 'Jane Eyre',
+                        author: { name: 'Charlotte Brontë', books: { nodes: [{ title: 'Jane Eyre' }] } }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                title: 'The Raven',
+                author: {
+                  name: 'Edgar Allen Poe',
+                  books: {
+                    nodes: [
+                      {
+                        title: 'The Raven',
+                        author: {
+                          name: 'Edgar Allen Poe',
+                          books: { nodes: [{ title: 'The Raven' }, { title: 'Eleonora' }] }
+                        }
+                      },
+                      {
+                        title: 'Eleonora',
+                        author: {
+                          name: 'Edgar Allen Poe',
+                          books: { nodes: [{ title: 'The Raven' }, { title: 'Eleonora' }] }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                title: 'Eleonora',
+                author: {
+                  name: 'Edgar Allen Poe',
+                  books: {
+                    nodes: [
+                      {
+                        title: 'The Raven',
+                        author: {
+                          name: 'Edgar Allen Poe',
+                          books: { nodes: [{ title: 'The Raven' }, { title: 'Eleonora' }] }
+                        }
+                      },
+                      {
+                        title: 'Eleonora',
+                        author: {
+                          name: 'Edgar Allen Poe',
+                          books: { nodes: [{ title: 'The Raven' }, { title: 'Eleonora' }] }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                title: 'Catweazle',
+                author: {
+                  name: 'Richard Carpenter',
+                  books: {
+                    nodes: [
+                      {
+                        title: 'Catweazle',
+                        author: { name: 'Richard Carpenter', books: { nodes: [{ title: 'Catweazle' }] } }
+                      }
+                    ]
+                  }
                 }
               }
             ]

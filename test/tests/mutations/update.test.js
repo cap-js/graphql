@@ -6,7 +6,10 @@ describe('graphql - update mutations', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset() 
+  })
 
   test('update no entries', async () => {
     const query = gql`
@@ -140,7 +143,7 @@ describe('graphql - update mutations', () => {
       mutation ($input: AdminService_Books_U!) {
         AdminService {
           Books {
-            update(input: $input) {
+            update(filter: {}, input: $input) {
               title
               stock
             }

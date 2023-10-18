@@ -1,26 +1,11 @@
 type CompositionOfAspectService {
-  Books(
-    filter: [CompositionOfAspectService_Books_filter]
-    orderBy: [CompositionOfAspectService_Books_orderBy]
-    skip: Int
-    top: Int
-  ): CompositionOfAspectService_Books_connection
+  Books(filter: [CompositionOfAspectService_Books_filter], orderBy: [CompositionOfAspectService_Books_orderBy], skip: Int, top: Int): CompositionOfAspectService_Books_connection
 }
 
 type CompositionOfAspectService_Books {
-  chapters(
-    filter: [CompositionOfAspectService_Books_chapters_filter]
-    orderBy: [CompositionOfAspectService_Books_chapters_orderBy]
-    skip: Int
-    top: Int
-  ): CompositionOfAspectService_Books_chapters_connection
+  chapters(filter: [CompositionOfAspectService_Books_chapters_filter], orderBy: [CompositionOfAspectService_Books_chapters_orderBy], skip: Int, top: Int): CompositionOfAspectService_Books_chapters_connection
   id: ID
-  reviews(
-    filter: [CompositionOfAspectService_Books_reviews_filter]
-    orderBy: [CompositionOfAspectService_Books_reviews_orderBy]
-    skip: Int
-    top: Int
-  ): CompositionOfAspectService_Books_reviews_connection
+  reviews(filter: [CompositionOfAspectService_Books_reviews_filter], orderBy: [CompositionOfAspectService_Books_reviews_orderBy], skip: Int, top: Int): CompositionOfAspectService_Books_reviews_connection
 }
 
 input CompositionOfAspectService_Books_C {
@@ -51,15 +36,6 @@ input CompositionOfAspectService_Books_chapters_filter {
   id: [ID_filter]
 }
 
-type CompositionOfAspectService_Books_chapters_input {
-  create(
-    input: [CompositionOfAspectService_Books_chapters_C]!
-  ): [CompositionOfAspectService_Books_chapters]
-  delete(
-    filter: [CompositionOfAspectService_Books_chapters_filter]
-  ): Int
-}
-
 input CompositionOfAspectService_Books_chapters_orderBy {
   id: SortDirection
 }
@@ -74,16 +50,9 @@ input CompositionOfAspectService_Books_filter {
 }
 
 type CompositionOfAspectService_Books_input {
-  create(
-    input: [CompositionOfAspectService_Books_C]!
-  ): [CompositionOfAspectService_Books]
-  delete(
-    filter: [CompositionOfAspectService_Books_filter]
-  ): Int
-  update(
-    filter: [CompositionOfAspectService_Books_filter]
-    input: CompositionOfAspectService_Books_U!
-  ): [CompositionOfAspectService_Books]
+  create(input: [CompositionOfAspectService_Books_C]!): [CompositionOfAspectService_Books]
+  delete(filter: [CompositionOfAspectService_Books_filter]!): Int
+  update(filter: [CompositionOfAspectService_Books_filter]!, input: CompositionOfAspectService_Books_U!): [CompositionOfAspectService_Books]
 }
 
 input CompositionOfAspectService_Books_orderBy {
@@ -107,31 +76,20 @@ input CompositionOfAspectService_Books_reviews_filter {
   id: [ID_filter]
 }
 
-type CompositionOfAspectService_Books_reviews_input {
-  create(
-    input: [CompositionOfAspectService_Books_reviews_C]!
-  ): [CompositionOfAspectService_Books_reviews]
-  delete(
-    filter: [CompositionOfAspectService_Books_reviews_filter]
-  ): Int
-}
-
 input CompositionOfAspectService_Books_reviews_orderBy {
   id: SortDirection
 }
 
 type CompositionOfAspectService_input {
   Books: CompositionOfAspectService_Books_input
-  Books_chapters: CompositionOfAspectService_Books_chapters_input
-  Books_reviews: CompositionOfAspectService_Books_reviews_input
 }
 
 input ID_filter {
-  eq: [ID]
-  ge: [ID]
-  gt: [ID]
-  le: [ID]
-  lt: [ID]
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
   ne: [ID]
 }
 
