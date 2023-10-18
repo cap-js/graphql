@@ -20,7 +20,7 @@ describe('graphql - query logging with sanitization in production', () => {
   })
 
   beforeEach(async () => {
-    await data.reset() 
+    await data.reset()
     _log = jest.spyOn(console, 'info')
   })
 
