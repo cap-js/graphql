@@ -1,16 +1,6 @@
 type FieldsWithConnectionNamesService {
-  Nodes(
-    filter: [FieldsWithConnectionNamesService_Nodes_filter]
-    orderBy: [FieldsWithConnectionNamesService_Nodes_orderBy]
-    skip: Int
-    top: Int
-  ): FieldsWithConnectionNamesService_Nodes_connection
-  Root(
-    filter: [FieldsWithConnectionNamesService_Root_filter]
-    orderBy: [FieldsWithConnectionNamesService_Root_orderBy]
-    skip: Int
-    top: Int
-  ): FieldsWithConnectionNamesService_Root_connection
+  Nodes(filter: [FieldsWithConnectionNamesService_Nodes_filter], orderBy: [FieldsWithConnectionNamesService_Nodes_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Nodes_connection
+  Root(filter: [FieldsWithConnectionNamesService_Root_filter], orderBy: [FieldsWithConnectionNamesService_Root_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Root_connection
 }
 
 type FieldsWithConnectionNamesService_Nodes {
@@ -42,16 +32,9 @@ input FieldsWithConnectionNamesService_Nodes_filter {
 }
 
 type FieldsWithConnectionNamesService_Nodes_input {
-  create(
-    input: [FieldsWithConnectionNamesService_Nodes_C]!
-  ): [FieldsWithConnectionNamesService_Nodes]
-  delete(
-    filter: [FieldsWithConnectionNamesService_Nodes_filter]
-  ): Int
-  update(
-    filter: [FieldsWithConnectionNamesService_Nodes_filter]
-    input: FieldsWithConnectionNamesService_Nodes_U!
-  ): [FieldsWithConnectionNamesService_Nodes]
+  create(input: [FieldsWithConnectionNamesService_Nodes_C]!): [FieldsWithConnectionNamesService_Nodes]
+  delete(filter: [FieldsWithConnectionNamesService_Nodes_filter]!): Int
+  update(filter: [FieldsWithConnectionNamesService_Nodes_filter]!, input: FieldsWithConnectionNamesService_Nodes_U!): [FieldsWithConnectionNamesService_Nodes]
 }
 
 input FieldsWithConnectionNamesService_Nodes_orderBy {
@@ -92,16 +75,9 @@ input FieldsWithConnectionNamesService_Root_filter {
 }
 
 type FieldsWithConnectionNamesService_Root_input {
-  create(
-    input: [FieldsWithConnectionNamesService_Root_C]!
-  ): [FieldsWithConnectionNamesService_Root]
-  delete(
-    filter: [FieldsWithConnectionNamesService_Root_filter]
-  ): Int
-  update(
-    filter: [FieldsWithConnectionNamesService_Root_filter]
-    input: FieldsWithConnectionNamesService_Root_U!
-  ): [FieldsWithConnectionNamesService_Root]
+  create(input: [FieldsWithConnectionNamesService_Root_C]!): [FieldsWithConnectionNamesService_Root]
+  delete(filter: [FieldsWithConnectionNamesService_Root_filter]!): Int
+  update(filter: [FieldsWithConnectionNamesService_Root_filter]!, input: FieldsWithConnectionNamesService_Root_U!): [FieldsWithConnectionNamesService_Root]
 }
 
 input FieldsWithConnectionNamesService_Root_orderBy {
@@ -116,11 +92,11 @@ type FieldsWithConnectionNamesService_input {
 }
 
 input ID_filter {
-  eq: [ID]
-  ge: [ID]
-  gt: [ID]
-  le: [ID]
-  lt: [ID]
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
   ne: [ID]
 }
 
@@ -139,12 +115,12 @@ enum SortDirection {
 
 input String_filter {
   contains: [String]
-  endswith: [String]
-  eq: [String]
-  ge: [String]
-  gt: [String]
-  le: [String]
-  lt: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
   ne: [String]
-  startswith: [String]
+  startswith: String
 }
