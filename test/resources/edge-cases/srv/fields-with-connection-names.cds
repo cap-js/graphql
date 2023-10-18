@@ -1,3 +1,4 @@
+@graphql
 service FieldsWithConnectionNamesService {
   entity Nodes {
     key ID         : UUID;
