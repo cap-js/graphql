@@ -6,7 +6,10 @@ describe('graphql - edge cases', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../resources/edge-cases'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
-  data.autoReset(true)
+
+  beforeEach(async () => {
+    await data.reset()
+  })
 
   test('no name clashes occur between CDS names and connection fields with 2 one', async () => {
     const queryCreate = gql`
