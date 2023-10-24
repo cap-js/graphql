@@ -1109,7 +1109,7 @@ input Timestamp_filter {
 }
 
 type UserService {
-  me(filter: [UserService_me_filter], orderBy: [UserService_me_orderBy], skip: Int, top: Int): UserService_me_connection
+  me(filter: [UserService_me_filter], orderBy: [UserService_me_orderBy], skip: Int, top: Int): UserService_me
 }
 
 type UserService_input {
@@ -1132,11 +1132,6 @@ input UserService_me_U {
   id: String
   locale: String
   tenant: String
-}
-
-type UserService_me_connection {
-  nodes: [UserService_me]
-  totalCount: Int
 }
 
 input UserService_me_filter {
