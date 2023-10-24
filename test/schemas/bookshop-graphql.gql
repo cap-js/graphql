@@ -1109,7 +1109,7 @@ input Timestamp_filter {
 }
 
 type UserService {
-  me(filter: [UserService_me_filter], orderBy: [UserService_me_orderBy], skip: Int, top: Int): UserService_me
+  me: UserService_me
 }
 
 type UserService_input {
@@ -1144,10 +1144,4 @@ type UserService_me_input {
   create(input: [UserService_me_C]!): [UserService_me]
   delete(filter: [UserService_me_filter]!): Int
   update(filter: [UserService_me_filter]!, input: UserService_me_U!): [UserService_me]
-}
-
-input UserService_me_orderBy {
-  id: SortDirection
-  locale: SortDirection
-  tenant: SortDirection
 }
