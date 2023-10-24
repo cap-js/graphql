@@ -1110,10 +1110,12 @@ input Timestamp_filter {
 
 type UserService {
   me: UserService_me
+  nullableSingleton: UserService_nullableSingleton
 }
 
 type UserService_input {
   me: UserService_me_input
+  nullableSingleton: UserService_nullableSingleton_input
 }
 
 type UserService_me {
@@ -1131,4 +1133,17 @@ input UserService_me_U {
 type UserService_me_input {
   delete: Int
   update(input: UserService_me_U!): UserService_me
+}
+
+type UserService_nullableSingleton {
+  value: String
+}
+
+input UserService_nullableSingleton_U {
+  value: String
+}
+
+type UserService_nullableSingleton_input {
+  delete: Int
+  update(input: UserService_nullableSingleton_U!): UserService_nullableSingleton
 }

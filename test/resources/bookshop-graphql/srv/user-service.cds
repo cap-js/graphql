@@ -1,3 +1,10 @@
 using {UserService} from '../../bookshop/srv/user-service';
 
-annotate UserService with @graphql;
+@graphql
+extend service UserService with {
+  // TODO: move to separate test project
+  @odata.singleton.nullable
+  entity nullableSingleton {
+    value : String;
+  };
+}
