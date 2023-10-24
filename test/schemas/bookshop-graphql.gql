@@ -1128,13 +1128,7 @@ input UserService_me_U {
   tenant: String
 }
 
-input UserService_me_filter {
-  id: [String_filter]
-  locale: [String_filter]
-  tenant: [String_filter]
-}
-
 type UserService_me_input {
-  delete(filter: [UserService_me_filter]!): Int
-  update(filter: [UserService_me_filter]!, input: UserService_me_U!): [UserService_me]
+  delete: Int
+  update(input: UserService_me_U!): [UserService_me]
 }
