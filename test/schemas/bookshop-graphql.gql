@@ -1130,5 +1130,5 @@ input UserService_me_U {
 
 type UserService_me_input {
   delete: Int
-  update(input: UserService_me_U!): [UserService_me]
+  update(input: UserService_me_U!): UserService_me
 }
