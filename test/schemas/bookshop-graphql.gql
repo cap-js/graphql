@@ -1068,11 +1068,13 @@ input Int_filter {
 type Mutation {
   AdminService: AdminService_input
   CatalogService: CatalogService_input
+  UserService: UserService_input
 }
 
 type Query {
   AdminService: AdminService
   CatalogService: CatalogService
+  UserService: UserService
 }
 
 enum SortDirection {
@@ -1104,4 +1106,53 @@ input Timestamp_filter {
   le: Timestamp
   lt: Timestamp
   ne: [Timestamp]
+}
+
+type UserService {
+  me(filter: [UserService_me_filter], orderBy: [UserService_me_orderBy], skip: Int, top: Int): UserService_me_connection
+}
+
+type UserService_input {
+  me: UserService_me_input
+}
+
+type UserService_me {
+  id: String
+  locale: String
+  tenant: String
+}
+
+input UserService_me_C {
+  id: String
+  locale: String
+  tenant: String
+}
+
+input UserService_me_U {
+  id: String
+  locale: String
+  tenant: String
+}
+
+type UserService_me_connection {
+  nodes: [UserService_me]
+  totalCount: Int
+}
+
+input UserService_me_filter {
+  id: [String_filter]
+  locale: [String_filter]
+  tenant: [String_filter]
+}
+
+type UserService_me_input {
+  create(input: [UserService_me_C]!): [UserService_me]
+  delete(filter: [UserService_me_filter]!): Int
+  update(filter: [UserService_me_filter]!, input: UserService_me_U!): [UserService_me]
+}
+
+input UserService_me_orderBy {
+  id: SortDirection
+  locale: SortDirection
+  tenant: SortDirection
 }
