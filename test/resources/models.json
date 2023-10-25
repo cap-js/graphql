@@ -18,5 +18,13 @@
   {
     "name": "edge-cases/field-named-localized",
     "files": ["./edge-cases/srv/field-named-localized.cds"]
+  },
+  {
+    "name": "edge-cases/name-clashes",
+    "files": [
+      "./edge-cases/srv/service-name-clash.cds",
+      "./edge-cases/srv/entity-name-clash.cds",
+      "./edge-cases/srv/element-name-clash.cds"
+    ]
   }
 ]
