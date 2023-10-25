@@ -5,6 +5,7 @@ type ElementNameClashService {
 type ElementNameClashService_MyEntity {
   ID: ID
   myElement: String
+  myElement_1: String
 }
 
 input ElementNameClashService_MyEntity_C {
