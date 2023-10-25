@@ -1,10 +1,10 @@
-service Service_NameClashService {
+service ![Service-NameClashService] {
   entity EntityA {
     key ID : UUID;
   }
 }
 
-service Service.NameClashService {
+service ![Service NameClashService] {
   entity EntityB {
     key ID : UUID;
   }

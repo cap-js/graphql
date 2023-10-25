@@ -1,7 +1,7 @@
 service ElementNameClashService {
   entity MyEntity {
-    key ID         : UUID;
-        my_Element : String;
-        my$Element : String;
+    key ID            : UUID;
+        ![my-Element] : String;
+        ![my Element] : String;
   }
 }

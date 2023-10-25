@@ -1,10 +1,10 @@
 service EntityNameClashService {
-  entity My_Entity {
+  entity ![My-Entity] {
     key ID       : UUID;
         elementA : String;
   }
 
-  entity My.Entity {
+  entity ![My Entity] {
     key ID       : UUID;
         elementB : String;
   }
