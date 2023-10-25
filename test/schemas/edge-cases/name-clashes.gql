@@ -1,0 +1,157 @@
+type ElementNameClashService {
+  MyEntity(filter: [ElementNameClashService_MyEntity_filter], orderBy: [ElementNameClashService_MyEntity_orderBy], skip: Int, top: Int): ElementNameClashService_MyEntity_connection
+}
+
+type ElementNameClashService_MyEntity {
+  ID: ID
+  myElement: String
+}
+
+input ElementNameClashService_MyEntity_C {
+  ID: ID
+  myElement: String
+}
+
+input ElementNameClashService_MyEntity_U {
+  myElement: String
+}
+
+type ElementNameClashService_MyEntity_connection {
+  nodes: [ElementNameClashService_MyEntity]
+  totalCount: Int
+}
+
+input ElementNameClashService_MyEntity_filter {
+  ID: [ID_filter]
+  myElement: [String_filter]
+}
+
+type ElementNameClashService_MyEntity_input {
+  create(input: [ElementNameClashService_MyEntity_C]!): [ElementNameClashService_MyEntity]
+  delete(filter: [ElementNameClashService_MyEntity_filter]!): Int
+  update(filter: [ElementNameClashService_MyEntity_filter]!, input: ElementNameClashService_MyEntity_U!): [ElementNameClashService_MyEntity]
+}
+
+input ElementNameClashService_MyEntity_orderBy {
+  ID: SortDirection
+  myElement: SortDirection
+}
+
+type ElementNameClashService_input {
+  MyEntity: ElementNameClashService_MyEntity_input
+}
+
+type EntityNameClashService {
+  MyEntity(filter: [EntityNameClashService_MyEntity_filter], orderBy: [EntityNameClashService_MyEntity_orderBy], skip: Int, top: Int): EntityNameClashService_MyEntity_connection
+}
+
+type EntityNameClashService_MyEntity {
+  ID: ID
+  elementA: String
+}
+
+input EntityNameClashService_MyEntity_C {
+  ID: ID
+  elementA: String
+}
+
+input EntityNameClashService_MyEntity_U {
+  elementA: String
+}
+
+type EntityNameClashService_MyEntity_connection {
+  nodes: [EntityNameClashService_MyEntity]
+  totalCount: Int
+}
+
+input EntityNameClashService_MyEntity_filter {
+  ID: [ID_filter]
+  elementA: [String_filter]
+}
+
+type EntityNameClashService_MyEntity_input {
+  create(input: [EntityNameClashService_MyEntity_C]!): [EntityNameClashService_MyEntity]
+  delete(filter: [EntityNameClashService_MyEntity_filter]!): Int
+  update(filter: [EntityNameClashService_MyEntity_filter]!, input: EntityNameClashService_MyEntity_U!): [EntityNameClashService_MyEntity]
+}
+
+input EntityNameClashService_MyEntity_orderBy {
+  ID: SortDirection
+  elementA: SortDirection
+}
+
+type EntityNameClashService_input {
+  MyEntity: EntityNameClashService_MyEntity_input
+}
+
+input ID_filter {
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: [ID]
+}
+
+type Mutation {
+  ElementNameClashService: ElementNameClashService_input
+  EntityNameClashService: EntityNameClashService_input
+  ServiceNameClashService: ServiceNameClashService_input
+}
+
+type Query {
+  ElementNameClashService: ElementNameClashService
+  EntityNameClashService: EntityNameClashService
+  ServiceNameClashService: ServiceNameClashService
+}
+
+type ServiceNameClashService {
+  EntityB(filter: [ServiceNameClashService_EntityB_filter], orderBy: [ServiceNameClashService_EntityB_orderBy], skip: Int, top: Int): ServiceNameClashService_EntityB_connection
+}
+
+type ServiceNameClashService_EntityB {
+  ID: ID
+}
+
+input ServiceNameClashService_EntityB_C {
+  ID: ID
+}
+
+type ServiceNameClashService_EntityB_connection {
+  nodes: [ServiceNameClashService_EntityB]
+  totalCount: Int
+}
+
+input ServiceNameClashService_EntityB_filter {
+  ID: [ID_filter]
+}
+
+type ServiceNameClashService_EntityB_input {
+  create(input: [ServiceNameClashService_EntityB_C]!): [ServiceNameClashService_EntityB]
+  delete(filter: [ServiceNameClashService_EntityB_filter]!): Int
+}
+
+input ServiceNameClashService_EntityB_orderBy {
+  ID: SortDirection
+}
+
+type ServiceNameClashService_input {
+  EntityB: ServiceNameClashService_EntityB_input
+}
+
+enum SortDirection {
+  asc
+  desc
+}
+
+input String_filter {
+  contains: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: [String]
+  startswith: String
+}
