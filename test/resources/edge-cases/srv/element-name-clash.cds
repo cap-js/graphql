@@ -1,3 +1,4 @@
+@graphql
 service ElementNameClashService {
   entity MyEntity {
     key ID          : UUID;
