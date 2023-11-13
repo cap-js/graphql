@@ -364,6 +364,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
       expect(console.error.mock.calls[0][1]).toMatchObject({
         code: '500',
+        message: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           {
             code: 'Some-Custom-Code1',
