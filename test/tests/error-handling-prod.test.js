@@ -384,6 +384,7 @@ describe('graphql - error handling in production', () => {
           }
         ]
       })
+      expect(console.error.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
 
     test('Thrown error is modified in srv.on(error) handler', async () => {
