@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
- - Message interpolation, transforming error message placeholders into human-readable text (default locale)
+ - Message interpolation of logged errors, transforming error message placeholders into human-readable text (default locale)
 
 ### Changed
 
