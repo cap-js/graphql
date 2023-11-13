@@ -188,6 +188,7 @@ describe('graphql - error handling in production', () => {
           }
         ]
       })
+      expect(console.warn.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
   })
 
