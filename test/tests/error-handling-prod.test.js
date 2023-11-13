@@ -50,7 +50,8 @@ describe('graphql - error handling in production', () => {
         numericSeverity: 4,
         target: 'notEmptyI',
         type: 'cds.Integer',
-        value: undefined
+        value: undefined,
+        stack: expect.any(String)
       })
     })
 
@@ -169,7 +170,8 @@ describe('graphql - error handling in production', () => {
             numericSeverity: 4,
             target: 'inRange',
             type: 'cds.Integer',
-            value: undefined
+            value: undefined,
+            stack: expect.any(String)
           },
           {
             args: ['"foo"', '"high", "medium", "low"'],
@@ -181,7 +183,8 @@ describe('graphql - error handling in production', () => {
             numericSeverity: 4,
             target: 'oneOfEnumValues',
             type: 'cds.String',
-            value: 'foo'
+            value: 'foo',
+            stack: expect.any(String)
           }
         ]
       })
@@ -366,14 +369,16 @@ describe('graphql - error handling in production', () => {
             message: 'Some Custom Error Message 1',
             numericSeverity: 4,
             status: 418,
-            target: 'some_field'
+            target: 'some_field',
+            stack: expect.any(String)
           },
           {
             code: 'Some-Custom-Code2',
             message: 'Some Custom Error Message 2',
             numericSeverity: 4,
             status: 500,
-            target: 'some_field'
+            target: 'some_field',
+            stack: expect.any(String)
           }
         ]
       })
