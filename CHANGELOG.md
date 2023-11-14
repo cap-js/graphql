@@ -9,13 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
- - Message interpolation of logged errors, transforming error message placeholders into human-readable text (default locale)
+- Message interpolation of logged errors, transforming error message placeholders into human-readable text (default locale)
 
 ### Changed
 
 - Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
 - Improve merging of custom `graphql` protocol configuration with plugin default configuration
 - Errors representing client errors (`4xx` range) are now logged as warnings instead of errors
+- Exclude the stack trace of the outer error message in multiple error scenarios, as the inner stack trace already
+contained the precise initial segment of the outer stack trace.
 
 ### Fixed
 
