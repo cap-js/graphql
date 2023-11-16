@@ -148,8 +148,9 @@ describe('graphql - query logging with sanitization in production', () => {
 
   describe('GET requests', () => {
     test('Do not log requests with undefined queries', async () => {
-      const { status } = await GET('/graphql')
-      expect(status).toEqual(400)
+      const response = await GET('/graphql')
+      expect(response.status).toEqual(200)
+      expect(response.data).toMatch(/html/i)
       expect(_log.mock.calls.length).toEqual(0)
     })
 
