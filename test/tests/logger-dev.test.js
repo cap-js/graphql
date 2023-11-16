@@ -13,7 +13,7 @@ describe('graphql - query logging in development', () => {
   let _log
 
   beforeEach(async () => {
-    await data.reset() 
+    await data.reset()
     _log = jest.spyOn(console, 'info')
   })
 

@@ -8,7 +8,7 @@ describe('graphql - delete mutations', () => {
   axios.defaults.validateStatus = false
 
   beforeEach(async () => {
-    await data.reset() 
+    await data.reset()
   })
 
   test('delete no entries', async () => {
