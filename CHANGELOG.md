@@ -16,12 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
 - Improve merging of custom `graphql` protocol configuration with plugin default configuration
 - Errors representing client errors (`4xx` range) are now logged as warnings instead of errors
-- Exclude the stack trace of the outer logged error message in multiple error scenarios, as the inner stack trace already
-contained the precise initial segment of the outer stack trace.
+- Exclude the stack trace of the outer logged error message in multiple error scenarios, as the inner stack trace already contained the precise initial segment of the outer stack trace
 
 ### Fixed
 
 - Load custom `errorFormatter` relative to CDS project root
+- Fix internal server error when formatting errors that aren't CDS errors (thrown by CDS or in custom handlers) or instances of GraphQLError, such as the error caused by requests with undefined `query` property 
 
 ### Removed
 
