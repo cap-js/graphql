@@ -23,8 +23,8 @@ describe('graphql - query logging in development', () => {
 
   describe('POST requests', () => {
     test('Do not log requests with undefined queries', async () => {
-      const response = await POST('/graphql')
-      expect(response.status).toEqual(400)
+      const { status } = await POST('/graphql')
+      expect(status).toEqual(400)
       expect(_log.mock.calls.length).toEqual(0)
     })
 
@@ -139,8 +139,8 @@ describe('graphql - query logging in development', () => {
 
   describe('GET requests', () => {
     test('Do not log requests with undefined queries', async () => {
-      const response = await GET('/graphql')
-      expect(response.status).toEqual(400)
+      const { status } = await GET('/graphql')
+      expect(status).toEqual(400)
       expect(_log.mock.calls.length).toEqual(0)
     })
 
