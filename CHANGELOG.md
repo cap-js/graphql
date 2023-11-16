@@ -22,6 +22,7 @@ contained the precise initial segment of the outer stack trace.
 ### Fixed
 
 - Load custom `errorFormatter` relative to CDS project root
+- Fix internal server error when formatting errors that aren't CDS errors (thrown by CDS or in custom handlers) or instances of GraphQLError, such as the error caused by requests with undefined `query` property 
 
 ### Removed
 
