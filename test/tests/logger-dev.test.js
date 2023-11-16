@@ -23,8 +23,9 @@ describe('graphql - query logging in development', () => {
 
   describe('POST requests', () => {
     test('Do not log requests with undefined queries', async () => {
-      const { status } = await POST('/graphql')
-      expect(status).toEqual(400)
+      const response = await POST('/graphql')
+      expect(response.status).toEqual(400)
+      expect(response.data.errors[0]).toEqual({ message: 'Missing query' })
       expect(_log.mock.calls.length).toEqual(0)
     })
 
