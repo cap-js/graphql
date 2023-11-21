@@ -1,4 +1,4 @@
-"""Service to administer Books and Authors"""
+"""Service used by administrators to manage Books and Authors"""
 type AdminService {
   Authors(filter: [AdminService_Authors_filter], orderBy: [AdminService_Authors_orderBy], skip: Int, top: Int): AdminService_Authors_connection
   Books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
