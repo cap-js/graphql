@@ -8,7 +8,7 @@ describe('graphql - queries', () => {
   axios.defaults.validateStatus = false
 
   beforeEach(async () => {
-    await data.reset() 
+    await data.reset()
   })
 
   // REVISIT: unskip for support of configurable schema flavors

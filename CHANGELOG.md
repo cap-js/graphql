@@ -5,20 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.9.0 - tbd
+## Version 0.10.0 - tbd
 
 ### Added
 
 ### Changed
 
+### Fixed
+
+### Removed
+
+## Version 0.9.0 - 2023-11-16
+
+### Added
+
+- Message interpolation of logged errors, transforming error message placeholders into human-readable text (default locale)
+
+### Changed
+
 - Moved registration of `cds.compile.to.gql` and `cds.compile.to.graphql` targets from `@sap/cds` to `@cap-js/graphql`
 - Improve merging of custom `graphql` protocol configuration with plugin default configuration
+- Errors representing client errors (`4xx` range) are now logged as warnings instead of errors
+- Exclude the stack trace of the outer logged error message in multiple error scenarios, as the inner stack trace already contained the precise initial segment of the outer stack trace
 
 ### Fixed
 
 - Load custom `errorFormatter` relative to CDS project root
-
-### Removed
+- Fix internal server error when formatting errors that aren't CDS errors (thrown by CDS or in custom handlers) or instances of GraphQLError, such as the error caused by requests with undefined `query` property
 
 ## Version 0.8.0 - 2023-10-06
 
