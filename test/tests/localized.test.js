@@ -8,7 +8,7 @@ describe('graphql - queries with localized data', () => {
   axios.defaults.validateStatus = false
 
   beforeEach(async () => {
-    await data.reset() 
+    await data.reset()
   })
 
   test('query with default locale', async () => {

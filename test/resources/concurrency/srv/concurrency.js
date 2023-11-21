@@ -11,9 +11,9 @@ class ConcurrencyService extends cds.ApplicationService { init(){
     console.log('END ' + message)
   }
 
-  const SLEEP_DURATION_A = 3000
-  const SLEEP_DURATION_B = 1000
-  const SLEEP_DURATION_C = 2000
+  const SLEEP_DURATION_A = 300
+  const SLEEP_DURATION_B = 100
+  const SLEEP_DURATION_C = 200
 
   this.on('READ', 'A', () => logSleep(SLEEP_DURATION_A, 'READ A'))
   this.on('READ', 'B', () => logSleep(SLEEP_DURATION_B, 'READ B'))
