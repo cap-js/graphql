@@ -49,7 +49,7 @@ describe('graphql - types parsing and validation', () => {
   axios.defaults.validateStatus = false
 
   beforeEach(async () => {
-    await data.reset() 
+    await data.reset()
   })
 
   describe('cds.Binary', () => {
