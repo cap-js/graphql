@@ -263,7 +263,7 @@ input AdminService_Books_texts_orderBy {
   title: SortDirection
 }
 
-"""A chapter of a Book"""
+"""A Chapter of a Book"""
 type AdminService_Chapters {
   book: AdminService_Books
   book_ID: Int
@@ -711,7 +711,7 @@ input CatalogService_Books_texts_orderBy {
   title: SortDirection
 }
 
-"""A chapter of a Book"""
+"""A Chapter of a Book"""
 type CatalogService_Chapters {
   book: CatalogService_Books
   book_ID: Int
