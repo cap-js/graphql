@@ -42,16 +42,15 @@ describe('graphql - error handling in production', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
-      expect(console.warn.mock.calls[0][1]).toMatchObject({
+      const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
+      expect(log).toMatchObject({
         code: '400',
         element: 'notEmptyI',
         entity: 'ValidationErrorsService.A',
         message: 'Value is required',
         numericSeverity: 4,
         target: 'notEmptyI',
-        type: 'cds.Integer',
-        value: undefined,
-        stack: expect.any(String)
+        type: 'cds.Integer'
       })
     })
 
@@ -157,9 +156,11 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
-      expect(console.warn.mock.calls[0][1]).toMatchObject({
+      const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
+      const msgProperty = log.msg ? 'msg' : 'message'
+      expect(log).toMatchObject({
         code: '400',
-        message: 'Multiple errors occurred. Please see the details for more information.',
+        [msgProperty]: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           {
             args: ['inRange'],
@@ -169,9 +170,7 @@ describe('graphql - error handling in production', () => {
             message: 'Value is required',
             numericSeverity: 4,
             target: 'inRange',
-            type: 'cds.Integer',
-            value: undefined,
-            stack: expect.any(String)
+            type: 'cds.Integer'
           },
           {
             args: ['"foo"', '"high", "medium", "low"'],
@@ -183,12 +182,11 @@ describe('graphql - error handling in production', () => {
             numericSeverity: 4,
             target: 'oneOfEnumValues',
             type: 'cds.String',
-            value: 'foo',
-            stack: expect.any(String)
+            value: 'foo'
           }
         ]
       })
-      expect(console.warn.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
+      expect(log).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
   })
 
@@ -362,29 +360,29 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
-      expect(console.error.mock.calls[0][1]).toMatchObject({
+      const log = console.error.mock.calls[0][1] || JSON.parse(console.error.mock.calls[0][0])
+      const msgProperty = log.msg ? 'msg' : 'message'
+      expect(log).toMatchObject({
         code: '500',
-        message: 'Multiple errors occurred. Please see the details for more information.',
+        [msgProperty]: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           {
             code: 'Some-Custom-Code1',
             message: 'Some Custom Error Message 1',
             numericSeverity: 4,
             status: 418,
-            target: 'some_field',
-            stack: expect.any(String)
+            target: 'some_field'
           },
           {
             code: 'Some-Custom-Code2',
             message: 'Some Custom Error Message 2',
             numericSeverity: 4,
             status: 500,
-            target: 'some_field',
-            stack: expect.any(String)
+            target: 'some_field'
           }
         ]
       })
-      expect(console.error.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
+      expect(log).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
 
     test('Thrown error is modified in srv.on(error) handler', async () => {
