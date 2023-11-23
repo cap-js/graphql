@@ -1,3 +1,4 @@
+"""Service used by administrators to manage Books and Authors"""
 type AdminService {
   Authors(filter: [AdminService_Authors_filter], orderBy: [AdminService_Authors_orderBy], skip: Int, top: Int): AdminService_Authors_connection
   Books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
@@ -9,14 +10,23 @@ type AdminService {
   Genres_texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type AdminService_Authors {
   ID: Int
   books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
   dateOfBirth: Date
   dateOfDeath: Date
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   name: String
   placeOfBirth: String
@@ -87,17 +97,32 @@ input AdminService_Authors_orderBy {
   placeOfDeath: SortDirection
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type AdminService_Books {
   ID: Int
   author: AdminService_Authors
   chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
   currency: AdminService_Currencies
   descr: String
   genre: AdminService_Genres
   image: Binary
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   price: Decimal
   stock: Int
@@ -180,6 +205,8 @@ input AdminService_Books_orderBy {
 type AdminService_Books_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   title: String
 }
@@ -221,11 +248,16 @@ input AdminService_Books_texts_orderBy {
   title: SortDirection
 }
 
+"""A Chapter of a Book"""
 type AdminService_Chapters {
   book: AdminService_Books
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   number: Int
   title: String
@@ -278,6 +310,11 @@ input AdminService_Chapters_orderBy {
   title: SortDirection
 }
 
+"""
+Code list for currencies
+
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
+"""
 type AdminService_Currencies {
   code: String
   descr: String
@@ -334,6 +371,8 @@ input AdminService_Currencies_orderBy {
 type AdminService_Currencies_texts {
   code: String
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -375,6 +414,7 @@ input AdminService_Currencies_texts_orderBy {
   name: SortDirection
 }
 
+"""Hierarchically organized Code List for Genres"""
 type AdminService_Genres {
   ID: Int
   children(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
@@ -427,6 +467,8 @@ input AdminService_Genres_orderBy {
 type AdminService_Genres_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -500,11 +542,18 @@ type CatalogService {
   ListOfBooks(filter: [CatalogService_ListOfBooks_filter], orderBy: [CatalogService_ListOfBooks_orderBy], skip: Int, top: Int): CatalogService_ListOfBooks_connection
 }
 
+"""For display in details pages"""
 type CatalogService_Books {
   ID: Int
   author: String
   chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
   createdAt: Timestamp
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
   currency: CatalogService_Currencies
   descr: String
   genre: CatalogService_Genres
@@ -585,6 +634,8 @@ input CatalogService_Books_orderBy {
 type CatalogService_Books_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   title: String
 }
@@ -626,11 +677,16 @@ input CatalogService_Books_texts_orderBy {
   title: SortDirection
 }
 
+"""A Chapter of a Book"""
 type CatalogService_Chapters {
   book: CatalogService_Books
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   number: Int
   title: String
@@ -683,6 +739,11 @@ input CatalogService_Chapters_orderBy {
   title: SortDirection
 }
 
+"""
+Code list for currencies
+
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
+"""
 type CatalogService_Currencies {
   code: String
   descr: String
@@ -739,6 +800,8 @@ input CatalogService_Currencies_orderBy {
 type CatalogService_Currencies_texts {
   code: String
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -780,6 +843,7 @@ input CatalogService_Currencies_texts_orderBy {
   name: SortDirection
 }
 
+"""Hierarchically organized Code List for Genres"""
 type CatalogService_Genres {
   ID: Int
   children(filter: [CatalogService_Genres_filter], orderBy: [CatalogService_Genres_orderBy], skip: Int, top: Int): CatalogService_Genres_connection
@@ -832,6 +896,8 @@ input CatalogService_Genres_orderBy {
 type CatalogService_Genres_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -873,11 +939,18 @@ input CatalogService_Genres_texts_orderBy {
   name: SortDirection
 }
 
+"""For displaying lists of Books"""
 type CatalogService_ListOfBooks {
   ID: Int
   author: String
   chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
   createdAt: Timestamp
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
   currency: CatalogService_Currencies
   genre: CatalogService_Genres
   image: Binary
