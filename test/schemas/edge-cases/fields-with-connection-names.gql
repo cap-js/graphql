@@ -1,3 +1,7 @@
+interface Connection {
+  totalCount: Int
+}
+
 type FieldsWithConnectionNamesService {
   Nodes(filter: [FieldsWithConnectionNamesService_Nodes_filter], orderBy: [FieldsWithConnectionNamesService_Nodes_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Nodes_connection
   Root(filter: [FieldsWithConnectionNamesService_Root_filter], orderBy: [FieldsWithConnectionNamesService_Root_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Root_connection
@@ -20,7 +24,7 @@ input FieldsWithConnectionNamesService_Nodes_U {
   totalCount: String
 }
 
-type FieldsWithConnectionNamesService_Nodes_connection {
+type FieldsWithConnectionNamesService_Nodes_connection implements Connection {
   nodes: [FieldsWithConnectionNamesService_Nodes]
   totalCount: Int
 }
@@ -63,7 +67,7 @@ input FieldsWithConnectionNamesService_Root_U {
   totalCount: String
 }
 
-type FieldsWithConnectionNamesService_Root_connection {
+type FieldsWithConnectionNamesService_Root_connection implements Connection {
   nodes: [FieldsWithConnectionNamesService_Root]
   totalCount: Int
 }

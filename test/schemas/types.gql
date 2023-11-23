@@ -13,6 +13,10 @@ input Boolean_filter {
   ne: [Boolean]
 }
 
+interface Connection {
+  totalCount: Int
+}
+
 """
 The `Date` scalar type represents date values as strings in the ISO 8601 format `YYYY-MM-DD`.
 """
@@ -232,7 +236,7 @@ input TypesService_MyEntity_U {
   myUInt8: UInt8
 }
 
-type TypesService_MyEntity_connection {
+type TypesService_MyEntity_connection implements Connection {
   nodes: [TypesService_MyEntity]
   totalCount: Int
 }

@@ -27,7 +27,7 @@ input CompositionOfAspectService_Books_chapters_C {
   id: ID
 }
 
-type CompositionOfAspectService_Books_chapters_connection {
+type CompositionOfAspectService_Books_chapters_connection implements Connection {
   nodes: [CompositionOfAspectService_Books_chapters]
   totalCount: Int
 }
@@ -40,7 +40,7 @@ input CompositionOfAspectService_Books_chapters_orderBy {
   id: SortDirection
 }
 
-type CompositionOfAspectService_Books_connection {
+type CompositionOfAspectService_Books_connection implements Connection {
   nodes: [CompositionOfAspectService_Books]
   totalCount: Int
 }
@@ -67,7 +67,7 @@ input CompositionOfAspectService_Books_reviews_C {
   id: ID
 }
 
-type CompositionOfAspectService_Books_reviews_connection {
+type CompositionOfAspectService_Books_reviews_connection implements Connection {
   nodes: [CompositionOfAspectService_Books_reviews]
   totalCount: Int
 }
@@ -82,6 +82,10 @@ input CompositionOfAspectService_Books_reviews_orderBy {
 
 type CompositionOfAspectService_input {
   Books: CompositionOfAspectService_Books_input
+}
+
+interface Connection {
+  totalCount: Int
 }
 
 input ID_filter {
