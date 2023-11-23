@@ -2,8 +2,9 @@ type CompositionOfAspectService {
   Books(filter: [CompositionOfAspectService_Books_filter], orderBy: [CompositionOfAspectService_Books_orderBy], skip: Int, top: Int): CompositionOfAspectService_Books_connection
 }
 
-type CompositionOfAspectService_Books {
+type CompositionOfAspectService_Books implements Node {
   chapters(filter: [CompositionOfAspectService_Books_chapters_filter], orderBy: [CompositionOfAspectService_Books_chapters_orderBy], skip: Int, top: Int): CompositionOfAspectService_Books_chapters_connection
+  dummy: Int
   id: ID
   reviews(filter: [CompositionOfAspectService_Books_reviews_filter], orderBy: [CompositionOfAspectService_Books_reviews_orderBy], skip: Int, top: Int): CompositionOfAspectService_Books_reviews_connection
 }
@@ -19,7 +20,8 @@ input CompositionOfAspectService_Books_U {
   reviews: [CompositionOfAspectService_Books_reviews_C]
 }
 
-type CompositionOfAspectService_Books_chapters {
+type CompositionOfAspectService_Books_chapters implements Node {
+  dummy: Int
   id: ID
 }
 
@@ -59,7 +61,8 @@ input CompositionOfAspectService_Books_orderBy {
   id: SortDirection
 }
 
-type CompositionOfAspectService_Books_reviews {
+type CompositionOfAspectService_Books_reviews implements Node {
+  dummy: Int
   id: ID
 }
 
@@ -85,6 +88,7 @@ type CompositionOfAspectService_input {
 }
 
 interface Connection {
+  nodes: [Node]
   totalCount: Int
 }
 
@@ -99,6 +103,10 @@ input ID_filter {
 
 type Mutation {
   CompositionOfAspectService: CompositionOfAspectService_input
+}
+
+interface Node {
+  dummy: Int
 }
 
 type Query {

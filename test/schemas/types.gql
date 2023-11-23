@@ -14,6 +14,7 @@ input Boolean_filter {
 }
 
 interface Connection {
+  nodes: [Node]
   totalCount: Int
 }
 
@@ -118,6 +119,10 @@ type Mutation {
   TypesService: TypesService_input
 }
 
+interface Node {
+  dummy: Int
+}
+
 type Query {
   TypesService: TypesService
 }
@@ -171,7 +176,8 @@ type TypesService {
   MyEntity(filter: [TypesService_MyEntity_filter], orderBy: [TypesService_MyEntity_orderBy], skip: Int, top: Int): TypesService_MyEntity_connection
 }
 
-type TypesService_MyEntity {
+type TypesService_MyEntity implements Node {
+  dummy: Int
   myBinary: Binary
   myBoolean: Boolean
   myDate: Date

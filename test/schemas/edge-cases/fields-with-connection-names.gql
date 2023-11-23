@@ -1,4 +1,5 @@
 interface Connection {
+  nodes: [Node]
   totalCount: Int
 }
 
@@ -7,8 +8,9 @@ type FieldsWithConnectionNamesService {
   Root(filter: [FieldsWithConnectionNamesService_Root_filter], orderBy: [FieldsWithConnectionNamesService_Root_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Root_connection
 }
 
-type FieldsWithConnectionNamesService_Nodes {
+type FieldsWithConnectionNamesService_Nodes implements Node {
   ID: ID
+  dummy: Int
   nodes: String
   totalCount: String
 }
@@ -47,8 +49,9 @@ input FieldsWithConnectionNamesService_Nodes_orderBy {
   totalCount: SortDirection
 }
 
-type FieldsWithConnectionNamesService_Root {
+type FieldsWithConnectionNamesService_Root implements Node {
   ID: ID
+  dummy: Int
   nodes: FieldsWithConnectionNamesService_Nodes
   nodes_ID: ID
   totalCount: String
@@ -106,6 +109,10 @@ input ID_filter {
 
 type Mutation {
   FieldsWithConnectionNamesService: FieldsWithConnectionNamesService_input
+}
+
+interface Node {
+  dummy: Int
 }
 
 type Query {

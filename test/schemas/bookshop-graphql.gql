@@ -15,7 +15,7 @@ Aspect to capture changes by user and name
 
 See https://cap.cloud.sap/docs/cds/common#aspect-managed
 """
-type AdminService_Authors {
+type AdminService_Authors implements Node {
   ID: Int
   books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
   createdAt: Timestamp
@@ -24,6 +24,7 @@ type AdminService_Authors {
   createdBy: String
   dateOfBirth: Date
   dateOfDeath: Date
+  dummy: Int
   modifiedAt: Timestamp
 
   """Canonical user ID"""
@@ -102,7 +103,7 @@ Aspect to capture changes by user and name
 
 See https://cap.cloud.sap/docs/cds/common#aspect-managed
 """
-type AdminService_Books {
+type AdminService_Books implements Node {
   ID: Int
   author: AdminService_Authors
   author_ID: Int
@@ -120,6 +121,7 @@ type AdminService_Books {
   currency: AdminService_Currencies
   currency_code: String
   descr: String
+  dummy: Int
   genre: AdminService_Genres
   genre_ID: Int
   image: Binary
@@ -217,9 +219,10 @@ input AdminService_Books_orderBy {
   title: SortDirection
 }
 
-type AdminService_Books_texts {
+type AdminService_Books_texts implements Node {
   ID: Int
   descr: String
+  dummy: Int
 
   """Type for a language code"""
   locale: String
@@ -264,13 +267,14 @@ input AdminService_Books_texts_orderBy {
 }
 
 """A Chapter of a Book"""
-type AdminService_Chapters {
+type AdminService_Chapters implements Node {
   book: AdminService_Books
   book_ID: Int
   createdAt: Timestamp
 
   """Canonical user ID"""
   createdBy: String
+  dummy: Int
   modifiedAt: Timestamp
 
   """Canonical user ID"""
@@ -334,9 +338,10 @@ Code list for currencies
 
 See https://cap.cloud.sap/docs/cds/common#entity-currencies
 """
-type AdminService_Currencies {
+type AdminService_Currencies implements Node {
   code: String
   descr: String
+  dummy: Int
   minorUnit: Int16
   name: String
   symbol: String
@@ -387,9 +392,10 @@ input AdminService_Currencies_orderBy {
   symbol: SortDirection
 }
 
-type AdminService_Currencies_texts {
+type AdminService_Currencies_texts implements Node {
   code: String
   descr: String
+  dummy: Int
 
   """Type for a language code"""
   locale: String
@@ -434,10 +440,11 @@ input AdminService_Currencies_texts_orderBy {
 }
 
 """Hierarchically organized Code List for Genres"""
-type AdminService_Genres {
+type AdminService_Genres implements Node {
   ID: Int
   children(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
   descr: String
+  dummy: Int
   name: String
   parent: AdminService_Genres
   parent_ID: Int
@@ -488,9 +495,10 @@ input AdminService_Genres_orderBy {
   parent_ID: SortDirection
 }
 
-type AdminService_Genres_texts {
+type AdminService_Genres_texts implements Node {
   ID: Int
   descr: String
+  dummy: Int
 
   """Type for a language code"""
   locale: String
@@ -567,7 +575,7 @@ type CatalogService {
 }
 
 """For display in details pages"""
-type CatalogService_Books {
+type CatalogService_Books implements Node {
   ID: Int
   author: String
   chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
@@ -581,6 +589,7 @@ type CatalogService_Books {
   currency: CatalogService_Currencies
   currency_code: String
   descr: String
+  dummy: Int
   genre: CatalogService_Genres
   genre_ID: Int
   image: Binary
@@ -665,9 +674,10 @@ input CatalogService_Books_orderBy {
   title: SortDirection
 }
 
-type CatalogService_Books_texts {
+type CatalogService_Books_texts implements Node {
   ID: Int
   descr: String
+  dummy: Int
 
   """Type for a language code"""
   locale: String
@@ -712,13 +722,14 @@ input CatalogService_Books_texts_orderBy {
 }
 
 """A Chapter of a Book"""
-type CatalogService_Chapters {
+type CatalogService_Chapters implements Node {
   book: CatalogService_Books
   book_ID: Int
   createdAt: Timestamp
 
   """Canonical user ID"""
   createdBy: String
+  dummy: Int
   modifiedAt: Timestamp
 
   """Canonical user ID"""
@@ -782,9 +793,10 @@ Code list for currencies
 
 See https://cap.cloud.sap/docs/cds/common#entity-currencies
 """
-type CatalogService_Currencies {
+type CatalogService_Currencies implements Node {
   code: String
   descr: String
+  dummy: Int
   minorUnit: Int16
   name: String
   symbol: String
@@ -835,9 +847,10 @@ input CatalogService_Currencies_orderBy {
   symbol: SortDirection
 }
 
-type CatalogService_Currencies_texts {
+type CatalogService_Currencies_texts implements Node {
   code: String
   descr: String
+  dummy: Int
 
   """Type for a language code"""
   locale: String
@@ -882,10 +895,11 @@ input CatalogService_Currencies_texts_orderBy {
 }
 
 """Hierarchically organized Code List for Genres"""
-type CatalogService_Genres {
+type CatalogService_Genres implements Node {
   ID: Int
   children(filter: [CatalogService_Genres_filter], orderBy: [CatalogService_Genres_orderBy], skip: Int, top: Int): CatalogService_Genres_connection
   descr: String
+  dummy: Int
   name: String
   parent: CatalogService_Genres
   parent_ID: Int
@@ -936,9 +950,10 @@ input CatalogService_Genres_orderBy {
   parent_ID: SortDirection
 }
 
-type CatalogService_Genres_texts {
+type CatalogService_Genres_texts implements Node {
   ID: Int
   descr: String
+  dummy: Int
 
   """Type for a language code"""
   locale: String
@@ -983,7 +998,7 @@ input CatalogService_Genres_texts_orderBy {
 }
 
 """For displaying lists of Books"""
-type CatalogService_ListOfBooks {
+type CatalogService_ListOfBooks implements Node {
   ID: Int
   author: String
   chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
@@ -996,6 +1011,7 @@ type CatalogService_ListOfBooks {
   """
   currency: CatalogService_Currencies
   currency_code: String
+  dummy: Int
   genre: CatalogService_Genres
   genre_ID: Int
   image: Binary
@@ -1088,6 +1104,7 @@ type CatalogService_input {
 }
 
 interface Connection {
+  nodes: [Node]
   totalCount: Int
 }
 
@@ -1145,6 +1162,10 @@ input Int_filter {
 type Mutation {
   AdminService: AdminService_input
   CatalogService: CatalogService_input
+}
+
+interface Node {
+  dummy: Int
 }
 
 type Query {

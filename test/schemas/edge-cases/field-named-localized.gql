@@ -1,4 +1,5 @@
 interface Connection {
+  nodes: [Node]
   totalCount: Int
 }
 
@@ -7,8 +8,9 @@ type FieldNamedLocalizedService {
   localized(filter: [FieldNamedLocalizedService_localized_filter], orderBy: [FieldNamedLocalizedService_localized_orderBy], skip: Int, top: Int): FieldNamedLocalizedService_localized_connection
 }
 
-type FieldNamedLocalizedService_Root {
+type FieldNamedLocalizedService_Root implements Node {
   ID: Int
+  dummy: Int
   localized(filter: [FieldNamedLocalizedService_localized_filter], orderBy: [FieldNamedLocalizedService_localized_orderBy], skip: Int, top: Int): FieldNamedLocalizedService_localized_connection
 }
 
@@ -45,8 +47,9 @@ type FieldNamedLocalizedService_input {
   localized: FieldNamedLocalizedService_localized_input
 }
 
-type FieldNamedLocalizedService_localized {
+type FieldNamedLocalizedService_localized implements Node {
   ID: Int
+  dummy: Int
   localized: String
   root: FieldNamedLocalizedService_Root
   root_ID: Int
@@ -99,6 +102,10 @@ input Int_filter {
 
 type Mutation {
   FieldNamedLocalizedService: FieldNamedLocalizedService_input
+}
+
+interface Node {
+  dummy: Int
 }
 
 type Query {
