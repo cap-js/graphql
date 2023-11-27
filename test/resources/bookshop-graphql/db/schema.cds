@@ -8,6 +8,7 @@ extend bookshop.Books with {
                on chapters.book = $self;
 }
 
+/** A Chapter of a Book */
 entity Chapters : managed {
   key book   : Association to bookshop.Books;
   key number : Integer;
