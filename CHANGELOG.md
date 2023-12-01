@@ -9,9 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support for generating GraphQL descriptions from CDS doc comments of services, entities, and elements
+
 ### Changed
 
+- Bump `@graphiql/plugin-explorer` version to `^1`
+
 ### Fixed
+
+- Name clashes when CDS elements are named `nodes` or `totalCount`
 
 ### Removed
 
