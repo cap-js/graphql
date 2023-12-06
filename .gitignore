@@ -3,3 +3,6 @@ package-lock.json
 .idea
 .DS_Store
 .vscode
+
+# cds-typer
+@cds-models/
