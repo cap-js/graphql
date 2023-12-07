@@ -1,3 +1,6 @@
+// REVISIT: test should not fail due to outbox entities
+process.env.CDS_REQUIRES_OUTBOX = false
+
 describe('graphql - query logging with sanitization in production', () => {
   process.env.NODE_ENV = 'production'
   const cds = require('@sap/cds/lib')
