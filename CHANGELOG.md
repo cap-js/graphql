@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump `@graphiql/plugin-explorer` version to `^1`
+- Ignore fields that represent foreign keys in GraphQL schema generation
 
 ### Fixed
 
