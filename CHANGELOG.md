@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Name clashes when CDS elements are named `nodes` or `totalCount`
+- Parsing of `null` values in lists
 
 ### Removed
 
