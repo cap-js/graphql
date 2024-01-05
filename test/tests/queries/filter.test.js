@@ -235,6 +235,33 @@ describe('graphql - filter', () => {
         expect(response.data).toEqual({ data })
       })
 
+      test('query with filter operator conjunction', async () => {
+        const query = gql`
+          {
+            AdminService {
+              Books(filter: { ID: { ne: [201, 207, 251] } }) {
+                nodes {
+                  ID
+                  title
+                }
+              }
+            }
+          }
+        `
+        const data = {
+          AdminService: {
+            Books: {
+              nodes: [
+                { ID: 252, title: 'Eleonora' },
+                { ID: 271, title: 'Catweazle' }
+              ]
+            }
+          }
+        }
+        const response = await POST('/graphql', { query })
+        expect(response.data).toEqual({ data })
+      })
+
       test('query with simple filter wrapped as lists', async () => {
         const query = gql`
           {
