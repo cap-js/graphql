@@ -302,5 +302,23 @@ describe('graphql - enrich AST ', () => {
       const value = enrichedAST[0].selectionSet.selections[0].arguments[0].value.fields[0].value.fields[0].value.value
       expect(value).toEqual(null)
     })
+
+    test('null value passed as nested input value within a list has a value of null', async () => {
+      const query = gql`
+        {
+          AdminService {
+            Books(filter: { ID: { ne: [1, null, 3] } }) {
+              totalCount
+            }
+          }
+        }
+      `
+      const document = parse(query)
+      const fakeInfo = fakeInfoObject(document, bookshopSchema, 'Query')
+      const enrichedAST = enrich(fakeInfo)
+      const value =
+        enrichedAST[0].selectionSet.selections[0].arguments[0].value.fields[0].value.fields[0].value.values[1].value
+      expect(value).toEqual(null)
+    })
   })
 })
