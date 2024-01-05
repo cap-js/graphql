@@ -27,6 +27,7 @@ input DateTime_filter {
   eq: DateTime
   ge: DateTime
   gt: DateTime
+  in: [DateTime]
   le: DateTime
   lt: DateTime
   ne: [DateTime]
@@ -36,6 +37,7 @@ input Date_filter {
   eq: Date
   ge: Date
   gt: Date
+  in: [Date]
   le: Date
   lt: Date
   ne: [Date]
@@ -50,6 +52,7 @@ input Decimal_filter {
   eq: Decimal
   ge: Decimal
   gt: Decimal
+  in: [Decimal]
   le: Decimal
   lt: Decimal
   ne: [Decimal]
@@ -59,6 +62,7 @@ input Float_filter {
   eq: Float
   ge: Float
   gt: Float
+  in: [Float]
   le: Float
   lt: Float
   ne: [Float]
@@ -68,6 +72,7 @@ input ID_filter {
   eq: ID
   ge: ID
   gt: ID
+  in: [ID]
   le: ID
   lt: ID
   ne: [ID]
@@ -82,6 +87,7 @@ input Int16_filter {
   eq: Int16
   ge: Int16
   gt: Int16
+  in: [Int16]
   le: Int16
   lt: Int16
   ne: [Int16]
@@ -96,6 +102,7 @@ input Int64_filter {
   eq: Int64
   ge: Int64
   gt: Int64
+  in: [Int64]
   le: Int64
   lt: Int64
   ne: [Int64]
@@ -105,6 +112,7 @@ input Int_filter {
   eq: Int
   ge: Int
   gt: Int
+  in: [Int]
   le: Int
   lt: Int
   ne: [Int]
@@ -129,6 +137,7 @@ input String_filter {
   eq: String
   ge: String
   gt: String
+  in: [String]
   le: String
   lt: String
   ne: [String]
@@ -144,6 +153,7 @@ input Time_filter {
   eq: Time
   ge: Time
   gt: Time
+  in: [Time]
   le: Time
   lt: Time
   ne: [Time]
@@ -158,6 +168,7 @@ input Timestamp_filter {
   eq: Timestamp
   ge: Timestamp
   gt: Timestamp
+  in: [Timestamp]
   le: Timestamp
   lt: Timestamp
   ne: [Timestamp]
@@ -300,6 +311,7 @@ input UInt8_filter {
   eq: UInt8
   ge: UInt8
   gt: UInt8
+  in: [UInt8]
   le: UInt8
   lt: UInt8
   ne: [UInt8]

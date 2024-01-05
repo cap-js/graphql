@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support for generating GraphQL descriptions from CDS doc comments of services, entities, and elements
+- Support for operator `in` for filtering on lists of values
 
 ### Changed
 

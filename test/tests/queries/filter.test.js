@@ -382,6 +382,34 @@ describe('graphql - filter', () => {
         expect(response.data).toEqual({ data })
       })
 
+      test('query with filter with in operator', async () => {
+        const query = gql`
+          {
+            AdminService {
+              Books(filter: [{ ID: { in: [201, 251] }},  { title: { contains: "cat" } }]) {
+                nodes {
+                  ID
+                  title
+                }
+              }
+            }
+          }
+        `
+        const data = {
+          AdminService: {
+            Books: {
+              nodes: [
+                { ID: 201, title: 'Wuthering Heights' },
+                { ID: 251, title: 'The Raven' },
+                { ID: 271, title: 'Catweazle' }
+              ]
+            }
+          }
+        }
+        const response = await POST('/graphql', { query })
+        expect(response.data).toEqual({ data })
+      })
+
       test('query with filter joined by OR on different fields', async () => {
         const query = gql`
           {

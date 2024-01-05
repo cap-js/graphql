@@ -1096,6 +1096,7 @@ input Date_filter {
   eq: Date
   ge: Date
   gt: Date
+  in: [Date]
   le: Date
   lt: Date
   ne: [Date]
@@ -1110,6 +1111,7 @@ input Decimal_filter {
   eq: Decimal
   ge: Decimal
   gt: Decimal
+  in: [Decimal]
   le: Decimal
   lt: Decimal
   ne: [Decimal]
@@ -1124,6 +1126,7 @@ input Int16_filter {
   eq: Int16
   ge: Int16
   gt: Int16
+  in: [Int16]
   le: Int16
   lt: Int16
   ne: [Int16]
@@ -1133,6 +1136,7 @@ input Int_filter {
   eq: Int
   ge: Int
   gt: Int
+  in: [Int]
   le: Int
   lt: Int
   ne: [Int]
@@ -1159,6 +1163,7 @@ input String_filter {
   eq: String
   ge: String
   gt: String
+  in: [String]
   le: String
   lt: String
   ne: [String]
@@ -1174,6 +1179,7 @@ input Timestamp_filter {
   eq: Timestamp
   ge: Timestamp
   gt: Timestamp
+  in: [Timestamp]
   le: Timestamp
   lt: Timestamp
   ne: [Timestamp]
