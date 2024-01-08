@@ -138,6 +138,7 @@ input ID_filter {
   eq: ID
   ge: ID
   gt: ID
+  in: [ID]
   le: ID
   lt: ID
   ne: [ID]
