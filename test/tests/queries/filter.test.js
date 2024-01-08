@@ -262,6 +262,58 @@ describe('graphql - filter', () => {
         expect(response.data).toEqual({ data })
       })
 
+      test('query with filter with in operator with single value', async () => {
+        const query = gql`
+          {
+            AdminService {
+              Books(filter: { ID: { in: 201 } }) {
+                nodes {
+                  ID
+                  title
+                }
+              }
+            }
+          }
+        `
+        const data = {
+          AdminService: {
+            Books: {
+              nodes: [{ ID: 201, title: 'Wuthering Heights' }]
+            }
+          }
+        }
+        const response = await POST('/graphql', { query })
+        expect(response.data).toEqual({ data })
+      })
+
+      test('query with filter with in operator with multiple values', async () => {
+        const query = gql`
+          {
+            AdminService {
+              Books(filter: [{ ID: { in: [201, 251] } }, { title: { contains: "cat" } }]) {
+                nodes {
+                  ID
+                  title
+                }
+              }
+            }
+          }
+        `
+        const data = {
+          AdminService: {
+            Books: {
+              nodes: [
+                { ID: 201, title: 'Wuthering Heights' },
+                { ID: 251, title: 'The Raven' },
+                { ID: 271, title: 'Catweazle' }
+              ]
+            }
+          }
+        }
+        const response = await POST('/graphql', { query })
+        expect(response.data).toEqual({ data })
+      })
+
       test('query with simple filter wrapped as lists', async () => {
         const query = gql`
           {

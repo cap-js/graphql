@@ -88,6 +88,7 @@ input Int_filter {
   eq: Int
   ge: Int
   gt: Int
+  in: [Int]
   le: Int
   lt: Int
   ne: [Int]
@@ -112,6 +113,7 @@ input String_filter {
   eq: String
   ge: String
   gt: String
+  in: [String]
   le: String
   lt: String
   ne: [String]
