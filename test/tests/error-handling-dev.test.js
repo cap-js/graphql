@@ -7,6 +7,15 @@ describe('graphql - error handling in development', () => {
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
+  beforeEach(() => {
+    jest.spyOn(console, 'warn')
+    jest.spyOn(console, 'error')
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   describe('Errors thrown by CDS', () => {
     test('Single @mandatory validation error', async () => {
       const query = gql`
@@ -175,6 +184,38 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
+      expect(console.warn.mock.calls[0][1]).toMatchObject({
+        code: '400',
+        message: 'Multiple errors occurred. Please see the details for more information.',
+        details: [
+          {
+            args: ['inRange'],
+            code: '400',
+            element: 'inRange',
+            entity: 'ValidationErrorsService.C',
+            message: 'Value is required',
+            numericSeverity: 4,
+            target: 'inRange',
+            type: 'cds.Integer',
+            value: undefined,
+            stack: expect.any(String)
+          },
+          {
+            args: ['"foo"', '"high", "medium", "low"'],
+            code: '400',
+            element: 'oneOfEnumValues',
+            entity: 'ValidationErrorsService.C',
+            enum: ['@assert.range', 'type', 'enum'],
+            message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
+            numericSeverity: 4,
+            target: 'oneOfEnumValues',
+            type: 'cds.String',
+            value: 'foo',
+            stack: expect.any(String)
+          }
+        ]
+      })
+      expect(console.warn.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
   })
 
@@ -361,6 +402,29 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
+      expect(console.error.mock.calls[0][1]).toMatchObject({
+        code: '500',
+        message: 'Multiple errors occurred. Please see the details for more information.',
+        details: [
+          {
+            code: 'Some-Custom-Code1',
+            message: 'Some Custom Error Message 1',
+            numericSeverity: 4,
+            status: 418,
+            target: 'some_field',
+            stack: expect.any(String)
+          },
+          {
+            code: 'Some-Custom-Code2',
+            message: 'Some Custom Error Message 2',
+            numericSeverity: 4,
+            status: 500,
+            target: 'some_field',
+            stack: expect.any(String)
+          }
+        ]
+      })
+      expect(console.error.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
 
     test('Thrown error is modified in srv.on(error) handler', async () => {

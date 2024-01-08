@@ -22,5 +22,9 @@
   {
     "name": "edge-cases/field-named-localized",
     "files": ["./edge-cases/srv/field-named-localized.cds"]
+  },
+  {
+    "name": "edge-cases/fields-with-connection-names",
+    "files": ["./edge-cases/srv/fields-with-connection-names.cds"]
   }
 ]
