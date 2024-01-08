@@ -386,7 +386,7 @@ describe('graphql - filter', () => {
         const query = gql`
           {
             AdminService {
-              Books(filter: [{ ID: { in: [201, 251] }},  { title: { contains: "cat" } }]) {
+              Books(filter: [{ ID: { in: [201, 251] } }, { title: { contains: "cat" } }]) {
                 nodes {
                   ID
                   title
