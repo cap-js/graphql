@@ -26,6 +26,22 @@ describe('graphql - annotations', () => {
       expect(response.data.errors[0].message).toMatch(/^Cannot query field "NotAnnotated" on type "Query"\./)
     })
 
+    test('service annotated with "@protocol: \'none\'" is not served', async () => {
+      const query = gql`
+        {
+          AnnotatedWithAtProtocolNone {
+            A {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST(path, { query })
+      expect(response.data.errors[0].message).toMatch(/^Cannot query field "AnnotatedWithAtProtocolNone " on type "Query"\./)
+    })
+
     test('service annotated with non-GraphQL protocol is not served', async () => {
       const query = gql`
         {
