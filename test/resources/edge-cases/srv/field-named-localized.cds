@@ -1,12 +1,5 @@
-using {managed} from '@sap/cds/common';
-
+@graphql
 service FieldNamedLocalizedService {
-  entity localized {
-    key ID        : Integer;
-        root      : Association to Root;
-        localized : String; // to test that a property only named 'localized' is not confused with localized keyword
-  }
-
   entity Root {
     key ID        : Integer;
         // The resulting GraphQL schema should contain a field named
@@ -14,5 +7,11 @@ service FieldNamedLocalizedService {
         // automatically generated association that points to translated texts
         localized : Association to many localized
                       on localized.root = $self;
+  }
+
+  entity localized {
+    key ID        : Integer;
+        root      : Association to Root;
+        localized : String; // to test that a property only named 'localized' is not confused with localized keyword
   }
 }
