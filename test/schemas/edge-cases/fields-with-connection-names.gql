@@ -90,6 +90,7 @@ input ID_filter {
   eq: ID
   ge: ID
   gt: ID
+  in: [ID]
   le: ID
   lt: ID
   ne: [ID]
@@ -114,6 +115,7 @@ input String_filter {
   eq: String
   ge: String
   gt: String
+  in: [String]
   le: String
   lt: String
   ne: [String]
