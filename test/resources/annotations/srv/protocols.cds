@@ -11,7 +11,7 @@ service AnnotatedWithAtProtocolNone {
   }
 }
 
-@protocol: 'odata-v4'
+@protocol: 'odata'
 service AnnotatedWithNonGraphQL {
   entity A {
     key id : UUID;
