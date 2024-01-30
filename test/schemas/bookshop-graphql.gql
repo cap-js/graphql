@@ -1,3 +1,4 @@
+"""Service used by administrators to manage Books and Authors"""
 type AdminService {
   Authors(filter: [AdminService_Authors_filter], orderBy: [AdminService_Authors_orderBy], skip: Int, top: Int): AdminService_Authors_connection
   Books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
@@ -9,14 +10,23 @@ type AdminService {
   Genres_texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type AdminService_Authors {
   ID: Int
   books(filter: [AdminService_Books_filter], orderBy: [AdminService_Books_orderBy], skip: Int, top: Int): AdminService_Books_connection
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
   dateOfBirth: Date
   dateOfDeath: Date
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   name: String
   placeOfBirth: String
@@ -87,20 +97,32 @@ input AdminService_Authors_orderBy {
   placeOfDeath: SortDirection
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
 type AdminService_Books {
   ID: Int
   author: AdminService_Authors
-  author_ID: Int
   chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
   currency: AdminService_Currencies
-  currency_code: String
   descr: String
   genre: AdminService_Genres
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   price: Decimal
   stock: Int
@@ -111,15 +133,12 @@ type AdminService_Books {
 input AdminService_Books_C {
   ID: Int
   author: AdminService_Authors_C
-  author_ID: Int
   chapters: [AdminService_Chapters_C]
   createdAt: Timestamp
   createdBy: String
   currency: AdminService_Currencies_C
-  currency_code: String
   descr: String
   genre: AdminService_Genres_C
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   modifiedBy: String
@@ -131,15 +150,12 @@ input AdminService_Books_C {
 
 input AdminService_Books_U {
   author: AdminService_Authors_C
-  author_ID: Int
   chapters: [AdminService_Chapters_C]
   createdAt: Timestamp
   createdBy: String
   currency: AdminService_Currencies_C
-  currency_code: String
   descr: String
   genre: AdminService_Genres_C
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   modifiedBy: String
@@ -156,12 +172,9 @@ type AdminService_Books_connection {
 
 input AdminService_Books_filter {
   ID: [Int_filter]
-  author_ID: [Int_filter]
   createdAt: [Timestamp_filter]
   createdBy: [String_filter]
-  currency_code: [String_filter]
   descr: [String_filter]
-  genre_ID: [Int_filter]
   image: [Binary_filter]
   modifiedAt: [Timestamp_filter]
   modifiedBy: [String_filter]
@@ -178,12 +191,9 @@ type AdminService_Books_input {
 
 input AdminService_Books_orderBy {
   ID: SortDirection
-  author_ID: SortDirection
   createdAt: SortDirection
   createdBy: SortDirection
-  currency_code: SortDirection
   descr: SortDirection
-  genre_ID: SortDirection
   image: SortDirection
   modifiedAt: SortDirection
   modifiedBy: SortDirection
@@ -195,6 +205,8 @@ input AdminService_Books_orderBy {
 type AdminService_Books_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   title: String
 }
@@ -236,12 +248,16 @@ input AdminService_Books_texts_orderBy {
   title: SortDirection
 }
 
+"""A Chapter of a Book"""
 type AdminService_Chapters {
   book: AdminService_Books
-  book_ID: Int
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   number: Int
   title: String
@@ -249,7 +265,6 @@ type AdminService_Chapters {
 
 input AdminService_Chapters_C {
   book: AdminService_Books_C
-  book_ID: Int
   createdAt: Timestamp
   createdBy: String
   modifiedAt: Timestamp
@@ -272,7 +287,6 @@ type AdminService_Chapters_connection {
 }
 
 input AdminService_Chapters_filter {
-  book_ID: [Int_filter]
   createdAt: [Timestamp_filter]
   createdBy: [String_filter]
   modifiedAt: [Timestamp_filter]
@@ -288,7 +302,6 @@ type AdminService_Chapters_input {
 }
 
 input AdminService_Chapters_orderBy {
-  book_ID: SortDirection
   createdAt: SortDirection
   createdBy: SortDirection
   modifiedAt: SortDirection
@@ -297,6 +310,11 @@ input AdminService_Chapters_orderBy {
   title: SortDirection
 }
 
+"""
+Code list for currencies
+
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
+"""
 type AdminService_Currencies {
   code: String
   descr: String
@@ -353,6 +371,8 @@ input AdminService_Currencies_orderBy {
 type AdminService_Currencies_texts {
   code: String
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -394,13 +414,13 @@ input AdminService_Currencies_texts_orderBy {
   name: SortDirection
 }
 
+"""Hierarchically organized Code List for Genres"""
 type AdminService_Genres {
   ID: Int
   children(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
   descr: String
   name: String
   parent: AdminService_Genres
-  parent_ID: Int
   texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
 }
 
@@ -410,7 +430,6 @@ input AdminService_Genres_C {
   descr: String
   name: String
   parent: AdminService_Genres_C
-  parent_ID: Int
   texts: [AdminService_Genres_texts_C]
 }
 
@@ -419,7 +438,6 @@ input AdminService_Genres_U {
   descr: String
   name: String
   parent: AdminService_Genres_C
-  parent_ID: Int
   texts: [AdminService_Genres_texts_C]
 }
 
@@ -432,7 +450,6 @@ input AdminService_Genres_filter {
   ID: [Int_filter]
   descr: [String_filter]
   name: [String_filter]
-  parent_ID: [Int_filter]
 }
 
 type AdminService_Genres_input {
@@ -445,12 +462,13 @@ input AdminService_Genres_orderBy {
   ID: SortDirection
   descr: SortDirection
   name: SortDirection
-  parent_ID: SortDirection
 }
 
 type AdminService_Genres_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -524,16 +542,21 @@ type CatalogService {
   ListOfBooks(filter: [CatalogService_ListOfBooks_filter], orderBy: [CatalogService_ListOfBooks_orderBy], skip: Int, top: Int): CatalogService_ListOfBooks_connection
 }
 
+"""For display in details pages"""
 type CatalogService_Books {
   ID: Int
   author: String
   chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
   createdAt: Timestamp
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
   currency: CatalogService_Currencies
-  currency_code: String
   descr: String
   genre: CatalogService_Genres
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
@@ -548,10 +571,8 @@ input CatalogService_Books_C {
   chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
   currency: CatalogService_Currencies_C
-  currency_code: String
   descr: String
   genre: CatalogService_Genres_C
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
@@ -565,10 +586,8 @@ input CatalogService_Books_U {
   chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
   currency: CatalogService_Currencies_C
-  currency_code: String
   descr: String
   genre: CatalogService_Genres_C
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
@@ -586,9 +605,7 @@ input CatalogService_Books_filter {
   ID: [Int_filter]
   author: [String_filter]
   createdAt: [Timestamp_filter]
-  currency_code: [String_filter]
   descr: [String_filter]
-  genre_ID: [Int_filter]
   image: [Binary_filter]
   modifiedAt: [Timestamp_filter]
   price: [Decimal_filter]
@@ -606,9 +623,7 @@ input CatalogService_Books_orderBy {
   ID: SortDirection
   author: SortDirection
   createdAt: SortDirection
-  currency_code: SortDirection
   descr: SortDirection
-  genre_ID: SortDirection
   image: SortDirection
   modifiedAt: SortDirection
   price: SortDirection
@@ -619,6 +634,8 @@ input CatalogService_Books_orderBy {
 type CatalogService_Books_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   title: String
 }
@@ -660,12 +677,16 @@ input CatalogService_Books_texts_orderBy {
   title: SortDirection
 }
 
+"""A Chapter of a Book"""
 type CatalogService_Chapters {
   book: CatalogService_Books
-  book_ID: Int
   createdAt: Timestamp
+
+  """Canonical user ID"""
   createdBy: String
   modifiedAt: Timestamp
+
+  """Canonical user ID"""
   modifiedBy: String
   number: Int
   title: String
@@ -673,7 +694,6 @@ type CatalogService_Chapters {
 
 input CatalogService_Chapters_C {
   book: CatalogService_Books_C
-  book_ID: Int
   createdAt: Timestamp
   createdBy: String
   modifiedAt: Timestamp
@@ -696,7 +716,6 @@ type CatalogService_Chapters_connection {
 }
 
 input CatalogService_Chapters_filter {
-  book_ID: [Int_filter]
   createdAt: [Timestamp_filter]
   createdBy: [String_filter]
   modifiedAt: [Timestamp_filter]
@@ -712,7 +731,6 @@ type CatalogService_Chapters_input {
 }
 
 input CatalogService_Chapters_orderBy {
-  book_ID: SortDirection
   createdAt: SortDirection
   createdBy: SortDirection
   modifiedAt: SortDirection
@@ -721,6 +739,11 @@ input CatalogService_Chapters_orderBy {
   title: SortDirection
 }
 
+"""
+Code list for currencies
+
+See https://cap.cloud.sap/docs/cds/common#entity-currencies
+"""
 type CatalogService_Currencies {
   code: String
   descr: String
@@ -777,6 +800,8 @@ input CatalogService_Currencies_orderBy {
 type CatalogService_Currencies_texts {
   code: String
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -818,13 +843,13 @@ input CatalogService_Currencies_texts_orderBy {
   name: SortDirection
 }
 
+"""Hierarchically organized Code List for Genres"""
 type CatalogService_Genres {
   ID: Int
   children(filter: [CatalogService_Genres_filter], orderBy: [CatalogService_Genres_orderBy], skip: Int, top: Int): CatalogService_Genres_connection
   descr: String
   name: String
   parent: CatalogService_Genres
-  parent_ID: Int
   texts(filter: [CatalogService_Genres_texts_filter], orderBy: [CatalogService_Genres_texts_orderBy], skip: Int, top: Int): CatalogService_Genres_texts_connection
 }
 
@@ -834,7 +859,6 @@ input CatalogService_Genres_C {
   descr: String
   name: String
   parent: CatalogService_Genres_C
-  parent_ID: Int
   texts: [CatalogService_Genres_texts_C]
 }
 
@@ -843,7 +867,6 @@ input CatalogService_Genres_U {
   descr: String
   name: String
   parent: CatalogService_Genres_C
-  parent_ID: Int
   texts: [CatalogService_Genres_texts_C]
 }
 
@@ -856,7 +879,6 @@ input CatalogService_Genres_filter {
   ID: [Int_filter]
   descr: [String_filter]
   name: [String_filter]
-  parent_ID: [Int_filter]
 }
 
 type CatalogService_Genres_input {
@@ -869,12 +891,13 @@ input CatalogService_Genres_orderBy {
   ID: SortDirection
   descr: SortDirection
   name: SortDirection
-  parent_ID: SortDirection
 }
 
 type CatalogService_Genres_texts {
   ID: Int
   descr: String
+
+  """Type for a language code"""
   locale: String
   name: String
 }
@@ -916,15 +939,20 @@ input CatalogService_Genres_texts_orderBy {
   name: SortDirection
 }
 
+"""For displaying lists of Books"""
 type CatalogService_ListOfBooks {
   ID: Int
   author: String
   chapters(filter: [CatalogService_Chapters_filter], orderBy: [CatalogService_Chapters_orderBy], skip: Int, top: Int): CatalogService_Chapters_connection
   createdAt: Timestamp
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
   currency: CatalogService_Currencies
-  currency_code: String
   genre: CatalogService_Genres
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
@@ -939,9 +967,7 @@ input CatalogService_ListOfBooks_C {
   chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
   currency: CatalogService_Currencies_C
-  currency_code: String
   genre: CatalogService_Genres_C
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
@@ -955,9 +981,7 @@ input CatalogService_ListOfBooks_U {
   chapters: [CatalogService_Chapters_C]
   createdAt: Timestamp
   currency: CatalogService_Currencies_C
-  currency_code: String
   genre: CatalogService_Genres_C
-  genre_ID: Int
   image: Binary
   modifiedAt: Timestamp
   price: Decimal
@@ -975,8 +999,6 @@ input CatalogService_ListOfBooks_filter {
   ID: [Int_filter]
   author: [String_filter]
   createdAt: [Timestamp_filter]
-  currency_code: [String_filter]
-  genre_ID: [Int_filter]
   image: [Binary_filter]
   modifiedAt: [Timestamp_filter]
   price: [Decimal_filter]
@@ -994,8 +1016,6 @@ input CatalogService_ListOfBooks_orderBy {
   ID: SortDirection
   author: SortDirection
   createdAt: SortDirection
-  currency_code: SortDirection
-  genre_ID: SortDirection
   image: SortDirection
   modifiedAt: SortDirection
   price: SortDirection
@@ -1023,6 +1043,7 @@ input Date_filter {
   eq: Date
   ge: Date
   gt: Date
+  in: [Date]
   le: Date
   lt: Date
   ne: [Date]
@@ -1037,6 +1058,7 @@ input Decimal_filter {
   eq: Decimal
   ge: Decimal
   gt: Decimal
+  in: [Decimal]
   le: Decimal
   lt: Decimal
   ne: [Decimal]
@@ -1051,6 +1073,7 @@ input Int16_filter {
   eq: Int16
   ge: Int16
   gt: Int16
+  in: [Int16]
   le: Int16
   lt: Int16
   ne: [Int16]
@@ -1060,6 +1083,7 @@ input Int_filter {
   eq: Int
   ge: Int
   gt: Int
+  in: [Int]
   le: Int
   lt: Int
   ne: [Int]
@@ -1086,6 +1110,7 @@ input String_filter {
   eq: String
   ge: String
   gt: String
+  in: [String]
   le: String
   lt: String
   ne: [String]
@@ -1101,6 +1126,7 @@ input Timestamp_filter {
   eq: Timestamp
   ge: Timestamp
   gt: Timestamp
+  in: [Timestamp]
   le: Timestamp
   lt: Timestamp
   ne: [Timestamp]

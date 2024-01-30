@@ -5,19 +5,13 @@ describe('graphql - query logging with sanitization in production', () => {
   const { gql } = require('../util')
   const util = require('util')
 
-  const PROJECT_PATH = path.join(__dirname, '../resources/bookshop-graphql')
-
-  const { axios, GET, POST, data } = cds.test(PROJECT_PATH)
+  const { axios, GET, POST, data } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
   const _format = e => util.formatWithOptions({ colors: false, depth: null }, ...(Array.isArray(e) ? e : [e]))
 
   let _log
-
-  beforeAll(async () => {
-    await cds.deploy(path.join(PROJECT_PATH, 'srv'))
-  })
 
   beforeEach(async () => {
     await data.reset()

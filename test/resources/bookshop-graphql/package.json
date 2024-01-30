@@ -13,6 +13,12 @@
       "auth": {
         "kind": "mocked"
       }
+    },
+    "features": {
+      "in_memory_db": true
+    },
+    "cdsc": {
+      "docs": true
     }
   }
 }

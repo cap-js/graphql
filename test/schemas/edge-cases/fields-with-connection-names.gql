@@ -1,0 +1,123 @@
+type FieldsWithConnectionNamesService {
+  Nodes(filter: [FieldsWithConnectionNamesService_Nodes_filter], orderBy: [FieldsWithConnectionNamesService_Nodes_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Nodes_connection
+  Root(filter: [FieldsWithConnectionNamesService_Root_filter], orderBy: [FieldsWithConnectionNamesService_Root_orderBy], skip: Int, top: Int): FieldsWithConnectionNamesService_Root_connection
+}
+
+type FieldsWithConnectionNamesService_Nodes {
+  ID: ID
+  nodes: String
+  totalCount: String
+}
+
+input FieldsWithConnectionNamesService_Nodes_C {
+  ID: ID
+  nodes: String
+  totalCount: String
+}
+
+input FieldsWithConnectionNamesService_Nodes_U {
+  nodes: String
+  totalCount: String
+}
+
+type FieldsWithConnectionNamesService_Nodes_connection {
+  nodes: [FieldsWithConnectionNamesService_Nodes]
+  totalCount: Int
+}
+
+input FieldsWithConnectionNamesService_Nodes_filter {
+  ID: [ID_filter]
+  nodes: [String_filter]
+  totalCount: [String_filter]
+}
+
+type FieldsWithConnectionNamesService_Nodes_input {
+  create(input: [FieldsWithConnectionNamesService_Nodes_C]!): [FieldsWithConnectionNamesService_Nodes]
+  delete(filter: [FieldsWithConnectionNamesService_Nodes_filter]!): Int
+  update(filter: [FieldsWithConnectionNamesService_Nodes_filter]!, input: FieldsWithConnectionNamesService_Nodes_U!): [FieldsWithConnectionNamesService_Nodes]
+}
+
+input FieldsWithConnectionNamesService_Nodes_orderBy {
+  ID: SortDirection
+  nodes: SortDirection
+  totalCount: SortDirection
+}
+
+type FieldsWithConnectionNamesService_Root {
+  ID: ID
+  nodes: FieldsWithConnectionNamesService_Nodes
+  totalCount: String
+}
+
+input FieldsWithConnectionNamesService_Root_C {
+  ID: ID
+  nodes: FieldsWithConnectionNamesService_Nodes_C
+  totalCount: String
+}
+
+input FieldsWithConnectionNamesService_Root_U {
+  nodes: FieldsWithConnectionNamesService_Nodes_C
+  totalCount: String
+}
+
+type FieldsWithConnectionNamesService_Root_connection {
+  nodes: [FieldsWithConnectionNamesService_Root]
+  totalCount: Int
+}
+
+input FieldsWithConnectionNamesService_Root_filter {
+  ID: [ID_filter]
+  totalCount: [String_filter]
+}
+
+type FieldsWithConnectionNamesService_Root_input {
+  create(input: [FieldsWithConnectionNamesService_Root_C]!): [FieldsWithConnectionNamesService_Root]
+  delete(filter: [FieldsWithConnectionNamesService_Root_filter]!): Int
+  update(filter: [FieldsWithConnectionNamesService_Root_filter]!, input: FieldsWithConnectionNamesService_Root_U!): [FieldsWithConnectionNamesService_Root]
+}
+
+input FieldsWithConnectionNamesService_Root_orderBy {
+  ID: SortDirection
+  totalCount: SortDirection
+}
+
+type FieldsWithConnectionNamesService_input {
+  Nodes: FieldsWithConnectionNamesService_Nodes_input
+  Root: FieldsWithConnectionNamesService_Root_input
+}
+
+input ID_filter {
+  eq: ID
+  ge: ID
+  gt: ID
+  in: [ID]
+  le: ID
+  lt: ID
+  ne: [ID]
+}
+
+type Mutation {
+  FieldsWithConnectionNamesService: FieldsWithConnectionNamesService_input
+}
+
+type Query {
+  FieldsWithConnectionNamesService: FieldsWithConnectionNamesService
+}
+
+enum SortDirection {
+  asc
+  desc
+}
+
+input String_filter {
+  contains: [String]
+  endswith: String
+  eq: String
+  ge: String
+  gt: String
+  in: [String]
+  le: String
+  lt: String
+  ne: [String]
+  startswith: String
+}

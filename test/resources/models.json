@@ -8,6 +8,10 @@
     "requires_cds": ">=6.8.0"
   },
   {
+    "name": "annotations",
+    "files": ["./annotations/srv/protocols.cds"]
+  },
+  {
     "name": "types",
     "files": ["./types/srv/types.cds"]
   },
@@ -18,6 +22,10 @@
   {
     "name": "edge-cases/field-named-localized",
     "files": ["./edge-cases/srv/field-named-localized.cds"]
+  },
+  {
+    "name": "edge-cases/fields-with-connection-names",
+    "files": ["./edge-cases/srv/fields-with-connection-names.cds"]
   },
   {
     "name": "edge-cases/name-clashes",
