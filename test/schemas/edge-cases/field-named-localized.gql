@@ -45,20 +45,17 @@ type FieldNamedLocalizedService_localized {
   ID: Int
   localized: String
   root: FieldNamedLocalizedService_Root
-  root_ID: Int
 }
 
 input FieldNamedLocalizedService_localized_C {
   ID: Int
   localized: String
   root: FieldNamedLocalizedService_Root_C
-  root_ID: Int
 }
 
 input FieldNamedLocalizedService_localized_U {
   localized: String
   root: FieldNamedLocalizedService_Root_C
-  root_ID: Int
 }
 
 type FieldNamedLocalizedService_localized_connection {
@@ -69,7 +66,6 @@ type FieldNamedLocalizedService_localized_connection {
 input FieldNamedLocalizedService_localized_filter {
   ID: [Int_filter]
   localized: [String_filter]
-  root_ID: [Int_filter]
 }
 
 type FieldNamedLocalizedService_localized_input {
@@ -81,7 +77,6 @@ type FieldNamedLocalizedService_localized_input {
 input FieldNamedLocalizedService_localized_orderBy {
   ID: SortDirection
   localized: SortDirection
-  root_ID: SortDirection
 }
 
 input Int_filter {

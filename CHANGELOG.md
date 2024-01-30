@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump `@graphiql/plugin-explorer` version to `^1`
+- Ignore fields that represent foreign keys in GraphQL schema generation
+- When compiling to GraphQL using the CDS API or CLI, only generate GraphQL schemas for services that are annotated with GraphQL protocol annotations
 
 ### Fixed
 

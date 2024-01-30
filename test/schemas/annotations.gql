@@ -1,0 +1,164 @@
+type AnnotatedWithAtGraphQL {
+  A(filter: [AnnotatedWithAtGraphQL_A_filter], orderBy: [AnnotatedWithAtGraphQL_A_orderBy], skip: Int, top: Int): AnnotatedWithAtGraphQL_A_connection
+}
+
+type AnnotatedWithAtGraphQL_A {
+  id: ID
+}
+
+input AnnotatedWithAtGraphQL_A_C {
+  id: ID
+}
+
+type AnnotatedWithAtGraphQL_A_connection {
+  nodes: [AnnotatedWithAtGraphQL_A]
+  totalCount: Int
+}
+
+input AnnotatedWithAtGraphQL_A_filter {
+  id: [ID_filter]
+}
+
+type AnnotatedWithAtGraphQL_A_input {
+  create(input: [AnnotatedWithAtGraphQL_A_C]!): [AnnotatedWithAtGraphQL_A]
+  delete(filter: [AnnotatedWithAtGraphQL_A_filter]!): Int
+}
+
+input AnnotatedWithAtGraphQL_A_orderBy {
+  id: SortDirection
+}
+
+type AnnotatedWithAtGraphQL_input {
+  A: AnnotatedWithAtGraphQL_A_input
+}
+
+type AnnotatedWithAtProtocolObjectList {
+  A(filter: [AnnotatedWithAtProtocolObjectList_A_filter], orderBy: [AnnotatedWithAtProtocolObjectList_A_orderBy], skip: Int, top: Int): AnnotatedWithAtProtocolObjectList_A_connection
+}
+
+type AnnotatedWithAtProtocolObjectList_A {
+  id: ID
+}
+
+input AnnotatedWithAtProtocolObjectList_A_C {
+  id: ID
+}
+
+type AnnotatedWithAtProtocolObjectList_A_connection {
+  nodes: [AnnotatedWithAtProtocolObjectList_A]
+  totalCount: Int
+}
+
+input AnnotatedWithAtProtocolObjectList_A_filter {
+  id: [ID_filter]
+}
+
+type AnnotatedWithAtProtocolObjectList_A_input {
+  create(input: [AnnotatedWithAtProtocolObjectList_A_C]!): [AnnotatedWithAtProtocolObjectList_A]
+  delete(filter: [AnnotatedWithAtProtocolObjectList_A_filter]!): Int
+}
+
+input AnnotatedWithAtProtocolObjectList_A_orderBy {
+  id: SortDirection
+}
+
+type AnnotatedWithAtProtocolObjectList_input {
+  A: AnnotatedWithAtProtocolObjectList_A_input
+}
+
+type AnnotatedWithAtProtocolString {
+  A(filter: [AnnotatedWithAtProtocolString_A_filter], orderBy: [AnnotatedWithAtProtocolString_A_orderBy], skip: Int, top: Int): AnnotatedWithAtProtocolString_A_connection
+}
+
+type AnnotatedWithAtProtocolStringList {
+  A(filter: [AnnotatedWithAtProtocolStringList_A_filter], orderBy: [AnnotatedWithAtProtocolStringList_A_orderBy], skip: Int, top: Int): AnnotatedWithAtProtocolStringList_A_connection
+}
+
+type AnnotatedWithAtProtocolStringList_A {
+  id: ID
+}
+
+input AnnotatedWithAtProtocolStringList_A_C {
+  id: ID
+}
+
+type AnnotatedWithAtProtocolStringList_A_connection {
+  nodes: [AnnotatedWithAtProtocolStringList_A]
+  totalCount: Int
+}
+
+input AnnotatedWithAtProtocolStringList_A_filter {
+  id: [ID_filter]
+}
+
+type AnnotatedWithAtProtocolStringList_A_input {
+  create(input: [AnnotatedWithAtProtocolStringList_A_C]!): [AnnotatedWithAtProtocolStringList_A]
+  delete(filter: [AnnotatedWithAtProtocolStringList_A_filter]!): Int
+}
+
+input AnnotatedWithAtProtocolStringList_A_orderBy {
+  id: SortDirection
+}
+
+type AnnotatedWithAtProtocolStringList_input {
+  A: AnnotatedWithAtProtocolStringList_A_input
+}
+
+type AnnotatedWithAtProtocolString_A {
+  id: ID
+}
+
+input AnnotatedWithAtProtocolString_A_C {
+  id: ID
+}
+
+type AnnotatedWithAtProtocolString_A_connection {
+  nodes: [AnnotatedWithAtProtocolString_A]
+  totalCount: Int
+}
+
+input AnnotatedWithAtProtocolString_A_filter {
+  id: [ID_filter]
+}
+
+type AnnotatedWithAtProtocolString_A_input {
+  create(input: [AnnotatedWithAtProtocolString_A_C]!): [AnnotatedWithAtProtocolString_A]
+  delete(filter: [AnnotatedWithAtProtocolString_A_filter]!): Int
+}
+
+input AnnotatedWithAtProtocolString_A_orderBy {
+  id: SortDirection
+}
+
+type AnnotatedWithAtProtocolString_input {
+  A: AnnotatedWithAtProtocolString_A_input
+}
+
+input ID_filter {
+  eq: ID
+  ge: ID
+  gt: ID
+  in: [ID]
+  le: ID
+  lt: ID
+  ne: [ID]
+}
+
+type Mutation {
+  AnnotatedWithAtGraphQL: AnnotatedWithAtGraphQL_input
+  AnnotatedWithAtProtocolObjectList: AnnotatedWithAtProtocolObjectList_input
+  AnnotatedWithAtProtocolString: AnnotatedWithAtProtocolString_input
+  AnnotatedWithAtProtocolStringList: AnnotatedWithAtProtocolStringList_input
+}
+
+type Query {
+  AnnotatedWithAtGraphQL: AnnotatedWithAtGraphQL
+  AnnotatedWithAtProtocolObjectList: AnnotatedWithAtProtocolObjectList
+  AnnotatedWithAtProtocolString: AnnotatedWithAtProtocolString
+  AnnotatedWithAtProtocolStringList: AnnotatedWithAtProtocolStringList
+}
+
+enum SortDirection {
+  asc
+  desc
+}
