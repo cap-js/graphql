@@ -9,6 +9,10 @@
     "requires_cds": ">=6.8.0"
   },
   {
+    "name": "annotations",
+    "files": ["./annotations/srv/protocols.cds"]
+  },
+  {
     "name": "types",
     "files": ["./types/srv/types.cds"]
   },

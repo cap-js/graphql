@@ -4,6 +4,20 @@ service NotAnnotated {
   }
 }
 
+@protocol: 'none'
+service AnnotatedWithAtProtocolNone {
+  entity A {
+    key id : UUID;
+  }
+}
+
+@protocol: 'odata'
+service AnnotatedWithNonGraphQL {
+  entity A {
+    key id : UUID;
+  }
+}
+
 @graphql
 service AnnotatedWithAtGraphQL {
   entity A {

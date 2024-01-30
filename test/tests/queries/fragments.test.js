@@ -349,6 +349,40 @@ describe('graphql - fragments', () => {
       expect(response.data).toEqual({ data })
     })
 
+    test('query with fragment containing multiple scalar fields', async () => {
+      const query = gql`
+        query {
+          AdminService {
+            Books {
+              nodes {
+                ...myFragmentA
+              }
+            }
+          }
+        }
+
+        fragment myFragmentA on AdminService_Books {
+          ID
+          title
+        }
+      `
+      const data = {
+        AdminService: {
+          Books: {
+            nodes: [
+              { ID: 201, title: 'Wuthering Heights' },
+              { ID: 207, title: 'Jane Eyre' },
+              { ID: 251, title: 'The Raven' },
+              { ID: 252, title: 'Eleonora' },
+              { ID: 271, title: 'Catweazle' }
+            ]
+          }
+        }
+      }
+      const response = await POST('/graphql', { query })
+      expect(response.data).toEqual({ data })
+    })
+
     test('query with fragments along with other fields', async () => {
       const query = gql`
         query {

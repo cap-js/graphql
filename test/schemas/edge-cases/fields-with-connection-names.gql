@@ -46,20 +46,17 @@ input FieldsWithConnectionNamesService_Nodes_orderBy {
 type FieldsWithConnectionNamesService_Root {
   ID: ID
   nodes: FieldsWithConnectionNamesService_Nodes
-  nodes_ID: ID
   totalCount: String
 }
 
 input FieldsWithConnectionNamesService_Root_C {
   ID: ID
   nodes: FieldsWithConnectionNamesService_Nodes_C
-  nodes_ID: ID
   totalCount: String
 }
 
 input FieldsWithConnectionNamesService_Root_U {
   nodes: FieldsWithConnectionNamesService_Nodes_C
-  nodes_ID: ID
   totalCount: String
 }
 
@@ -70,7 +67,6 @@ type FieldsWithConnectionNamesService_Root_connection {
 
 input FieldsWithConnectionNamesService_Root_filter {
   ID: [ID_filter]
-  nodes_ID: [ID_filter]
   totalCount: [String_filter]
 }
 
@@ -82,7 +78,6 @@ type FieldsWithConnectionNamesService_Root_input {
 
 input FieldsWithConnectionNamesService_Root_orderBy {
   ID: SortDirection
-  nodes_ID: SortDirection
   totalCount: SortDirection
 }
 
@@ -95,6 +90,7 @@ input ID_filter {
   eq: ID
   ge: ID
   gt: ID
+  in: [ID]
   le: ID
   lt: ID
   ne: [ID]
@@ -119,6 +115,7 @@ input String_filter {
   eq: String
   ge: String
   gt: String
+  in: [String]
   le: String
   lt: String
   ne: [String]
