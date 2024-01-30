@@ -1,3 +1,4 @@
+@protocol: ['graphql']
 service CompositionOfAspectService {
   entity Books {
     key id       : UUID;
