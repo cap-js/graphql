@@ -25,8 +25,8 @@
     "node": ">=14"
   },
   "scripts": {
-    "prettier": "npm_config_yes=true npx prettier@3 --write app lib test",
-    "prettier:check": "npm_config_yes=true npx prettier@3 --check app lib test",
+    "prettier": "npm_config_yes=true npx prettier@3.2 --write app lib test",
+    "prettier:check": "npm_config_yes=true npx prettier@3.2 --check app lib test",
     "lint": "npx eslint .",
     "test": "jest --silent",
     "test:generate-schemas": "node ./test/scripts/generate-schemas.js"
