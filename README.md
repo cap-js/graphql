@@ -7,7 +7,7 @@
 A GraphQL protocol adapter for [SAP Cloud Application Programming Model](https://cap.cloud.sap) Node.js.
 This adapter generically generates a GraphQL schema for the models of an application and serves an endpoint that allows you to query your services using the GraphQL query language.
 
-_**WARNING:** This package is in an early general availability state. This means that it is general available, with stable APIs unless otherwise indicated, and you can use it for production. However, please note the [current limitations](#limitations) listed below._
+_**WARNING:** This package is in an early general availability state. This means that it is generally available, with stable APIs unless otherwise indicated, and you can use it for production. However, please note the [current limitations](#limitations) listed below._
 
 ## Requirements and Setup
 
@@ -16,7 +16,7 @@ _**WARNING:** This package is in an early general availability state. This means
    npm add @cap-js/graphql
    ```
 
-> This will automatically plugin to `@sap/cds` runtime, enabling the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and register a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model. 
+> This will automatically plug into the `@sap/cds` runtime, enable the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and register a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model. 
   
 2. Annotate the services you want to serve, e.g. using `@graphql` or `@protocol: 'graphql'`.
 
