@@ -16,7 +16,7 @@ _**WARNING:** This package is in an early general availability state. This means
    npm add @cap-js/graphql
    ```
 
-> This command will setup the GraphQL plugin with the `@sap/cds` runtime, it enables the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and registers a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model.
+> This command will setup the GraphQL plugin with the `@sap/cds` runtime, first it enables the new [middlewares architecture](https://cap.cloud.sap/docs/node.js/middlewares) in Node.js, and then it registers a GraphQL endpoint at `/graphql` serving all CRUD requests for the application services found in your model.
   
 2. Annotate the services you want to serve, e.g. using `@graphql` or `@protocol: 'graphql'`.
 
