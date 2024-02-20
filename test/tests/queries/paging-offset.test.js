@@ -120,7 +120,8 @@ describe('graphql - offset-based paging', () => {
       expect(response.data).toEqual({ data })
     })
 
-    test('query with top and skip arguments on nested fields', async () => {
+    // @cap-js/sqlite does not throw that error
+    test.skip('query with top and skip arguments on nested fields', async () => {
       const query = gql`
         {
           AdminService {
