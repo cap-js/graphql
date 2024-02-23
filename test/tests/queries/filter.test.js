@@ -286,7 +286,6 @@ describe('graphql - filter', () => {
         expect(response.data).toEqual({ data })
       })
 
-      // REVISIT: why is contains now case sensitive?
       test('query with filter with in operator with multiple values', async () => {
         const query = gql`
           {
@@ -462,7 +461,6 @@ describe('graphql - filter', () => {
         expect(response.data).toEqual({ data })
       })
 
-      // REVISIT: why is contains,startswith,endswith now case sensitive?
       test('query with complex filter', async () => {
         const query = gql`
           {
