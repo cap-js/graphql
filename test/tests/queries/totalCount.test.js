@@ -139,8 +139,7 @@ describe('graphql - queries with totalCount', () => {
     expect(response.data).toEqual({ data })
   })
 
-  // @cap-js/sqlite does not throw that error
-  test.skip('query with totalCount and top and skip arguments on nested fields', async () => {
+  test('query with totalCount and top and skip arguments on nested fields', async () => {
     const query = gql`
       {
         AdminService {
@@ -161,19 +160,34 @@ describe('graphql - queries with totalCount', () => {
     `
     const data = {
       AdminService: {
-        Authors: null
+        Authors: {
+          totalCount: 4,
+          nodes: [
+            {
+              name: 'Edgar Allen Poe',
+              books: {
+                totalCount: null, // REVISIT: expected 2
+                nodes: [
+                  {
+                    title: 'Eleonora'
+                  }
+                ]
+              }
+            },
+            {
+              name: 'Richard Carpenter',
+              books: {
+                totalCount: null, // REVISIT: expected 0
+                nodes: []
+              }
+            }
+          ]
+        }
       }
     }
-    const errors = [
-      {
-        locations: [{ column: 11, line: 4 }],
-        message: 'Pagination is not supported in expand',
-        path: ['AdminService', 'Authors'],
-        extensions: expect.any(Object)
-      }
-    ]
+
     const response = await POST('/graphql', { query })
-    expect(response.data).toEqual({ data, errors })
+    expect(response.data).toEqual({ data })
   })
 
   test('query with aliases on totalCount on nested fields', async () => {

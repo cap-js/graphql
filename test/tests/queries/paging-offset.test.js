@@ -61,19 +61,27 @@ describe('graphql - offset-based paging', () => {
         }
       `
       const data = {
-        AdminServiceBasic: {
-          Authors: null
+        AdminService: {
+          Authors: [
+            {
+              name: 'Edgar Allen Poe',
+              books: [
+                // Edgar Allen Poe has 2 books, but only 1 requested.
+                {
+                  title: 'Eleonora'
+                }
+              ]
+            },
+            {
+              name: 'Richard Carpenter',
+              books: []
+            }
+          ]
         }
       }
-      const errors = [
-        {
-          locations: [{ column: 13, line: 4 }],
-          message: 'Pagination is not supported in expand',
-          path: ['AdminServiceBasic', 'Authors']
-        }
-      ]
+
       const response = await POST('/graphql', { query })
-      expect(response.data).toEqual({ data, errors })
+      expect(response.data).toEqual({ data })
     })
   })
 
@@ -120,8 +128,7 @@ describe('graphql - offset-based paging', () => {
       expect(response.data).toEqual({ data })
     })
 
-    // @cap-js/sqlite does not throw that error
-    test.skip('query with top and skip arguments on nested fields', async () => {
+    test('query with top and skip arguments on nested fields', async () => {
       const query = gql`
         {
           AdminService {
@@ -140,19 +147,32 @@ describe('graphql - offset-based paging', () => {
       `
       const data = {
         AdminService: {
-          Authors: null
+          Authors: {
+            nodes: [
+              {
+                name: 'Edgar Allen Poe',
+                books: {
+                  // Edgar Allen Poe has 2 books, but only 1 requested.
+                  nodes: [
+                    {
+                      title: 'Eleonora'
+                    }
+                  ]
+                }
+              },
+              {
+                name: 'Richard Carpenter',
+                books: {
+                  nodes: []
+                }
+              }
+            ]
+          }
         }
       }
-      const errors = [
-        {
-          locations: [{ column: 13, line: 4 }],
-          message: 'Pagination is not supported in expand',
-          path: ['AdminService', 'Authors'],
-          extensions: expect.any(Object)
-        }
-      ]
+
       const response = await POST('/graphql', { query })
-      expect(response.data).toEqual({ data, errors })
+      expect(response.data).toEqual({ data })
     })
   })
 })
