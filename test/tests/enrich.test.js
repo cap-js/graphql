@@ -179,7 +179,7 @@ describe('graphql - enrich AST ', () => {
       expect(value).toEqual(2)
     })
 
-    test('parsing of literal value in nested input value of a query with sub-selection of fields', async () => {
+    test('parsing of literal value in nested input value passed as arg on field with sub-selection of fields', async () => {
       const query = gql`
         {
           AdminService {
@@ -199,7 +199,7 @@ describe('graphql - enrich AST ', () => {
       expect(value).toEqual(201)
     })
 
-    test('parsing of literal value in nested input value of a mutation with a scalar return type', async () => {
+    test('parsing of literal value in nested input value passed as arg on field of scalar type', async () => {
       const query = gql`
         mutation {
           AdminService {
