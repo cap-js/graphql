@@ -100,7 +100,7 @@ describe('graphql - delete mutations', () => {
     ])
   })
 
-  test('delete single entry by non-key field', async () => {
+  test('delete single entry by filtering for non-key field', async () => {
     const query = gql`
       mutation {
         AdminService {
