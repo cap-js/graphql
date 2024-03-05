@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Type parsing error for literal values passed within arguments on fields of scalar type differing from the literal type. This case occurred for delete mutations where the filter operands have a type other than `Int`.
+- Type parsing error for literal values passed within arguments on fields of scalar type differing from the literal type. This case occurred for delete mutations when the filter operands had a type other than `Int`.
 
 ### Removed
 
