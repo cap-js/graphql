@@ -100,6 +100,35 @@ describe('graphql - delete mutations', () => {
     ])
   })
 
+  test('delete single entry by filtering for non-key field', async () => {
+    const query = gql`
+      mutation {
+        AdminService {
+          Books {
+            delete(filter: { title: { eq: "Jane Eyre" } })
+          }
+        }
+      }
+    `
+    const data = {
+      AdminService: {
+        Books: {
+          delete: 1
+        }
+      }
+    }
+    const response = await POST('/graphql', { query })
+    expect(response.data).toEqual({ data })
+
+    const result = await SELECT.from('sap.capire.bookshop.Books').columns('ID', 'title')
+    expect(result).toEqual([
+      { ID: 201, title: 'Wuthering Heights' },
+      { ID: 251, title: 'The Raven' },
+      { ID: 252, title: 'Eleonora' },
+      { ID: 271, title: 'Catweazle' }
+    ])
+  })
+
   test('delete multiple entries', async () => {
     const query = gql`
       mutation ($filter: AdminService_Books_filter) {

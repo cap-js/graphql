@@ -179,7 +179,7 @@ describe('graphql - enrich AST ', () => {
       expect(value).toEqual(2)
     })
 
-    test('parsing of literal value in nested input value', async () => {
+    test('parsing of literal value in nested input value passed as arg on field with sub-selection of fields', async () => {
       const query = gql`
         {
           AdminService {
@@ -197,6 +197,25 @@ describe('graphql - enrich AST ', () => {
       const enrichedAST = enrich(fakeInfo)
       const value = enrichedAST[0].selectionSet.selections[0].arguments[0].value.fields[0].value.fields[0].value.value
       expect(value).toEqual(201)
+    })
+
+    test('parsing of literal value in nested input value passed as arg on field of scalar type', async () => {
+      const query = gql`
+        mutation {
+          AdminService {
+            Authors {
+              delete(filter: { dateOfBirth: { eq: "1818-07-30T00:00:00.000Z" } })
+            }
+          }
+        }
+      `
+      const document = parse(query)
+      const fakeInfo = fakeInfoObject(document, bookshopSchema, 'Mutation')
+      const enrichedAST = enrich(fakeInfo)
+      const value =
+        enrichedAST[0].selectionSet.selections[0].selectionSet.selections[0].arguments[0].value.fields[0].value
+          .fields[0].value.value
+      expect(value).toEqual('1818-07-30')
     })
   })
 
