@@ -2,10 +2,14 @@
   "dependencies": {
     "@cap-js/graphql": "*"
   },
+  "devDependencies": {
+    "@cap-js/sqlite": "*"
+  },
   "cds": {
     "requires": {
       "db": {
         "kind": "sqlite",
+        "impl": "@cap-js/sqlite",
         "credentials": {
           "database": ":memory:"
         }

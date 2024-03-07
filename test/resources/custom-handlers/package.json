@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "@cap-js/graphql": "*"
-  },
   "devDependencies": {
     "@cap-js/sqlite": "*"
   }
