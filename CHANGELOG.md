@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version 0.11.0 - tbd
 
 ### Added
+- Possibility to enable cds.assert via `cds.env.features.cds_assert = true` flag
 
 ### Changed
 
