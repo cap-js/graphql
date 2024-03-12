@@ -166,7 +166,6 @@ describe('graphql - error handling in production', () => {
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
 
       if (cds.env.features.cds_assert) {
-        // REVISIT: message missing, cds.assert also misses some properties like type, element, entity ...
         expect(log).toMatchObject({
           code: '400',
           msg: 'Multiple errors occurred. Please see the details for more information.',
