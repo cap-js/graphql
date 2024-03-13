@@ -47,20 +47,18 @@ describe('graphql - error handling in production', () => {
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
 
       if (cds.env.features.cds_assert) {
-        // REVISIT: message missing, cds.assert also misses some properties like type, element, entity ...
-        expect(log).toMatchObject({ code: '400', target: 'notEmptyI' })
-      }else {
+        expect(log).toMatchObject({ code: '400', target: 'notEmptyI', msg: 'Value is required' })
+      } else {
         expect(log).toMatchObject({
           code: '400',
           element: 'notEmptyI',
           entity: 'ValidationErrorsService.A',
-          message: 'Value is required',
+          msg: 'Value is required',
           numericSeverity: 4,
           target: 'notEmptyI',
           type: 'cds.Integer'
         })
       }
-      
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -166,22 +164,24 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
-      const msgProperty = log.msg ? 'msg' : 'message'
 
       if (cds.env.features.cds_assert) {
-        // REVISIT: message missing, cds.assert also misses some properties like type, element, entity ...
         expect(log).toMatchObject({
           code: '400',
-          [msgProperty]: 'Multiple errors occurred. Please see the details for more information.',
+          msg: 'Multiple errors occurred. Please see the details for more information.',
           details: [
-            { code: '400', target: 'inRange' },
-            { code: '400', target: 'oneOfEnumValues' }
+            { code: '400', target: 'inRange', message: 'Value is required' },
+            {
+              code: '400',
+              target: 'oneOfEnumValues',
+              message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}'
+            }
           ]
         })
       } else {
         expect(log).toMatchObject({
           code: '400',
-          [msgProperty]: 'Multiple errors occurred. Please see the details for more information.',
+          msg: 'Multiple errors occurred. Please see the details for more information.',
           details: [
             {
               args: ['inRange'],
@@ -384,10 +384,9 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.error.mock.calls[0][1] || JSON.parse(console.error.mock.calls[0][0])
-      const msgProperty = log.msg ? 'msg' : 'message'
       expect(log).toMatchObject({
         code: '500',
-        [msgProperty]: 'Multiple errors occurred. Please see the details for more information.',
+        msg: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           {
             code: 'Some-Custom-Code1',
