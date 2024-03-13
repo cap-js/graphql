@@ -1,5 +1,3 @@
-// process.env.CDS_FEATURES_CDS__ASSERT = 'true'
-
 describe('graphql - error handling in production', () => {
   process.env.NODE_ENV = 'production'
   const cds = require('@sap/cds/lib')
