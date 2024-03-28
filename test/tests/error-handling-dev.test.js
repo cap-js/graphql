@@ -35,11 +35,6 @@ describe('graphql - error handling in development', () => {
           extensions: {
             code: '400',
             target: 'notEmptyI',
-            args: ['notEmptyI'],
-            entity: 'ValidationErrorsService.A',
-            element: 'notEmptyI',
-            type: 'cds.Integer',
-            numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
         }
@@ -71,22 +66,12 @@ describe('graphql - error handling in development', () => {
                 code: '400',
                 message: 'Value is required',
                 target: 'notEmptyI',
-                args: ['notEmptyI'],
-                entity: 'ValidationErrorsService.B',
-                element: 'notEmptyI',
-                type: 'cds.Integer',
-                numericSeverity: 4,
                 stacktrace: expect.any(Array)
               },
               {
                 code: '400',
                 message: 'Value is required',
                 target: 'notEmptyS',
-                args: ['notEmptyS'],
-                entity: 'ValidationErrorsService.B',
-                element: 'notEmptyS',
-                type: 'cds.String',
-                numericSeverity: 4,
                 stacktrace: expect.any(Array)
               }
             ]
@@ -119,11 +104,6 @@ describe('graphql - error handling in development', () => {
             code: '400',
             target: 'inRange',
             args: [10, 0, 3],
-            entity: 'ValidationErrorsService.C',
-            element: 'inRange',
-            type: 'cds.Integer',
-            value: 10,
-            numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
         }
@@ -155,11 +135,6 @@ describe('graphql - error handling in development', () => {
                 code: '400',
                 message: 'Wert ist erforderlich',
                 target: 'inRange',
-                args: ['inRange'],
-                entity: 'ValidationErrorsService.C',
-                element: 'inRange',
-                type: 'cds.Integer',
-                numericSeverity: 4,
                 stacktrace: expect.any(Array)
               },
               {
@@ -167,12 +142,6 @@ describe('graphql - error handling in development', () => {
                 message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
                 target: 'oneOfEnumValues',
                 args: ['"foo"', '"high", "medium", "low"'],
-                entity: 'ValidationErrorsService.C',
-                element: 'oneOfEnumValues',
-                type: 'cds.String',
-                value: 'foo',
-                enum: ['@assert.range', 'type', 'enum'],
-                numericSeverity: 4,
                 stacktrace: expect.any(Array)
               }
             ]
@@ -184,37 +153,55 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
-      expect(console.warn.mock.calls[0][1]).toMatchObject({
-        code: '400',
-        message: 'Multiple errors occurred. Please see the details for more information.',
-        details: [
-          {
-            args: ['inRange'],
-            code: '400',
-            element: 'inRange',
-            entity: 'ValidationErrorsService.C',
-            message: 'Value is required',
-            numericSeverity: 4,
-            target: 'inRange',
-            type: 'cds.Integer',
-            value: undefined,
-            stack: expect.any(String)
-          },
-          {
-            args: ['"foo"', '"high", "medium", "low"'],
-            code: '400',
-            element: 'oneOfEnumValues',
-            entity: 'ValidationErrorsService.C',
-            enum: ['@assert.range', 'type', 'enum'],
-            message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
-            numericSeverity: 4,
-            target: 'oneOfEnumValues',
-            type: 'cds.String',
-            value: 'foo',
-            stack: expect.any(String)
-          }
-        ]
-      })
+
+      const log = console.warn.mock.calls[0][1]
+      if (cds.env.features.cds_assert) {
+        expect(log).toMatchObject({
+          code: '400',
+          message: 'Multiple errors occurred. Please see the details for more information.',
+          details: [
+            { code: '400', target: 'inRange', message: 'Value is required' },
+            {
+              code: '400',
+              target: 'oneOfEnumValues',
+              message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}'
+            }
+          ]
+        })
+      } else {
+        expect(log).toMatchObject({
+          code: '400',
+          message: 'Multiple errors occurred. Please see the details for more information.',
+          details: [
+            {
+              args: ['inRange'],
+              code: '400',
+              element: 'inRange',
+              entity: 'ValidationErrorsService.C',
+              message: 'Value is required',
+              numericSeverity: 4,
+              target: 'inRange',
+              type: 'cds.Integer',
+              value: undefined,
+              stack: expect.any(String)
+            },
+            {
+              args: ['"foo"', '"high", "medium", "low"'],
+              code: '400',
+              element: 'oneOfEnumValues',
+              entity: 'ValidationErrorsService.C',
+              enum: ['@assert.range', 'type', 'enum'],
+              message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
+              numericSeverity: 4,
+              target: 'oneOfEnumValues',
+              type: 'cds.String',
+              value: 'foo',
+              stack: expect.any(String)
+            }
+          ]
+        })
+      }
+
       expect(console.warn.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
   })
