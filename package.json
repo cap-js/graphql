@@ -45,6 +45,6 @@
     "express": "^4.17.1",
     "jest": "^29.3.1",
     "semver": "^7.4.0",
-    "sqlite3": "^5.0.2"
+    "@cap-js/sqlite": "^1"
   }
 }
