@@ -25,9 +25,9 @@
     "node": ">=14"
   },
   "scripts": {
-    "prettier": "npx prettier --write app lib test",
-    "prettier:check": "npx prettier --check app lib test",
-    "lint": "npx eslint .",
+    "prettier": "npm_config_yes=true npx prettier@latest --write app lib test",
+    "prettier:check": "npm_config_yes=true npx prettier@latest --check app lib test",
+    "lint": "npm_config_yes=true npx eslint@latest .",
     "test": "jest --silent",
     "test:generate-schemas": "node ./test/scripts/generate-schemas.js"
   },
@@ -41,7 +41,6 @@
   "devDependencies": {
     "@cap-js/graphql": "file:.",
     "axios": "^1",
-    "eslint": "^8",
     "express": "^4.17.1",
     "jest": "^29.3.1",
     "semver": "^7.4.0",
