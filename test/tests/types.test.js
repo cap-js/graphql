@@ -66,7 +66,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary is correctly parsed from input literal base64url encoded string value', async () => {
@@ -78,7 +78,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary is correctly parsed from input literal base64 encoded string value with padding', async () => {
@@ -90,7 +90,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary is correctly parsed from input literal base64 encoded string value with no padding', async () => {
@@ -102,7 +102,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary throws error when input literal is not a string, but an integer', async () => {
@@ -148,7 +148,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary is correctly parsed from variable base64url encoded string value', async () => {
@@ -160,7 +160,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary is correctly parsed from variable base64 encoded string value with padding', async () => {
@@ -172,7 +172,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary is correctly parsed from variable base64 encoded string value with no padding', async () => {
@@ -184,7 +184,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary throws error when variable string value contains non base64 or base64url characters', async () => {
@@ -235,7 +235,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.Boolean is correctly parsed from variable value', async () => {
@@ -245,7 +245,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -261,7 +261,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Date throws error when input literal is a string containing a non-date value', async () => {
@@ -290,7 +290,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Date throws error when variable is a string containing a non-date value', async () => {
@@ -325,7 +325,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.DateTime is correctly parsed from input literal non-UTC datetime string value', async () => {
@@ -337,7 +337,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: returnValue })
+        expect(result[field]).toEqual(returnValue)
       })
 
       test('cds.DateTime throws error when input literal is a string containing a non-datetime value', async () => {
@@ -366,7 +366,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.DateTime is correctly parsed from variable non-UTC datetime string value', async () => {
@@ -378,7 +378,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: returnValue })
+        expect(result[field]).toEqual(returnValue)
       })
 
       test('cds.DateTime throws error when variable is a string containing a non-datetime value', async () => {
@@ -413,7 +413,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Decimal is correctly parsed from input literal int value', async () => {
@@ -424,7 +424,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Decimal is correctly parsed from input literal numeric string value', async () => {
@@ -435,7 +435,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Decimal correctly determines large input literal numeric string to be a decimal number', async () => {
@@ -508,7 +508,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: number })
+        expect(result[field]).toEqual(number)
       })
 
       test('cds.Decimal is correctly parsed from variable string int value', async () => {
@@ -520,7 +520,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: number })
+        expect(result[field]).toEqual(number)
       })
 
       test('cds.Decimal correctly determines large numeric string variable to be a decimal number', async () => {
@@ -592,7 +592,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.DecimalFloat is correctly parsed from variable value', async () => {
@@ -602,7 +602,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -617,7 +617,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.Double is correctly parsed from variable value', async () => {
@@ -627,7 +627,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -643,7 +643,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Int16 throws error when input literal int value exceeds max value', async () => {
@@ -696,7 +696,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Int16 throws error when variable number value exceeds max value', async () => {
@@ -758,7 +758,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.Int32 is correctly parsed from variable value', async () => {
@@ -768,7 +768,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -784,7 +784,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.Int64 is correctly parsed from variable string value', async () => {
@@ -795,7 +795,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -810,7 +810,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.Integer is correctly parsed from variable value', async () => {
@@ -820,7 +820,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -836,7 +836,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Integer64 throws error when input literal int value exceeds max value', async () => {
@@ -863,7 +863,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Integer64 throws error when input literal string value exceeds max value', async () => {
@@ -925,7 +925,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Integer64 throws error when variable string value exceeds max value', async () => {
@@ -992,7 +992,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.LargeBinary is correctly parsed from large input literal base64url encoded string value', async () => {
@@ -1003,7 +1003,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
     })
 
@@ -1016,7 +1016,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.LargeBinary is correctly parsed from large variable base64url encoded string value', async () => {
@@ -1027,7 +1027,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: buffer })
+        expect(result[field]).toEqual(buffer)
       })
     })
   })
@@ -1051,7 +1051,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.LargeString is correctly parsed from variable value', async () => {
@@ -1061,7 +1061,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -1076,7 +1076,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.String is correctly parsed from variable value', async () => {
@@ -1086,7 +1086,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 
@@ -1102,7 +1102,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Time throws error when input literal is a string containing an invalid time format value', async () => {
@@ -1139,7 +1139,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.Time throws error when variable is a string containing an invalid time format value', async () => {
@@ -1184,7 +1184,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: expect.stringMatching(returnValue) })
+        expect(result[field]).toMatch(returnValue)
       })
 
       test('cds.Timestamp is correctly parsed from input literal high precision timestamp string value', async () => {
@@ -1196,7 +1196,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: expect.stringMatching(returnValue) })
+        expect(result[field]).toMatch(returnValue)
       })
 
       test('cds.Timestamp throws error when input literal is a string containing a non-time value', async () => {
@@ -1227,7 +1227,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: expect.stringMatching(returnValue) })
+        expect(result[field]).toMatch(returnValue)
       })
 
       test('cds.Timestamp is correctly parsed from variable high precision timestamp string value', async () => {
@@ -1239,7 +1239,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: expect.stringMatching(returnValue) })
+        expect(result[field]).toMatch(returnValue)
       })
 
       test('cds.Timestamp throws error when variable is a string containing a non-timestamp value', async () => {
@@ -1274,7 +1274,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.UInt8 throws error when input literal int value exceeds max value', async () => {
@@ -1327,7 +1327,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result).toEqual({ [field]: value })
+        expect(result[field]).toEqual(value)
       })
 
       test('cds.UInt8 throws error when variable number value exceeds max value', async () => {
@@ -1388,7 +1388,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
 
     test('cds.UUID is correctly parsed from variable value', async () => {
@@ -1398,7 +1398,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result).toEqual({ [field]: value })
+      expect(result[field]).toEqual(value)
     })
   })
 })
