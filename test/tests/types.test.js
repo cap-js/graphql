@@ -406,42 +406,45 @@ describe('graphql - types parsing and validation', () => {
 
     describe('input literal', () => {
       test('cds.Decimal is correctly parsed from input literal float value', async () => {
-        const value = 123.45
-        const query = _getMutationForFieldWithLiteralValue(field, value, false)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: String(value) }] } } }
+        const number = 123.45
+        const value = String(number)
+        const query = _getMutationForFieldWithLiteralValue(field, number, false)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(String(result[field])).toEqual(String(value))
+        expect(String(result[field])).toEqual(value)
       })
 
       test('cds.Decimal is correctly parsed from input literal int value', async () => {
-        const value = 123
-        const query = _getMutationForFieldWithLiteralValue(field, value, false)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: String(value) }] } } }
+        const number = 123
+        const value = String(number)
+        const query = _getMutationForFieldWithLiteralValue(field, number, false)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(String(result[field])).toEqual(String(value))
+        expect(String(result[field])).toEqual(value)
       })
 
       test('cds.Decimal is correctly parsed from input literal numeric string value', async () => {
-        const value = 123.45
-        const query = _getMutationForFieldWithLiteralValue(field, value, true)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: String(value) }] } } }
+        const number = 123.45
+        const value = String(number)
+        const query = _getMutationForFieldWithLiteralValue(field, number, true)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(String(result[field])).toEqual(String(value))
+        expect(String(result[field])).toEqual(value)
       })
 
       test('cds.Decimal correctly determines large input literal numeric string to be a decimal number', async () => {
         const value = '12345678901234567890.01234567890123456789'
         const query = _getMutationForFieldWithLiteralValue(field, value, true)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: String(value) }] } } }
+        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
@@ -508,7 +511,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(String(result[field])).toEqual(String(value))
+        expect(String(result[field])).toEqual(value)
       })
 
       test('cds.Decimal is correctly parsed from variable string int value', async () => {
@@ -520,7 +523,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(String(result[field])).toEqual(String(value))
+        expect(String(result[field])).toEqual(value)
       })
 
       test('cds.Decimal correctly determines large numeric string variable to be a decimal number', async () => {
@@ -535,8 +538,8 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Decimal throws error when variable value is a float', async () => {
-        const value = 123.45
-        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
+        const number = 123.45
+        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
           'Variable "$input" got invalid value 123.45 at "input.myDecimal"; Decimal variable value must be represented by a string: 123.45'
         const response = await POST('/graphql', { query, variables })
@@ -544,8 +547,8 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Decimal throws error when variable value is an int', async () => {
-        const value = 123
-        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
+        const number = 123
+        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
           'Variable "$input" got invalid value 123 at "input.myDecimal"; Decimal variable value must be represented by a string: 123'
         const response = await POST('/graphql', { query, variables })
@@ -583,51 +586,52 @@ describe('graphql - types parsing and validation', () => {
 
   describe('cds.DecimalFloat', () => {
     const field = 'myDecimalFloat'
-    const value = 1234.567
+    const number = 1234.567
+    const value = String(number)
 
     test('cds.DecimalFloat is correctly parsed from input literal', async () => {
-      const query = _getMutationForFieldWithLiteralValue(field, value, false)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const query = _getMutationForFieldWithLiteralValue(field, number, false)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(String(result[field])).toEqual(String(value))
+      expect(String(result[field])).toEqual(value)
     })
 
     test('cds.DecimalFloat is correctly parsed from variable value', async () => {
-      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query, variables })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(String(result[field])).toEqual(String(value))
+      expect(String(result[field])).toEqual(value)
     })
   })
 
   describe('cds.Double', () => {
     const field = 'myDouble'
-    const value = 1234.567
+    const number = 1234.567
 
     test('cds.Double is correctly parsed from input literal', async () => {
-      const query = _getMutationForFieldWithLiteralValue(field, value, false)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const query = _getMutationForFieldWithLiteralValue(field, number, false)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(result[field]).toEqual(number)
     })
 
     test('cds.Double is correctly parsed from variable value', async () => {
-      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query, variables })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(result[field]).toEqual(number)
     })
   })
 
@@ -636,27 +640,27 @@ describe('graphql - types parsing and validation', () => {
 
     describe('input literal', () => {
       test('cds.Int16 is correctly parsed from input literal int value', async () => {
-        const value = 32767 // Max Int16
-        const query = _getMutationForFieldWithLiteralValue(field, value, false)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+        const number = 32767 // Max Int16
+        const query = _getMutationForFieldWithLiteralValue(field, number, false)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
         const response = await POST('/graphql', { query })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(value)
+        expect(result[field]).toEqual(number)
       })
 
       test('cds.Int16 throws error when input literal int value exceeds max value', async () => {
-        const value = 32768 // Max Int16 + 1
-        const query = _getMutationForFieldWithLiteralValue(field, value, false)
+        const number = 32768 // Max Int16 + 1
+        const query = _getMutationForFieldWithLiteralValue(field, number, false)
         const message = 'Int16 must be an integer value between -(2^15) and 2^15 - 1: 32768'
         const response = await POST('/graphql', { query })
         expect(response.data.errors[0].message).toEqual(message)
       })
 
       test('cds.Int16 throws error when input literal int value exceeds min value', async () => {
-        const value = -32769 // Min Int16 - 1
-        const query = _getMutationForFieldWithLiteralValue(field, value, false)
+        const number = -32769 // Min Int16 - 1
+        const query = _getMutationForFieldWithLiteralValue(field, number, false)
         const message = 'Int16 must be an integer value between -(2^15) and 2^15 - 1: -32769'
         const response = await POST('/graphql', { query })
         expect(response.data.errors[0].message).toEqual(message)
@@ -689,19 +693,19 @@ describe('graphql - types parsing and validation', () => {
 
     describe('variable value', () => {
       test('cds.Int16 is correctly parsed from variable number value', async () => {
-        const value = 32767 // Max Int16
-        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+        const number = 32767 // Max Int16
+        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
         const response = await POST('/graphql', { query, variables })
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(value)
+        expect(result[field]).toEqual(number)
       })
 
       test('cds.Int16 throws error when variable number value exceeds max value', async () => {
-        const value = 32768 // Max Int16 + 1
-        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
+        const number = 32768 // Max Int16 + 1
+        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
           'Variable "$input" got invalid value 32768 at "input.myInt16"; Int16 must be an integer value between -(2^15) and 2^15 - 1: 32768'
         const response = await POST('/graphql', { query, variables })
@@ -709,8 +713,8 @@ describe('graphql - types parsing and validation', () => {
       })
 
       test('cds.Int16 throws error when variable number value exceeds min value', async () => {
-        const value = -32769 // Min Int16 - 1
-        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
+        const number = -32769 // Min Int16 - 1
+        const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
           'Variable "$input" got invalid value -32769 at "input.myInt16"; Int16 must be an integer value between -(2^15) and 2^15 - 1: -32769'
         const response = await POST('/graphql', { query, variables })
@@ -749,26 +753,26 @@ describe('graphql - types parsing and validation', () => {
   // Note: maps to same type as cds.Integer
   describe('cds.Int32', () => {
     const field = 'myInt32'
-    const value = 2147483647
+    const number = 2147483647
 
     test('cds.Int32 is correctly parsed from input literal', async () => {
-      const query = _getMutationForFieldWithLiteralValue(field, value, false)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const query = _getMutationForFieldWithLiteralValue(field, number, false)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(result[field]).toEqual(number)
     })
 
     test('cds.Int32 is correctly parsed from variable value', async () => {
-      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query, variables })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(result[field]).toEqual(number)
     })
   })
 
@@ -801,26 +805,26 @@ describe('graphql - types parsing and validation', () => {
 
   describe('cds.Integer', () => {
     const field = 'myInteger'
-    const value = 2147483647
+    const number = 2147483647
 
     test('cds.Integer is correctly parsed from input literal', async () => {
-      const query = _getMutationForFieldWithLiteralValue(field, value, false)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const query = _getMutationForFieldWithLiteralValue(field, number, false)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(result[field]).toEqual(number)
     })
 
     test('cds.Integer is correctly parsed from variable value', async () => {
-      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, value)
-      const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
+      const { query, variables } = _getMutationAndVariablesForFieldWithVariable(field, number)
+      const data = { TypesService: { MyEntity: { create: [{ [field]: number }] } } }
       const response = await POST('/graphql', { query, variables })
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(result[field]).toEqual(number)
     })
   })
 
