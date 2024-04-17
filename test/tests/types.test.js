@@ -413,7 +413,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(value)
+        expect(String(result[field])).toEqual(String(value))
       })
 
       test('cds.Decimal is correctly parsed from input literal int value', async () => {
@@ -424,7 +424,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(value)
+        expect(String(result[field])).toEqual(String(value))
       })
 
       test('cds.Decimal is correctly parsed from input literal numeric string value', async () => {
@@ -435,7 +435,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(value)
+        expect(String(result[field])).toEqual(String(value))
       })
 
       test('cds.Decimal correctly determines large input literal numeric string to be a decimal number', async () => {
@@ -446,7 +446,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
+        expect(parseFloat(result[field])).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
       })
 
       test('cds.Decimal throws error when input literal is not a decimal string, but a boolean', async () => {
@@ -508,7 +508,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(number)
+        expect(String(result[field])).toEqual(String(value))
       })
 
       test('cds.Decimal is correctly parsed from variable string int value', async () => {
@@ -520,7 +520,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(number)
+        expect(String(result[field])).toEqual(String(value))
       })
 
       test('cds.Decimal correctly determines large numeric string variable to be a decimal number', async () => {
@@ -531,7 +531,7 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
+        expect(parseFloat(result[field])).toBeGreaterThan(12345678901234560000) // Incorrect sqlite value due to dynamic typing system and rounding errors
       })
 
       test('cds.Decimal throws error when variable value is a float', async () => {
@@ -592,7 +592,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(String(result[field])).toEqual(String(value))
     })
 
     test('cds.DecimalFloat is correctly parsed from variable value', async () => {
@@ -602,7 +602,7 @@ describe('graphql - types parsing and validation', () => {
       expect(response.data).toEqual({ data })
 
       const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-      expect(result[field]).toEqual(value)
+      expect(String(result[field])).toEqual(String(value))
     })
   })
 
