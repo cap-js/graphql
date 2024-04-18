@@ -433,7 +433,7 @@ describe('graphql - types parsing and validation', () => {
       test('cds.Decimal is correctly parsed from input literal numeric string value', async () => {
         const number = 123.45
         const value = String(number)
-        const body = _getMutationForFieldWithLiteralValue(field, number, true)
+        const body = _getMutationForFieldWithLiteralValue(field, value, true)
         const data = { TypesService: { MyEntity: { create: [{ [field]: value }] } } }
         const response = await POST('/graphql', body)
         expect(response.data).toEqual({ data })
