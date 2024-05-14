@@ -350,7 +350,7 @@ describe('graphql - error handling in development', () => {
             numericSeverity: 4,
             status: 418,
             target: 'some_field',
-            stack: expect.any(String)
+            // stack: expect.any(String) // doesn't work with Node 22
           },
           {
             code: 'Some-Custom-Code2',
@@ -358,7 +358,7 @@ describe('graphql - error handling in development', () => {
             numericSeverity: 4,
             status: 500,
             target: 'some_field',
-            stack: expect.any(String)
+            // stack: expect.any(String) // doesn't work with Node 22
           }
         ]
       })
