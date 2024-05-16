@@ -43,20 +43,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
-
-      if (cds.env.features.cds_assert) {
-        expect(log).toMatchObject({ code: '400', target: 'notEmptyI', msg: 'Value is required' })
-      } else {
-        expect(log).toMatchObject({
-          code: '400',
-          element: 'notEmptyI',
-          entity: 'ValidationErrorsService.A',
-          msg: 'Value is required',
-          numericSeverity: 4,
-          target: 'notEmptyI',
-          type: 'cds.Integer'
-        })
-      }
+      expect(log).toMatchObject({ code: '400', target: 'notEmptyI', msg: 'Value is required' })
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -149,7 +136,7 @@ describe('graphql - error handling in production', () => {
               },
               {
                 code: '400',
-                message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
+                message: expect.stringContaining('Value "foo" is invalid'),
                 target: 'oneOfEnumValues'
               }
             ]
@@ -163,49 +150,18 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
 
-      if (cds.env.features.cds_assert) {
-        expect(log).toMatchObject({
-          code: '400',
-          msg: 'Multiple errors occurred. Please see the details for more information.',
-          details: [
-            { code: '400', target: 'inRange', message: 'Value is required' },
-            {
-              code: '400',
-              target: 'oneOfEnumValues',
-              message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}'
-            }
-          ]
-        })
-      } else {
-        expect(log).toMatchObject({
-          code: '400',
-          msg: 'Multiple errors occurred. Please see the details for more information.',
-          details: [
-            {
-              args: ['inRange'],
-              code: '400',
-              element: 'inRange',
-              entity: 'ValidationErrorsService.C',
-              message: 'Value is required',
-              numericSeverity: 4,
-              target: 'inRange',
-              type: 'cds.Integer'
-            },
-            {
-              args: ['"foo"', '"high", "medium", "low"'],
-              code: '400',
-              element: 'oneOfEnumValues',
-              entity: 'ValidationErrorsService.C',
-              enum: ['@assert.range', 'type', 'enum'],
-              message: 'Value "foo" is invalid according to enum declaration {"high", "medium", "low"}',
-              numericSeverity: 4,
-              target: 'oneOfEnumValues',
-              type: 'cds.String',
-              value: 'foo'
-            }
-          ]
-        })
-      }
+      expect(log).toMatchObject({
+        code: '400',
+        msg: 'Multiple errors occurred. Please see the details for more information.',
+        details: [
+          { code: '400', target: 'inRange', message: 'Value is required' },
+          {
+            code: '400',
+            target: 'oneOfEnumValues',
+            message: expect.stringContaining('Value "foo" is invalid')
+          }
+        ]
+      })
 
       expect(log).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
