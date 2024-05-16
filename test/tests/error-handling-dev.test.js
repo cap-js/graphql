@@ -1,4 +1,3 @@
-
 describe('graphql - error handling in development', () => {
   const cds = require('@sap/cds/lib')
   const path = require('path')
