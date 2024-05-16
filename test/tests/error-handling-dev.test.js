@@ -1,4 +1,3 @@
-process.env.cds_features_cds__assert ??= 'lean'
 
 describe('graphql - error handling in development', () => {
   const cds = require('@sap/cds/lib')
