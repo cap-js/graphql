@@ -1043,11 +1043,7 @@ describe('graphql - types parsing and validation', () => {
   // - https://github.com/graphql/express-graphql/blob/28e4c2924ea6984bf918465cefdadae340d8780e/src/parseBody.ts#L96
   describe.skip('cds.LargeString', () => {
     const field = 'myLargeString'
-    const value = (() => {
-      let string = ''
-      for (let i = 0; i < 100000; i++) string += 'This is a test string! '
-      return string
-    })()
+    const value = 'This is a test string! '.repeat(100000)
 
     test('cds.LargeString is correctly parsed from input literal', async () => {
       const body = _getMutationForFieldWithLiteralValue(field, value, true)
