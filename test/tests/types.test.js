@@ -2,10 +2,9 @@ const { gql } = require('../util')
 
 const _toBase64Url = value => value.replace(/\//g, '_').replace(/\+/g, '-')
 
-const _getTestBuffer = repetitions => {
-  const testString = 'Test String!!'
-  let string = ''
-  for (let i = 0; i < repetitions; i++) string += testString
+const _getTestBuffer = length => {
+  const testString = 'Test String! '
+  let string = testString.repeat(Math.ceil(length / testString.length)).slice(0, length)
   return Buffer.from(string)
 }
 
@@ -986,7 +985,7 @@ describe('graphql - types parsing and validation', () => {
   // - https://github.com/graphql/express-graphql/blob/28e4c2924ea6984bf918465cefdadae340d8780e/src/parseBody.ts#L96
   describe.skip('cds.LargeBinary', () => {
     const field = 'myLargeBinary'
-    const buffer = _getTestBuffer(500000)
+    const buffer = _getTestBuffer(500000) // 500 KB
 
     describe('input literal', () => {
       test('cds.LargeBinary is correctly parsed from large input literal base64 encoded string value', async () => {
