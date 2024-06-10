@@ -113,28 +113,40 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data.errors[0].message).toEqual(message)
       })
 
-      test('cds.Binary throws error when input literal string value contains non base64 or base64url characters', async () => {
+      test('cds.Binary is correctly parsed from input literal base64 encoded string value containing non base64 or base64url characters', async () => {
         const value = 'abc.def~123'
+        const buffer = Buffer.from(value, 'base64url')
         const body = _getMutationForFieldWithLiteralValue(field, value, true)
-        const message = 'Binary values must be base64 or base64url encoded and normalized strings'
+        const data = { TypesService: { MyEntity: { create: [{ [field]: 'abcdef12' }] } } }
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data).toEqual({ data })
+
+        const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
+        expect(result[field]).toEqual(buffer)
       })
 
-      test('cds.Binary throws error when input literal string value contains non-normalized base64 encoding', async () => {
+      test('cds.Binary is correctly parsed from input literal string value containing non-normalized base64 encoding', async () => {
         const value = 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nISF=' // Should be E=
+        const buffer = Buffer.from(value, 'base64url')
         const body = _getMutationForFieldWithLiteralValue(field, value, true)
-        const message = 'Binary values must be base64 or base64url encoded and normalized strings'
+        const data = { TypesService: { MyEntity: { create: [{ [field]: 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nISE=' }] } } }
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data).toEqual({ data })
+
+        const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
+        expect(result[field]).toEqual(buffer)
       })
 
-      test('cds.Binary throws error when input literal string value contains base64 encoded string value with excessive padding', async () => {
+      test('cds.Binary is correctly parsed from input literal string value containing base64 encoded string value with excessive padding', async () => {
         const value = 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nIQ=========='
+        const buffer = Buffer.from(value, 'base64url')
         const body = _getMutationForFieldWithLiteralValue(field, value, true)
-        const message = 'Binary values must be base64 or base64url encoded and normalized strings'
+        const data = { TypesService: { MyEntity: { create: [{ [field]: 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nIQ==' }] } } }
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data).toEqual({ data })
+
+        const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
+        expect(result[field]).toEqual(buffer)
       })
     })
 
@@ -187,13 +199,40 @@ describe('graphql - types parsing and validation', () => {
         expect(result[field]).toEqual(buffer)
       })
 
-      test('cds.Binary throws error when variable string value contains non base64 or base64url characters', async () => {
+      test('cds.Binary is correctly parsed from variable string value containing non base64 or base64url characters', async () => {
         const value = 'abc.def~123'
+        const buffer = Buffer.from(value, 'base64url')
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const message =
-          'Variable "$input" got invalid value "abc.def~123" at "input.myBinary"; Binary values must be base64 or base64url encoded and normalized strings'
+        const data = { TypesService: { MyEntity: { create: [{ [field]: 'abcdef12' }] } } }
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data).toEqual({ data })
+
+        const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
+        expect(result[field]).toEqual(buffer)
+      })
+
+      test('cds.Binary is correctly parsed from variable string value containing non-normalized base64 encoding', async () => {
+        const value = 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nISF=' // Should be E=
+        const buffer = Buffer.from(value, 'base64url')
+        const body = _getMutationForFieldWithLiteralValue(field, value, true)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nISE=' }] } } }
+        const response = await POST('/graphql', body)
+        expect(response.data).toEqual({ data })
+
+        const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
+        expect(result[field]).toEqual(buffer)
+      })
+
+      test('cds.Binary is correctly parsed from variable string value containing base64 encoded string value with excessive padding', async () => {
+        const value = 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nIQ=========='
+        const buffer = Buffer.from(value, 'base64url')
+        const body = _getMutationAndVariablesForFieldWithVariable(field, value)
+        const data = { TypesService: { MyEntity: { create: [{ [field]: 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nIQ==' }] } } }
+        const response = await POST('/graphql', body)
+        expect(response.data).toEqual({ data })
+
+        const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
+        expect(result[field]).toEqual(buffer)
       })
 
       test('cds.Binary throws error when variable value is not a string, but an integer', async () => {
@@ -201,23 +240,6 @@ describe('graphql - types parsing and validation', () => {
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
           'Variable "$input" got invalid value 123 at "input.myBinary"; Binary cannot represent non string value: 123'
-        const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
-      })
-
-      test('cds.Binary throws error when variable string value contains non-normalized base64 encoding', async () => {
-        const value = 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nISF=' // Should be E=
-        const body = _getMutationForFieldWithLiteralValue(field, value, true)
-        const message = 'Binary values must be base64 or base64url encoded and normalized strings'
-        const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
-      })
-
-      test('cds.Binary throws error when variable string value contains base64 encoded string value with excessive padding', async () => {
-        const value = 'VGhpcyBpcyBhIHRlc3Qgc3RyaW5nIQ=========='
-        const body = _getMutationAndVariablesForFieldWithVariable(field, value)
-        const message =
-          'Variable "$input" got invalid value "VGhpcyBpcyBhIHRlc3Qgc3RyaW5nIQ==========" at "input.myBinary"; Binary values must be base64 or base64url encoded and normalized strings'
         const response = await POST('/graphql', body)
         expect(response.data.errors[0].message).toEqual(message)
       })
