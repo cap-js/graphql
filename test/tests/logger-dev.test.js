@@ -1,5 +1,5 @@
 describe('graphql - query logging in development', () => {
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../util')
   const util = require('util')
