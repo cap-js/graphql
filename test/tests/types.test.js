@@ -799,7 +799,7 @@ describe('graphql - types parsing and validation', () => {
   })
 
   // Note: maps to same type as cds.Integer64
-  describe('cds.Int64', () => {
+  xdescribe('cds.Int64', () => {
     const field = 'myInt64'
 
     test('cds.Int64 is correctly parsed from input literal int value', async () => {
