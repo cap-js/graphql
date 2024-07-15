@@ -4,5 +4,12 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "*"
+  },
+  "cds": {
+    "protocols": {
+      "graphql": {
+        "max_content_length": "110KB"
+      }
+    }
   }
 }

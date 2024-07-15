@@ -1,12 +1,18 @@
+const consumers = require('node:stream/consumers')
+
 const { gql } = require('../util')
 
 const _toBase64Url = value => value.replace(/\//g, '_').replace(/\+/g, '-')
 
-const _getTestBuffer = length => {
-  const testString = 'Test String! '
-  let string = testString.repeat(Math.ceil(length / testString.length)).slice(0, length)
-  return Buffer.from(string)
+const _getTestString = length => {
+  const testString = 'This is a test string! '
+  return testString.repeat(Math.ceil(length / testString.length)).slice(0, length)
 }
+
+const _getTestBuffer = length => Buffer.from(_getTestString(length))
+
+// e.g. base64 string with length 96 -> requires buffer with length 72
+const _neededBufferLengthForBase64StringWithLength = length => Math.ceil((length * 6) / 8)
 
 const _getMutationForFieldWithLiteralValue = (field, value, quoted) => ({
   query: gql`
@@ -48,9 +54,7 @@ describe('graphql - types parsing and validation', () => {
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
-  beforeEach(async () => {
-    await data.reset()
-  })
+  beforeEach(data.reset)
 
   describe('cds.Binary', () => {
     const field = 'myBinary'
@@ -1002,12 +1006,9 @@ describe('graphql - types parsing and validation', () => {
   })
 
   // Note: maps to same type as cds.Binary
-  // REVISIT: express-graphql limits request body size to 100kb by default:
-  // - https://github.com/graphql/express-graphql/issues/346
-  // - https://github.com/graphql/express-graphql/blob/28e4c2924ea6984bf918465cefdadae340d8780e/src/parseBody.ts#L96
-  describe.skip('cds.LargeBinary', () => {
+  describe('cds.LargeBinary', () => {
     const field = 'myLargeBinary'
-    const buffer = _getTestBuffer(500000) // 500 KB
+    const buffer = _getTestBuffer(_neededBufferLengthForBase64StringWithLength(105000)) // 105 KB as base64 string
 
     describe('input literal', () => {
       test('cds.LargeBinary is correctly parsed from large input literal base64 encoded string value', async () => {
@@ -1018,7 +1019,8 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(buffer)
+        const bufferFromDB = await consumers.buffer(result[field])
+        expect(bufferFromDB).toEqual(buffer)
       })
 
       test('cds.LargeBinary is correctly parsed from large input literal base64url encoded string value', async () => {
@@ -1029,7 +1031,8 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(buffer)
+        const bufferFromDB = await consumers.buffer(result[field])
+        expect(bufferFromDB).toEqual(buffer)
       })
     })
 
@@ -1042,7 +1045,8 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(buffer)
+        const bufferFromDB = await consumers.buffer(result[field])
+        expect(bufferFromDB).toEqual(buffer)
       })
 
       test('cds.LargeBinary is correctly parsed from large variable base64url encoded string value', async () => {
@@ -1053,18 +1057,16 @@ describe('graphql - types parsing and validation', () => {
         expect(response.data).toEqual({ data })
 
         const result = await SELECT.one.from('sap.cds.graphql.types.MyEntity').columns(field)
-        expect(result[field]).toEqual(buffer)
+        const bufferFromDB = await consumers.buffer(result[field])
+        expect(bufferFromDB).toEqual(buffer)
       })
     })
   })
 
   // Note: maps to same type as cds.String
-  // REVISIT: express-graphql limits request body size to 100kb by default:
-  // - https://github.com/graphql/express-graphql/issues/346
-  // - https://github.com/graphql/express-graphql/blob/28e4c2924ea6984bf918465cefdadae340d8780e/src/parseBody.ts#L96
-  describe.skip('cds.LargeString', () => {
+  describe('cds.LargeString', () => {
     const field = 'myLargeString'
-    const value = 'This is a test string! '.repeat(100000)
+    const value = _getTestString(105000) // 105 KB
 
     test('cds.LargeString is correctly parsed from input literal', async () => {
       const body = _getMutationForFieldWithLiteralValue(field, value, true)
