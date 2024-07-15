@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Allow maximum POST body size to be configured using the `max_content_length` option. This value is passed to the Express JSON body parser middleware `limit` option. For example:
+  ```json
+  {
+    "cds": {
+      "protocols": {
+        "graphql": {
+          "max_content_length": "500KB"
+        }
+      }
+    }
+  }
+  ```
+
 ### Changed
 
 - To improve performance, binary payloads are no longer validated to check if they are properly base64 or base64url encoded
@@ -99,10 +112,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Improved query logging:
-  + Don't log queries that are `undefined`
-  + Log `operationName`
-  + Log `variables` when not in production
-  + Sanitize arguments and their values in queries when in production
+  - Don't log queries that are `undefined`
+  - Log `operationName`
+  - Log `variables` when not in production
+  - Sanitize arguments and their values in queries when in production
 
 ### Fixed
 
@@ -121,21 +134,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved the `GraphQLAdapter` module to `lib/GraphQLAdapter.js` and merged it with `CDSGraphQLAdapter` previously found in `index.js` in the root directory
 - Don't generate fields that represent compositions of aspects within mutation types that represent services
 - Disabled conjunction on the same field for the following operators:
-  + `eq` (Equal)
-  + `gt` (Greater Than)
-  + `ge` (Greater Than or Equal)
-  + `le` (Less Than or Equal)
-  + `lt` (Less Than)
-  + `startswith`
-  + `endswith`
+  - `eq` (Equal)
+  - `gt` (Greater Than)
+  - `ge` (Greater Than or Equal)
+  - `le` (Less Than or Equal)
+  - `lt` (Less Than)
+  - `startswith`
+  - `endswith`
 
 ## Version 0.5.0 - 2023-05-04
 
 ### Changed
 
 - Improved consistency of handling results of different types returned by custom handlers in CRUD resolvers:
-  + Wrap only objects (i.e. not primitive types or arrays) returned by custom handlers in arrays in create, read, and update resolvers
-  + Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
+  - Wrap only objects (i.e. not primitive types or arrays) returned by custom handlers in arrays in create, read, and update resolvers
+  - Delete mutations return the length of an array that is returned by a `DELETE` custom handler or 1 if a single object is returned
 - Don't generate fields for key elements in update input objects
 - Update and delete mutations have mandatory `filter` argument
 - Allow services that are not instances of `cds.ApplicationService`. It is expected that the invoker provides the correct set of service providers when directly using the GraphQL protocol adapter API.
