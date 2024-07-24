@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support for configuring request payload limit using global feature flag `cds.server.max_request_body_size`
+- Support for configuring request payload limit using global flag `cds.server.max_request_body_size`
 
 ### Changed
 
