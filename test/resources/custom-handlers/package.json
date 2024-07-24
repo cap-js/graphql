@@ -1,5 +1,6 @@
 {
-  "dependencies": {
+  "Note: Programmatic configuration of GraphQL protocol adapter in server.js": "",
+  "__dependencies": {
     "@cap-js/graphql": "*"
   },
   "devDependencies": {
