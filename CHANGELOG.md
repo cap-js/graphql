@@ -9,19 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Allow maximum POST body size to be configured using the `max_content_length` option. This value is passed to the Express JSON body parser middleware `limit` option. For example:
-  ```json
-  {
-    "cds": {
-      "protocols": {
-        "graphql": {
-          "max_content_length": "500KB"
-        }
-      }
-    }
-  }
-  ```
-
 ### Changed
 
 - To improve performance, binary payloads are no longer validated to check if they are properly base64 or base64url encoded
