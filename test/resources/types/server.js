@@ -1,6 +1,3 @@
-const cds = require('@sap/cds')
-const path = require('path')
-const protocols = cds.env.protocols ??= {}
-if (!protocols.graphql) protocols.graphql = {
-  path: '/graphql', impl: path.join(__dirname, '../../../index.js')
-}
+cds.on('bootstrap', app => {
+  app.use(cds.env.protocols.graphql.path, require('express').json({ limit: '110KB' }))
+})
