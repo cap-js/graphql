@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support for configuring request payload limit using global feature flag `cds.server.max_request_body_size`
+
 ### Changed
 
 - To improve performance, binary payloads are no longer validated to check if they are properly base64 or base64url encoded
