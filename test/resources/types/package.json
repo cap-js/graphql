@@ -4,5 +4,10 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "*"
+  },
+  "cds": {
+    "server": {
+      "max_request_body_size": "110KB"
+    }
   }
 }
