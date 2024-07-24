@@ -46,7 +46,7 @@ const _getMutationAndVariablesForFieldWithVariable = (field, value) => ({
 })
 
 describe('graphql - types parsing and validation', () => {
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const fs = require('fs')
 
