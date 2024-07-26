@@ -7,7 +7,9 @@
   },
   "cds": {
     "server": {
-      "max_request_body_size": "110KB"
+      "body_parser": {
+        "limit": "110KB"
+      }
     }
   }
 }
