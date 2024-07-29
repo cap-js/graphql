@@ -13,8 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Bump required `@sap/cds` version to `>=7.8`
 - To improve performance, binary payloads are no longer validated to check if they are properly base64 or base64url encoded
 - Bump required `node` version to `^16` due to usage of `Buffer.toString('base64url')`
+- Use `cds.compile.to.serviceinfo` to determine if a service should be compiled to GraphQL schema
 
 ### Fixed
 
