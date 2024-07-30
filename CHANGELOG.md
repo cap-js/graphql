@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.11.0 - tbd
+## Version 0.11.0 - 2024-07-30
 
 ### Added
 
@@ -17,10 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - To improve performance, binary payloads are no longer validated to check if they are properly base64 or base64url encoded
 - Bump required `node` version to `^16` due to usage of `Buffer.toString('base64url')`
 - Use `cds.compile.to.serviceinfo` to determine if a service should be compiled to GraphQL schema
-
-### Fixed
-
-### Removed
 
 ## Version 0.10.1 - 2024-03-07
 
