@@ -10,6 +10,9 @@
       "body_parser": {
         "limit": "110KB"
       }
+    },
+    "features": {
+      "ieee754compatible": true
     }
   }
 }
