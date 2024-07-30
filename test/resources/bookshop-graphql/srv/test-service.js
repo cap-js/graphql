@@ -1,4 +1,4 @@
-const cds = require('@sap/cds/lib')
+const cds = require('@sap/cds')
 
 module.exports = cds.service.impl(srv => {
   const { Foo } = srv.entities

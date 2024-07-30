@@ -66,6 +66,74 @@ type AnnotatedWithAtProtocolObjectList_input {
   A: AnnotatedWithAtProtocolObjectList_A_input
 }
 
+type AnnotatedWithAtProtocolObjectWithKey {
+  A(filter: [AnnotatedWithAtProtocolObjectWithKey_A_filter], orderBy: [AnnotatedWithAtProtocolObjectWithKey_A_orderBy], skip: Int, top: Int): AnnotatedWithAtProtocolObjectWithKey_A_connection
+}
+
+type AnnotatedWithAtProtocolObjectWithKeyAndValue {
+  A(filter: [AnnotatedWithAtProtocolObjectWithKeyAndValue_A_filter], orderBy: [AnnotatedWithAtProtocolObjectWithKeyAndValue_A_orderBy], skip: Int, top: Int): AnnotatedWithAtProtocolObjectWithKeyAndValue_A_connection
+}
+
+type AnnotatedWithAtProtocolObjectWithKeyAndValue_A {
+  id: ID
+}
+
+input AnnotatedWithAtProtocolObjectWithKeyAndValue_A_C {
+  id: ID
+}
+
+type AnnotatedWithAtProtocolObjectWithKeyAndValue_A_connection {
+  nodes: [AnnotatedWithAtProtocolObjectWithKeyAndValue_A]
+  totalCount: Int
+}
+
+input AnnotatedWithAtProtocolObjectWithKeyAndValue_A_filter {
+  id: [ID_filter]
+}
+
+type AnnotatedWithAtProtocolObjectWithKeyAndValue_A_input {
+  create(input: [AnnotatedWithAtProtocolObjectWithKeyAndValue_A_C]!): [AnnotatedWithAtProtocolObjectWithKeyAndValue_A]
+  delete(filter: [AnnotatedWithAtProtocolObjectWithKeyAndValue_A_filter]!): Int
+}
+
+input AnnotatedWithAtProtocolObjectWithKeyAndValue_A_orderBy {
+  id: SortDirection
+}
+
+type AnnotatedWithAtProtocolObjectWithKeyAndValue_input {
+  A: AnnotatedWithAtProtocolObjectWithKeyAndValue_A_input
+}
+
+type AnnotatedWithAtProtocolObjectWithKey_A {
+  id: ID
+}
+
+input AnnotatedWithAtProtocolObjectWithKey_A_C {
+  id: ID
+}
+
+type AnnotatedWithAtProtocolObjectWithKey_A_connection {
+  nodes: [AnnotatedWithAtProtocolObjectWithKey_A]
+  totalCount: Int
+}
+
+input AnnotatedWithAtProtocolObjectWithKey_A_filter {
+  id: [ID_filter]
+}
+
+type AnnotatedWithAtProtocolObjectWithKey_A_input {
+  create(input: [AnnotatedWithAtProtocolObjectWithKey_A_C]!): [AnnotatedWithAtProtocolObjectWithKey_A]
+  delete(filter: [AnnotatedWithAtProtocolObjectWithKey_A_filter]!): Int
+}
+
+input AnnotatedWithAtProtocolObjectWithKey_A_orderBy {
+  id: SortDirection
+}
+
+type AnnotatedWithAtProtocolObjectWithKey_input {
+  A: AnnotatedWithAtProtocolObjectWithKey_A_input
+}
+
 type AnnotatedWithAtProtocolString {
   A(filter: [AnnotatedWithAtProtocolString_A_filter], orderBy: [AnnotatedWithAtProtocolString_A_orderBy], skip: Int, top: Int): AnnotatedWithAtProtocolString_A_connection
 }
@@ -147,6 +215,8 @@ input ID_filter {
 type Mutation {
   AnnotatedWithAtGraphQL: AnnotatedWithAtGraphQL_input
   AnnotatedWithAtProtocolObjectList: AnnotatedWithAtProtocolObjectList_input
+  AnnotatedWithAtProtocolObjectWithKey: AnnotatedWithAtProtocolObjectWithKey_input
+  AnnotatedWithAtProtocolObjectWithKeyAndValue: AnnotatedWithAtProtocolObjectWithKeyAndValue_input
   AnnotatedWithAtProtocolString: AnnotatedWithAtProtocolString_input
   AnnotatedWithAtProtocolStringList: AnnotatedWithAtProtocolStringList_input
 }
@@ -154,6 +224,8 @@ type Mutation {
 type Query {
   AnnotatedWithAtGraphQL: AnnotatedWithAtGraphQL
   AnnotatedWithAtProtocolObjectList: AnnotatedWithAtProtocolObjectList
+  AnnotatedWithAtProtocolObjectWithKey: AnnotatedWithAtProtocolObjectWithKey
+  AnnotatedWithAtProtocolObjectWithKeyAndValue: AnnotatedWithAtProtocolObjectWithKeyAndValue
   AnnotatedWithAtProtocolString: AnnotatedWithAtProtocolString
   AnnotatedWithAtProtocolStringList: AnnotatedWithAtProtocolStringList
 }

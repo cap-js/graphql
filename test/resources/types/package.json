@@ -1,5 +1,18 @@
 {
   "dependencies": {
+    "@cap-js/graphql": "*"
+  },
+  "devDependencies": {
     "@cap-js/sqlite": "*"
+  },
+  "cds": {
+    "server": {
+      "body_parser": {
+        "limit": "110KB"
+      }
+    },
+    "features": {
+      "ieee754compatible": true
+    }
   }
 }

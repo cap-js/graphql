@@ -1,5 +1,5 @@
 describe('graphql - aliases', () => {
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../../util')
 

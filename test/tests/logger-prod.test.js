@@ -1,6 +1,6 @@
 describe('graphql - query logging with sanitization in production', () => {
   process.env.NODE_ENV = 'production'
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../util')
   const util = require('util')
