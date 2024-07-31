@@ -5,17 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.11.0 - tbd
+## Version 0.12.0 - tbd
 
 ### Added
 
 ### Changed
 
+- Bump `@graphiql/plugin-explorer` version to `^3`
+
 ### Fixed
 
 ### Removed
 
-## Version 0.10.0 - 2023-01-30
+## Version 0.11.0 - 2024-07-30
+
+### Added
+
+- Support for configuring request payload limit using global flag `cds.server.body_parser.limit`
+
+### Changed
+
+- Bump required `@sap/cds` version to `>=7.8`
+- To improve performance, binary payloads are no longer validated to check if they are properly base64 or base64url encoded
+- Bump required `node` version to `^16` due to usage of `Buffer.toString('base64url')`
+- Use `cds.compile.to.serviceinfo` to determine if a service should be compiled to GraphQL schema
+
+## Version 0.10.1 - 2024-03-07
+
+### Fixed
+
+- Type parsing error for literal values passed within arguments on fields of scalar type differing from the literal type. This case occurred for delete mutations when the filter operands had a type other than `Int`.
+
+## Version 0.10.0 - 2024-01-30
 
 ### Added
 

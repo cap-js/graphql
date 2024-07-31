@@ -1,5 +1,5 @@
 describe('graphql - annotations', () => {
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../util')
 
@@ -39,7 +39,9 @@ describe('graphql - annotations', () => {
         }
       `
       const response = await POST(path, { query })
-      expect(response.data.errors[0].message).toMatch(/^Cannot query field "AnnotatedWithAtProtocolNone" on type "Query"\./)
+      expect(response.data.errors[0].message).toMatch(
+        /^Cannot query field "AnnotatedWithAtProtocolNone" on type "Query"\./
+      )
     })
 
     test('service annotated with non-GraphQL protocol is not served', async () => {
@@ -110,6 +112,38 @@ describe('graphql - annotations', () => {
       const query = gql`
         {
           AnnotatedWithAtProtocolObjectList {
+            A {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST(path, { query })
+      expect(response.data).not.toHaveProperty('errors')
+    })
+
+    test('service annotated with "@protocol: { graphql }" is served at configured path', async () => {
+      const query = gql`
+        {
+          AnnotatedWithAtProtocolObjectWithKey {
+            A {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST(path, { query })
+      expect(response.data).not.toHaveProperty('errors')
+    })
+
+    test('service annotated with "@protocol: { graphql: \'dummy\' }" is served at configured path', async () => {
+      const query = gql`
+        {
+          AnnotatedWithAtProtocolObjectWithKeyAndValue {
             A {
               nodes {
                 id

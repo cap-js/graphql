@@ -6,10 +6,13 @@
     "@cap-js/sqlite": "*"
   },
   "cds": {
-    "protocols": {
-      "graphql": {
-        "path": "/custom-graphql-path"
+    "server": {
+      "body_parser": {
+        "limit": "110KB"
       }
+    },
+    "features": {
+      "ieee754compatible": true
     }
   }
 }

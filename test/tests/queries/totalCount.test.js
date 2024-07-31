@@ -1,5 +1,5 @@
 describe('graphql - queries with totalCount', () => {
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../../util')
 
@@ -160,19 +160,34 @@ describe('graphql - queries with totalCount', () => {
     `
     const data = {
       AdminService: {
-        Authors: null
+        Authors: {
+          totalCount: 4,
+          nodes: [
+            {
+              name: 'Edgar Allen Poe',
+              books: {
+                totalCount: null, // REVISIT: expected 2
+                nodes: [
+                  {
+                    title: 'Eleonora'
+                  }
+                ]
+              }
+            },
+            {
+              name: 'Richard Carpenter',
+              books: {
+                totalCount: null, // REVISIT: expected 0
+                nodes: []
+              }
+            }
+          ]
+        }
       }
     }
-    const errors = [
-      {
-        locations: [{ column: 11, line: 4 }],
-        message: 'Pagination is not supported in expand',
-        path: ['AdminService', 'Authors'],
-        extensions: expect.any(Object)
-      }
-    ]
+
     const response = await POST('/graphql', { query })
-    expect(response.data).toEqual({ data, errors })
+    expect(response.data).toEqual({ data })
   })
 
   test('query with aliases on totalCount on nested fields', async () => {
