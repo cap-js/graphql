@@ -10,8 +10,12 @@
     "index.js"
   ],
   "dependencies": {
+    "@cap-js/graphql": "*",
     "@sap/cds": ">=5.9",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "*"
   },
   "scripts": {
     "genres": "cds serve test/genres.cds",

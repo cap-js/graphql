@@ -1,5 +1,5 @@
 describe('graphql - filter', () => {
-  const cds = require('@sap/cds/lib')
+  const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../../util')
 
@@ -290,7 +290,7 @@ describe('graphql - filter', () => {
         const query = gql`
           {
             AdminService {
-              Books(filter: [{ ID: { in: [201, 251] } }, { title: { contains: "cat" } }]) {
+              Books(filter: [{ ID: { in: [201, 251] } }, { title: { contains: "Cat" } }]) {
                 nodes {
                   ID
                   title
@@ -468,10 +468,10 @@ describe('graphql - filter', () => {
               Books(
                 filter: [
                   {
-                    title: [{ startswith: "the", endswith: "raven" }, { contains: "height" }]
+                    title: [{ startswith: "The", endswith: "Raven" }, { contains: "Height" }]
                     ID: [{ eq: 201 }, { eq: 251 }]
                   }
-                  { title: { contains: "cat" } }
+                  { title: { contains: "Cat" } }
                 ]
               ) {
                 nodes {
