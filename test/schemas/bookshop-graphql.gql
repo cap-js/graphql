@@ -1134,6 +1134,7 @@ input Timestamp_filter {
   ne: [Timestamp]
 }
 
+"""Exposes user information"""
 type UserService {
   me: UserService_me
   nullableSingleton: UserService_nullableSingleton
@@ -1144,6 +1145,7 @@ type UserService_input {
   nullableSingleton: UserService_nullableSingleton_input
 }
 
+"""The current user"""
 type UserService_me {
   id: String
   locale: String
