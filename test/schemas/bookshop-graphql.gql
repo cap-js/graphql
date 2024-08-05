@@ -8,6 +8,8 @@ type AdminService {
   Currencies_texts(filter: [AdminService_Currencies_texts_filter], orderBy: [AdminService_Currencies_texts_orderBy], skip: Int, top: Int): AdminService_Currencies_texts_connection
   Genres(filter: [AdminService_Genres_filter], orderBy: [AdminService_Genres_orderBy], skip: Int, top: Int): AdminService_Genres_connection
   Genres_texts(filter: [AdminService_Genres_texts_filter], orderBy: [AdminService_Genres_texts_orderBy], skip: Int, top: Int): AdminService_Genres_texts_connection
+  SingleBook: AdminService_SingleBook
+  SingleNullableBook: AdminService_SingleNullableBook
 }
 
 """
@@ -510,6 +512,115 @@ input AdminService_Genres_texts_orderBy {
   name: SortDirection
 }
 
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
+type AdminService_SingleBook {
+  ID: Int
+  author: AdminService_Authors
+  chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
+  createdAt: Timestamp
+
+  """Canonical user ID"""
+  createdBy: String
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
+  currency: AdminService_Currencies
+  descr: String
+  genre: AdminService_Genres
+  image: Binary
+  modifiedAt: Timestamp
+
+  """Canonical user ID"""
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts(filter: [AdminService_Books_texts_filter], orderBy: [AdminService_Books_texts_orderBy], skip: Int, top: Int): AdminService_Books_texts_connection
+  title: String
+}
+
+input AdminService_SingleBook_U {
+  author: AdminService_Authors_C
+  chapters: [AdminService_Chapters_C]
+  createdAt: Timestamp
+  createdBy: String
+  currency: AdminService_Currencies_C
+  descr: String
+  genre: AdminService_Genres_C
+  image: Binary
+  modifiedAt: Timestamp
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts: [AdminService_Books_texts_C]
+  title: String
+}
+
+type AdminService_SingleBook_input {
+  update(input: AdminService_SingleBook_U!): AdminService_SingleBook
+}
+
+"""
+Aspect to capture changes by user and name
+
+See https://cap.cloud.sap/docs/cds/common#aspect-managed
+"""
+type AdminService_SingleNullableBook {
+  ID: Int
+  author: AdminService_Authors
+  chapters(filter: [AdminService_Chapters_filter], orderBy: [AdminService_Chapters_orderBy], skip: Int, top: Int): AdminService_Chapters_connection
+  createdAt: Timestamp
+
+  """Canonical user ID"""
+  createdBy: String
+
+  """
+  Type for an association to Currencies
+  
+  See https://cap.cloud.sap/docs/cds/common#type-currency
+  """
+  currency: AdminService_Currencies
+  descr: String
+  genre: AdminService_Genres
+  image: Binary
+  modifiedAt: Timestamp
+
+  """Canonical user ID"""
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts(filter: [AdminService_Books_texts_filter], orderBy: [AdminService_Books_texts_orderBy], skip: Int, top: Int): AdminService_Books_texts_connection
+  title: String
+}
+
+input AdminService_SingleNullableBook_U {
+  author: AdminService_Authors_C
+  chapters: [AdminService_Chapters_C]
+  createdAt: Timestamp
+  createdBy: String
+  currency: AdminService_Currencies_C
+  descr: String
+  genre: AdminService_Genres_C
+  image: Binary
+  modifiedAt: Timestamp
+  modifiedBy: String
+  price: Decimal
+  stock: Int
+  texts: [AdminService_Books_texts_C]
+  title: String
+}
+
+type AdminService_SingleNullableBook_input {
+  delete: Int
+  update(input: AdminService_SingleNullableBook_U!): AdminService_SingleNullableBook
+}
+
 type AdminService_input {
   Authors: AdminService_Authors_input
   Books: AdminService_Books_input
@@ -519,6 +630,8 @@ type AdminService_input {
   Currencies_texts: AdminService_Currencies_texts_input
   Genres: AdminService_Genres_input
   Genres_texts: AdminService_Genres_texts_input
+  SingleBook: AdminService_SingleBook_input
+  SingleNullableBook: AdminService_SingleNullableBook_input
 }
 
 """
