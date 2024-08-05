@@ -11,6 +11,10 @@ module.exports = cds.service.impl(srv => {
   })
   srv.on('cancelOrder', async (req) => {
     const { orderID, reason } = req.data
-    return { acknowledge: `Aknowledged cancelation of order ${orderID}`, message: `Canceled for reason: ${reason}` }
+    return { acknowledge: `Acknowledged cancelation of order ${orderID}`, message: `Canceled for reason: ${reason}` }
+  })
+  srv.on('submitFoo', async (req) => {
+    const { foo } = req.data
+    return foo
   })
 })

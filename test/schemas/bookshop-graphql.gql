@@ -1176,6 +1176,7 @@ type TestService_input {
   Foo: TestService_Foo_input
   cancelOrder(orderID: Int, reason: String): TestService_cancelOrderRet
   noReturn: Void
+  submitFoo(foo: TestService_Foo_C): TestService_Foo
 }
 
 """
