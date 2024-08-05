@@ -15,4 +15,5 @@ service TestService {
   function getFoos () returns array of Foo;
   function getInts () returns array of Integer;
   action submitFoo (foo:Foo) returns Foo;
+  action submitFoos (foo:many Foo) returns array of Foo;
 }
