@@ -9,4 +9,7 @@ module.exports = cds.service.impl(srv => {
     if (to === 'me') to = require('os').userInfo().username
     return `Hello ${to}!`
   })
+  srv.on('world', (req) => {
+    return Math.floor(Math.random() * 1000)
+  })
 })

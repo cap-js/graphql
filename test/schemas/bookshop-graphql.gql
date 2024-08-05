@@ -1161,6 +1161,7 @@ input TestService_Foo_orderBy {
 
 type TestService_input {
   Foo: TestService_Foo_input
+  world: Int
 }
 
 """
