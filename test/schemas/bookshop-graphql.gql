@@ -1092,11 +1092,13 @@ input Int_filter {
 type Mutation {
   AdminService: AdminService_input
   CatalogService: CatalogService_input
+  TestService: TestService_input
 }
 
 type Query {
   AdminService: AdminService
   CatalogService: CatalogService
+  TestService: TestService
 }
 
 enum SortDirection {
@@ -1115,6 +1117,50 @@ input String_filter {
   lt: String
   ne: [String]
   startswith: String
+}
+
+type TestService {
+  Foo(filter: [TestService_Foo_filter], orderBy: [TestService_Foo_orderBy], skip: Int, top: Int): TestService_Foo_connection
+  hello: String
+}
+
+type TestService_Foo {
+  ID: Int
+  bar: String
+}
+
+input TestService_Foo_C {
+  ID: Int
+  bar: String
+}
+
+input TestService_Foo_U {
+  bar: String
+}
+
+type TestService_Foo_connection {
+  nodes: [TestService_Foo]
+  totalCount: Int
+}
+
+input TestService_Foo_filter {
+  ID: [Int_filter]
+  bar: [String_filter]
+}
+
+type TestService_Foo_input {
+  create(input: [TestService_Foo_C]!): [TestService_Foo]
+  delete(filter: [TestService_Foo_filter]!): Int
+  update(filter: [TestService_Foo_filter]!, input: TestService_Foo_U!): [TestService_Foo]
+}
+
+input TestService_Foo_orderBy {
+  ID: SortDirection
+  bar: SortDirection
+}
+
+type TestService_input {
+  Foo: TestService_Foo_input
 }
 
 """

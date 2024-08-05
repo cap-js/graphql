@@ -3,7 +3,8 @@
     "name": "bookshop-graphql",
     "files": [
       "./bookshop-graphql/srv/admin-service.cds",
-      "./bookshop-graphql/srv/cat-service.cds"
+      "./bookshop-graphql/srv/cat-service.cds",
+      "./bookshop-graphql/srv/test-service.cds"
     ],
     "requires_cds": ">=6.8.0"
   },
