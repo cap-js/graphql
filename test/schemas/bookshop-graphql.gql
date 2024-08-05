@@ -1121,6 +1121,8 @@ input String_filter {
 
 type TestService {
   Foo(filter: [TestService_Foo_filter], orderBy: [TestService_Foo_orderBy], skip: Int, top: Int): TestService_Foo_connection
+  getFoo: TestService_Foo
+  getFoos: [TestService_Foo]
   hello(to: String): String
 }
 

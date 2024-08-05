@@ -6,4 +6,6 @@ service TestService {
   }
   function hello (to:String) returns String;
   action cancelOrder ( orderID:Integer, reason:String );
+  function getFoo () returns Foo;
+  function getFoos () returns array of Foo;
 }
