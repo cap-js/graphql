@@ -1121,7 +1121,7 @@ input String_filter {
 
 type TestService {
   Foo(filter: [TestService_Foo_filter], orderBy: [TestService_Foo_orderBy], skip: Int, top: Int): TestService_Foo_connection
-  hello: String
+  hello(to: String): String
 }
 
 type TestService_Foo {
@@ -1161,7 +1161,7 @@ input TestService_Foo_orderBy {
 
 type TestService_input {
   Foo: TestService_Foo_input
-  world: Void
+  cancelOrder(orderID: Int, reason: String): Void
 }
 
 """

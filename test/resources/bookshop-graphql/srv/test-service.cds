@@ -5,5 +5,5 @@ service TestService {
     bar : String;
   }
   function hello (to:String) returns String;
-  action world();
+  action cancelOrder ( orderID:Integer, reason:String );
 }
