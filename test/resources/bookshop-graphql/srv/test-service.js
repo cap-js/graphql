@@ -9,4 +9,8 @@ module.exports = cds.service.impl(srv => {
     if (to === 'me') to = require('os').userInfo().username
     return `Hello ${to}!`
   })
+  srv.on('cancelOrder', async (req) => {
+    const { orderID, reason } = req.data
+    return { acknowledge: `Aknowledged cancelation of order ${orderID}`, message: `Canceled for reason: ${reason}` }
+  })
 })

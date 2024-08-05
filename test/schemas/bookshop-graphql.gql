@@ -1032,6 +1032,11 @@ type CatalogService_input {
   Genres: CatalogService_Genres_input
   Genres_texts: CatalogService_Genres_texts_input
   ListOfBooks: CatalogService_ListOfBooks_input
+  submitOrder(book: Int, quantity: Int): CatalogService_submitOrder_struct
+}
+
+type CatalogService_submitOrder_struct {
+  stock: Int
 }
 
 """
@@ -1162,9 +1167,15 @@ input TestService_Foo_orderBy {
   bar: SortDirection
 }
 
+type TestService_cancelOrderRet {
+  acknowledge: String
+  message: String
+}
+
 type TestService_input {
   Foo: TestService_Foo_input
-  cancelOrder(orderID: Int, reason: String): Void
+  cancelOrder(orderID: Int, reason: String): TestService_cancelOrderRet
+  noReturn: Void
 }
 
 """
@@ -1182,5 +1193,5 @@ input Timestamp_filter {
   ne: [Timestamp]
 }
 
-"""Void"""
+"""The `Void` scalar type represents `null` values."""
 scalar Void
