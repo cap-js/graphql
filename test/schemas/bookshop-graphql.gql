@@ -1125,6 +1125,7 @@ input String_filter {
 }
 
 type TestService {
+  Baz(filter: [TestService_Baz_filter], orderBy: [TestService_Baz_orderBy], skip: Int, top: Int): TestService_Baz_connection
   Foo(filter: [TestService_Foo_filter], orderBy: [TestService_Foo_orderBy], skip: Int, top: Int): TestService_Foo_connection
   getFoo: TestService_Foo
   getFoos: [TestService_Foo]
@@ -1132,18 +1133,59 @@ type TestService {
   hello(to: String): String
 }
 
+type TestService_Baz {
+  ID: Int
+  title: String
+}
+
+input TestService_Baz_C {
+  ID: Int
+  title: String
+}
+
+input TestService_Baz_U {
+  title: String
+}
+
+type TestService_Baz_connection {
+  nodes: [TestService_Baz]
+  totalCount: Int
+}
+
+input TestService_Baz_filter {
+  ID: [Int_filter]
+  title: [String_filter]
+}
+
+type TestService_Baz_input {
+  create(input: [TestService_Baz_C]!): [TestService_Baz]
+  delete(filter: [TestService_Baz_filter]!): Int
+  update(filter: [TestService_Baz_filter]!, input: TestService_Baz_U!): [TestService_Baz]
+}
+
+input TestService_Baz_orderBy {
+  ID: SortDirection
+  title: SortDirection
+}
+
 type TestService_Foo {
   ID: Int
   bar: String
+  manyBaz(filter: [TestService_Baz_filter], orderBy: [TestService_Baz_orderBy], skip: Int, top: Int): TestService_Baz_connection
+  oneBaz: TestService_Baz
 }
 
 input TestService_Foo_C {
   ID: Int
   bar: String
+  manyBaz: [TestService_Baz_C]
+  oneBaz: TestService_Baz_C
 }
 
 input TestService_Foo_U {
   bar: String
+  manyBaz: [TestService_Baz_C]
+  oneBaz: TestService_Baz_C
 }
 
 type TestService_Foo_connection {
@@ -1173,6 +1215,7 @@ type TestService_cancelOrderRet {
 }
 
 type TestService_input {
+  Baz: TestService_Baz_input
   Foo: TestService_Foo_input
   cancelOrder(orderID: Int, reason: String): TestService_cancelOrderRet
   noReturn: Void

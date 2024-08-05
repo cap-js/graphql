@@ -17,4 +17,13 @@ module.exports = cds.service.impl(srv => {
     const { foo } = req.data
     return foo
   })
+  srv.on('submitFoos', async (req) => {
+    const { foo } = req.data
+    const baz = {ID: 1, title: 'Baz'}
+    foo.forEach(f => {
+      f.oneBaz = baz
+      f.manyBaz = [baz, baz]
+    })
+    return foo
+  })
 })

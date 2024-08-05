@@ -3,8 +3,16 @@ service TestService {
   entity Foo {
     key ID : Integer;
     bar : String;
+    oneBaz : Composition of Baz;
+    manyBaz : Composition of many Baz;
   }
-   type cancelOrderRet {
+
+  entity Baz {
+    key ID : Integer;
+    title : String;
+  }
+
+  type cancelOrderRet {
     acknowledge: String enum { succeeded; failed; };
     message: String;
   }
