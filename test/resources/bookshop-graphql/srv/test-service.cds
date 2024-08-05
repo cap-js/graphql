@@ -8,4 +8,5 @@ service TestService {
   action cancelOrder ( orderID:Integer, reason:String );
   function getFoo () returns Foo;
   function getFoos () returns array of Foo;
+  function getInts () returns array of Integer;
 }
