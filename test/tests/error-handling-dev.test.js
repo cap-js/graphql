@@ -469,7 +469,7 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message: 'The order of NULL books exceeds the stock by NULL',
+          message: 'The order of books exceeds the stock',
           extensions: {
             code: '500',
             numericSeverity: 4,

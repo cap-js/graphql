@@ -72,7 +72,7 @@ module.exports = srv => {
 
       if (id === 1) req.reject(400, message, args)
       if (id === 2) req.reject(code, message, args)
-      req.reject(message)
+      req.reject('ORDER_EXCEEDS_STOCK_NO_ARGS')
     }
   })
 }
