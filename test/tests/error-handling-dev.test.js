@@ -453,33 +453,34 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
 
-    test('req.reject with custom code', async () => {
-      const query = gql`
-        mutation {
-          CustomHandlerErrorsService {
-            Orders {
-              create(input: { id: 3, quantity: 20, stock: 10 }) {
-                id
-                quantity
-                stock
-              }
-            }
-          }
-        }
-      `
-      const errors = [
-        {
-          message: 'The order of NULL books exceeds the stock by NULL',
-          extensions: {
-            code: '500',
-            numericSeverity: 4,
-            stacktrace: expect.any(Array)
-          }
-        }
-      ]
-      const response = await POST('/graphql', { query })
-      expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
-    })
+    // NOTE: Never do such tests: it doesn't check expected behavior but just documents actual one which can change
+    // test('req.reject with custom code', async () => {
+    //   const query = gql`
+    //     mutation {
+    //       CustomHandlerErrorsService {
+    //         Orders {
+    //           create(input: { id: 3, quantity: 20, stock: 10 }) {
+    //             id
+    //             quantity
+    //             stock
+    //           }
+    //         }
+    //       }
+    //     }
+    //   `
+    //   const errors = [
+    //     {
+    //       message: 'The order of NULL books exceeds the stock by NULL',
+    //       extensions: {
+    //         code: '500',
+    //         numericSeverity: 4,
+    //         stacktrace: expect.any(Array)
+    //       }
+    //     }
+    //   ]
+    //   const response = await POST('/graphql', { query })
+    //   expect(response.data).toMatchObject({ errors })
+    //   expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
+    // })
   })
 })
