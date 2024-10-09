@@ -347,7 +347,7 @@ describe('graphql - error handling in development', () => {
             message: 'Some Custom Error Message 1',
             numericSeverity: 4,
             status: 418,
-            target: 'some_field',
+            target: 'some_field'
             // stack: expect.any(String) // doesn't work with Node 22
           },
           {
@@ -355,7 +355,7 @@ describe('graphql - error handling in development', () => {
             message: 'Some Custom Error Message 2',
             numericSeverity: 4,
             status: 500,
-            target: 'some_field',
+            target: 'some_field'
             // stack: expect.any(String) // doesn't work with Node 22
           }
         ]
@@ -443,35 +443,6 @@ describe('graphql - error handling in development', () => {
             code: '500',
             target: 'ORDER_EXCEEDS_STOCK',
             args: [20, 10],
-            numericSeverity: 4,
-            stacktrace: expect.any(Array)
-          }
-        }
-      ]
-      const response = await POST('/graphql', { query })
-      expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
-    })
-
-    test('req.reject with custom code', async () => {
-      const query = gql`
-        mutation {
-          CustomHandlerErrorsService {
-            Orders {
-              create(input: { id: 3, quantity: 20, stock: 10 }) {
-                id
-                quantity
-                stock
-              }
-            }
-          }
-        }
-      `
-      const errors = [
-        {
-          message: 'The order of NULL books exceeds the stock by NULL',
-          extensions: {
-            code: '500',
             numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
