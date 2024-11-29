@@ -23,8 +23,18 @@ service AnnotatedWithAtGraphQL {
   entity A as projection on protocols.A;
 }
 
+@protocol: graphql
+service AnnotatedWithAtProtocolSymbol {
+  entity A as projection on protocols.A;
+}
+
 @protocol: 'graphql'
 service AnnotatedWithAtProtocolString {
+  entity A as projection on protocols.A;
+}
+
+@protocol: [graphql]
+service AnnotatedWithAtProtocolSymbolList {
   entity A as projection on protocols.A;
 }
 

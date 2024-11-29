@@ -76,10 +76,42 @@ describe('graphql - annotations', () => {
       expect(response.data).not.toHaveProperty('errors')
     })
 
+    test('service annotated with "@protocol: graphql" is served at configured path', async () => {
+      const query = gql`
+        {
+          AnnotatedWithAtProtocolSymbol {
+            A {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST(path, { query })
+      expect(response.data).not.toHaveProperty('errors')
+    })
+
     test('service annotated with "@protocol: \'graphql\'" is served at configured path', async () => {
       const query = gql`
         {
           AnnotatedWithAtProtocolString {
+            A {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      `
+      const response = await POST(path, { query })
+      expect(response.data).not.toHaveProperty('errors')
+    })
+
+    test('service annotated with "@protocol: [graphql]" is served at configured path', async () => {
+      const query = gql`
+        {
+          AnnotatedWithAtProtocolSymbolList {
             A {
               nodes {
                 id
