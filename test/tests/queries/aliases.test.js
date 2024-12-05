@@ -6,6 +6,9 @@ describe('graphql - aliases', () => {
   const { axios, POST } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  axios.defaults.headers = {
+    authorization: 'Basic YWxpY2U6'
+  }
 
   // REVISIT: unskip for support of configurable schema flavors
   describe.skip('queries with aliases without connections', () => {
