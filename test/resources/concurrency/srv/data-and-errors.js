@@ -1,7 +1,6 @@
 
 const cds = require('@sap/cds')
-const util = require('util')
-const sleep = util.promisify(setTimeout)
+const sleep = require('node:timers/promises').setTimeout
 
 class DataAndErrorsService extends cds.ApplicationService { init(){
 
