@@ -314,32 +314,19 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Multiple errors occurred. Please see the details for more information.',
+          message: 'Internal Server Error',
           extensions: {
-            code: '500',
-            details: [
-              {
-                code: 'Some-Custom-Code1',
-                message: 'Some Custom Error Message 1',
-                target: 'some_field'
-              },
-              {
-                code: 'Some-Custom-Code2',
-                message: 'Some Custom Error Message 2',
-                target: 'some_field'
-              }
-            ]
+            code: '500'
           }
         }
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
-      expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
-      expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
+      expect(response.data.errors[0].extensions).not.toHaveProperty('details') // No details since one of the errors is 5xx
       const log = console.error.mock.calls[0][1] || JSON.parse(console.error.mock.calls[0][0])
       expect(log).toMatchObject({
-        code: '500',
+        code: 'MULTIPLE_ERRORS',
         msg: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           {
