@@ -34,7 +34,7 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Value is required',
           extensions: {
-            code: '400',
+            code: 'ASSERT_NOT_NULL',
             target: 'notEmptyI'
           }
         }
@@ -43,7 +43,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
-      expect(log).toMatchObject({ code: '400', target: 'notEmptyI', msg: 'Value is required' })
+      expect(log).toMatchObject({ code: 'ASSERT_NOT_NULL', target: 'notEmptyI', msg: 'Value is required' })
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -62,15 +62,15 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Multiple errors occurred. Please see the details for more information.',
           extensions: {
-            code: '400',
+            code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: '400',
+                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required',
                 target: 'notEmptyI'
               },
               {
-                code: '400',
+                code: 'ASSERT_NOT_NULL',
                 message: 'Value is required',
                 target: 'notEmptyS'
               }
@@ -101,7 +101,7 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Value 10 is not in specified range [0, 3]',
           extensions: {
-            code: '400',
+            code: 'ASSERT_RANGE',
             target: 'inRange'
           }
         }
@@ -127,15 +127,15 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
-            code: '400',
+            code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: '400',
+                code: 'ASSERT_NOT_NULL',
                 message: 'Wert ist erforderlich',
                 target: 'inRange'
               },
               {
-                code: '400',
+                code: 'ASSERT_ENUM',
                 message: expect.stringContaining('Value "foo" is invalid'),
                 target: 'oneOfEnumValues'
               }
@@ -151,12 +151,12 @@ describe('graphql - error handling in production', () => {
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
 
       expect(log).toMatchObject({
-        code: '400',
+        code: 'MULTIPLE_ERRORS',
         msg: 'Multiple errors occurred. Please see the details for more information.',
         details: [
-          { code: '400', target: 'inRange', message: 'Value is required' },
+          { code: 'ASSERT_NOT_NULL', target: 'inRange', message: 'Value is required' },
           {
-            code: '400',
+            code: 'ASSERT_ENUM',
             target: 'oneOfEnumValues',
             message: expect.stringContaining('Value "foo" is invalid')
           }
