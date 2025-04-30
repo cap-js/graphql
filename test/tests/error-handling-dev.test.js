@@ -417,7 +417,7 @@ describe('graphql - error handling in development', () => {
           }
         }
       ]
-      const response = await POST('/graphql', { query })
+      const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'en' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
@@ -448,7 +448,7 @@ describe('graphql - error handling in development', () => {
           }
         }
       ]
-      const response = await POST('/graphql', { query })
+      const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'en' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
