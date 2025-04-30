@@ -8,7 +8,7 @@
     "GraphQL"
   ],
   "author": "SAP SE (https://www.sap.com)",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "Apache-2.0",
   "repository": "cap-js/graphql",
   "homepage": "https://cap.cloud.sap/",
   "main": "index.js",
