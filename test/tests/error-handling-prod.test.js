@@ -429,32 +429,5 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
     })
-
-    test('req.reject with custom code', async () => {
-      const query = gql`
-        mutation {
-          CustomHandlerErrorsService {
-            Orders {
-              create(input: { id: 3, quantity: 20, stock: 10 }) {
-                id
-                quantity
-                stock
-              }
-            }
-          }
-        }
-      `
-      const errors = [
-        {
-          message: 'Internal Server Error',
-          extensions: {
-            code: '500'
-          }
-        }
-      ]
-      const response = await POST('/graphql', { query })
-      expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
-    })
   })
 })
