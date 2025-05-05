@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "scripts": {
     "prettier": "npm_config_yes=true npx prettier@latest --write app lib test",
@@ -36,11 +36,11 @@
     "graphql-http": "^1.18.0"
   },
   "peerDependencies": {
-    "@sap/cds": ">=7.8"
+    "@sap/cds": ">=9"
   },
   "devDependencies": {
     "@cap-js/graphql": "file:.",
-    "@cap-js/sqlite": "^1",
+    "@cap-js/sqlite": ">=1",
     "axios": "^1",
     "express": "^4.17.1",
     "jest": "^29.3.1",
