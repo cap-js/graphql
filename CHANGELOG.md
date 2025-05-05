@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump `@graphiql/plugin-explorer` version to `^3`
+- Make error handling compatible with `@sap/cds` version `>=9`
+- Bump required `@sap/cds` version to `>=9`
 
 ### Fixed
 
