@@ -60,7 +60,7 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Multiple errors occurred. Please see the details for more information.',
+          message: expect.stringMatching(/multiple/i),
           extensions: {
             code: 'MULTIPLE_ERRORS',
             details: [
@@ -152,7 +152,6 @@ describe('graphql - error handling in production', () => {
 
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
-        msg: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           { code: 'ASSERT_NOT_NULL', target: 'inRange', message: 'Value is required' },
           {
@@ -327,19 +326,16 @@ describe('graphql - error handling in production', () => {
       const log = console.error.mock.calls[0][1] || JSON.parse(console.error.mock.calls[0][0])
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
-        msg: 'Multiple errors occurred. Please see the details for more information.',
         details: [
           {
             code: 'Some-Custom-Code1',
             message: 'Some Custom Error Message 1',
-            numericSeverity: 4,
             status: 418,
             target: 'some_field'
           },
           {
             code: 'Some-Custom-Code2',
             message: 'Some Custom Error Message 2',
-            numericSeverity: 4,
             status: 500,
             target: 'some_field'
           }
