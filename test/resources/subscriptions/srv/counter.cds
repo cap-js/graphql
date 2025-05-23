@@ -8,7 +8,7 @@ service CounterService {
   action   incCounter() returns Integer;
   action   decCounter() returns Integer;
 
-  event CounterUpdated {
+  event CounterUpdate {
     counter : Integer;
   }
 }

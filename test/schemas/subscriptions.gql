@@ -1,4 +1,4 @@
-type CounterService_CounterUpdated_event {
+type CounterService_CounterUpdate_event {
   counter: Int
 }
 
@@ -7,5 +7,5 @@ type Query {
 }
 
 type Subscription {
-  CounterService_CounterUpdated: CounterService_CounterUpdated_event
+  CounterService_CounterUpdate: CounterService_CounterUpdate_event
 }
