@@ -28,7 +28,7 @@
     <script crossorigin src="https://unpkg.com/@graphiql/plugin-explorer@3/dist/index.umd.js"></script>
 
     <script>
-      const fetcher = GraphiQL.createFetcher({ url: '' })
+      const fetcher = GraphiQL.createFetcher({ url: '', subscriptionUrl: 'ws://localhost:4004' })
 
       function GraphiQLWithExplorer() {
         const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin()

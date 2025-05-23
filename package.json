@@ -33,7 +33,9 @@
   },
   "dependencies": {
     "graphql": "^16",
-    "graphql-http": "^1.18.0"
+    "graphql-http": "^1.18.0",
+    "graphql-ws": "^6.0.5",
+    "ws": "^8.18.2"
   },
   "peerDependencies": {
     "@sap/cds": ">=9"
