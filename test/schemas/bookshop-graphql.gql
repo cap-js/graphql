@@ -967,6 +967,16 @@ input CatalogService_ListOfBooks_orderBy {
   title: SortDirection
 }
 
+type CatalogService_OrderedBook_event {
+  book: Int
+  buyer: String
+  quantity: Int
+}
+
+type CatalogService_event {
+  OrderedBook: CatalogService_OrderedBook_event
+}
+
 type CatalogService_input {
   Books: CatalogService_Books_input
   Books_texts: CatalogService_Books_texts_input
@@ -1059,6 +1069,10 @@ input String_filter {
   lt: String
   ne: [String]
   startswith: String
+}
+
+type Subscription {
+  CatalogService: CatalogService_event
 }
 
 """

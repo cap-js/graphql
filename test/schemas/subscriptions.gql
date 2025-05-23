@@ -1,0 +1,15 @@
+type CounterService_CounterUpdated_event {
+  counter: Int
+}
+
+type CounterService_event {
+  CounterUpdated: CounterService_CounterUpdated_event
+}
+
+type Query {
+  dummy: String
+}
+
+type Subscription {
+  CounterService: CounterService_event
+}
