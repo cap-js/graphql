@@ -973,10 +973,6 @@ type CatalogService_OrderedBook_event {
   quantity: Int
 }
 
-type CatalogService_event {
-  OrderedBook: CatalogService_OrderedBook_event
-}
-
 type CatalogService_input {
   Books: CatalogService_Books_input
   Books_texts: CatalogService_Books_texts_input
@@ -1072,7 +1068,7 @@ input String_filter {
 }
 
 type Subscription {
-  CatalogService: CatalogService_event
+  CatalogService_OrderedBook: CatalogService_OrderedBook_event
 }
 
 """
