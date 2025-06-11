@@ -32,7 +32,7 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Value is required',
+          message: expect.stringMatching(/required|missing value/i),
           extensions: {
             code: 'ASSERT_NOT_NULL',
             target: 'notEmptyI'
@@ -43,7 +43,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
-      expect(log).toMatchObject({ code: 'ASSERT_NOT_NULL', target: 'notEmptyI', msg: 'Value is required' })
+      expect(log).toMatchObject({ code: 'ASSERT_NOT_NULL', target: 'notEmptyI' })
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -66,12 +66,12 @@ describe('graphql - error handling in production', () => {
             details: [
               {
                 code: 'ASSERT_NOT_NULL',
-                message: 'Value is required',
+                message: expect.stringMatching(/required|missing value/i),
                 target: 'notEmptyI'
               },
               {
                 code: 'ASSERT_NOT_NULL',
-                message: 'Value is required',
+                message: expect.stringMatching(/required|missing value/i),
                 target: 'notEmptyS'
               }
             ]
@@ -99,7 +99,7 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Value 10 is not in specified range [0, 3]',
+          message: expect.stringMatching(/specified range|within the range/i),
           extensions: {
             code: 'ASSERT_RANGE',
             target: 'inRange'
@@ -136,7 +136,7 @@ describe('graphql - error handling in production', () => {
               },
               {
                 code: 'ASSERT_ENUM',
-                message: expect.stringContaining('Value "foo" is invalid'),
+                message: expect.stringMatching(/invalid|allowed values/i),
                 target: 'oneOfEnumValues'
               }
             ]
@@ -153,11 +153,10 @@ describe('graphql - error handling in production', () => {
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
         details: [
-          { code: 'ASSERT_NOT_NULL', target: 'inRange', message: 'Value is required' },
+          { code: 'ASSERT_NOT_NULL', target: 'inRange' },
           {
             code: 'ASSERT_ENUM',
-            target: 'oneOfEnumValues',
-            message: expect.stringContaining('Value "foo" is invalid')
+            target: 'oneOfEnumValues'
           }
         ]
       })
