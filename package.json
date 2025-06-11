@@ -42,7 +42,6 @@
     "@cap-js/graphql": "file:.",
     "@cap-js/sqlite": ">=1",
     "@cap-js/test": ">=0",
-    "axios": "^1",
     "express": "^4.17.1",
     "jest": "^29.3.1",
     "semver": "^7.4.0"
