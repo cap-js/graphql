@@ -1,0 +1,56 @@
+type EmptyEntityService {
+  NonEmptyEntity(filter: [EmptyEntityService_NonEmptyEntity_filter], orderBy: [EmptyEntityService_NonEmptyEntity_orderBy], skip: Int, top: Int): EmptyEntityService_NonEmptyEntity_connection
+}
+
+type EmptyEntityService_NonEmptyEntity {
+  ID: ID
+}
+
+input EmptyEntityService_NonEmptyEntity_C {
+  ID: ID
+}
+
+type EmptyEntityService_NonEmptyEntity_connection {
+  nodes: [EmptyEntityService_NonEmptyEntity]
+  totalCount: Int
+}
+
+input EmptyEntityService_NonEmptyEntity_filter {
+  ID: [ID_filter]
+}
+
+type EmptyEntityService_NonEmptyEntity_input {
+  create(input: [EmptyEntityService_NonEmptyEntity_C]!): [EmptyEntityService_NonEmptyEntity]
+  delete(filter: [EmptyEntityService_NonEmptyEntity_filter]!): Int
+}
+
+input EmptyEntityService_NonEmptyEntity_orderBy {
+  ID: SortDirection
+}
+
+type EmptyEntityService_input {
+  NonEmptyEntity: EmptyEntityService_NonEmptyEntity_input
+}
+
+input ID_filter {
+  eq: ID
+  ge: ID
+  gt: ID
+  in: [ID]
+  le: ID
+  lt: ID
+  ne: [ID]
+}
+
+type Mutation {
+  EmptyEntityService: EmptyEntityService_input
+}
+
+type Query {
+  EmptyEntityService: EmptyEntityService
+}
+
+enum SortDirection {
+  asc
+  desc
+}

@@ -1,0 +1,2 @@
+@graphql
+service EmptyService {}

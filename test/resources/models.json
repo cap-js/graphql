@@ -28,6 +28,14 @@
     "files": ["./edge-cases/srv/fields-with-connection-names.cds"]
   },
   {
+    "name": "edge-cases/empty-service",
+    "files": ["./edge-cases/srv/empty-service.cds"]
+  },
+  {
+    "name": "edge-cases/empty-entity",
+    "files": ["./edge-cases/srv/empty-entity.cds"]
+  },
+  {
     "name": "edge-cases/empty-aspect",
     "files": ["./edge-cases/srv/empty-aspect.cds"]
   }
