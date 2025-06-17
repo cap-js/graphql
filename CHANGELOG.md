@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Schema validation after schema generation using the `graphql-js` `validateSchema` function to ensure that the generated schema is valid according to the GraphQL specification. As such, schema generation runs both on server startup and when manually compiling to GraphQL schema.
+- Custom scalar type `Void` that is used to denote the absence of a return value. Currently only needed as a return type for placeholder fields. As with all custom scalar types, this type will only appear in the generated schema if it is referenced.
+
 ### Changed
 
 ### Fixed
+
+- Improved robustness of schema generation where CDS modelling would could cause empty types to be generated, which are not allowed in GraphQL. These types are omitted from the generated schema and all parent types that are empty as a result are also omitted. Types that are now omitted if empty are entities, aspects and services. If an empty root query type would be generated, a placeholder field `_empty` is added to the root query type to ensure that the schema is valid. This placeholder field has type `Void` which is a custom scalar type that only allows `null` values.
 
 ### Removed
 
