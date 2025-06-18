@@ -1,4 +1,4 @@
-describe('graphql - empty root query type', () => {
+describe('graphql - empty query root operation type', () => {
   const cds = require('@sap/cds')
   const path = require('path')
   const { gql } = require('../util')
