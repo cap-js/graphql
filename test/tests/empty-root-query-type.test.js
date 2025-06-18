@@ -9,14 +9,14 @@ describe('graphql - empty root query type', () => {
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
-  test('_empty placeholder of type Void returns null', async () => {
+  test('_ placeholder field of type Void returns null', async () => {
     const query = gql`
       {
-        _empty
+        _
       }
     `
     const data = {
-      _empty: null
+      _: null
     }
 
     const response = await POST('/graphql', { query })
