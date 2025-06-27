@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Improved schema generation robustness where specific CDS modelling could cause empty GraphQL types to be generated (which is not allowed) for entities, aspects and services. These types and any resulting empty parent types are omitted from the generated schema. If schema generation would result in an empty query root type, a placeholder field `_` of type `Void` is added to keep the schema valid.
+- Improved schema generation robustness where specific CDS modelling could cause empty GraphQL types to be generated (which is not allowed) for entities, aspects and services. These types and any resulting empty parent types are omitted from the generated schema and a warning is logged for them. If schema generation would result in an empty query root type, a placeholder field `_` of type `Void` is added to keep the schema valid.
 
 ### Removed
 
