@@ -6,3 +6,8 @@ service EmptyEntityService {
 
   entity EmptyEntity {}
 }
+
+@graphql
+service WillBecomeEmptyService {
+  entity EmptyEntity {}
+}
