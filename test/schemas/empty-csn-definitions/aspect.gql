@@ -1,0 +1,56 @@
+type EmptyAspectService {
+  Root(filter: [EmptyAspectService_Root_filter], orderBy: [EmptyAspectService_Root_orderBy], skip: Int, top: Int): EmptyAspectService_Root_connection
+}
+
+type EmptyAspectService_Root {
+  ID: ID
+}
+
+input EmptyAspectService_Root_C {
+  ID: ID
+}
+
+type EmptyAspectService_Root_connection {
+  nodes: [EmptyAspectService_Root]
+  totalCount: Int
+}
+
+input EmptyAspectService_Root_filter {
+  ID: [ID_filter]
+}
+
+type EmptyAspectService_Root_input {
+  create(input: [EmptyAspectService_Root_C]!): [EmptyAspectService_Root]
+  delete(filter: [EmptyAspectService_Root_filter]!): Int
+}
+
+input EmptyAspectService_Root_orderBy {
+  ID: SortDirection
+}
+
+type EmptyAspectService_input {
+  Root: EmptyAspectService_Root_input
+}
+
+input ID_filter {
+  eq: ID
+  ge: ID
+  gt: ID
+  in: [ID]
+  le: ID
+  lt: ID
+  ne: [ID]
+}
+
+type Mutation {
+  EmptyAspectService: EmptyAspectService_input
+}
+
+type Query {
+  EmptyAspectService: EmptyAspectService
+}
+
+enum SortDirection {
+  asc
+  desc
+}

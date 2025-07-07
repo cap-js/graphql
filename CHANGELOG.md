@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Schema validation after schema generation (on server startup or manual compilation) to ensure that the generated schema is valid according to the GraphQL specification
+- Scalar type `Void` that represents the absence of a return value and only allows value `null`
+
 ### Changed
 
 ### Fixed
+
+- Improved schema generation robustness where specific CDS modelling could cause empty GraphQL types to be generated (which is not allowed) for entities, aspects and services. These types and any resulting empty parent types are omitted from the generated schema and a warning is logged for them. If schema generation would result in an empty query root type, a placeholder field `_` of type `Void` is added to keep the schema valid.
 
 ### Removed
 
