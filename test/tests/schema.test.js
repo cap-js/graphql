@@ -3,7 +3,7 @@ const path = require('path')
 // Load @cap-js/graphql plugin to ensure .to.gql and .to.graphql compile targets are registered
 require('../../cds-plugin')
 
-const models = require('../resources')
+const  { models } = require('../resources')
 const { SCHEMAS_DIR } = require('../util')
 const { printSchema, validateSchema } = require('graphql')
 
