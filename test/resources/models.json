@@ -4,8 +4,7 @@
     "files": [
       "./bookshop-graphql/srv/admin-service.cds",
       "./bookshop-graphql/srv/cat-service.cds"
-    ],
-    "requires_cds": ">=9"
+    ]
   },
   {
     "name": "annotations",

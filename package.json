@@ -43,7 +43,6 @@
     "@cap-js/sqlite": ">=1",
     "@cap-js/cds-test": ">=0",
     "express": "^4.17.1",
-    "jest": "^29.3.1",
-    "semver": "^7.4.0"
+    "jest": "^29.3.1"
   }
 }
