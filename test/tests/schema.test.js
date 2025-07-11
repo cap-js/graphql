@@ -1,14 +1,9 @@
 const fs = require('fs')
 const path = require('path')
-const semver = require('semver')
-const { version: cdsVersion } = require('@sap/cds')
 // Load @cap-js/graphql plugin to ensure .to.gql and .to.graphql compile targets are registered
 require('../../cds-plugin')
 
-const models = require('../resources').models.filter(
-  m => !m.requires_cds || semver.satisfies(cdsVersion, m.requires_cds)
-)
-
+const models = require('../resources')
 const { SCHEMAS_DIR } = require('../util')
 const { printSchema, validateSchema } = require('graphql')
 
