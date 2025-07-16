@@ -1,6 +1,6 @@
 {
   "name": "@cap-js/graphql",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "CDS protocol adapter for GraphQL",
   "keywords": [
     "CAP",
@@ -8,7 +8,7 @@
     "GraphQL"
   ],
   "author": "SAP SE (https://www.sap.com)",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "Apache-2.0",
   "repository": "cap-js/graphql",
   "homepage": "https://cap.cloud.sap/",
   "main": "index.js",
@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "scripts": {
     "prettier": "npm_config_yes=true npx prettier@latest --write app lib test",
@@ -36,14 +36,13 @@
     "graphql-http": "^1.18.0"
   },
   "peerDependencies": {
-    "@sap/cds": ">=7.8"
+    "@sap/cds": ">=9"
   },
   "devDependencies": {
     "@cap-js/graphql": "file:.",
-    "@cap-js/sqlite": "^1",
-    "axios": "^1",
+    "@cap-js/sqlite": ">=2",
+    "@cap-js/cds-test": ">=0",
     "express": "^4.17.1",
-    "jest": "^29.3.1",
-    "semver": "^7.4.0"
+    "jest": "^30"
   }
 }

@@ -32,9 +32,9 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Value is required',
+          message: expect.any(String),
           extensions: {
-            code: '400',
+            code: 'ASSERT_NOT_NULL',
             target: 'notEmptyI'
           }
         }
@@ -43,7 +43,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
-      expect(log).toMatchObject({ code: '400', target: 'notEmptyI', msg: 'Value is required' })
+      expect(log).toMatchObject({ code: 'ASSERT_NOT_NULL', target: 'notEmptyI' })
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -60,18 +60,18 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Multiple errors occurred. Please see the details for more information.',
+          message: expect.any(String),
           extensions: {
-            code: '400',
+            code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: '400',
-                message: 'Value is required',
+                code: 'ASSERT_NOT_NULL',
+                message: expect.any(String),
                 target: 'notEmptyI'
               },
               {
-                code: '400',
-                message: 'Value is required',
+                code: 'ASSERT_NOT_NULL',
+                message: expect.any(String),
                 target: 'notEmptyS'
               }
             ]
@@ -99,9 +99,9 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Value 10 is not in specified range [0, 3]',
+          message: expect.any(String),
           extensions: {
-            code: '400',
+            code: 'ASSERT_RANGE',
             target: 'inRange'
           }
         }
@@ -127,16 +127,16 @@ describe('graphql - error handling in production', () => {
         {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
-            code: '400',
+            code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: '400',
+                code: 'ASSERT_NOT_NULL',
                 message: 'Wert ist erforderlich',
                 target: 'inRange'
               },
               {
-                code: '400',
-                message: expect.stringContaining('Value "foo" is invalid'),
+                code: 'ASSERT_ENUM',
+                message: expect.any(String),
                 target: 'oneOfEnumValues'
               }
             ]
@@ -151,14 +151,12 @@ describe('graphql - error handling in production', () => {
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
 
       expect(log).toMatchObject({
-        code: '400',
-        msg: 'Multiple errors occurred. Please see the details for more information.',
+        code: 'MULTIPLE_ERRORS',
         details: [
-          { code: '400', target: 'inRange', message: 'Value is required' },
+          { code: 'ASSERT_NOT_NULL', target: 'inRange' },
           {
-            code: '400',
-            target: 'oneOfEnumValues',
-            message: expect.stringContaining('Value "foo" is invalid')
+            code: 'ASSERT_ENUM',
+            target: 'oneOfEnumValues'
           }
         ]
       })
@@ -314,45 +312,29 @@ describe('graphql - error handling in production', () => {
       `
       const errors = [
         {
-          message: 'Multiple errors occurred. Please see the details for more information.',
+          message: 'Internal Server Error',
           extensions: {
-            code: '500',
-            details: [
-              {
-                code: 'Some-Custom-Code1',
-                message: 'Some Custom Error Message 1',
-                target: 'some_field'
-              },
-              {
-                code: 'Some-Custom-Code2',
-                message: 'Some Custom Error Message 2',
-                target: 'some_field'
-              }
-            ]
+            code: '500'
           }
         }
       ]
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
-      expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
-      expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
+      expect(response.data.errors[0].extensions).not.toHaveProperty('details') // No details since one of the errors is 5xx
       const log = console.error.mock.calls[0][1] || JSON.parse(console.error.mock.calls[0][0])
       expect(log).toMatchObject({
-        code: '500',
-        msg: 'Multiple errors occurred. Please see the details for more information.',
+        code: 'MULTIPLE_ERRORS',
         details: [
           {
             code: 'Some-Custom-Code1',
             message: 'Some Custom Error Message 1',
-            numericSeverity: 4,
             status: 418,
             target: 'some_field'
           },
           {
             code: 'Some-Custom-Code2',
             message: 'Some Custom Error Message 2',
-            numericSeverity: 4,
             status: 500,
             target: 'some_field'
           }
@@ -411,7 +393,7 @@ describe('graphql - error handling in production', () => {
           }
         }
       ]
-      const response = await POST('/graphql', { query })
+      const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'en' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
     })
@@ -438,34 +420,7 @@ describe('graphql - error handling in production', () => {
           }
         }
       ]
-      const response = await POST('/graphql', { query })
-      expect(response.data).toMatchObject({ errors })
-      expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
-    })
-
-    test('req.reject with custom code', async () => {
-      const query = gql`
-        mutation {
-          CustomHandlerErrorsService {
-            Orders {
-              create(input: { id: 3, quantity: 20, stock: 10 }) {
-                id
-                quantity
-                stock
-              }
-            }
-          }
-        }
-      `
-      const errors = [
-        {
-          message: 'Internal Server Error',
-          extensions: {
-            code: '500'
-          }
-        }
-      ]
-      const response = await POST('/graphql', { query })
+      const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'en' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
     })

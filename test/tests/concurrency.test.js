@@ -8,14 +8,15 @@ describe('graphql - resolver concurrency', () => {
   axios.defaults.validateStatus = false
 
   describe('execution order of query and mutation resolvers', () => {
-    let _log
+
+    let _log = []
 
     beforeEach(() => {
-      _log = jest.spyOn(console, 'log')
+      console.log = s => _log.push(s) // eslint-disable-line no-console
     })
 
     afterEach(() => {
-      jest.clearAllMocks()
+      _log = []
     })
 
     test('query resolvers should be executed in parallel', async () => {
@@ -41,12 +42,12 @@ describe('graphql - resolver concurrency', () => {
         }
       `
       await POST('/graphql', { query })
-      expect(_log.mock.calls[0][0]).toEqual('BEGIN READ A')
-      expect(_log.mock.calls[1][0]).toEqual('BEGIN READ B')
-      expect(_log.mock.calls[2][0]).toEqual('BEGIN READ C')
-      expect(_log.mock.calls[3][0]).toEqual('END READ B')
-      expect(_log.mock.calls[4][0]).toEqual('END READ C')
-      expect(_log.mock.calls[5][0]).toEqual('END READ A')
+      expect(_log[0]).toEqual('BEGIN READ A')
+      expect(_log[1]).toEqual('BEGIN READ B')
+      expect(_log[2]).toEqual('BEGIN READ C')
+      expect(_log[3]).toEqual('END READ B')
+      expect(_log[4]).toEqual('END READ C')
+      expect(_log[5]).toEqual('END READ A')
     })
 
     test('mutation resolvers should be executed serially', async () => {
@@ -72,12 +73,12 @@ describe('graphql - resolver concurrency', () => {
         }
       `
       await POST('/graphql', { query })
-      expect(_log.mock.calls[0][0]).toEqual('BEGIN CREATE A')
-      expect(_log.mock.calls[1][0]).toEqual('END CREATE A')
-      expect(_log.mock.calls[2][0]).toEqual('BEGIN CREATE B')
-      expect(_log.mock.calls[3][0]).toEqual('END CREATE B')
-      expect(_log.mock.calls[4][0]).toEqual('BEGIN CREATE C')
-      expect(_log.mock.calls[5][0]).toEqual('END CREATE C')
+      expect(_log[0]).toEqual('BEGIN CREATE A')
+      expect(_log[1]).toEqual('END CREATE A')
+      expect(_log[2]).toEqual('BEGIN CREATE B')
+      expect(_log[3]).toEqual('END CREATE B')
+      expect(_log[4]).toEqual('BEGIN CREATE C')
+      expect(_log[5]).toEqual('END CREATE C')
     })
   })
 

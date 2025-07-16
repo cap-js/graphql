@@ -31,9 +31,9 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message: 'Value is required',
+          message: expect.any(String),
           extensions: {
-            code: '400',
+            code: 'ASSERT_NOT_NULL',
             target: 'notEmptyI',
             stacktrace: expect.any(Array)
           }
@@ -58,19 +58,19 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message: 'Multiple errors occurred. Please see the details for more information.',
+          message: expect.any(String),
           extensions: {
-            code: '400',
+            code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: '400',
-                message: 'Value is required',
+                code: 'ASSERT_NOT_NULL',
+                message: expect.any(String),
                 target: 'notEmptyI',
                 stacktrace: expect.any(Array)
               },
               {
-                code: '400',
-                message: 'Value is required',
+                code: 'ASSERT_NOT_NULL',
+                message: expect.any(String),
                 target: 'notEmptyS',
                 stacktrace: expect.any(Array)
               }
@@ -99,9 +99,9 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message: 'Value 10 is not in specified range [0, 3]',
+          message: expect.any(String),
           extensions: {
-            code: '400',
+            code: 'ASSERT_RANGE',
             target: 'inRange',
             args: [10, 0, 3],
             stacktrace: expect.any(Array)
@@ -129,10 +129,10 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Es sind mehrere Fehler aufgetreten.',
           extensions: {
-            code: '400',
+            code: 'MULTIPLE_ERRORS',
             details: [
               { target: 'inRange', message: 'Wert ist erforderlich' },
-              { target: 'oneOfEnumValues', message: expect.stringContaining('Value "foo" is invalid') }
+              { target: 'oneOfEnumValues', message: expect.any(String) },
             ]
           }
         }
@@ -145,10 +145,10 @@ describe('graphql - error handling in development', () => {
 
       const log = console.warn.mock.calls[0][1]
       expect(log).toMatchObject({
-        code: '400',
+        code: 'MULTIPLE_ERRORS',
         details: [
-          { target: 'inRange', message: 'Value is required' },
-          { target: 'oneOfEnumValues', message: expect.stringContaining('Value "foo" is invalid') }
+          { target: 'inRange', code: 'ASSERT_NOT_NULL' },
+          { target: 'oneOfEnumValues', code: 'ASSERT_ENUM' }
         ]
       })
       expect(console.warn.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
@@ -172,7 +172,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Error on READ A',
           extensions: {
-            code: '500',
+            code: '',
             myProperty: 'My value A1',
             $myProperty: 'My value A2',
             my: { nested: { property: 'My value A3' } },
@@ -202,7 +202,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Error on READ B',
           extensions: {
-            code: '500',
+            code: '',
             stacktrace: expect.any(Array)
           }
         }
@@ -228,7 +228,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Error on READ C',
           extensions: {
-            code: '500',
+            code: '',
             stacktrace: expect.any(Array)
           }
         }
@@ -285,7 +285,6 @@ describe('graphql - error handling in development', () => {
             code: 'Some-Custom-Code',
             target: 'some_field',
             status: 418,
-            numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
         }
@@ -309,16 +308,15 @@ describe('graphql - error handling in development', () => {
       `
       const errors = [
         {
-          message: 'Multiple errors occurred. Please see the details for more information.',
+          message: expect.any(String),
           extensions: {
-            code: '500',
+            code: 'MULTIPLE_ERRORS',
             details: [
               {
                 code: 'Some-Custom-Code1',
                 message: 'Some Custom Error Message 1',
                 target: 'some_field',
                 status: 418,
-                numericSeverity: 4,
                 stacktrace: expect.any(Array)
               },
               {
@@ -326,7 +324,6 @@ describe('graphql - error handling in development', () => {
                 message: 'Some Custom Error Message 2',
                 target: 'some_field',
                 status: 500,
-                numericSeverity: 4,
                 stacktrace: expect.any(Array)
               }
             ]
@@ -339,13 +336,11 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(console.error.mock.calls[0][1]).toMatchObject({
-        code: '500',
-        message: 'Multiple errors occurred. Please see the details for more information.',
+        code: 'MULTIPLE_ERRORS',
         details: [
           {
             code: 'Some-Custom-Code1',
             message: 'Some Custom Error Message 1',
-            numericSeverity: 4,
             status: 418,
             target: 'some_field'
             // stack: expect.any(String) // doesn't work with Node 22
@@ -353,7 +348,6 @@ describe('graphql - error handling in development', () => {
           {
             code: 'Some-Custom-Code2',
             message: 'Some Custom Error Message 2',
-            numericSeverity: 4,
             status: 500,
             target: 'some_field'
             // stack: expect.any(String) // doesn't work with Node 22
@@ -412,12 +406,11 @@ describe('graphql - error handling in development', () => {
           extensions: {
             code: '400',
             args: [20, 10],
-            numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
         }
       ]
-      const response = await POST('/graphql', { query })
+      const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'en' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
@@ -440,15 +433,14 @@ describe('graphql - error handling in development', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: '500',
+            code: '',
             target: 'ORDER_EXCEEDS_STOCK',
             args: [20, 10],
-            numericSeverity: 4,
             stacktrace: expect.any(Array)
           }
         }
       ]
-      const response = await POST('/graphql', { query })
+      const response = await POST('/graphql', { query }, { headers: { 'Accept-Language': 'en' } })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions.stacktrace).not.toHaveLength(0) // Stacktrace exists and is not empty
     })
