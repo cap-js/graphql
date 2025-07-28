@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Lazy load and cache GraphiQL HTML file to avoid unnecessary file system access on every request
+
 ### Removed
 
 ## Version 0.13.0 - 2025-07-11
