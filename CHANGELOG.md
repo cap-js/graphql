@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Only load default error formatter if no custom error formatter is configured
+
 ### Fixed
 
 - Read GraphiQL HTML file only once on startup, and only if GraphiQL is enabled, to avoid unnecessary file system access
