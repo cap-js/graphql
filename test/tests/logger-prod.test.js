@@ -120,8 +120,59 @@ describe('graphql - query logging with sanitization in production', () => {
       await POST('/graphql', { query })
       expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
     })
+    
+    test('Log should not contain literal values that contain parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "() ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
 
-    test('Log should not contain variables or their values', async () => {
+    test('Log should not contain literal values that contain unmatched opening parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "${secretTitle} (" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched closing parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: ") ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain variable values', async () => {
       const secretTitle = 'secret'
       const query = gql`
         mutation ($input: [AdminService_Books_C]!) {
@@ -136,7 +187,6 @@ describe('graphql - query logging with sanitization in production', () => {
       `
       const variables = { input: { title: secretTitle } }
       await POST('/graphql', { query, variables })
-      expect(_format(_log.mock.calls[0])).not.toContain('$input')
       expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
     })
   })
@@ -240,7 +290,58 @@ describe('graphql - query logging with sanitization in production', () => {
       expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
     })
 
-    test('Log should not contain variables or their values', async () => {
+    test('Log should not contain literal values that contain parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "() ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched opening parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "${secretTitle} (" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched closing parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: ") ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain variable values', async () => {
       const secretTitle = 'secret'
       const query = gql`
         query ($filter: [AdminService_Books_filter]) {
@@ -255,7 +356,6 @@ describe('graphql - query logging with sanitization in production', () => {
       `
       const variables = { filter: { title: { ne: secretTitle } } }
       await GET(`/graphql?query=${query}&variables=${JSON.stringify(variables)}`)
-      expect(_format(_log.mock.calls[0])).not.toContain('$filter')
       expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
     })
   })
