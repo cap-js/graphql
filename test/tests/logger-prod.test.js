@@ -120,6 +120,57 @@ describe('graphql - query logging with sanitization in production', () => {
       await POST('/graphql', { query })
       expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
     })
+    
+    test('Log should not contain literal values that contain parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "() ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched opening parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "${secretTitle} (" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched closing parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: ") ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await POST('/graphql', { query })
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
 
     test('Log should not contain variables or their values', async () => {
       const secretTitle = 'secret'
@@ -230,6 +281,57 @@ describe('graphql - query logging with sanitization in production', () => {
           AdminService {
             Books(filter: { title: { ne: "${secretTitle}"}}) {
               nodes {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "() ${secretTitle}" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched opening parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: "${secretTitle} (" }) {
+                title
+              }
+            }
+          }
+        }
+      `
+      await GET(`/graphql?query=${query}`)
+      expect(_format(_log.mock.calls[0])).not.toContain(secretTitle)
+    })
+
+    test('Log should not contain literal values that contain unmatched closing parentheses', async () => {
+      const secretTitle = 'secret'
+      const query = gql`
+        mutation {
+          AdminService {
+            Books {
+              create (input: { title: ") ${secretTitle}" }) {
                 title
               }
             }
