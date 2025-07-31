@@ -8,7 +8,8 @@
   "cds": {
     "protocols": {
       "graphql": {
-        "path": "/custom-graphql-path"
+        "path": "/custom-graphql-path",
+        "graphiql": false
       }
     }
   }
