@@ -8,14 +8,19 @@ describe('graphql - error handling in production', () => {
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
+  let _warn = []
+  let _error = []
+
   beforeEach(() => {
-    jest.spyOn(console, 'warn')
-    jest.spyOn(console, 'error')
+    console.warn = (...s) => _warn.push(s) // eslint-disable-line no-console
+    console.error = (...s) => _error.push(s) // eslint-disable-line no-console
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    _warn = []
+    _error = []
   })
+
 
   describe('Errors thrown by CDS', () => {
     test('Single @mandatory validation error', async () => {
@@ -42,7 +47,7 @@ describe('graphql - error handling in production', () => {
       const response = await POST('/graphql', { query })
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
-      const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
+      const log = _warn[0][1] || JSON.parse(_warn[0][0])
       expect(log).toMatchObject({ code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) , target: 'notEmptyI' })
     })
 
@@ -148,7 +153,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0]).not.toHaveProperty('stacktrace') // No stacktrace in production
       expect(response.data.errors[0].extensions.details[1]).not.toHaveProperty('stacktrace') // No stacktrace in production
-      const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
+      const log = _warn[0][1] || JSON.parse(_warn[0][0])
 
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
@@ -322,7 +327,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions).not.toHaveProperty('details') // No details since one of the errors is 5xx
-      const log = console.error.mock.calls[0][1] || JSON.parse(console.error.mock.calls[0][0])
+      const log = _error[0][1] || JSON.parse(_error[0][0])
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
         details: [

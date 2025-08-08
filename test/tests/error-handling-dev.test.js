@@ -7,13 +7,17 @@ describe('graphql - error handling in development', () => {
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
 
+  let _warn = []
+  let _error = []
+
   beforeEach(() => {
-    jest.spyOn(console, 'warn')
-    jest.spyOn(console, 'error')
+    console.warn = (...s) => _warn.push(s) // eslint-disable-line no-console
+    console.error = (...s) => _error.push(s) // eslint-disable-line no-console
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    _warn = []
+    _error = []
   })
 
   describe('Errors thrown by CDS', () => {
@@ -33,7 +37,7 @@ describe('graphql - error handling in development', () => {
         {
           message: expect.any(String),
           extensions: {
-            code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
+            code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/),
             target: 'notEmptyI',
             stacktrace: expect.any(Array)
           }
@@ -63,13 +67,13 @@ describe('graphql - error handling in development', () => {
             code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/),
                 message: expect.any(String),
                 target: 'notEmptyI',
                 stacktrace: expect.any(Array)
               },
               {
-                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/),
                 message: expect.any(String),
                 target: 'notEmptyS',
                 stacktrace: expect.any(Array)
@@ -132,7 +136,7 @@ describe('graphql - error handling in development', () => {
             code: 'MULTIPLE_ERRORS',
             details: [
               { target: 'inRange', message: 'Wert ist erforderlich' },
-              { target: 'oneOfEnumValues', message: expect.any(String) },
+              { target: 'oneOfEnumValues', message: expect.any(String) }
             ]
           }
         }
@@ -143,7 +147,7 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
 
-      const log = console.warn.mock.calls[0][1]
+      const log = _warn[0][1]
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
         details: [
@@ -151,7 +155,7 @@ describe('graphql - error handling in development', () => {
           { target: 'oneOfEnumValues', code: 'ASSERT_ENUM' }
         ]
       })
-      expect(console.warn.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
+      expect(_warn[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
   })
 
@@ -335,7 +339,7 @@ describe('graphql - error handling in development', () => {
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
       expect(response.data.errors[0].extensions.details[0].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
       expect(response.data.errors[0].extensions.details[1].stacktrace[0]).not.toHaveLength(0) // Stacktrace exists and is not empty
-      expect(console.error.mock.calls[0][1]).toMatchObject({
+      expect(_error[0][1]).toMatchObject({
         code: 'MULTIPLE_ERRORS',
         details: [
           {
@@ -354,7 +358,7 @@ describe('graphql - error handling in development', () => {
           }
         ]
       })
-      expect(console.error.mock.calls[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
+      expect(_error[0][1]).not.toHaveProperty('stacktrace') // No stacktrace outside of error details
     })
 
     test('Thrown error is modified in srv.on(error) handler', async () => {
