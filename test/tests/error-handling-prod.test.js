@@ -34,7 +34,7 @@ describe('graphql - error handling in production', () => {
         {
           message: expect.any(String),
           extensions: {
-            code: 'ASSERT_NOT_NULL',
+            code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
             target: 'notEmptyI'
           }
         }
@@ -43,7 +43,7 @@ describe('graphql - error handling in production', () => {
       expect(response.data).toMatchObject({ errors })
       expect(response.data.errors[0].extensions).not.toHaveProperty('stacktrace') // No stacktrace in production
       const log = console.warn.mock.calls[0][1] || JSON.parse(console.warn.mock.calls[0][0])
-      expect(log).toMatchObject({ code: 'ASSERT_NOT_NULL', target: 'notEmptyI' })
+      expect(log).toMatchObject({ code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) , target: 'notEmptyI' })
     })
 
     test('Multiple @mandatory validation errors', async () => {
@@ -65,12 +65,12 @@ describe('graphql - error handling in production', () => {
             code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
                 message: expect.any(String),
                 target: 'notEmptyI'
               },
               {
-                code: 'ASSERT_NOT_NULL',
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
                 message: expect.any(String),
                 target: 'notEmptyS'
               }
@@ -130,7 +130,7 @@ describe('graphql - error handling in production', () => {
             code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
                 message: 'Wert ist erforderlich',
                 target: 'inRange'
               },
@@ -153,7 +153,7 @@ describe('graphql - error handling in production', () => {
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
         details: [
-          { code: 'ASSERT_NOT_NULL', target: 'inRange' },
+          { code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) , target: 'inRange' },
           {
             code: 'ASSERT_ENUM',
             target: 'oneOfEnumValues'
