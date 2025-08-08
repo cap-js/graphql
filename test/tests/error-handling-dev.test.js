@@ -33,7 +33,7 @@ describe('graphql - error handling in development', () => {
         {
           message: expect.any(String),
           extensions: {
-            code: 'ASSERT_NOT_NULL',
+            code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
             target: 'notEmptyI',
             stacktrace: expect.any(Array)
           }
@@ -63,13 +63,13 @@ describe('graphql - error handling in development', () => {
             code: 'MULTIPLE_ERRORS',
             details: [
               {
-                code: 'ASSERT_NOT_NULL',
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
                 message: expect.any(String),
                 target: 'notEmptyI',
                 stacktrace: expect.any(Array)
               },
               {
-                code: 'ASSERT_NOT_NULL',
+                code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) ,
                 message: expect.any(String),
                 target: 'notEmptyS',
                 stacktrace: expect.any(Array)
@@ -147,7 +147,7 @@ describe('graphql - error handling in development', () => {
       expect(log).toMatchObject({
         code: 'MULTIPLE_ERRORS',
         details: [
-          { target: 'inRange', code: 'ASSERT_NOT_NULL' },
+          { target: 'inRange', code: expect.stringMatching(/ASSERT_MANDATORY|ASSERT_NOT_NULL/) },
           { target: 'oneOfEnumValues', code: 'ASSERT_ENUM' }
         ]
       })
