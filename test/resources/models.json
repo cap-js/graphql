@@ -4,8 +4,7 @@
     "files": [
       "./bookshop-graphql/srv/admin-service.cds",
       "./bookshop-graphql/srv/cat-service.cds"
-    ],
-    "requires_cds": ">=6.8.0"
+    ]
   },
   {
     "name": "annotations",
@@ -26,5 +25,17 @@
   {
     "name": "edge-cases/fields-with-connection-names",
     "files": ["./edge-cases/srv/fields-with-connection-names.cds"]
+  },
+  {
+    "name": "empty-csn-definitions/service",
+    "files": ["./empty-csn-definitions/srv/empty-service.cds"]
+  },
+  {
+    "name": "empty-csn-definitions/entity",
+    "files": ["./empty-csn-definitions/srv/empty-entity.cds"]
+  },
+  {
+    "name": "empty-csn-definitions/aspect",
+    "files": ["./empty-csn-definitions/srv/empty-aspect.cds"]
   }
 ]

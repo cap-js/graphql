@@ -10,15 +10,14 @@ describe('graphql - query logging in development', () => {
 
   const _format = e => util.formatWithOptions({ colors: false, depth: null }, ...(Array.isArray(e) ? e : [e]))
 
-  let _log
+  let _info = []
 
-  beforeEach(async () => {
-    await data.reset()
-    _log = jest.spyOn(console, 'info')
+  beforeEach(() => {
+    console.info = (...s) => _info.push(s) // eslint-disable-line no-console
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    _info = []
   })
 
   describe('POST requests', () => {
@@ -26,7 +25,7 @@ describe('graphql - query logging in development', () => {
       const response = await POST('/graphql')
       expect(response.status).toEqual(400)
       expect(response.data.errors[0]).toEqual({ message: 'Missing query' })
-      expect(_log.mock.calls.length).toEqual(0)
+      expect(_info.length).toEqual(0)
     })
 
     test('Log should contain HTTP method', async () => {
@@ -42,7 +41,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await POST('/graphql', { query })
-      expect(_format(_log.mock.calls[0])).toContain('POST')
+      expect(_format(_info[0])).toContain('POST')
     })
 
     test('Log should not contain operationName if none was provided', async () => {
@@ -58,7 +57,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await POST('/graphql', { query })
-      expect(_format(_log.mock.calls[0])).not.toContain('operationName')
+      expect(_format(_info[0])).not.toContain('operationName')
     })
 
     test('Log should not contain variables if none were provided', async () => {
@@ -74,7 +73,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await POST('/graphql', { query })
-      expect(_format(_log.mock.calls[0])).not.toContain('variables')
+      expect(_format(_info[0])).not.toContain('variables')
     })
 
     test('Log should contain operationName and its value', async () => {
@@ -100,7 +99,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await POST('/graphql', { operationName, query })
-      expect(_format(_log.mock.calls[0])).toContain(`operationName: '${operationName}'`)
+      expect(_format(_info[0])).toContain(`operationName: '${operationName}'`)
     })
 
     test('Log should contain literal values', async () => {
@@ -117,7 +116,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await POST('/graphql', { query })
-      expect(_format(_log.mock.calls[0])).toContain(secretTitle)
+      expect(_format(_info[0])).toContain(secretTitle)
     })
 
     test('Log should contain variables and their values', async () => {
@@ -134,7 +133,7 @@ describe('graphql - query logging in development', () => {
       `
       const variables = { filter: { ID: { ge: 250 } } }
       await POST('/graphql', { query, variables })
-      expect(_format(_log.mock.calls[0])).toContain(`variables: ${_format(variables)}`)
+      expect(_format(_info[0])).toContain(`variables: ${_format(variables)}`)
     })
   })
 
@@ -143,7 +142,7 @@ describe('graphql - query logging in development', () => {
       const response = await GET('/graphql')
       expect(response.status).toEqual(200)
       expect(response.data).toMatch(/html/i) // GraphiQL is returned
-      expect(_log.mock.calls.length).toEqual(0)
+      expect(_info.length).toEqual(0)
     })
 
     test('Log should contain HTTP method', async () => {
@@ -159,7 +158,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await GET(`/graphql?query=${query}`)
-      expect(_format(_log.mock.calls[0])).toContain('GET')
+      expect(_format(_info[0])).toContain('GET')
     })
 
     test('Log should not contain operationName if none was provided', async () => {
@@ -175,7 +174,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await GET(`/graphql?query=${query}`)
-      expect(_format(_log.mock.calls[0])).not.toContain('operationName')
+      expect(_format(_info[0])).not.toContain('operationName')
     })
 
     test('Log should not contain variables if none were provided', async () => {
@@ -191,7 +190,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await GET(`/graphql?query=${query}`)
-      expect(_format(_log.mock.calls[0])).not.toContain('variables')
+      expect(_format(_info[0])).not.toContain('variables')
     })
 
     test('Log should contain operationName and its value', async () => {
@@ -217,7 +216,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await GET(`/graphql?operationName=${operationName}&query=${query}`)
-      expect(_format(_log.mock.calls[0])).toContain(`operationName: '${operationName}'`)
+      expect(_format(_info[0])).toContain(`operationName: '${operationName}'`)
     })
 
     test('Log should contain literal values', async () => {
@@ -234,7 +233,7 @@ describe('graphql - query logging in development', () => {
         }
       `
       await GET(`/graphql?query=${query}`)
-      expect(_format(_log.mock.calls[0])).toContain(secretTitle)
+      expect(_format(_info[0])).toContain(secretTitle)
     })
 
     test('Log should contain variables and their values', async () => {
@@ -251,7 +250,7 @@ describe('graphql - query logging in development', () => {
       `
       const variables = { filter: { ID: { ge: 250 } } }
       await GET(`/graphql?query=${query}&variables=${JSON.stringify(variables)}`)
-      expect(_format(_log.mock.calls[0])).toContain(`variables: ${_format(variables)}`)
+      expect(_format(_info[0])).toContain(`variables: ${_format(variables)}`)
     })
   })
 })

@@ -5,17 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.12.0 - tbd
+## Version 0.14.0 - tbd
 
 ### Added
 
 ### Changed
 
-- Bump `@graphiql/plugin-explorer` version to `^3`
+- Only load default error formatter if no custom error formatter is configured
 
 ### Fixed
 
+- Sanitization of logged queries, when running in production, if literal values contain parentheses
+- Read GraphiQL HTML file only once on startup, and only if GraphiQL is enabled, to avoid unnecessary file system access
+
 ### Removed
+
+## Version 0.13.0 - 2025-07-11
+
+### Added
+
+- Schema validation after schema generation (on server startup or manual compilation) to ensure that the generated schema is valid according to the GraphQL specification
+- Scalar type `Void` that represents the absence of a return value and only allows value `null`
+
+### Fixed
+
+- Improved schema generation robustness where specific CDS modelling could cause empty GraphQL types to be generated (which is not allowed) for entities, aspects and services. These types and any resulting empty parent types are omitted from the generated schema and a warning is logged for them. If schema generation would result in an empty query root type, a placeholder field `_` of type `Void` is added to keep the schema valid.
+
+## Version 0.12.0 - 2025-05-05
+
+### Changed
+
+- Bump `@graphiql/plugin-explorer` version to `^3`
+- Make error handling compatible with `@sap/cds` version `>=9`
+- Bump required `@sap/cds` version to `>=9` which will be released in the near future
 
 ## Version 0.11.0 - 2024-07-30
 

@@ -6,6 +6,9 @@ describe('graphql - update mutations', () => {
   const { axios, POST, data } = cds.test(path.join(__dirname, '../../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  axios.defaults.headers = {
+    authorization: 'Basic YWxpY2U6'
+  }
 
   beforeEach(async () => {
     await data.reset()

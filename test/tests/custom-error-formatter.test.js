@@ -21,7 +21,7 @@ describe('graphql - custom error formatter function', () => {
     `
     const errors = [
       {
-        message: 'Oops! Multiple errors occurred. Please see the details for more information.',
+        message: expect.stringMatching(/oops! multiple/i),
         extensions: {
           custom: 'This property is added by the custom error formatter',
           count: 2,

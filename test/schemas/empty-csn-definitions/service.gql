@@ -1,0 +1,8 @@
+type Query {
+  _: Void
+}
+
+"""
+The `Void` scalar type represents the absence of a value. Void can only represent the value `null`.
+"""
+scalar Void

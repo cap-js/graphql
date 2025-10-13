@@ -6,9 +6,13 @@ describe('graphql - GraphiQL', () => {
   const { axios, GET } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
   // Prevent axios from throwing errors for non 2xx status codes
   axios.defaults.validateStatus = false
+  axios.defaults.headers = {
+    authorization: 'Basic YWxpY2U6'
+  }
 
   test('GET request to endpoint should serve HTML containing GraphiQL', async () => {
     const response = await GET('/graphql')
+    expect(response.headers['content-type']).toMatch(/text\/html/)
     expect(response.data).toMatch(/<html>[\s\S]*graphiql[\s\S]*<\/html>/)
   })
 
