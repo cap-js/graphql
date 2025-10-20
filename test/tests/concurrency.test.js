@@ -8,7 +8,6 @@ describe('graphql - resolver concurrency', () => {
   axios.defaults.validateStatus = false
 
   describe('execution order of query and mutation resolvers', () => {
-
     let _log = []
 
     beforeEach(() => {
