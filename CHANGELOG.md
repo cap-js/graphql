@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sanitization of logged queries, when running in production, if literal values contain parentheses
 - Read GraphiQL HTML file only once on startup, and only if GraphiQL is enabled, to avoid unnecessary file system access
+- Server crash by `SyntaxError` from express JSON parser
 
 ### Removed
 
