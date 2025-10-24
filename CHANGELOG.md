@@ -15,9 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-## Version 0.14.0 - tbd
-
-### Added
+## Version 0.14.0 - 2025-10-24
 
 ### Changed
 
@@ -28,8 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sanitization of logged queries, when running in production, if literal values contain parentheses
 - Read GraphiQL HTML file only once on startup, and only if GraphiQL is enabled, to avoid unnecessary file system access
 - Server crash by `SyntaxError` from express JSON parser
-
-### Removed
 
 ## Version 0.13.0 - 2025-07-11
 
