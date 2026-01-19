@@ -10,7 +10,7 @@ const collectServicesAndMountAdapter = (srv, options) => {
 
     cds.on('serving', service => {
       // Add link to GraphiQL in service index HTML
-      addLinkToIndexHtml(service)
+      addLinkToIndexHtml(service, options.path)
     })
 
     cds.on('served', () => {
