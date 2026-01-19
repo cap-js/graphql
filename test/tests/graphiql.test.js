@@ -44,20 +44,14 @@ describe('graphql - GraphiQL', () => {
     const response = await GET('/graphql?query=' + query)
     expect(response.data).toEqual({ data })
   })
-})
 
 describe('GraphiQL link provider in service index', () => {
-  const cds = require('@sap/cds')
-  const path = require('path')
-
   let capturedService
 
   // Capture the service during the serving event
   cds.once('serving', service => {
     capturedService = service
   })
-
-  const { GET } = cds.test(path.join(__dirname, '../resources/bookshop-graphql'))
 
   // Helper function to find the GraphQL link provider
   const getGraphQLLinkProvider = () => {
@@ -128,3 +122,7 @@ describe('GraphiQL link provider in service index', () => {
     expect(response.data).toMatch(/\/graphql/)
   })
 })
+
+})
+
+
