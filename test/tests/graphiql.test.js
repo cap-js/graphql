@@ -119,7 +119,7 @@ describe('graphql - GraphiQL', () => {
 
       // Check that the response contains the GraphiQL link
       expect(response.data).toMatch(/GraphiQL/)
-      expect(response.data).toMatch(/\/graphql/)
+      expect(response.data).toMatch(/href="\/graphql"/)
     })
   })
 })
