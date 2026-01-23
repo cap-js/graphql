@@ -44,4 +44,82 @@ describe('graphql - GraphiQL', () => {
     const response = await GET('/graphql?query=' + query)
     expect(response.data).toEqual({ data })
   })
+
+  describe('GraphiQL link provider in service index', () => {
+    let capturedService
+
+    // Capture the service during the serving event
+    cds.once('serving', service => {
+      capturedService = service
+    })
+
+    // Helper function to find the GraphQL link provider
+    const getGraphQLLinkProvider = () => {
+      if (!capturedService?.$linkProviders) return undefined
+      return capturedService.$linkProviders.find(provider => {
+        const result = provider(null, { kind: 'graphql' })
+        return result && result.name === 'GraphiQL'
+      })
+    }
+
+    test('link provider should be registered on service', () => {
+      expect(capturedService).toBeDefined()
+      expect(capturedService.$linkProviders).toBeDefined()
+      expect(Array.isArray(capturedService.$linkProviders)).toBe(true)
+
+      const graphqlLinkProvider = getGraphQLLinkProvider()
+      expect(graphqlLinkProvider).toBeDefined()
+      expect(typeof graphqlLinkProvider).toBe('function')
+    })
+
+    test('link provider returns nothing when entity is provided', () => {
+      const graphqlLinkProvider = getGraphQLLinkProvider()
+      const result = graphqlLinkProvider({ name: 'SomeEntity' }, { kind: 'graphql' })
+      expect(result).toBeUndefined()
+    })
+
+    test('link provider returns nothing when endpoint kind is not graphql', () => {
+      const graphqlLinkProvider = getGraphQLLinkProvider()
+
+      // Test various non-GraphQL endpoint kinds
+      const testCases = [
+        { kind: 'odata' },
+        { kind: 'rest' },
+        { kind: 'fiori' },
+        { kind: null },
+        { kind: undefined },
+        {},
+        null,
+        undefined
+      ]
+
+      testCases.forEach(endpoint => {
+        const result = graphqlLinkProvider(null, endpoint)
+        expect(result).toBeUndefined()
+      })
+    })
+
+    test('link provider returns correct link object for GraphQL endpoint', () => {
+      const graphqlLinkProvider = getGraphQLLinkProvider()
+      const result = graphqlLinkProvider(null, { kind: 'graphql' })
+
+      expect(result).toBeDefined()
+      expect(result).toEqual({
+        href: '/graphql',
+        name: 'GraphiQL',
+        title: 'Show in GraphiQL'
+      })
+    })
+
+    test('GraphiQL link appears in service index HTML', async () => {
+      const response = await GET('/')
+
+      // Verify the response is HTML
+      expect(response.headers['content-type']).toMatch(/text\/html/)
+
+      // Check that the response contains the GraphiQL link
+      expect(response.data).toMatch(/GraphiQL/)
+      expect(response.data).toMatch(/href="\/graphql"/)
+    })
+  })
 })

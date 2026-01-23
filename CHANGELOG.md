@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- GraphiQL link to service index HTML page for GraphQL endpoints
+
 ### Changed
 
 ### Fixed
