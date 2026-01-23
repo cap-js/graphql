@@ -41,7 +41,7 @@
   "devDependencies": {
     "@cap-js/graphql": "file:.",
     "@cap-js/sqlite": ">=2",
-    "@cap-js/cds-test": ">=0"
+    "@cap-js/cds-test": ">=0",
     "jest": "^30"
   }
 }
