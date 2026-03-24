@@ -10,6 +10,10 @@ describe('graphql - create mutations', () => {
     authorization: 'Basic YWxpY2U6'
   }
 
+  beforeAll(async () => {
+    await INSERT.into('sap.capire.bookshop.Authors').entries([{ ID: 999, name: 'Placeholder' }])
+  })
+
   beforeEach(async () => {
     await data.reset()
   })
@@ -18,9 +22,9 @@ describe('graphql - create mutations', () => {
     const query = gql`
       mutation {
         AdminService {
-          Books {
+          Genres {
             create(input: {}) {
-              title
+              name
             }
           }
         }
@@ -28,16 +32,16 @@ describe('graphql - create mutations', () => {
     `
     const data = {
       AdminService: {
-        Books: {
-          create: [{ title: null }]
+        Genres: {
+          create: [{ name: null }]
         }
       }
     }
     const response = await POST('/graphql', { query })
     expect(response.data).toEqual({ data })
 
-    const result = await SELECT.from('sap.capire.bookshop.Books').columns('title', 'stock', 'price', 'descr')
-    expect(result).toContainEqual({ title: null, stock: null, price: null, descr: null })
+    const result = await SELECT.from('sap.capire.bookshop.Genres').columns('name')
+    expect(result).toContainEqual({ name: null })
   })
 
   test('create single entry without variables', async () => {
