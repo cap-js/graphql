@@ -27,7 +27,7 @@ describe('GraphQL express json parser error scenario', () => {
     } catch (err) {
       expect(err.status).toBe(400)
       expect(err.response.data.error.message).toMatch(/JSON/i)
-      expect(_format(_error[0])).toContain('InvalidJSON')
+      expect(_format(_error[0])).toContain('Expected property name or \'}\' in JSON at position 2')
     }
   })
 })
