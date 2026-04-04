@@ -28,7 +28,7 @@
     "prettier": "npm_config_yes=true npx prettier@latest --write app lib test",
     "prettier:check": "npm_config_yes=true npx prettier@latest --check app lib test",
     "lint": "npm_config_yes=true npx eslint@latest .",
-    "test": "jest --silent",
+    "test": "npx jest --silent",
     "test:generate-schemas": "node ./test/scripts/generate-schemas.js"
   },
   "dependencies": {
@@ -39,9 +39,8 @@
     "@sap/cds": ">=9"
   },
   "devDependencies": {
-    "@cap-js/graphql": "file:.",
-    "@cap-js/sqlite": ">=2",
     "@cap-js/cds-test": ">=0",
-    "jest": "^30"
+    "@cap-js/graphql": "file:.",
+    "@cap-js/sqlite": ">=2"
   }
 }

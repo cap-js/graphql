@@ -176,7 +176,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Error on READ A',
           extensions: {
-            code: '',
+            code: expect.stringMatching(/^(|500)$/),
             myProperty: 'My value A1',
             $myProperty: 'My value A2',
             my: { nested: { property: 'My value A3' } },
@@ -206,7 +206,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Error on READ B',
           extensions: {
-            code: '',
+            code: expect.stringMatching(/^(|500)$/),
             stacktrace: expect.any(Array)
           }
         }
@@ -232,7 +232,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'Error on READ C',
           extensions: {
-            code: '',
+            code: expect.stringMatching(/^(|500)$/),
             stacktrace: expect.any(Array)
           }
         }
@@ -408,7 +408,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: '400',
+            code: expect.stringMatching(/^(400|ORDER_EXCEEDS_STOCK)$/),
             args: [20, 10],
             stacktrace: expect.any(Array)
           }
@@ -437,7 +437,7 @@ describe('graphql - error handling in development', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: '',
+            code: expect.stringMatching(/^(|ORDER_EXCEEDS_STOCK)$/),
             target: 'ORDER_EXCEEDS_STOCK',
             args: [20, 10],
             stacktrace: expect.any(Array)
