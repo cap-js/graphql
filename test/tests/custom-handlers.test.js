@@ -167,7 +167,7 @@ describe('graphql - custom handlers', () => {
       const data = {
         ReturnTypesService: {
           Integer: {
-            update: null
+            update: [{ id: null, string: null }]
           },
           String: {
             update: null
@@ -184,12 +184,6 @@ describe('graphql - custom handlers', () => {
         }
       }
       const errors = [
-        {
-          locations: [{ column: 15, line: 5 }],
-          message: 'Expected Iterable, but did not find one for field "ReturnTypesService_Integer_input.update".',
-          path: ['ReturnTypesService', 'Integer', 'update'],
-          extensions: { stacktrace: expect.any(Array) }
-        },
         {
           locations: [{ column: 15, line: 11 }],
           message: 'Expected Iterable, but did not find one for field "ReturnTypesService_String_input.update".',
