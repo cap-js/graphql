@@ -18,7 +18,7 @@ describe('graphql - schema generation', () => {
 
         const loadedSchema = fs.readFileSync(path.join(SCHEMAS_DIR, `${model.name}.gql`), 'utf-8')
         const generatedSchema = printSchema(generatedSchemaObject)
-        expect(loadedSchema).toEqual(generatedSchema)
+        expect(generatedSchema).toEqual(loadedSchema)
       })
     })
   })
