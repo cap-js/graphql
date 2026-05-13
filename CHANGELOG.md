@@ -11,7 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - GraphiQL link to service index HTML page for GraphQL endpoints
 - Allow usage of express 5
-- Support for streamlined service result
 
 ### Changed
 
