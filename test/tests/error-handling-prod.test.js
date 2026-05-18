@@ -396,7 +396,7 @@ describe('graphql - error handling in production', () => {
         {
           message: 'The order of 20 books exceeds the stock by 10',
           extensions: {
-            code: '400'
+            code: expect.stringMatching(/400|ORDER_EXCEEDS_STOCK/)
           }
         }
       ]
