@@ -1,5 +1,5 @@
 const path = require('path')
-const { Kind } = require('graphql')
+const { Kind, versionInfo } = require('graphql')
 
 const SCHEMAS_DIR = path.join(__dirname, '../schemas')
 
@@ -21,7 +21,8 @@ const fakeInfoObject = (document, schema, parentTypeName, variables) => {
     fieldNodes: operationDefinition.selectionSet.selections,
     schema,
     parentType: schema.getType(parentTypeName),
-    variableValues: { ...variables },
+    // graphql@17 nests coerced runtime variable values under `.coerced`; graphql@16 exposes them directly
+    variableValues: versionInfo.major >= 17 ? { coerced: { ...variables } } : { ...variables },
     fragments
   }
 }

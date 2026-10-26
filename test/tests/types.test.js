@@ -243,9 +243,9 @@ describe('graphql - types parsing and validation', () => {
         const value = 123
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 123 at "input.myBinary"; Binary cannot represent non string value: 123'
+          'Binary cannot represent non string value: 123'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -323,18 +323,18 @@ describe('graphql - types parsing and validation', () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myDate"; Date values must be strings in the ISO 8601 format YYYY-MM-DD: "bla"'
+          'Date values must be strings in the ISO 8601 format YYYY-MM-DD: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Date throws error when variable value is not a string, but an integer', async () => {
         const value = 20210627
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 20210627 at "input.myDate"; Date cannot represent non string value: 20210627'
+          'Date cannot represent non string value: 20210627'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -411,18 +411,18 @@ describe('graphql - types parsing and validation', () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myDateTime"; DateTime values must be strings in the ISO 8601 format YYYY-MM-DDThh-mm-ssTZD: "bla"'
+          'DateTime values must be strings in the ISO 8601 format YYYY-MM-DDThh-mm-ssTZD: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.DateTime throws error when variable value is not a string, but an integer', async () => {
         const value = 20210627145223
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 20210627145223 at "input.myDateTime"; DateTime cannot represent non string value: 20210627145223'
+          'DateTime cannot represent non string value: 20210627145223'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -567,45 +567,45 @@ describe('graphql - types parsing and validation', () => {
         const number = 123.45
         const body = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
-          'Variable "$input" got invalid value 123.45 at "input.myDecimal"; Decimal variable value must be represented by a string: 123.45'
+          'Decimal variable value must be represented by a string: 123.45'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Decimal throws error when variable value is an int', async () => {
         const number = 123
         const body = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
-          'Variable "$input" got invalid value 123 at "input.myDecimal"; Decimal variable value must be represented by a string: 123'
+          'Decimal variable value must be represented by a string: 123'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Decimal throws error when variable value is a whitespace string', async () => {
         const value = ' '
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value " " at "input.myDecimal"; Decimal must be a numeric value: " "'
+          'Decimal must be a numeric value: " "'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Decimal throws error when variable value is a string containing NaN', async () => {
         const value = 'NaN'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "NaN" at "input.myDecimal"; Decimal must be a numeric value: "NaN"'
+          'Decimal must be a numeric value: "NaN"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Decimal throws error when variable value is a string containing Infinity', async () => {
         const value = 'Infinity'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "Infinity" at "input.myDecimal"; Decimal must be a numeric value: "Infinity"'
+          'Decimal must be a numeric value: "Infinity"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -733,45 +733,45 @@ describe('graphql - types parsing and validation', () => {
         const number = 32768 // Max Int16 + 1
         const body = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
-          'Variable "$input" got invalid value 32768 at "input.myInt16"; Int16 must be an integer value between -(2^15) and 2^15 - 1: 32768'
+          'Int16 must be an integer value between -(2^15) and 2^15 - 1: 32768'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Int16 throws error when variable number value exceeds min value', async () => {
         const number = -32769 // Min Int16 - 1
         const body = _getMutationAndVariablesForFieldWithVariable(field, number)
         const message =
-          'Variable "$input" got invalid value -32769 at "input.myInt16"; Int16 must be an integer value between -(2^15) and 2^15 - 1: -32769'
+          'Int16 must be an integer value between -(2^15) and 2^15 - 1: -32769'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Int16 throws error when variable value is not a number, but a numeric string', async () => {
         const value = '12345'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "12345" at "input.myInt16"; Int16 cannot represent non integer value: "12345"'
+          'Int16 cannot represent non integer value: "12345"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Int16 throws error when variable value is not a number, but a non-numeric string', async () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myInt16"; Int16 cannot represent non integer value: "bla"'
+          'Int16 cannot represent non integer value: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Int16 throws error when variable value is not a number, but a boolean', async () => {
         const value = false
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value false at "input.myInt16"; Int16 cannot represent non integer value: false'
+          'Int16 cannot represent non integer value: false'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -942,9 +942,9 @@ describe('graphql - types parsing and validation', () => {
         const value = 123
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 123 at "input.myInteger64"; Int64 variable value must be represented by a string: 123'
+          'Int64 variable value must be represented by a string: 123'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Integer64 is correctly parsed from variable string value', async () => {
@@ -962,45 +962,45 @@ describe('graphql - types parsing and validation', () => {
         const value = '9223372036854775808' // Max Integer64 + 1
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "9223372036854775808" at "input.myInteger64"; Int64 must be an integer value between -(2^63) and 2^63 - 1: 9223372036854775808'
+          'Int64 must be an integer value between -(2^63) and 2^63 - 1: 9223372036854775808'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Integer64 throws error when variable string value exceeds min value', async () => {
         const value = '-9223372036854775809' // Min Integer64 - 1
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "-9223372036854775809" at "input.myInteger64"; Int64 must be an integer value between -(2^63) and 2^63 - 1: -9223372036854775809'
+          'Int64 must be an integer value between -(2^63) and 2^63 - 1: -9223372036854775809'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Integer64 throws error when variable value is not a number, but a non-numeric string', async () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myInteger64"; Int64 cannot represent non integer value: "bla"'
+          'Int64 cannot represent non integer value: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Integer64 throws error when variable value is not a number, but a whitespace string', async () => {
         const value = ' '
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value " " at "input.myInteger64"; Int64 cannot represent non integer value: " "'
+          'Int64 cannot represent non integer value: " "'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Integer64 throws error when variable value is not a number, but a boolean', async () => {
         const value = false
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value false at "input.myInteger64"; Int64 variable value must be represented by a string: false'
+          'Int64 variable value must be represented by a string: false'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -1170,27 +1170,27 @@ describe('graphql - types parsing and validation', () => {
         const value = '99:99:99'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "99:99:99" at "input.myTime"; Time values must be strings in the ISO 8601 format hh:mm:ss: "99:99:99"'
+          'Time values must be strings in the ISO 8601 format hh:mm:ss: "99:99:99"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Time throws error when variable is a string containing a non-time value', async () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myTime"; Time values must be strings in the ISO 8601 format hh:mm:ss: "bla"'
+          'Time values must be strings in the ISO 8601 format hh:mm:ss: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Time throws error when variable value is not a string, but an integer', async () => {
         const value = 123456
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 123456 at "input.myTime"; Time cannot represent non string value: 123456'
+          'Time cannot represent non string value: 123456'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -1270,18 +1270,18 @@ describe('graphql - types parsing and validation', () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myTimestamp"; Timestamp values must be strings in the ISO 8601 format YYYY-MM-DDThh-mm-ss.sTZD with up to 7 digits of fractional seconds: "bla"'
+          'Timestamp values must be strings in the ISO 8601 format YYYY-MM-DDThh-mm-ss.sTZD with up to 7 digits of fractional seconds: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.Timestamp throws error when variable value is not a string, but an integer', async () => {
         const value = 123456
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 123456 at "input.myTimestamp"; Timestamp cannot represent non string value: 123456'
+          'Timestamp cannot represent non string value: 123456'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
@@ -1358,45 +1358,45 @@ describe('graphql - types parsing and validation', () => {
         const value = 256 // Max UInt8 + 1
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value 256 at "input.myUInt8"; UInt8 must be an integer value between 0 and 2^8 - 1: 256'
+          'UInt8 must be an integer value between 0 and 2^8 - 1: 256'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.UInt8 throws error when variable number value exceeds min value', async () => {
         const value = -1 // Min UInt8 - 1
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value -1 at "input.myUInt8"; UInt8 must be an integer value between 0 and 2^8 - 1: -1'
+          'UInt8 must be an integer value between 0 and 2^8 - 1: -1'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.UInt8 throws error when variable value is not a number, but a numeric string', async () => {
         const value = '123'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "123" at "input.myUInt8"; UInt8 cannot represent non integer value: "123"'
+          'UInt8 cannot represent non integer value: "123"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.UInt8 throws error when variable value is not a number, but a non-numeric string', async () => {
         const value = 'bla'
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value "bla" at "input.myUInt8"; UInt8 cannot represent non integer value: "bla"'
+          'UInt8 cannot represent non integer value: "bla"'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
 
       test('cds.UInt8 throws error when variable value is not a number, but a boolean', async () => {
         const value = false
         const body = _getMutationAndVariablesForFieldWithVariable(field, value)
         const message =
-          'Variable "$input" got invalid value false at "input.myUInt8"; UInt8 cannot represent non integer value: false'
+          'UInt8 cannot represent non integer value: false'
         const response = await POST('/graphql', body)
-        expect(response.data.errors[0].message).toEqual(message)
+        expect(response.data.errors[0].message).toContain(message)
       })
     })
   })
