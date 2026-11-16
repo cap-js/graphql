@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const cds = require('@sap/cds')
 // Load @cap-js/graphql plugin to ensure .to.gql and .to.graphql compile targets are registered
 require('../../cds-plugin')
 
@@ -16,7 +17,15 @@ describe('graphql - schema generation', () => {
         const schemaValidationErrors = validateSchema(generatedSchemaObject)
         expect(schemaValidationErrors.length).toEqual(0)
 
-        const loadedSchema = fs.readFileSync(path.join(SCHEMAS_DIR, `${model.name}.gql`), 'utf-8')
+        let loadedSchema = fs.readFileSync(path.join(SCHEMAS_DIR, `${model.name}.gql`), 'utf-8')
+        const [major, minor] = cds.version.split('.').map(Number)
+        if (major > 10 || (major === 10 && minor >= 3)) {
+          loadedSchema = loadedSchema.replace(
+            /"""\n(Code list for currencies)\n\nSee https:\/\/cap\.cloud\.sap\/docs\/cds\/common#entity-currencies\n"""/g,
+            '"""$1"""'
+          )
+        }
+
         const generatedSchema = printSchema(generatedSchemaObject)
         expect(generatedSchema).toEqual(loadedSchema)
       })
